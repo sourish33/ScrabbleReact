@@ -2,7 +2,7 @@ import React from "react"
 import Square from "../Square/Square"
 import Tile from "../Tile/Tile"
 import styles from "./Board.module.css"
-import { TWs, DWs, TLs, S } from "./BoardMarkings"
+import { TWs, DWs, DLs, TLs, S } from "./BoardMarkings"
 
 
 const renderSquare = (i, piece = null) => {
@@ -19,6 +19,9 @@ const renderSquare = (i, piece = null) => {
     }
     if (TLs.includes(i)) {
         whichBgd = "TL"
+    }
+    if (DLs.includes(i)) {
+        whichBgd = "DL"
     }
     return (
         <div key={i} className={styles.wrappingSquare}>
