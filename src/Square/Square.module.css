@@ -24,6 +24,10 @@
     color: white;
   }
 
+  .plain {
+      background-color: rgb(195, 190, 161);
+  }
+
   .full-height-width {
       width: 100%;
       height: 100%;
