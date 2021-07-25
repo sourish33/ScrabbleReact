@@ -10,8 +10,9 @@ function Square({ bgd, children }) {
         return txt.value
     }
     //use the star if the marking is S
+
     const letter = bgd === "S" ? decodeHTML('&#9733') : bgd
-    const mystar = <span className={styles.star}>{letter}</span>
+    const mystar = <span className={bgd === "S" ? styles.star: null }>{letter}</span>
 
     const background = bgd ==="" ? 'plain' : bgd
     const squareBgd = `${styles[background]} ${styles[`full-height-width`]}`
