@@ -25,6 +25,17 @@ export function shuffle(arr) {
 }
 
 export const loc = (down,across) => { 
-    //gives the number of a square on the board when given the down and across coordinates from the top left corner
+    //gives the number of a square on the board when given the down and across coordinates from the top left corner (1,1)
     return 15*(down-1)+across-1
 }
+
+export function arrayToMap(arr) {
+    //takes an array of objects and returns a map
+
+    let amap = new Map()
+    if (arr.length===0) { return amap}
+    for (let el of arr) {
+      amap.set(el.pos, [el.letter, el.points])
+    }
+    return amap
+  }

@@ -14,20 +14,10 @@ const TILE_LIST_ARR = [
 ]
 // const TILE_LIST_ARR = []
 
-function arrayToMap(arr) {
 
-    let amap = new Map()
-    if (arr.length===0) { return amap}
-    for (let el of arr) {
-      amap.set(el.pos, [el.letter, el.points])
-    }
-    return amap
-  }
-
-const TILE_LIST = arrayToMap(TILE_LIST_ARR)
 
 const Game = () => {
-    const [tiles, setTiles] = useState(arrayToMap(TILE_LIST_ARR))
+    const [tiles, setTiles] = useState(TILE_LIST_ARR)
     
 
     return (

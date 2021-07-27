@@ -3,6 +3,7 @@ import Square from "../Square/Square"
 import Tile from "../Tile/Tile"
 import styles from "./Board.module.css"
 import { TWs, DWs, DLs, TLs, S } from "./BoardMarkings"
+import { arrayToMap } from "../Utils/helpers"
 
 
 const renderSquare = (i, piece = null) => {
@@ -32,11 +33,12 @@ const renderSquare = (i, piece = null) => {
 }
 
 const Board = ({ tiles }) => {
+    const tilesMap = arrayToMap(tiles)
     const squares = []
     for (let i = 0; i < 225; i++) {
-        if (tiles.has(i)) {
+        if (tilesMap.has(i)) {
             let piece = (
-                <Tile letter={tiles.get(i)[0]} points={tiles.get(i)[1]} />
+                <Tile letter={tilesMap.get(i)[0]} points={tilesMap.get(i)[1]} />
             )
             squares.push(renderSquare(i, piece))
         } else {
