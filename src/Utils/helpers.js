@@ -4,12 +4,14 @@ export function randomUpTo(max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export function getUniqueInts(n) {
-    let arr = Array.from({length: 225}, (x, i) => i+1)
+export function getUniqueInts(n, N=225) {
+    //returns a random integer from 1 to N
+    let arr = Array.from({length: N}, (x, i) => i+1)
     return shuffle(arr).slice(0,n)
 }
 
 export function shuffle(arr) {
+    //takes an array and returns a shuffled version
     let L = arr.length - 1
     let sarr = Array.from(arr) //cannot use = cuz JS passes by reference in this case
 
@@ -22,4 +24,7 @@ export function shuffle(arr) {
     return sarr
 }
 
-export const loc = (down,across) => { return 15*(down-1)+across-1}
+export const loc = (down,across) => { 
+    //gives the number of a square on the board when given the down and across coordinates from the top left corner
+    return 15*(down-1)+across-1
+}
