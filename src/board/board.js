@@ -26,9 +26,7 @@ const renderSquare = (i, piece = null) => {
     }
 
     return (
-        <div key={i} className={styles.wrappingSquare} id={i.toString()}>
-            <Square bgd={whichBgd}>{piece}</Square>
-        </div>
+        <Square bgd={whichBgd}>{piece}</Square>
     )
 }
 
@@ -40,9 +38,19 @@ const Board = ({ tiles }) => {
             let piece = (
                 <Tile letter={tiles.get(i)[0]} points={tiles.get(i)[1]} />
             )
-            squares.push(renderSquare(i, piece))
+            let thisSquare = (
+                <div key={i} className={styles.wrappingSquare} id={i.toString()}>
+                    {renderSquare(i, piece)}
+                </div>
+            )
+            squares.push(thisSquare)
         } else {
-            squares.push(renderSquare(i))
+            let thisSquare = (
+                <div key={i} className={styles.wrappingSquare} id={i.toString()}>
+                    {renderSquare(i)}
+                </div>
+            )
+            squares.push(thisSquare)
         }
     }
 
