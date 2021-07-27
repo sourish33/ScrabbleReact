@@ -15,6 +15,7 @@
     text-align: center;
     font-size: 1.3em;
     flex: 1;
+    color: black !important;
 }
 
 .points {
@@ -23,6 +24,7 @@
     /* text-align: end; */
     font-size: 0.7em;
     align-self: flex-end;
+    color: black !important;
 }
 
 .Aligner {

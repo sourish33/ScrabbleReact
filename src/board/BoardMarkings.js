@@ -1,4 +1,4 @@
-const loc = (down,across) => { return 15*(down-1)+across-1}
+import { loc } from "../Utils/helpers"
 
 export const TWs = [loc(1,1), loc(1,8), loc(1,15), loc(8,1), loc(8,15), loc(15,1), loc(15,8), loc(15,15)]
 export const DWs = [loc(2,2), loc(2,14), 

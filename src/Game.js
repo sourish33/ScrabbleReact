@@ -1,13 +1,16 @@
 import React, { useState } from "react"
 import Board from "./Board/Board"
+import { getUniqueInts } from "./Utils/helpers"
 
-
-const TILE_LIST_ARR = [{pos: 5, letter: "A", points: 1},
-{pos: 15, letter: "B", points: 2},
-{pos: 58, letter: "P", points: 1},
-{pos: 105, letter: "S", points: 1},
-{pos: 106, letter: "E", points: 1},
-{pos: 107, letter: "T", points: 1},
+let arr=getUniqueInts(6)
+const TILE_LIST_ARR = [
+// {pos: 15*7+7, letter: "A", points: 1},
+{pos: arr[5], letter: "A", points: 1},
+{pos: arr[0], letter: "B", points: 2},
+{pos: arr[1], letter: "P", points: 1},
+{pos: arr[2], letter: "S", points: 1},
+{pos: arr[3], letter: "E", points: 1},
+{pos: arr[4], letter: "T", points: 1},
 ]
 // const TILE_LIST_ARR = []
 

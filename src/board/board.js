@@ -23,6 +23,7 @@ const renderSquare = (i, piece = null) => {
     if (DLs.includes(i)) {
         whichBgd = "DL"
     }
+
     return (
         <div key={i} className={styles.wrappingSquare} id={i.toString()}>
             <Square bgd={whichBgd}>{piece}</Square>
