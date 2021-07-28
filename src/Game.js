@@ -8,10 +8,15 @@ const Game = () => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
 
     const handleClick = (event) =>{
+    
+      let clickedSquareId=parseInt(event.currentTarget.id)
+      let whatsHere=tiles.find(el=>{ return el.pos===clickedSquareId})
+      if (!whatsHere) {
+        console.log("Nothing here")
+      } else {
+        console.log(`Here lies a tile with letter ${whatsHere.letter} and points ${whatsHere.points}`)
+      }
 
-      // console.log(tiles)
-      let clickedSquareId=event.currentTarget.id
-      console.log(clickedSquareId)
     }
 
     return (
