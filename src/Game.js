@@ -14,7 +14,10 @@ const Game = () => {
       if (!whatsHere) {
         console.log("Nothing here")
       } else {
-        console.log(`Here lies a tile with letter ${whatsHere.letter} and points ${whatsHere.points}`)
+        console.log(`Deleting ${whatsHere.letter}`)
+        setTiles((tiles)=>{
+          return tiles.filter((el)=>{return el.pos!==clickedSquareId})
+        })
       }
 
     }
