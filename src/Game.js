@@ -8,6 +8,10 @@ const Game = () => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
 
     const move = (origin, destination) =>{
+      if (tiles.find(el=>{ return el.pos===destination})) {
+        //occupied spot
+        return
+      }
       let whatsHere=tiles.find(el=>{ return el.pos===origin})
       setTiles((x)=>{
         x = x.filter((el)=>{return el.pos!==origin})
