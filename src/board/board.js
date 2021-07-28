@@ -49,7 +49,7 @@ const Board = ({ tiles, handleClick }) => {
             squares.push(thisSquare)
         } else {
             let thisSquare = (
-                <div key={i} className={styles.wrappingSquare} id={(i).toString()} onClick={handleClick}>
+                <div key={i} className={styles.wrappingSquare} id={(i).toString()} >
                     {renderSquare(i)}
                 </div>
             )
