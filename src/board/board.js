@@ -30,7 +30,7 @@ const renderSquare = (i, piece = null) => {
     )
 }
 
-const Board = ({ tiles }) => {
+const Board = ({ tiles, handleClick }) => {
     
     const squares = []
     for (let i = 0; i < 225; i++) {
@@ -39,14 +39,14 @@ const Board = ({ tiles }) => {
                 <Tile letter={tiles.get(i)[0]} points={tiles.get(i)[1]} />
             )
             let thisSquare = (
-                <div key={i} className={styles.wrappingSquare} id={i.toString()}>
+                <div key={i} className={styles.wrappingSquare} id={(i+1).toString()} onClick={handleClick}>
                     {renderSquare(i, piece)}
                 </div>
             )
             squares.push(thisSquare)
         } else {
             let thisSquare = (
-                <div key={i} className={styles.wrappingSquare} id={i.toString()}>
+                <div key={i} className={styles.wrappingSquare} id={(i+1).toString()} onClick={handleClick}>
                     {renderSquare(i)}
                 </div>
             )
