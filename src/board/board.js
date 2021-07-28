@@ -4,6 +4,7 @@ import Tile from "../Tile/Tile"
 import styles from "./Board.module.css"
 import { TWs, DWs, DLs, TLs, S } from "./BoardMarkings"
 import { arrayToMap } from "../Utils/helpers"
+import { onDragStart, onDragOver, onDrop } from "../Utils/dragndropHelpers"
 
 
 
@@ -42,14 +43,23 @@ const Board = ({ tiles, handleClick }) => {
                 <Tile letter={tilesMap.get(i)[0]} points={tilesMap.get(i)[1]} />
             )
             let thisSquare = (
-                <div key={i} className={styles.wrappingSquare} id={(i).toString()} onClick={handleClick}>
+                <div key={i} 
+                className={styles.wrappingSquare} 
+                draggable
+                id={(i).toString()} 
+                // onClick={handleClick}
+                onDragStart={onDragStart}	
+                onDragOver={onDragOver}
+                onDrop={onDrop}>
                     {renderSquare(i, piece)}
                 </div>
             )
             squares.push(thisSquare)
         } else {
             let thisSquare = (
-                <div key={i} className={styles.wrappingSquare} id={(i).toString()} >
+                <div key={i} className={styles.wrappingSquare} id={(i).toString()}
+                onDragOver={onDragOver}
+                onDrop={onDrop}>
                     {renderSquare(i)}
                 </div>
             )
