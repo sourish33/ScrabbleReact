@@ -1,7 +1,7 @@
-import { getUniqueInts, arrayToMap } from './helpers'
+import { getUniqueInts} from './helpers'
 
 let arr=getUniqueInts(6)
-const TILE_LIST_ARR = [
+export const TILE_LIST_ARR = [
 // {pos: 15*7+7, letter: "A", points: 1},
 {pos: arr[5], letter: "A", points: 1},
 {pos: arr[0], letter: "B", points: 2},
@@ -12,4 +12,3 @@ const TILE_LIST_ARR = [
 ]
 // const TILE_LIST_ARR = []
 
-export const TILE_LIST_MAP = arrayToMap(TILE_LIST_ARR)

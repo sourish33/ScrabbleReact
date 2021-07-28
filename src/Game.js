@@ -1,16 +1,18 @@
 import React, { useState } from "react"
 import Board from './Board/Board'
-import { TILE_LIST_MAP } from "./Utils/DummyData.js"
+import { TILE_LIST_ARR} from './Utils/DummyData'
 
-const handleClick = (event) =>{
 
-  console.log("Hi there! Game speaking")
-  console.log(event.currentTarget.id)
-
-}
 
 const Game = () => {
-    const [tiles, setTiles] = useState(TILE_LIST_MAP)
+    const [tiles, setTiles] = useState(TILE_LIST_ARR)
+
+    const handleClick = (event) =>{
+
+      // console.log(tiles)
+      let clickedSquareId=event.currentTarget.id
+      console.log(clickedSquareId)
+    }
 
     return (
         <div>
