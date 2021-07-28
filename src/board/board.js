@@ -32,7 +32,7 @@ const renderSquare = (i, piece = null) => {
     )
 }
 
-const Board = ({ tiles, handleClick, DragStart, DragOver, Drop }) => {
+const Board = ({ tiles, DragStart, DragOver, Drop }) => {
 
     let tilesMap= arrayToMap(tiles)
     

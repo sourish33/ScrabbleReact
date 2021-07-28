@@ -30,28 +30,28 @@ const Game = () => {
   
   const Drop = (event) => {
       event.preventDefault()
-      let incoming = event.dataTransfer.getData("text")
-      let dest = event.currentTarget.id
+      let incoming = parseInt(event.dataTransfer.getData("text"))
+      let dest = parseInt(event.currentTarget.id)
       console.log(`${incoming} to ${dest}`)
+      move(incoming, dest)
   }
 
-    const handleClick = (event) =>{
+    // const handleClick = (event) =>{
     
-      let clickedSquareId=parseInt(event.currentTarget.id)
-      let whatsHere=tiles.find(el=>{ return el.pos===clickedSquareId})
-      if (!whatsHere) {
-        console.log("Nothing here")
-      } else {
-        move(clickedSquareId, clickedSquareId+3)
-      }
+    //   let clickedSquareId=parseInt(event.currentTarget.id)
+    //   let whatsHere=tiles.find(el=>{ return el.pos===clickedSquareId})
+    //   if (!whatsHere) {
+    //     console.log("Nothing here")
+    //   } else {
+    //     move(clickedSquareId, clickedSquareId+3)
+    //   }
 
-    }
+    // }
 
     return (
         <div>
             <Board 
             tiles={tiles} 
-            handleClick={handleClick} 
             DragStart={DragStart}
             DragOver={DragOver}
             Drop={Drop}/>
