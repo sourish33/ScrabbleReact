@@ -7,6 +7,15 @@ import { TILE_LIST_ARR} from './Utils/DummyData'
 const Game = () => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
 
+    const move = (origin, destination) =>{
+      let whatsHere=tiles.find(el=>{ return el.pos===origin})
+      setTiles((x)=>{
+        x = x.filter((el)=>{return el.pos!==origin})
+        return [...x, {pos: destination, letter: whatsHere.letter, points: whatsHere.points}]
+      })
+
+    }
+
     const handleClick = (event) =>{
     
       let clickedSquareId=parseInt(event.currentTarget.id)
@@ -14,11 +23,7 @@ const Game = () => {
       if (!whatsHere) {
         console.log("Nothing here")
       } else {
-        // console.log(`Deleting ${whatsHere.letter}`)
-        setTiles((x)=>{
-          x = x.filter((el)=>{return el.pos!==clickedSquareId})
-          return [...x, {pos: clickedSquareId+1, letter: whatsHere.letter, points: whatsHere.points}]
-        })
+        move(clickedSquareId, clickedSquareId+3)
       }
 
     }
