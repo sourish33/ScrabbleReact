@@ -19,6 +19,21 @@ const Game = () => {
       })
 
     }
+    const DragStart = (event) => {
+      event.dataTransfer.setData("text/plain", event.target.id)
+      // console.log(event.target.id)
+  }
+  
+  const DragOver = (event) => {
+      event.preventDefault()
+  }
+  
+  const Drop = (event) => {
+      event.preventDefault()
+      let incoming = event.dataTransfer.getData("text")
+      let dest = event.currentTarget.id
+      console.log(`${incoming} to ${dest}`)
+  }
 
     const handleClick = (event) =>{
     
@@ -34,7 +49,12 @@ const Game = () => {
 
     return (
         <div>
-            <Board tiles={tiles} handleClick={handleClick} />
+            <Board 
+            tiles={tiles} 
+            handleClick={handleClick} 
+            DragStart={DragStart}
+            DragOver={DragOver}
+            Drop={Drop}/>
         </div>
     )
 }
