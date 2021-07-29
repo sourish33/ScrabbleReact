@@ -22,8 +22,9 @@ const Game = () => {
 
     }
     const DragStart = (event) => {
-      event.dataTransfer.setData("text/plain", event.target.id)
-      // console.log(event.target.id)
+      let whereArtThou = event.target.parentElement.parentElement.id
+      event.dataTransfer.setData("text/plain", whereArtThou)
+      // console.log(event.target.parentElement.parentElement.id)
   }
   
   const DragOver = (event) => {

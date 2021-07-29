@@ -6,8 +6,6 @@ import { TWs, DWs, DLs, TLs, S } from "./BoardMarkings"
 import { arrayToMap } from "../Utils/helpers"
 // import { onDragStart, onDragOver, onDrop } from "../Utils/dragndropHelpers"
 
-
-
 const renderSquare = (i, piece = null) => {
     let whichBgd = ""
 
@@ -27,15 +25,12 @@ const renderSquare = (i, piece = null) => {
         whichBgd = "DL"
     }
 
-    return (
-        <Square bgd={whichBgd}>{piece}</Square>
-    )
+    return <Square bgd={whichBgd}>{piece}</Square>
 }
 
 const Board = ({ tiles, DragStart, DragOver, Drop }) => {
+    let tilesMap = arrayToMap(tiles)
 
-    let tilesMap= arrayToMap(tiles)
-    
     const squares = []
     for (let i = 0; i < 225; i++) {
         if (tilesMap.has(i)) {
@@ -43,23 +38,29 @@ const Board = ({ tiles, DragStart, DragOver, Drop }) => {
                 <Tile letter={tilesMap.get(i)[0]} points={tilesMap.get(i)[1]} />
             )
             let thisSquare = (
-                <div key={i} 
-                className={styles.wrappingSquare} 
-                draggable
-                id={(i).toString()} 
-                // onClick={handleClick}
-                onDragStart={DragStart}	
-                onDragOver={DragOver}
-                onDrop={Drop}>
+                <div
+                    key={i}
+                    className={styles.wrappingSquare}
+                    // draggable
+                    id={i.toString()}
+                    // onClick={handleClick}
+                    onDragStart={DragStart}
+                    onDragOver={DragOver}
+                    onDrop={Drop}
+                >
                     {renderSquare(i, piece)}
                 </div>
             )
             squares.push(thisSquare)
         } else {
             let thisSquare = (
-                <div key={i} className={styles.wrappingSquare} id={(i).toString()}
-                onDragOver={DragOver}
-                onDrop={Drop}>
+                <div
+                    key={i}
+                    className={styles.wrappingSquare}
+                    id={i.toString()}
+                    onDragOver={DragOver}
+                    onDrop={Drop}
+                >
                     {renderSquare(i)}
                 </div>
             )
