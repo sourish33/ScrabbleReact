@@ -34,16 +34,19 @@ const Board = ({ tiles, DragStart, DragOver, Drop }) => {
     const squares = []
     for (let i = 0; i < 225; i++) {
         if (tilesMap.has(i)) {
+            // console.log(`letter = ${tilesMap.get(i)[0]}, points = ${tilesMap.get(i)[1]}, submitted=${tilesMap.get(i)[2]}`)
             let piece = (
-                <Tile letter={tilesMap.get(i)[0]} points={tilesMap.get(i)[1]} />
+                <Tile
+                    letter={tilesMap.get(i)[0]}
+                    points={tilesMap.get(i)[1]}
+                    submitted={!tilesMap.get(i)[2]}
+                />
             )
             let thisSquare = (
                 <div
                     key={i}
                     className={styles.wrappingSquare}
-                    // draggable
                     id={i.toString()}
-                    // onClick={handleClick}
                     onDragStart={DragStart}
                     onDragOver={DragOver}
                     onDrop={Drop}

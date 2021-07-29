@@ -35,7 +35,7 @@ export function arrayToMap(arr) {
     let amap = new Map()
     if (arr.length===0) { return amap}
     for (let el of arr) {
-      amap.set(el.pos, [el.letter, el.points])
+      amap.set(el.pos, [el.letter, el.points, el.submitted])
     }
     return amap
   }

@@ -17,7 +17,7 @@ const Game = () => {
       let whatsHere=tiles.find(el=>{ return el.pos===origin})
       setTiles((x)=>{
         x = x.filter((el)=>{return el.pos!==origin})
-        return [...x, {pos: destination, letter: whatsHere.letter, points: whatsHere.points}]
+        return [...x, {pos: destination, letter: whatsHere.letter, points: whatsHere.points, submitted: whatsHere.submittedr}]
       })
 
     }
