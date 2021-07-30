@@ -19,7 +19,9 @@ function Square({ bgd, children }) {
 
     return (
         <div className={squareBgd}>
-            {children ? children : mystar}
+            {children}
+            {mystar}
+            {/* {children ? children : mystar} */}
         </div>
     )
 }

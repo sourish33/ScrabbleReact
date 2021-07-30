@@ -99,13 +99,7 @@ const getSquareIdFromPos = (pos) => {
   // return "none"
 }
 
-const getXY = (space_id) => {
-  let el
-  if (typeof space_id === "string") {
-      el = document.getElementById(space_id)
-  } else {
-      el = space_id
-  }
+const getXY = (el) => {
   let rect = el.getBoundingClientRect()
   let posX = (rect.left + rect.right) / 2
   let posY = (rect.top + rect.bottom) / 2
@@ -120,6 +114,7 @@ const getXY = (space_id) => {
       initialX = e.touches[0].clientX - xOffset
       initialY = e.touches[0].clientY - yOffset
       startingloc = getSquareIdFromPos(getXY(u))
+
       // console.log(startingloc)
     }
 
