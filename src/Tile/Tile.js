@@ -4,7 +4,7 @@ import styles from './Tile.module.css'
 const Tile = (props) => {
     return (
         <div draggable = {props.submitted} className={styles.tile}                     
-        onTouchStart = {props.TouchStart}
+        onTouchStart = {props.submitted ? props.TouchStart : null}
         onTouchMove = {props.TouchMove}
         onTouchEnd = {props.TouchEnd}
         onDragStart={props.DragStart}
