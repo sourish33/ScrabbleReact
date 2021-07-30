@@ -5,8 +5,8 @@ const Tile = (props) => {
     return (
         <div draggable = {props.submitted} className={styles.tile}                     
         onTouchStart = {props.submitted ? props.TouchStart : null}
-        onTouchMove = {props.TouchMove}
-        onTouchEnd = {props.TouchEnd}
+        onTouchMove = {props.submitted ? props.TouchMove: null}
+        onTouchEnd = {props.submitted ? props.TouchEnd: null}
         onDragStart={props.DragStart}
         onDragOver={props.DragOver}
         onDrop={props.Drop}
