@@ -1,15 +1,26 @@
 import React, { useState } from "react"
 import Board from "./Board/Board"
 import { TILE_LIST_ARR } from "./Utils/DummyData"
+import { formcheck } from "./Utils/helpers"
 
 const Game = () => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
+    // console.log(tiles)
 
     const move = (origin, destination) => {
+        if (!(formcheck(origin))){
+          console.log(`invalid origin ${origin}`)
+          return
+        }
+        if (!(formcheck(destination))){
+          console.log(`invalid destination ${destination}`)
+          return
+        }
         if (origin === destination) {
             console.log("Back to the same location")
             return
         }
+
         if (
             tiles.find((el) => {
                 return el.pos === destination
@@ -22,6 +33,12 @@ const Game = () => {
         let whatsHere = tiles.find((el) => {
             return el.pos === origin
         })
+        if (!whatsHere)
+          {
+            console.log(`Nothing at origin ${origin}`)
+            return
+        }
+        
         setTiles((x) => {
             x = x.filter((el) => {
                 return el.pos !== origin
@@ -40,7 +57,7 @@ const Game = () => {
     const DragStart = (event) => {
         let whereArtThou = event.target.parentElement.parentElement.id
         event.dataTransfer.setData("text/plain", whereArtThou)
-        // console.log(event.target.parentElement.parentElement.id)
+        // console.log(whereArtThou)
     }
 
     const DragOver = (event) => {
@@ -49,11 +66,13 @@ const Game = () => {
 
     const Drop = (event) => {
         event.preventDefault()
-        let incoming = parseInt(event.dataTransfer.getData("text"))
-        let dest = parseInt(event.currentTarget.id)
+        let incoming = event.dataTransfer.getData("text")
+        let dest = event.currentTarget.id
         console.log(`${incoming} to ${dest}`)
         move(incoming, dest)
     }
+    let startingloc=""
+    let endingloc=""
     let initialX
     let initialY 
     let xOffset =0
@@ -67,17 +86,16 @@ const getSquareIdFromPos = (pos) => {
   let x = pos[0]
   let y = pos[1]
   let whatshere = document.elementsFromPoint(x, y)
-  // if (whatshere.length === 0) {
-  //     return "none"
-  // }
-  let idshere = whatshere.map((el)=>el.id)
-  console.log(idshere)
-  // for (let stuffHere of whatshere) {
-  //     let stuff_id = stuffHere.id
-  //     if (/^[^pqrtuvwxyz]\d+$/.test(stuff_id)) {
-  //         return stuff_id
-  //     }
-  // }
+  if (whatshere.length === 0) {
+      return ""
+  }
+
+  let idshere = whatshere.map(el=>el.id)
+  for (let id of idshere) {
+      if (formcheck(id)) {
+          return id
+      }
+  }
   // return "none"
 }
 
@@ -99,16 +117,14 @@ const getXY = (space_id) => {
   }
     const TouchStart =(e) => {
       let u = e.currentTarget
-      console.log("Touchstart speaking.")
-      // console.log(u)
-      // console.log(getXY(u))
       initialX = e.touches[0].clientX - xOffset
       initialY = e.touches[0].clientY - yOffset
-      console.log(getSquareIdFromPos(getXY(u)))
+      startingloc = getSquareIdFromPos(getXY(u))
+      // console.log(startingloc)
     }
 
     const TouchMove = (e) => {
-      e.preventDefault()
+      // e.preventDefault()
       let dragItem = e.currentTarget
       lastMoved = dragItem
   
@@ -125,26 +141,17 @@ const getXY = (space_id) => {
       initialX = currentX
       initialY = currentY
       let u = e.currentTarget
-      console.log("Touchend speaking")
-      console.log(u)
-      console.log(getSquareIdFromPos(getXY(u)))
-      console.log(`[${currentX}, ${currentY}]`)
+      // console.log("Touchend speaking")
+      
+      endingloc = getSquareIdFromPos(getXY(u))
+      console.log(endingloc)
+      console.log(`[${startingloc} to ${endingloc}]`)
       xOffset = 0
       yOffset = 0
       setTranslate(0, 0, lastMoved)
+      move(startingloc, endingloc)
   }
 
-    // const handleClick = (event) =>{
-
-    //   let clickedSquareId=parseInt(event.currentTarget.id)
-    //   let whatsHere=tiles.find(el=>{ return el.pos===clickedSquareId})
-    //   if (!whatsHere) {
-    //     console.log("Nothing here")
-    //   } else {
-    //     move(clickedSquareId, clickedSquareId+3)
-    //   }
-
-    // }
 
     return (
         <div>

@@ -29,6 +29,10 @@ export const loc = (down,across) => {
     return 15*(down-1)+across-1
 }
 
+export function formcheck(id) {
+    return /[bpqr]\d+$/.test(id)
+}
+
 export function arrayToMap(arr) {
     //takes an array of objects and returns a map
 

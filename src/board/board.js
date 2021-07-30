@@ -33,26 +33,27 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
 
     const squares = []
     for (let i = 0; i < 225; i++) {
-        if (tilesMap.has(i)) {
+        if (tilesMap.has("b"+i)) {
             // console.log(`letter = ${tilesMap.get(i)[0]}, points = ${tilesMap.get(i)[1]}, submitted=${tilesMap.get(i)[2]}`)
             let piece = (
                 <Tile
-                    letter={tilesMap.get(i)[0]}
-                    points={tilesMap.get(i)[1]}
-                    submitted={!tilesMap.get(i)[2]}
+                    letter={tilesMap.get("b"+i)[0]}
+                    points={tilesMap.get("b"+i)[1]}
+                    submitted={!tilesMap.get("b"+i)[2]}
                     TouchStart = {TouchStart}
                     TouchMove = {TouchMove}
                     TouchEnd = {TouchEnd}
+                    DragStart={DragStart}
+                    DragOver={DragOver}
+                    Drop={Drop}
                 />
             )
             let thisSquare = (
                 <div
                     key={i}
                     className={styles.wrappingSquare}
-                    id={i.toString()}
-                    onDragStart={DragStart}
-                    onDragOver={DragOver}
-                    onDrop={Drop}
+                    id={"b"+i}
+
 
                 >
                     {renderSquare(i, piece)}
@@ -64,7 +65,7 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
                 <div
                     key={i}
                     className={styles.wrappingSquare}
-                    id={i.toString()}
+                    id={"b"+i}
                     onDragOver={DragOver}
                     onDrop={Drop}
                 >
