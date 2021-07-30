@@ -2,27 +2,28 @@ import React, { useState } from "react"
 import Board from "./Board/Board"
 import { TILE_LIST_ARR } from "./Utils/DummyData"
 import { formcheck } from "./Utils/helpers"
+import { getSquareIdFromPos, getXY, setTranslate } from "./Utils/dragndropHelpers"
 
 const Game = () => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
     // console.log(tiles)
 
     const move = (origin, destination) => {
-        if (!(formcheck(origin))){
+        if (!(formcheck(origin))){//checking origin
           console.log(`invalid origin ${origin}`)
           return
         }
-        if (!(formcheck(destination))){
+        if (!(formcheck(destination))){//checking destination
           console.log(`invalid destination ${destination}`)
           return
         }
-        if (origin === destination) {
+        if (origin === destination) {//checking that they are not the same
             console.log("Back to the same location")
             return
         }
 
         if (
-            tiles.find((el) => {
+            tiles.find((el) => {//checking if something exists are destination
                 return el.pos === destination
             })
         ) {
@@ -30,7 +31,7 @@ const Game = () => {
             return
         }
 
-        let whatsHere = tiles.find((el) => {
+        let whatsHere = tiles.find((el) => {//can't move if there is nothing to move
             return el.pos === origin
         })
         if (!whatsHere)
@@ -40,10 +41,10 @@ const Game = () => {
         }
         
         setTiles((x) => {
-            x = x.filter((el) => {
+            x = x.filter((el) => {//removing the entry from the origin
                 return el.pos !== origin
             })
-            return [
+            return [//and adding it to the destination
                 ...x,
                 {
                     pos: destination,
@@ -54,6 +55,17 @@ const Game = () => {
             ]
         })
     }
+
+    let startingloc=""
+    let endingloc=""
+    let initialX
+    let initialY 
+    let xOffset =0
+    let yOffset =0
+    let lastMoved
+    let currentX
+    let currentY
+
     const DragStart = (event) => {
         let whereArtThou = event.target.parentElement.parentElement.id
         event.dataTransfer.setData("text/plain", whereArtThou)
@@ -71,44 +83,9 @@ const Game = () => {
         console.log(`${incoming} to ${dest}`)
         move(incoming, dest)
     }
-    let startingloc=""
-    let endingloc=""
-    let initialX
-    let initialY 
-    let xOffset =0
-    let yOffset =0
-    let lastMoved
-    let currentX
-    let currentY
 
-    
-const getSquareIdFromPos = (pos) => {
-  let x = pos[0]
-  let y = pos[1]
-  let whatshere = document.elementsFromPoint(x, y)
-  if (whatshere.length === 0) {
-      return ""
-  }
 
-  let idshere = whatshere.map(el=>el.id)
-  for (let id of idshere) {
-      if (formcheck(id)) {
-          return id
-      }
-  }
-  // return "none"
-}
 
-const getXY = (el) => {
-  let rect = el.getBoundingClientRect()
-  let posX = (rect.left + rect.right) / 2
-  let posY = (rect.top + rect.bottom) / 2
-  return [posX, posY]
-}
-
-    const setTranslate = (xPos, yPos, el) => {
-      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)"
-  }
     const TouchStart =(e) => {
       let u = e.currentTarget
       initialX = e.touches[0].clientX - xOffset
