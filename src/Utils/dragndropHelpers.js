@@ -27,5 +27,7 @@ export const getSquareIdFromPos = (pos) => {
   }
   
 export const setTranslate = (xPos, yPos, el) => {
-        el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)"
+        if (el!==undefined) { //el might be undefined in some cases with multi-touches.
+            el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)"
+        }
     }

@@ -87,16 +87,18 @@ const Game = () => {
 
 
     const TouchStart =(e) => {
+      if (e.touches.length>1) {return}
+      document.getElementsByTagName("body")[0].style.touchAction = "none"
       let u = e.currentTarget
       initialX = e.touches[0].clientX - xOffset
       initialY = e.touches[0].clientY - yOffset
       startingloc = getSquareIdFromPos(getXY(u))
-
-      // console.log(startingloc)
     }
 
     const TouchMove = (e) => {
       // e.preventDefault()
+      if (e.touches.length>1) {return}
+      document.getElementsByTagName("body")[0].style.touchAction = "none"
       let dragItem = e.currentTarget
       lastMoved = dragItem
   
@@ -110,6 +112,7 @@ const Game = () => {
     }
 
     function TouchEnd(e) {
+      if (e.touches.length>1) {return}
       initialX = currentX
       initialY = currentY
       let u = e.currentTarget
@@ -122,6 +125,7 @@ const Game = () => {
       yOffset = 0
       setTranslate(0, 0, lastMoved)
       move(startingloc, endingloc)
+      document.getElementsByTagName("body")[0].style.touchAction = "auto"
   }
 
 
