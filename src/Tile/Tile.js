@@ -7,9 +7,9 @@ const Tile = (props) => {
         onTouchStart = {props.submitted ? props.TouchStart : null}
         onTouchMove = {props.submitted ? props.TouchMove: null}
         onTouchEnd = {props.submitted ? props.TouchEnd: null}
-        onDragStart={props.DragStart}
-        onDragOver={props.DragOver}
-        onDrop={props.Drop}
+        onDragStart={props.submitted ? props.DragStart: null}
+        onDragOver={props.submitted ? props.DragOver: null}
+        onDrop={props.submitted ? props.Drop: null}
         >
             <div className={styles.letter}>{props.letter}</div>
             <div className={styles.points}>{props.points}</div>
