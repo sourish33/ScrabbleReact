@@ -34,7 +34,6 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
     const squares = []
     for (let i = 0; i < 225; i++) {
         if (tilesMap.has("b"+i)) {
-            // console.log(`letter = ${tilesMap.get(i)[0]}, points = ${tilesMap.get(i)[1]}, submitted=${tilesMap.get(i)[2]}`)
             let piece = (
                 <Tile
                     letter={tilesMap.get("b"+i)[0]}

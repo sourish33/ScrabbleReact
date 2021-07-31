@@ -3,10 +3,12 @@ import Board from "./Board/Board"
 import { TILE_LIST_ARR } from "./Utils/DummyData"
 import { formcheck } from "./Utils/helpers"
 import { getSquareIdFromPos, getXY, setTranslate } from "./Utils/dragndropHelpers"
+import Rack from "./Rack/Rack"
 
 const Game = () => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
     // console.log(tiles)
+    const[visibleRack, setVisibleRack]=useState("p")
 
     const move = (origin, destination) => {
         if (!(formcheck(origin))){//checking origin
@@ -129,6 +131,16 @@ const Game = () => {
     return (
         <div>
             <Board
+                tiles={tiles}
+                DragStart={DragStart}
+                DragOver={DragOver}
+                Drop={Drop}
+                TouchStart = {TouchStart}
+                TouchMove = {TouchMove}
+                TouchEnd = {TouchEnd}
+            />
+            <Rack
+                whichRack={visibleRack}
                 tiles={tiles}
                 DragStart={DragStart}
                 DragOver={DragOver}
