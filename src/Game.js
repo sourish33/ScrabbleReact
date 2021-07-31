@@ -80,14 +80,14 @@ const Game = () => {
         event.preventDefault()
         let incoming = event.dataTransfer.getData("text")
         let dest = event.currentTarget.id
-        console.log(`${incoming} to ${dest}`)
         move(incoming, dest)
     }
 
 
 
     const TouchStart =(e) => {
-      if (e.touches.length>1) {return}
+      e.preventDefault()
+      if (e.touches.length>1) {return}//Multiple Touches
       document.getElementsByTagName("body")[0].style.touchAction = "none"
       let u = e.currentTarget
       initialX = e.touches[0].clientX - xOffset
@@ -96,8 +96,8 @@ const Game = () => {
     }
 
     const TouchMove = (e) => {
-      // e.preventDefault()
-      if (e.touches.length>1) {return}
+      e.preventDefault()
+      if (e.touches.length>1) {return}//Multiple Touches
       document.getElementsByTagName("body")[0].style.touchAction = "none"
       let dragItem = e.currentTarget
       lastMoved = dragItem
@@ -112,15 +112,12 @@ const Game = () => {
     }
 
     function TouchEnd(e) {
-      if (e.touches.length>1) {return}
+      e.preventDefault()
+      if (e.touches.length>1) {return}//Multiple Touches
       initialX = currentX
       initialY = currentY
       let u = e.currentTarget
-      // console.log("Touchend speaking")
-      
       endingloc = getSquareIdFromPos(getXY(u))
-      console.log(endingloc)
-      console.log(`[${startingloc} to ${endingloc}]`)
       xOffset = 0
       yOffset = 0
       setTranslate(0, 0, lastMoved)
