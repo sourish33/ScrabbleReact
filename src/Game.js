@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Board from "./Board/Board"
 import { TILE_LIST_ARR } from "./Utils/DummyData"
 import { formcheck } from "./Utils/helpers"
+import move from "./Utils/movers"
 import { getSquareIdFromPos, getXY, setTranslate } from "./Utils/dragndropHelpers"
 import Rack from "./Rack/Rack"
 
@@ -9,54 +10,6 @@ const Game = () => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
     // console.log(tiles)
     const[visibleRack, setVisibleRack]=useState("p")
-
-    const move = (origin, destination) => {
-        if (!(formcheck(origin))){//checking origin
-          console.log(`invalid origin ${origin}`)
-          return
-        }
-        if (!(formcheck(destination))){//checking destination
-          console.log(`invalid destination ${destination}`)
-          return
-        }
-        if (origin === destination) {//checking that they are not the same
-            console.log("Back to the same location")
-            return
-        }
-
-        if (
-            tiles.find((el) => {//checking if something exists are destination
-                return el.pos === destination
-            })
-        ) {
-            console.log("occupied spot")
-            return
-        }
-
-        let whatsHere = tiles.find((el) => {//can't move if there is nothing to move
-            return el.pos === origin
-        })
-        if (!whatsHere)
-          {
-            console.log(`Nothing at origin ${origin}`)
-            return
-        }
-        
-        setTiles((x) => {
-            x = x.filter((el) => {//removing the entry from the origin
-                return el.pos !== origin
-            })
-            return [//and adding it to the destination
-                ...x,
-                {
-                    pos: destination,
-                    letter: whatsHere.letter,
-                    points: whatsHere.points,
-                    submitted: whatsHere.submitted,
-                },
-            ]
-        })
-    }
 
     let startingloc=""
     let endingloc=""
@@ -82,7 +35,7 @@ const Game = () => {
         event.preventDefault()
         let incoming = event.dataTransfer.getData("text")
         let dest = event.currentTarget.id
-        move(incoming, dest)
+        setTiles(tiles=>move(incoming, dest,tiles))
     }
 
 
@@ -123,7 +76,7 @@ const Game = () => {
       xOffset = 0
       yOffset = 0
       setTranslate(0, 0, lastMoved)
-      move(startingloc, endingloc)
+      setTiles(tiles => move(startingloc, endingloc, tiles))
       document.getElementsByTagName("body")[0].style.touchAction = "auto"
   }
 

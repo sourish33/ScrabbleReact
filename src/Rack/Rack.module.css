@@ -1,6 +1,18 @@
 .wrappingSquare {
     width: 14.28%;
-    height: 100%
+    position: relative
+    /* height: 100% */
+}
+
+
+/* The following two maintain the aspect ratio of the tile and are from https://mademyday.de/height-equals-width-with-pure-css/ */
+.wrappingSquare:before {
+	content: "";
+	float: left;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+.content {
+	float: left;
 }
 
 .wrappingRack {
