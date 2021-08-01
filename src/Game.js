@@ -34,7 +34,10 @@ const Game = () => {
     const Drop = (event) => {
         event.preventDefault()
         let incoming = event.dataTransfer.getData("text")
-        let dest = event.currentTarget.id
+        // let dest = event.currentTarget.id
+        let u = event.currentTarget
+        let dest= getSquareIdFromPos(getXY(u))
+        console.log(`${incoming} to ${dest}`)
         setTiles(tiles=>move(incoming, dest,tiles))
     }
 
