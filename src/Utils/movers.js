@@ -42,7 +42,11 @@ const move = (origin, destination, tiles) => {
         } 
         if (fromBoard && toRack) {
            let rackSpot = emptySpot(tiles, destination[0])
-           return move(origin, rackSpot, tiles)
+           if (rackSpot) {
+                let ind = tiles.findIndex(el=>el.pos===origin)
+                tiles[ind].pos = rackSpot
+                return moveOnRack(rackSpot, destination, tiles)
+           }
         }
             
         console.log("occupied spot")
