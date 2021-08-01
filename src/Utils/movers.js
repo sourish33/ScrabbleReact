@@ -1,4 +1,17 @@
-import { formcheck } from "./helpers"
+import { emptySpot, formcheck } from "./helpers"
+
+const moveType = (orig, dest)=>{
+    let fromRack=false
+    let toRack = false
+    let fromBoard = false
+    let toBoard = false
+    fromBoard = orig[0]==="b"
+    toBoard = dest[0]==="b"
+    fromRack = /[pqrs]$/.test(orig[0])
+    toRack = /[pqrs]$/.test(dest[0])
+    return [fromRack, fromBoard, toRack, toBoard]
+  
+  }
 
 const move = (origin, destination, tiles) => {
     if (!formcheck(origin)) {
@@ -11,6 +24,7 @@ const move = (origin, destination, tiles) => {
         console.log(`invalid destination ${destination}`)
         return tiles
     }
+    let [fromRack, fromBoard, toRack, toBoard] = moveType(origin, destination)
     if (origin === destination) {
         //checking that they are not the same
         console.log("Back to the same location")
@@ -22,12 +36,16 @@ const move = (origin, destination, tiles) => {
             return el.pos === destination
         })
     ) {
-        if (origin[0] === destination[0] && origin[0] !== "b") {
+        if (fromRack && toRack) {
             // checking for a rack reshuffle
             return moveOnRack(origin, destination, tiles)
-        } else {
-            console.log("occupied spot")
+        } 
+        if (fromBoard && toRack) {
+           let rackSpot = emptySpot(tiles, destination[0])
+           return move(origin, rackSpot, tiles)
         }
+            
+        console.log("occupied spot")
         return tiles
     }
 

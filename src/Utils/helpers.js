@@ -24,13 +24,21 @@ export function shuffle(arr) {
     return sarr
 }
 
+export function emptySpot(arr, whichRack){
+    for (let i=1;i<8;i++){
+      let u=arr.find(el=>{return el.pos===whichRack+i})
+      if (!u) {return whichRack+i}
+    }
+    return false
+  }
+
 export const loc = (down,across) => { 
     //gives the number of a square on the board when given the down and across coordinates from the top left corner (1,1)
     return 15*(down-1)+across-1
 }
 
 export function formcheck(id) {
-    return /[bpqr]\d+$/.test(id)
+    return /[bpqrs]\d+$/.test(id)
 }
 
 export function arrayToMap(arr) {
