@@ -1,15 +1,14 @@
 import React, { useState } from "react"
 import Board from "./Board/Board"
 import { TILE_LIST_ARR } from "./Utils/DummyData"
-import { formcheck } from "./Utils/helpers"
 import move from "./Utils/movers"
 import { getSquareIdFromPos, getXY, setTranslate } from "./Utils/dragndropHelpers"
 import Rack from "./Rack/Rack"
 
-const Game = () => {
+const Game = ({visibleRack}) => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
     // console.log(tiles)
-    const[visibleRack, setVisibleRack]=useState("p")
+    // const[visibleRack, setVisibleRack]=useState("p")
 
     let startingloc=""
     let endingloc=""

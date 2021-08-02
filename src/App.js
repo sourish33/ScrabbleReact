@@ -1,11 +1,12 @@
 import React from 'react'
 import Game from './Game'
+import GameScreen from './GameScreen/GameScreen';
 
 
 
 
 function App() {
-  return <Game/>
+  return <GameScreen/>
 }
 
 export default App;
