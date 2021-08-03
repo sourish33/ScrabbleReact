@@ -4,10 +4,6 @@ import Game from "../Game"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 
-<meta
-    name="viewport"
-    content="minimum-scale=1, initial-scale=1, width=device-width"
-/>
 
 const GameScreen = () => {
     return (
