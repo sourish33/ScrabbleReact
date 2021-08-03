@@ -16,11 +16,11 @@ const GameScreen = () => {
                 <Col sm={12} lg={7} md={12}>
                     <Game visibleRack="p"></Game>
                 </Col>
-                <Col sm={12} lg={2} md={12}>
+                <Col sm={12} lg={2} md={12} >
                     <ControlButtons disabled={false}/> 
                 </Col>
                 <Col sm={12} lg={3} md={12}>
-                    <ScoreKeeper/>
+                    <ScoreKeeper points={5}/>
                 </Col>
             </Row>
         </Container>
