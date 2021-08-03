@@ -1,7 +1,8 @@
 import React from "react"
-import { Button, Col, Container, Row } from "react-bootstrap"
+import {Col, Container, Row } from "react-bootstrap"
 import Game from "../Game"
-import ControlButtons from "./ControlButtons"
+import ControlButtons from "../ControlButtons/ControlButtons"
+import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 
 <meta
     name="viewport"
@@ -12,14 +13,14 @@ const GameScreen = () => {
     return (
         <Container>
             <Row>
-                <Col sm={12} lg={7}>
+                <Col sm={12} lg={7} md={12}>
                     <Game visibleRack="p"></Game>
                 </Col>
-                <Col sm={12} lg={2}>
-                    <ControlButtons disabled={true}/> 
+                <Col sm={12} lg={2} md={12}>
+                    <ControlButtons disabled={false}/> 
                 </Col>
-                <Col sm={12} lg={3}>
-                    3 of 3
+                <Col sm={12} lg={3} md={12}>
+                    <ScoreKeeper/>
                 </Col>
             </Row>
         </Container>
