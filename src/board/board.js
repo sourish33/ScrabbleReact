@@ -4,7 +4,6 @@ import Tile from "../Tile/Tile"
 import styles from "./Board.module.css"
 import { TWs, DWs, DLs, TLs, S } from "./BoardMarkings"
 import { arrayToMap } from "../Utils/helpers"
-// import { onDragStart, onDragOver, onDrop } from "../Utils/dragndropHelpers"
 
 const renderSquare = (i, piece = null) => {
     let whichBgd = ""
@@ -75,7 +74,7 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
         }
     }
 
-    return <div className={styles.wrappingBoard}>{squares}</div>
+    return <div className={styles.wrappingBoard} style={{width: `${600}px`, height: `${600}px`}}>{squares}</div>
 }
 
 export default Board
