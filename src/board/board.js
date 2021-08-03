@@ -27,7 +27,7 @@ const renderSquare = (i, piece = null) => {
     return <Square bgd={whichBgd}>{piece}</Square>
 }
 
-const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd }) => {
+const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd, width, height }) => {
     let tilesMap = arrayToMap(tiles)
 
     const squares = []
@@ -74,7 +74,7 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
         }
     }
 
-    return <div className={styles.wrappingBoard} style={{width: `${600}px`, height: `${600}px`}}>{squares}</div>
+    return <div className={styles.wrappingBoard} style={{width: `${width}px`, height: `${height}px`}}>{squares}</div>
 }
 
 export default Board

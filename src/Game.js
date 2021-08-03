@@ -7,6 +7,7 @@ import Rack from "./Rack/Rack"
 
 const Game = ({visibleRack}) => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
+    const [boardDims, setBoardDims] = useState(setBoardSize())
     // console.log(tiles)
     // const[visibleRack, setVisibleRack]=useState("p")
 
@@ -82,6 +83,33 @@ const Game = ({visibleRack}) => {
       document.getElementsByTagName("body")[0].style.touchAction = "auto"
   }
 
+  function setBoardSize() {
+    let n = 95
+    let w = window.innerWidth
+    let h = window.innerHeight
+    let ww = Math.min(w, h)
+    if (ww > 650) {
+        n = 85
+    }
+    let width = parseInt((ww * n) / 100)
+    let height = parseInt((ww * n) / 100)
+    return ([width, height])
+}
+
+    // React.useEffect(() => {
+
+    //   window.addEventListener('resize', setBoardSize);
+
+
+    //   // cleanup this component
+
+    //   return () => {
+
+    //     window.removeEventListener('resize', setBoardSize);
+
+    //   };
+
+    // }, []);
 
     return (
         <div>
@@ -93,6 +121,8 @@ const Game = ({visibleRack}) => {
                 TouchStart = {TouchStart}
                 TouchMove = {TouchMove}
                 TouchEnd = {TouchEnd}
+                width = {boardDims[0]}
+                height = {boardDims[1]}
             />
             <Rack
                 whichRack={visibleRack}
