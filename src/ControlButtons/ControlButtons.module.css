@@ -1,0 +1,21 @@
+
+
+
+/* .horz-btns{
+  margin-top:2px;
+} */
+
+
+@media only screen and (max-width: 992px) {
+
+    .horz-btns{
+        flex-direction: row !important;
+        justify-content: space-around !important;
+      }
+  
+      .smallscreen{
+        padding-left: 0 !important;
+      }
+  
+
+}

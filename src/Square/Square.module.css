@@ -40,3 +40,33 @@
       position: relative;
       user-select: none;
   }
+
+
+  @media only screen and (max-width: 992px) {
+
+    /* @media (max-width: @screen-sm-min) { */
+       
+    .TW {
+      /* padding: 0; */
+      font-size: .8em;
+      
+    }
+    
+    .DL {
+      /* padding: 0; */
+      font-size: .8em;
+    }
+    
+    .TL {
+      font-size: .8em;
+    }
+    
+    .DW{
+      font-size: .8em;
+    }
+    
+    .S{
+      font-size: .8em;
+    }
+
+  }

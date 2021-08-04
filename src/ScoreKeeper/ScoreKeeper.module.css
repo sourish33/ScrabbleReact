@@ -1,0 +1,14 @@
+.pointsOuterBox{
+    margin:auto;
+    text-align: center;
+    background-color: lightgreen;
+    width:80%;
+    border-radius: 5px;
+          /* display: flex;
+      justify-content: center;
+      align-items: center; */
+}
+
+.points{
+    font-weight: bold;
+}
