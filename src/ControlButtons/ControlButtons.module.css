@@ -5,6 +5,10 @@
   margin-top:2px;
 } */
 
+.stretch {
+  width:50%
+}
+
 
 @media only screen and (max-width: 992px) {
 
@@ -18,6 +22,11 @@
         font-size: 0.8em;
         /* color: lightseagreen; */
       }
+
+    .stretch{
+      width:auto;
+    }
+
   
 
 }
