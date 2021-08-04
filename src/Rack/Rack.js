@@ -5,7 +5,7 @@ import Tile from '../Tile/Tile';
 import RackSquare from '../RackSquare/RackSquare';
 
 
-const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd }) => {
+const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd, width }) => {
     let tilesMap = arrayToMap(tiles)
 
     const squares = []
@@ -50,7 +50,7 @@ const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMov
         }
     }
 
-    return <div className={styles.wrappingRack}>{squares}</div>
+    return <div className={styles.wrappingRack} style={{width: `${width}px`}}>{squares}</div>
 
 }
 

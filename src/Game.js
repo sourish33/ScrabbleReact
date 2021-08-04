@@ -128,6 +128,7 @@ const Game = ({ visibleRack }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
+                width={boardDims[0]*0.66}
             />
         </div>
     )
