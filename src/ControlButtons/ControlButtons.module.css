@@ -13,8 +13,10 @@
         justify-content: space-around !important;
       }
   
-      .smallscreen{
-        padding-left: 0 !important;
+    .smallscreen{
+        /* padding-left: 0 !important; */
+        font-size: 0.8em;
+        /* color: lightseagreen; */
       }
   
 

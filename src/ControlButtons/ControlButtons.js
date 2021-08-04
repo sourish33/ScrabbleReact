@@ -7,30 +7,31 @@ const ControlButtons = (props) => {
         <div className={`d-flex flex-lg-column ${styles["horz-btns"]}`}>
             <div class="p-2 mt-0">
                 <Button variant="primary" disabled={props.disabled}>
-                    Shuffle
+                <span className={styles.smallscreen}>Shuffle</span>
                 </Button>
             </div>
             <div class="p-2 mt-0">
                 <Button variant="primary" disabled={props.disabled}>
-                    Recall
+                <span className={styles.smallscreen}>Recall</span>
                 </Button>
             </div>
             <div class="p-2 mt-0">
                 <Button variant="primary" disabled={props.disabled}>
-                    Exchange
+                <span className={styles.smallscreen}>Exchange</span>
                 </Button>
             </div>
             <div class="p-2 mt-0">
                 <Button variant="warning" disabled={props.disabled}>
-                    Pass
+                <span className={styles.smallscreen}>Pass</span>
+                    
                 </Button>
             </div>
             <div class="p-2 mt-0">
-                <Button variant="info"><span className="d-none d-xl-block">Dictionary</span><span className="d-none d-sm-none">Dict</span></Button>
+                <Button variant="info"><span className={styles.smallscreen}>Dict</span></Button>
             </div>
             <div class="p-2 mt-0">
                 <Button variant="success" disabled={props.disabled}>
-                    Play
+                <span className={styles.smallscreen}>Play</span>
                 </Button>
             </div>
         </div>
