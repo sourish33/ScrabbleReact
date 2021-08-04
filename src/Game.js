@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Board from "./Board/Board"
-import { TILE_LIST_ARR } from "./Utils/DummyData"
+
 import move from "./Utils/movers"
 import {
     getSquareIdFromPos,
@@ -10,8 +10,8 @@ import {
 import Rack from "./Rack/Rack"
 import { setBoardSize } from "./Utils/helpers"
 
-const Game = ({ visibleRack }) => {
-    const [tiles, setTiles] = useState(TILE_LIST_ARR)
+const Game = ({ tilesArray, visibleRack }) => {
+    const [tiles, setTiles] = useState(tilesArray)
     const [boardDims, setBoardDims] = useState(setBoardSize())
     // console.log(tiles)
     // const[visibleRack, setVisibleRack]=useState("p")

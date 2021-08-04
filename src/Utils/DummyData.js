@@ -23,5 +23,10 @@ export const TILE_LIST_ARR = [
 {pos: "q6", letter: "_", points: 0, submitted: false},
 {pos: "q7", letter: "Z", points: 10, submitted: false},
 ]
-// const TILE_LIST_ARR = []
+
+export const DUMMY_PLAYERS = [
+    {name: 'Ram', points: 122},
+    {name: 'Sita', points: 94},
+    {name: 'AI Lilly', points: 147},
+]
 
