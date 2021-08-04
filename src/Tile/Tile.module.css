@@ -47,3 +47,17 @@
   .Aligner-item--bottom {
     align-self: flex-end;
   }
+
+
+  @media only screen and (max-width: 900px) {
+
+    .letter {
+      font-size: 0.9em;
+    }
+
+    .points {
+      font-size: 0.6em;
+    }
+
+
+  }

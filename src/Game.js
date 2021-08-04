@@ -2,21 +2,26 @@ import React, { useState } from "react"
 import Board from "./Board/Board"
 import { TILE_LIST_ARR } from "./Utils/DummyData"
 import move from "./Utils/movers"
-import { getSquareIdFromPos, getXY, setTranslate } from "./Utils/dragndropHelpers"
+import {
+    getSquareIdFromPos,
+    getXY,
+    setTranslate,
+} from "./Utils/dragndropHelpers"
 import Rack from "./Rack/Rack"
+import { setBoardSize } from "./Utils/helpers"
 
-const Game = ({visibleRack}) => {
+const Game = ({ visibleRack }) => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
     const [boardDims, setBoardDims] = useState(setBoardSize())
     // console.log(tiles)
     // const[visibleRack, setVisibleRack]=useState("p")
 
-    let startingloc=""
-    let endingloc=""
+    let startingloc = ""
+    let endingloc = ""
     let initialX
-    let initialY 
-    let xOffset =0
-    let yOffset =0
+    let initialY
+    let xOffset = 0
+    let yOffset = 0
     let lastMoved
     let currentX
     let currentY
@@ -36,80 +41,70 @@ const Game = ({visibleRack}) => {
         let incoming = event.dataTransfer.getData("text")
         // let dest = event.currentTarget.id
         let u = event.currentTarget
-        let dest= getSquareIdFromPos(getXY(u))
+        let dest = getSquareIdFromPos(getXY(u))
         console.log(`${incoming} to ${dest}`)
-        setTiles(tiles=>move(incoming, dest,tiles))
+        setTiles((tiles) => move(incoming, dest, tiles))
     }
 
-
-
-    const TouchStart =(e) => {
-      e.preventDefault()
-      if (e.touches.length>1) {return}//Multiple Touches
-      document.getElementsByTagName("body")[0].style.touchAction = "none"
-      let u = e.currentTarget
-      initialX = e.touches[0].clientX - xOffset
-      initialY = e.touches[0].clientY - yOffset
-      startingloc = getSquareIdFromPos(getXY(u))
+    const TouchStart = (e) => {
+        e.preventDefault()
+        if (e.touches.length > 1) {
+            return
+        } //Multiple Touches
+        document.getElementsByTagName("body")[0].style.touchAction = "none"
+        let u = e.currentTarget
+        initialX = e.touches[0].clientX - xOffset
+        initialY = e.touches[0].clientY - yOffset
+        startingloc = getSquareIdFromPos(getXY(u))
     }
 
     const TouchMove = (e) => {
-      e.preventDefault()
-      if (e.touches.length>1) {return}//Multiple Touches
-      document.getElementsByTagName("body")[0].style.touchAction = "none"
-      let dragItem = e.currentTarget
-      lastMoved = dragItem
-  
-      currentX = e.touches[0].clientX - initialX
-      currentY = e.touches[0].clientY - initialY
-  
-      xOffset = currentX
-      yOffset = currentY
-  
-      setTranslate(currentX, currentY, dragItem)
+        e.preventDefault()
+        if (e.touches.length > 1) {
+            return
+        } //Multiple Touches
+        document.getElementsByTagName("body")[0].style.touchAction = "none"
+        let dragItem = e.currentTarget
+        lastMoved = dragItem
+
+        currentX = e.touches[0].clientX - initialX
+        currentY = e.touches[0].clientY - initialY
+
+        xOffset = currentX
+        yOffset = currentY
+
+        setTranslate(currentX, currentY, dragItem)
     }
 
     function TouchEnd(e) {
-      e.preventDefault()
-      if (e.touches.length>1) {return}//Multiple Touches
-      initialX = currentX
-      initialY = currentY
-      let u = e.currentTarget
-      endingloc = getSquareIdFromPos(getXY(u))
-      xOffset = 0
-      yOffset = 0
-      setTranslate(0, 0, lastMoved)
-      setTiles(tiles => move(startingloc, endingloc, tiles))
-      document.getElementsByTagName("body")[0].style.touchAction = "auto"
-  }
-
-  function setBoardSize() {
-    let n = 95
-    let w = window.innerWidth
-    let h = window.innerHeight
-    let ww = Math.min(w, h)
-    if (ww > 650) {
-        n = 85
+        e.preventDefault()
+        if (e.touches.length > 1) {
+            return
+        } //Multiple Touches
+        initialX = currentX
+        initialY = currentY
+        let u = e.currentTarget
+        endingloc = getSquareIdFromPos(getXY(u))
+        xOffset = 0
+        yOffset = 0
+        setTranslate(0, 0, lastMoved)
+        setTiles((tiles) => move(startingloc, endingloc, tiles))
+        document.getElementsByTagName("body")[0].style.touchAction = "auto"
     }
-    let width = parseInt((ww * n) / 100)
-    let height = parseInt((ww * n) / 100)
-    return ([width, height])
-}
 
-    // React.useEffect(() => {
+    const handleResize = () => {
+        setBoardDims(() => setBoardSize())
+    }
 
-    //   window.addEventListener('resize', setBoardSize);
+    React.useEffect(() => {
+        window.addEventListener("resize", handleResize)
 
+        // cleanup this component
 
-    //   // cleanup this component
-
-    //   return () => {
-
-    //     window.removeEventListener('resize', setBoardSize);
-
-    //   };
-
-    // }, []);
+        return () => {
+            window.removeEventListener("resize", handleResize)
+        }
+    }, [])
 
     return (
         <div>
@@ -118,11 +113,11 @@ const Game = ({visibleRack}) => {
                 DragStart={DragStart}
                 DragOver={DragOver}
                 Drop={Drop}
-                TouchStart = {TouchStart}
-                TouchMove = {TouchMove}
-                TouchEnd = {TouchEnd}
-                width = {boardDims[0]}
-                height = {boardDims[1]}
+                TouchStart={TouchStart}
+                TouchMove={TouchMove}
+                TouchEnd={TouchEnd}
+                width={boardDims[0]}
+                height={boardDims[1]}
             />
             <Rack
                 whichRack={visibleRack}
@@ -130,9 +125,9 @@ const Game = ({visibleRack}) => {
                 DragStart={DragStart}
                 DragOver={DragOver}
                 Drop={Drop}
-                TouchStart = {TouchStart}
-                TouchMove = {TouchMove}
-                TouchEnd = {TouchEnd}
+                TouchStart={TouchStart}
+                TouchMove={TouchMove}
+                TouchEnd={TouchEnd}
             />
         </div>
     )
