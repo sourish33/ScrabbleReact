@@ -26,7 +26,7 @@ const ControlButtons = (props) => {
                 </Button>
             </div>
             <div class="p-2 mt-0">
-                <Button variant="info">Dictionary</Button>
+                <Button variant="info"><span className="d-none d-xl-block">Dictionary</span><span className="d-none d-sm-none">Dict</span></Button>
             </div>
             <div class="p-2 mt-0">
                 <Button variant="success" disabled={props.disabled}>
