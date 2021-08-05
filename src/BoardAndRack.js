@@ -10,8 +10,8 @@ import {
 import Rack from "./Rack/Rack"
 import { setBoardSize } from "./Utils/helpers"
 
-const BoardAndRack = ({ tilesArray, visibleRack }) => {
-    const [tiles, setTiles] = useState(tilesArray)
+const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
+    
     const [boardDims, setBoardDims] = useState(setBoardSize())
 
     let startingloc = ""
@@ -41,7 +41,7 @@ const BoardAndRack = ({ tilesArray, visibleRack }) => {
         let u = event.currentTarget
         let dest = getSquareIdFromPos(getXY(u))
         console.log(`${incoming} to ${dest}`)
-        setTiles((tiles) => move(incoming, dest, tiles))
+        updateTiles(move(incoming, dest, tiles))
     }
 
     const TouchStart = (e) => {
@@ -86,7 +86,7 @@ const BoardAndRack = ({ tilesArray, visibleRack }) => {
         xOffset = 0
         yOffset = 0
         setTranslate(0, 0, lastMoved)
-        setTiles((tiles) => move(startingloc, endingloc, tiles))
+        updateTiles(move(startingloc, endingloc, tiles))
         document.getElementsByTagName("body")[0].style.touchAction = "auto"
     }
 
