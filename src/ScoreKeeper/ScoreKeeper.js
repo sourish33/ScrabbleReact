@@ -2,11 +2,7 @@ import React from "react"
 import { Table, Button } from "react-bootstrap"
 import styles from "./ScoreKeeper.module.css"
 
-const LAST_PLAYED = [
-    { player: "Ram", word: "GARRULOUS", points: 8 },
-    { player: "Sita", word: "SCOVILLE", points: 18 },
-    { player: "AI", word: "RENDEZVOUS", points: 43 },
-]
+
 
 const scoreTable = (playersAndPoints, currentPlayer) => {
     return (
@@ -94,7 +90,7 @@ const ScoreKeeper = (props) => {
                 />
             </div>
             <div className="p-1 mb-2 justify-content-center">
-                <LastPlayed lastPlayed={LAST_PLAYED} />
+                <LastPlayed lastPlayed={props.lastPlayed} />
             </div>
             <div className="p-1 mb-2 justify-content-center">
                 <Buttons />

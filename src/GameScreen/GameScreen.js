@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap"
 import Game from "../Game"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
-import { DUMMY_PLAYERS, TILE_LIST_ARR } from "../Utils/DummyData"
+import { DUMMY_PLAYERS, TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 
 const GameScreen = () => {
     return (
@@ -22,6 +22,7 @@ const GameScreen = () => {
                         currentPlayer ={0}
                         tilesLeft={79}
                         maxPoints ={150}
+                        lastPlayed = {LAST_PLAYED}
                     />
                 </Col>
             </Row>

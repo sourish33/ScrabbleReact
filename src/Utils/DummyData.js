@@ -30,3 +30,10 @@ export const DUMMY_PLAYERS = [
     {name: 'AI Lilly', points: 147},
 ]
 
+export const LAST_PLAYED = [
+    { player: "Ram", word: "GARRULOUS", points: 8 },
+    { player: "Sita", word: "SCOVILLE", points: 18 },
+    { player: "AI", word: "RENDEZVOUS", points: 43 },
+    { player: "Ram", word: "LIT", points: 6 },
+    { player: "Sita", word: "T0", points: 2 },
+]
