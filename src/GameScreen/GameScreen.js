@@ -19,7 +19,7 @@ const GameScreen = () => {
                     <ScoreKeeper
                         pointsPossible={15}
                         playersAndPoints={DUMMY_PLAYERS}
-                        currentPlayer ={0}
+                        currentPlayer ={1}
                         tilesLeft={79}
                         maxPoints ={150}
                         lastPlayed = {LAST_PLAYED}
