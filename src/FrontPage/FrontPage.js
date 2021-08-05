@@ -1,3 +1,13 @@
 import React from 'react'
 
-const FrontPage 
+const FrontPage = () =>{
+
+    return (
+        <div>
+            
+        </div>
+    )
+
+}
+
+export default FrontPage
