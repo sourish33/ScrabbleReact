@@ -4,7 +4,7 @@ import styles from "./ControlButtons.module.css"
 
 const ControlButtons = (props) => {
     return (
-        <div className={`d-flex flex-lg-column ${styles["horz-btns"]}`}>
+        <div className={`d-flex flex-column ${styles["horz-btns"]}`}>
             <div class="p-2 mt-0">
                 <Button className={styles.stretch} variant="primary" disabled={props.disabled}>
                 <span className={styles.smallscreen}>Shuffle</span>

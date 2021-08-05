@@ -1,5 +1,5 @@
 import React from "react"
-import { Table } from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
 import styles from "./ScoreKeeper.module.css"
 
 
@@ -30,6 +30,23 @@ const TilesAndPoints = ({tilesLeft, maxPoints}) =>{
     )
 }
 
+const Buttons = () => {
+    return (
+        <div className={`d-flex flex-row justify-content-center`}>
+            <div class="p-2 mt-0">
+                <Button variant="info"><span className={styles.smallscreen}>Instructions</span></Button>
+            </div>
+            <div class="p-2 mt-0">
+                <Button  variant="danger">
+                <span className={styles.smallscreen}>Exit</span>
+                </Button>
+            </div>
+
+        </div>
+
+    )
+}
+
 const ScoreKeeper = (props) => {
     return (
         <div className={`d-flex flex-column`}>
@@ -42,6 +59,9 @@ const ScoreKeeper = (props) => {
             </div>
             <div className="p-1 mb-2 justify-content-center">
                 <TilesAndPoints tilesLeft={props.tilesLeft} maxPoints={props.maxPoints}/>
+            </div>
+            <div className="p-1 mb-2 justify-content-center">
+                <Buttons/>
             </div>
         </div>
     )

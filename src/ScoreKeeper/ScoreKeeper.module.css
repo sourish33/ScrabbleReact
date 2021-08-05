@@ -38,3 +38,12 @@
 th {
     border: 2px solid blue;
 }
+
+@media only screen and (max-width: 992px) {
+
+    .smallscreen{
+        /* padding-left: 0 !important; */
+        font-size: 0.8em;
+        /* color: lightseagreen; */
+      }
+}
