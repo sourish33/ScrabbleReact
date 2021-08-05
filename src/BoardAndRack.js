@@ -10,7 +10,7 @@ import {
 import Rack from "./Rack/Rack"
 import { setBoardSize } from "./Utils/helpers"
 
-const Game = ({ tilesArray, visibleRack }) => {
+const BoardAndRack = ({ tilesArray, visibleRack }) => {
     const [tiles, setTiles] = useState(tilesArray)
     const [boardDims, setBoardDims] = useState(setBoardSize())
 
@@ -132,4 +132,5 @@ const Game = ({ tilesArray, visibleRack }) => {
     )
 }
 
-export default Game
+export default BoardAndRack
+

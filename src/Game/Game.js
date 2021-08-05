@@ -1,16 +1,16 @@
 import React from "react"
 import { Col, Container, Row } from "react-bootstrap"
-import Game from "../Game"
+import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { DUMMY_PLAYERS, TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 
-const GameScreen = () => {
+const Game = () => {
     return (
         <Container>
             <Row>
                 <Col sm={12} lg={7} md={12}>
-                    <Game tilesArray={TILE_LIST_ARR} visibleRack="p"></Game>
+                    <BoardAndRack tilesArray={TILE_LIST_ARR} visibleRack="p"></BoardAndRack>
                 </Col>
                 <Col sm={12} lg={2} md={12}>
                     <ControlButtons disabled={false} />
@@ -30,4 +30,4 @@ const GameScreen = () => {
     )
 }
 
-export default GameScreen
+export default Game
