@@ -8,6 +8,14 @@ import { DUMMY_PLAYERS, TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 const Game = () => {
 
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
+    const [visibleRack, setVisibleRack] = useState("p")
+    const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
+    const [pointsPossible, setPointsPossible] = useState(0)
+    const [playersAndPoints, setPlayersAndPoints] = useState(DUMMY_PLAYERS)
+    const [currentPlayer, setCurrentPlayer] = useState(2)
+    const [tilesLeft, setTilesLeft] = useState(47)
+    const [maxPoints, setMaxPoints] = useState(150)
+    const [buttonsDisabled, setButtonsDisabled] = useState(false)
 
     const updateTiles = (tiles)=>{
         setTiles(x=>tiles)
@@ -16,19 +24,19 @@ const Game = () => {
         <Container>
             <Row>
                 <Col sm={12} lg={7} md={12}>
-                    <BoardAndRack tiles={tiles} visibleRack="p" updateTiles={updateTiles}></BoardAndRack>
+                    <BoardAndRack tiles={tiles} visibleRack={visibleRack} updateTiles={updateTiles}></BoardAndRack>
                 </Col>
                 <Col sm={12} lg={2} md={12}>
-                    <ControlButtons disabled={false} />
+                    <ControlButtons disabled={buttonsDisabled} />
                 </Col>
                 <Col sm={12} lg={3} md={12}>
                     <ScoreKeeper
-                        pointsPossible={15}
-                        playersAndPoints={DUMMY_PLAYERS}
-                        currentPlayer ={1}
-                        tilesLeft={79}
-                        maxPoints ={150}
-                        lastPlayed = {LAST_PLAYED}
+                        pointsPossible={pointsPossible}
+                        playersAndPoints={playersAndPoints}
+                        currentPlayer ={currentPlayer}
+                        tilesLeft={tilesLeft}
+                        maxPoints ={maxPoints}
+                        lastPlayed = {lastPlayed}
                     />
                 </Col>
             </Row>

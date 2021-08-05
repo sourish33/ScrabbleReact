@@ -35,5 +35,5 @@ export const LAST_PLAYED = [
     { player: "Sita", word: "SCOVILLE", points: 18 },
     { player: "AI", word: "RENDEZVOUS", points: 43 },
     { player: "Ram", word: "LIT", points: 6 },
-    { player: "Sita", word: "T0", points: 2 },
+    { player: "Sita", word: "TO", points: 2 },
 ]
