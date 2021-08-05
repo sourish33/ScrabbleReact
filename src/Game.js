@@ -13,8 +13,6 @@ import { setBoardSize } from "./Utils/helpers"
 const Game = ({ tilesArray, visibleRack }) => {
     const [tiles, setTiles] = useState(tilesArray)
     const [boardDims, setBoardDims] = useState(setBoardSize())
-    // console.log(tiles)
-    // const[visibleRack, setVisibleRack]=useState("p")
 
     let startingloc = ""
     let endingloc = ""
@@ -128,7 +126,7 @@ const Game = ({ tilesArray, visibleRack }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
-                width={parseInt(boardDims[0]*0.66)}
+                width={parseInt(boardDims[0] * 0.66)}
             />
         </div>
     )

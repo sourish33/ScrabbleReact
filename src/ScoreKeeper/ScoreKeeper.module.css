@@ -1,27 +1,40 @@
-.pointsOuterBox{
-    margin:auto;
+.pointsOuterBox {
+    margin: auto;
     text-align: center;
     background-color: lightgreen;
-    width:80%;
+    width: 80%;
     border-radius: 5px;
-          /* display: flex;
-      justify-content: center;
-      align-items: center; */
 }
 
-.bold{
+.bold {
     font-weight: bold;
 }
 
-
-
-  .mytable {
-    border: 2px solid blue;
-    width:80%;
-    margin-left:auto;
+.tpdiv {
+    width: 80%;
+    background-color: lightpink;
+    border-radius: 5px;
+    margin-left: auto; 
     margin-right: auto;
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
 
-  .mytable td, th {
+.tpbox {
+    text-align: center;
+}
+
+.mytable {
     border: 2px solid blue;
-  }
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mytable td,
+th {
+    border: 2px solid blue;
+}
