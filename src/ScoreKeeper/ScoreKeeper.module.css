@@ -39,6 +39,24 @@ th {
     border: 2px solid blue;
 }
 
+.lastPlayed {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #666;
+    padding: 5px;
+    border-radius: 10px;
+    background-color:lightskyblue;
+}
+
+.nomargin {
+    margin:0;
+}
+
+.bluebold {
+    font-weight: bold;
+    color: blue;
+}
+
 @media only screen and (max-width: 992px) {
 
     .smallscreen{
