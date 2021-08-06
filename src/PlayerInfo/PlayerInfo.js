@@ -53,11 +53,7 @@ const PlayerInfo = () => {
     }
 
     const removePlayer = () => {
-        setPlayerArray((x) => {
-            let last = x[x.length - 1]
-            return x.filter((el) => el !== last)
-        })
-
+        setPlayerArray((x)=>x.slice(0,-1))
         setPlayerTypes((x)=>x.slice(0,-1))
     }
 
@@ -95,7 +91,7 @@ const PlayerInfo = () => {
                     Remove
                 </Button>
             </Col>
-            <Button
+            {/* <Button
                     className="mt-4"
                     variant="primary"
                     size="lg"
@@ -105,7 +101,7 @@ const PlayerInfo = () => {
                     
                 >
                     Submit Data
-                </Button>
+                </Button> */}
 
         </Form>
     )
