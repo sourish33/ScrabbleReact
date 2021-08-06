@@ -67,7 +67,7 @@ const PlayerInfo = () => {
                     variant="primary"
                     type="submit"
                     onClick={addHumanPlayer}
-                    disabled={playerArray.length > 3}
+                    style={{display: playerArray.length<4 ? "inline-block" : "none" }}
                 >
                     Add Human
                 </Button>{" "}
@@ -75,7 +75,8 @@ const PlayerInfo = () => {
                     variant="primary"
                     type="submit"
                     onClick={addAIPlayer}
-                    disabled={playerArray.length > 3}
+                    // disabled={playerArray.length > 3}
+                    style={{display: playerArray.length<4 ? "inline-block" : "none" }}
                 >
                     Add Computer
                 </Button>{" "}
@@ -83,7 +84,8 @@ const PlayerInfo = () => {
                     variant="primary"
                     type="submit"
                     onClick={removePlayer}
-                    disabled={playerArray.length === 0}
+                    // disabled={playerArray.length === 0}
+                    style={{display: playerArray.length!==0 ? "inline-block" : "none" }}
                 >
                     Remove
                 </Button>
