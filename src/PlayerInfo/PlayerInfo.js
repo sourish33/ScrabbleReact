@@ -15,12 +15,11 @@ const AIPlayerForm = () => {
         <Form.Group className="mb-3">
             <Row>
                 <Col xs={6} sm={6}>
-                    <Form.Control type="text" value="AI Lily" />
+                    <Form.Control type="text" value="AI Lily" disabled/>
                 </Col>
                 <Col xs={6} sm={6}>
                     <Form.Select aria-label="Default select example">
-                        <option>Pick AI Strength</option>
-                        <option value="1">Weak</option>
+                        <option value="1" active>Weak</option>
                         <option value="2">Medium</option>
                         <option value="3">Strong</option>
                     </Form.Select>
@@ -32,23 +31,24 @@ const AIPlayerForm = () => {
 
 const PlayerInfo = () => {
     const [playerArray, setPlayerArray] = useState([])
+    const [playerTypes, setPlayerTypes] = useState([])
 
-    // const HumanPlayerArray = []
-    // for (let n=0; n<numPlayers;n++){
-    //     HumanPlayerArray.push(
-    //         <HumanPlayerForm key={n}/>
-    //     )
-    // }
 
     const addHumanPlayer = () => {
         setPlayerArray((x) => {
-            return [...x, <HumanPlayerForm key={x.length + 1} />]
+            return [...x, <HumanPlayerForm key={Math.random()} />]
+        })
+        setPlayerTypes((x)=>{
+            return [...x, "H"]
         })
     }
 
     const addAIPlayer = () => {
         setPlayerArray((x) => {
-            return [...x, <AIPlayerForm key={x.length + 1} />]
+            return [...x, <AIPlayerForm key={Math.random()} />]
+        })
+        setPlayerTypes((x)=>{
+            return [...x, "M"]
         })
     }
 
@@ -57,6 +57,8 @@ const PlayerInfo = () => {
             let last = x[x.length - 1]
             return x.filter((el) => el !== last)
         })
+
+        setPlayerTypes((x)=>x.slice(0,-1))
     }
 
     return (
@@ -65,6 +67,7 @@ const PlayerInfo = () => {
                 {playerArray}
                 <Button
                     variant="primary"
+                    size="lg"
                     type="submit"
                     onClick={addHumanPlayer}
                     style={{display: playerArray.length<4 ? "inline-block" : "none" }}
@@ -73,6 +76,7 @@ const PlayerInfo = () => {
                 </Button>{" "}
                 <Button
                     variant="primary"
+                    size="lg"
                     type="submit"
                     onClick={addAIPlayer}
                     // disabled={playerArray.length > 3}
@@ -82,6 +86,7 @@ const PlayerInfo = () => {
                 </Button>{" "}
                 <Button
                     variant="primary"
+                    size="lg"
                     type="submit"
                     onClick={removePlayer}
                     // disabled={playerArray.length === 0}
@@ -90,6 +95,18 @@ const PlayerInfo = () => {
                     Remove
                 </Button>
             </Col>
+            <Button
+                    className="mt-4"
+                    variant="primary"
+                    size="lg"
+                    type="submit"
+                    onClick={()=>{alert(playerTypes)}}
+                    // disabled={playerArray.length === 0}
+                    
+                >
+                    Submit Data
+                </Button>
+
         </Form>
     )
 }
