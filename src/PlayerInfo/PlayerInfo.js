@@ -30,11 +30,20 @@ const AIPlayerForm = () => {
 }
 
 const PlayerInfo = () => {
-    const [numPlayers, setNumPlayers] = useState(1)
+    const [numPlayers, setNumPlayers] = useState(0)
+
+
+    const HumanPlayerArray = []
+    for (let n=0; n<numPlayers;n++){
+        HumanPlayerArray.push(
+            <HumanPlayerForm key={n}/>
+        )
+    }
+
     return (
         <Form as={Row}>
             <Col sm="6">
-                <HumanPlayerForm/>
+               {HumanPlayerArray}
                 <AIPlayerForm/>
                 <Button variant="primary" type="submit">
                     Add Human
