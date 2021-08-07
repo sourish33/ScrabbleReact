@@ -5,7 +5,11 @@ import styles from "./PlayerInfo.module.css"
 const HumanPlayerForm = () => {
     return (
         <Form.Group className="mb-3">
+            <Row>
+            <Col xs={6} sm={6}>
             <Form.Control type="text" placeholder="Player Name" />
+            </Col>
+            </Row>
         </Form.Group>
     )
 }
@@ -58,6 +62,7 @@ const PlayerInfo = () => {
     }
 
     return (
+        
         <Form as={Row}>
             <Col sm={12} md={6} lg={6}>
                 {playerArray}
@@ -102,8 +107,8 @@ const PlayerInfo = () => {
                 >
                     Submit Data
                 </Button> */}
-
         </Form>
+    
     )
 }
 
