@@ -73,7 +73,7 @@ const PlayerInfo = () => {
                 <Button
                     variant="primary"
                     size="lg"
-                    type="submit"
+                    type="button"
                     onClick={addAIPlayer}
                     // disabled={playerArray.length > 3}
                     style={{display: playerArray.length<4 ? "inline-block" : "none" }}
@@ -83,7 +83,7 @@ const PlayerInfo = () => {
                 <Button
                     variant="primary"
                     size="lg"
-                    type="submit"
+                    type="button"
                     onClick={removePlayer}
                     // disabled={playerArray.length === 0}
                     style={{display: playerArray.length!==0 ? "inline-block" : "none" }}
