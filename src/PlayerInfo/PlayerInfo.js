@@ -4,7 +4,7 @@ import styles from "./PlayerInfo.module.css"
 
 
 const DUMMY_PLAYERS = [
-    {name: "", type: "", level: 0},
+    // {name: "", type: "", level: 0},
 ]
 const PlayerInfo = () => {
 
@@ -21,6 +21,12 @@ const PlayerInfo = () => {
         let newInput = {name: "", type: "H", level: 0}
         setPlayers((x)=>{
             return [...x, newInput]
+        })
+    }
+
+    const remove = () =>{
+        setPlayers((x)=>{
+            return x.slice(0,-1)
         })
     }
 
@@ -44,7 +50,7 @@ const PlayerInfo = () => {
         <div className="btn-toolbar">
         <button type="button" onClick={handleClickH}>Add Human</button>
         <button type="button">Add Computer</button>
-        <button type="button">Remove</button>
+        <button type="button" onClick={remove}>Remove</button>
         </div>
     </div>
 
