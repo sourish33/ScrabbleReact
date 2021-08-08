@@ -52,12 +52,14 @@ const PlayerInfo = () => {
         placeholder={`Player ${ind+1} name`}
         onChange={e=>handleChangeH(e,ind)}/> : 
 
-        <input 
-        key={ind} 
-        value = {el.name} 
-        type="text" 
-        disabled
-        /> 
+        <div key={ind}>
+            <input
+            value = {el.name}
+            type="text"
+            disabled
+            />
+        </div>
+    
     
         return u 
         
@@ -65,6 +67,7 @@ const PlayerInfo = () => {
 
     
     return (
+    // <div>
     <div className={styles.playerInfo}>
         {playerform}
         <div className="btn-toolbar">
@@ -73,6 +76,10 @@ const PlayerInfo = () => {
         <button type="button" onClick={remove}>Remove</button>
         </div>
     </div>
+   
+
+    // </div>
+    
 
     )
 }
