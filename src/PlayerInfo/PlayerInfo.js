@@ -84,15 +84,18 @@ const PlayerInfo = () => {
         <div className={styles.playerInfo}>
             {playerform}
             <div className="btn-toolbar">
+                {players.length<4 ? (
                 <button type="button" onClick={handleClickH}>
                     Add Human
-                </button>
+                </button> ) : null}
+                {players.length<4 ? (
                 <button type="button" onClick={handleClickM}>
                     Add Computer
-                </button>
-                <button type="button" onClick={remove}>
+                </button> ) : null}
+                
+                {players.length!==0 ? <button type="button" onClick={remove}>
                     Remove
-                </button>
+                </button> : null}
             </div>
             <div style={{ marginTop: 20 }}>
                 {JSON.stringify(players, null, 2)}
