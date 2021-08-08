@@ -31,16 +31,17 @@ const PlayerInfo = () => {
     }
 
     const playerform =  players.map((el, ind)=>{
-        return (
-            <input 
-            key={ind} 
-            name= "Player Name" 
-            value = {el.name} 
-            type="text" 
-            placeholder={`Player ${ind+1} name`}
-            onChange={e=>handleChangeH(e,ind)}/>
-
-        )
+        let u = el.level===0 ? 
+        <input 
+        key={ind} 
+        name= "Player Name" 
+        value = {el.name} 
+        type="text" 
+        placeholder={`Player ${ind+1} name`}
+        onChange={e=>handleChangeH(e,ind)}/> : null
+    
+        return u 
+        
     })
 
     
