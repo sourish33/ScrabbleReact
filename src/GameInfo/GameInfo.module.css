@@ -1,0 +1,11 @@
+.playerInfo {
+    display: flex;
+    flex-direction: column;
+    width:50%;
+}
+
+.horz {
+    display: flex;
+    flex-direction: row;
+
+}
