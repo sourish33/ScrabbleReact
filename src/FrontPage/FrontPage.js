@@ -4,6 +4,7 @@ import GameInfo from "../GameInfo/GameInfo"
 import styles from "./FrontPage.module.css"
 
 const FrontPage = () => {
+    const gameVariables = []
     return (
         <div>
             <div className="p-5 mb-4 bg-light rounded-3">

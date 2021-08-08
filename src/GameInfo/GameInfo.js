@@ -3,9 +3,6 @@ import { Form, Button, Row, Col } from "react-bootstrap"
 import { shuffle } from "../Utils/helpers"
 import styles from "./GameInfo.module.css"
 
-const DUMMY_PLAYERS = [
-    // {name: "", level: 0},
-]
 
 let AI_LIST = shuffle([
     "AI Lily",
@@ -15,12 +12,14 @@ let AI_LIST = shuffle([
     "AI Jasmine",
     "AI Kashmir",
     "AI Dylan",
+    "AI Sienna",
 ])
 const GameInfo = () => {
-    const [players, setPlayers] = useState(DUMMY_PLAYERS)
+    const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
     const [dictCheck, setDictCheck] = useState("1")
     const [gameType, setGameType] = useState("75")
+    const [data, setData] = useState({})
 
     const handleChange = (event, index) => {
         let playerName = event.target.value
@@ -104,6 +103,10 @@ const GameInfo = () => {
                         <option value="1">Yes</option>
                     </select>
                 </div>
+                {/* <div className="ml-4" onChange={handleSelectShuffle} value={shufflePlayers}>
+                     <input type="radio" value="0" name="No"/> No
+                    <input type="radio" value="1" name="Yes"/> Yes
+                </div> */}
             </div>
 
         )
@@ -132,7 +135,7 @@ const GameInfo = () => {
                     <select name="shuffle" onChange={handleSelectGameType} value={gameType}>
                         <option value="75">75 Point Game</option>
                         <option value="150">150 Point Game</option> 
-                        <option value="inf">Till The Tiles Run Out</option>     
+                        <option value="10000">Till The Tiles Run Out</option>     
                     </select>
                 </div>
             </div>
@@ -140,43 +143,60 @@ const GameInfo = () => {
         )
     }
 
+    const ShowData = (props) =>{
+        return(
+            props.data ?
+            <div style={{ marginTop: 20 }}>
+                    {JSON.stringify(data, null, 2)}
+             </div>
+
+             : null
+
+        )
+    }
+
+    const handleSubmit =(event) =>{
+        event.preventDefault()
+        let datapack = {
+            playerdata: players,
+            shuffPlayers: shufflePlayers,
+            dictCheck: dictCheck,
+            gameType: gameType
+
+        }
+        setData(datapack)
+    }
+
 
     return (
-        // <div>
         <div className={styles.playerInfo}>
-            {playerform}
-            <div className="btn-toolbar">
-                {players.length<4 ? (
-                <button type="button" onClick={handleClickHuman}>
-                    Add Human
-                </button> ) : null}
-                {players.length<4 ? (
-                <button type="button" onClick={handleClickAI}>
-                    Add Computer
-                </button> ) : null}
-                
-                {players.length!==0 ? <button type="button" onClick={remove}>
-                    Remove
-                </button> : null}
-            </div>
-            <ShouldShuffle/>
-            <ShouldCheckDict/>
-            <GameType/>
-            <div style={{ marginTop: 20 }}>
-                {JSON.stringify(players, null, 2)}
-            </div>
-            <div style={{ marginTop: 20 }}>
-                {JSON.stringify(shufflePlayers, null, 2)}
-            </div>
-            <div style={{ marginTop: 20 }}>
-                {JSON.stringify(dictCheck, null, 2)}
-            </div>
-            <div style={{ marginTop: 20 }}>
-                {JSON.stringify(gameType, null, 2)}
-            </div>
-        </div>
+            <form onSubmit={handleSubmit}>
+                {playerform}
+                <div className="btn-toolbar">
+                    {players.length<4 ? (
+                    <button type="button" onClick={handleClickHuman}>
+                        Add Human
+                    </button> ) : null}
+                    {players.length<4 ? (
+                    <button type="button" onClick={handleClickAI}>
+                        Add Computer
+                    </button> ) : null}
+                    
+                    {players.length!==0 ? <button type="button" onClick={remove}>
+                        Remove
+                    </button> : null}
+                </div>
+                <ShouldShuffle/>
+                <ShouldCheckDict/>
+                <GameType/>
+                <button type="submit">Start Game</button>
+            </form>
 
-        // </div>
+            <ShowData data={true}/>
+    
+
+
+        </div>
     )
 }
 
