@@ -8,7 +8,10 @@ const FrontPage = () => {
 
     const handleSubmit = (event, players, shufflePlayers, dictCheck, gameType) =>{
         event.preventDefault()
-        console.log("Hello from FrontPage.js!")
+        if (players.length<2) {
+            alert("At least two players are required")
+            return
+        }
         let x={}
         x.players=players
         x.shufflePlayers=shufflePlayers
