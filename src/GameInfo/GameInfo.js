@@ -14,12 +14,11 @@ let AI_LIST = shuffle([
     "AI Dylan",
     "AI Sienna",
 ])
-const GameInfo = () => {
+const GameInfo = ({ handleSubmit }) => {
     const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
     const [dictCheck, setDictCheck] = useState("1")
     const [gameType, setGameType] = useState("75")
-    const [data, setData] = useState({})
 
     const handleChange = (event, index) => {
         let playerName = event.target.value
@@ -143,34 +142,24 @@ const GameInfo = () => {
         )
     }
 
-    const ShowData = (props) =>{
-        return(
-            props.data ?
-            <div style={{ marginTop: 20 }}>
-                    {JSON.stringify(data, null, 2)}
-             </div>
 
-             : null
 
-        )
-    }
+    // const handleSubmit =(event) =>{
+    //     event.preventDefault()
+    //     let datapack = {
+    //         playerdata: players,
+    //         shuffPlayers: shufflePlayers,
+    //         dictCheck: dictCheck,
+    //         gameType: gameType
 
-    const handleSubmit =(event) =>{
-        event.preventDefault()
-        let datapack = {
-            playerdata: players,
-            shuffPlayers: shufflePlayers,
-            dictCheck: dictCheck,
-            gameType: gameType
-
-        }
-        setData(datapack)
-    }
+    //     }
+    //     setData(datapack)
+    // }
 
 
     return (
         <div className={styles.playerInfo}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e)=>handleSubmit(e, players, shufflePlayers, dictCheck, gameType)}>
                 {playerform}
                 <div className="btn-toolbar">
                     {players.length<4 ? (
@@ -192,7 +181,7 @@ const GameInfo = () => {
                 <button type="submit">Start Game</button>
             </form>
 
-            <ShowData data={true}/>
+            
     
 
 
