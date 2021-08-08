@@ -45,6 +45,10 @@ const GameInfo = () => {
         setDictCheck(event.target.value)
     }
 
+    const handleSelectGameType = (event) =>{
+        setGameType(event.target.value)
+    }
+
     const handleClickHuman = (event) => {
         let newInput = { name: "", level: 0 }
         setPlayers((x) => {
@@ -120,6 +124,22 @@ const GameInfo = () => {
         )
     }
 
+    const GameType = () => {
+        return(
+            <div className={styles.horz}>
+                <div>Dictionary Checking: </div>
+                <div className="ml-4">
+                    <select name="shuffle" onChange={handleSelectGameType} value={gameType}>
+                        <option value="75">75 Point Game</option>
+                        <option value="150">150 Point Game</option> 
+                        <option value="inf">Till The Tiles Run Out</option>     
+                    </select>
+                </div>
+            </div>
+
+        )
+    }
+
 
     return (
         // <div>
@@ -141,6 +161,7 @@ const GameInfo = () => {
             </div>
             <ShouldShuffle/>
             <ShouldCheckDict/>
+            <GameType/>
             <div style={{ marginTop: 20 }}>
                 {JSON.stringify(players, null, 2)}
             </div>
@@ -149,6 +170,9 @@ const GameInfo = () => {
             </div>
             <div style={{ marginTop: 20 }}>
                 {JSON.stringify(dictCheck, null, 2)}
+            </div>
+            <div style={{ marginTop: 20 }}>
+                {JSON.stringify(gameType, null, 2)}
             </div>
         </div>
 
