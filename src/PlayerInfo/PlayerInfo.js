@@ -5,7 +5,7 @@ import styles from "./PlayerInfo.module.css"
 
 
 const DUMMY_PLAYERS = [
-    // {name: "", type: "", level: 0},
+    // {name: "", level: 0},
 ]
 
 let AI_LIST = shuffle(["AI Lily", "AI Tori", "AI Parker", "AI Kira", "AI Jasmine", "AI Kashmir", "AI Dylan"])
@@ -13,7 +13,7 @@ const PlayerInfo = () => {
 
     const [players, setPlayers] = useState(DUMMY_PLAYERS)
 
-    const handleChangeH = (event, index) =>{
+    const handleChange = (event, index) =>{
         let playerName = event.target.value
         let x = [...players]
         x[index]["name"]=playerName
@@ -21,7 +21,7 @@ const PlayerInfo = () => {
     }
 
     const handleClickH = (event)=>{
-        let newInput = {name: "", type: "H", level: 0}
+        let newInput = {name: "",  level: 0}
         setPlayers((x)=>{
             return [...x, newInput]
         })
@@ -30,7 +30,7 @@ const PlayerInfo = () => {
 
 
     const handleClickM = (event)=>{
-        let newInput = {name: AI_LIST.pop(), type: "M", level: 1}
+        let newInput = {name: AI_LIST.pop(), level: 1}
         setPlayers((x)=>{
             return [...x, newInput]
         })
@@ -50,7 +50,7 @@ const PlayerInfo = () => {
         value = {el.name} 
         type="text" 
         placeholder={`Player ${ind+1} name`}
-        onChange={e=>handleChangeH(e,ind)}/> : 
+        onChange={e=>handleChange(e,ind)}/> : 
 
         <div key={ind}>
             <input
@@ -75,6 +75,7 @@ const PlayerInfo = () => {
         <button type="button" onClick={handleClickM}>Add Computer</button>
         <button type="button" onClick={remove}>Remove</button>
         </div>
+        <div style={{ marginTop: 20 }}>{JSON.stringify(players, null, 2)}</div>
     </div>
    
 
