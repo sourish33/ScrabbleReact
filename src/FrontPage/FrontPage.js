@@ -1,6 +1,6 @@
 import React from "react"
 import { Button, Container } from "react-bootstrap"
-import PlayerInfo from "../PlayerInfo/PlayerInfo"
+import GameInfo from "../GameInfo/GameInfo"
 import styles from "./FrontPage.module.css"
 
 const FrontPage = () => {
@@ -11,7 +11,7 @@ const FrontPage = () => {
                 <h3>A scrabble game built using React.js</h3>
             </div>
             <Container>
-                <PlayerInfo />
+                <GameInfo />
             </Container>
         </div>
     )
