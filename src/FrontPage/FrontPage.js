@@ -9,10 +9,6 @@ const FrontPage = () => {
 
     const handleSubmit = (event, players, shufflePlayers, dictCheck, gameType) =>{
         event.preventDefault()
-        if (players.length<2) {
-            alert("At least two players are required")
-            return
-        }
         for (let i=0;i<players.length;i++){
             if (players[i].name===""){
                 alert(`Please name player ${i+1}`)
