@@ -71,6 +71,7 @@ const GameInfo = ({ handleSubmit }) => {
                 <input
                     key={ind}
                     name="Player Name"
+                    className="form-control"
                     value={el.name}
                     type="text"
                     placeholder={`Player ${ind + 1} name`}
@@ -78,11 +79,12 @@ const GameInfo = ({ handleSubmit }) => {
                 />
             ) : (
                 <div key={ind}>
-                    <input value={el.name} type="text" disabled />
+                    <input value={el.name} type="text" className="form-control" disabled />
                     <select
                         name="level"
                         onChange={(e) => handleSelect(e, ind)}
                         value={el.level}
+                        className="form-control"
                     >
                         <option value="1">Weak</option>
                         <option value="2">Medium</option>
@@ -103,6 +105,7 @@ const GameInfo = ({ handleSubmit }) => {
                         name="shuffle"
                         onChange={handleSelectShuffle}
                         value={shufflePlayers}
+                        className="form-control"
                     >
                         <option value="0">No</option>
                         <option value="1">Yes</option>
@@ -121,6 +124,7 @@ const GameInfo = ({ handleSubmit }) => {
                         name="shuffle"
                         onChange={handleSelectDictCheck}
                         value={dictCheck}
+                        className="form-control"
                     >
                         <option value="1">On</option>
                         <option value="0">Off</option>
@@ -152,7 +156,7 @@ const GameInfo = ({ handleSubmit }) => {
 
 
     return (
-        <div className={styles.playerInfo}>
+        <div>
             <form
                 onSubmit={(e) =>
                     handleSubmit(
