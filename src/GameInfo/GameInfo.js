@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { Button } from "react-bootstrap"
 import { shuffle } from "../Utils/helpers"
 import styles from "./GameInfo.module.css"
 
