@@ -68,28 +68,37 @@ const GameInfo = ({ handleSubmit }) => {
     const playerform = players.map((el, ind) => {
         let u =
             el.level === 0 ? (
-                <input
-                    key={ind}
-                    name="Player Name"
-                    className="form-control"
-                    value={el.name}
-                    type="text"
-                    placeholder={`Player ${ind + 1} name`}
-                    onChange={(e) => handleChange(e, ind)}
-                />
-            ) : (
-                <div key={ind}>
-                    <input value={el.name} type="text" className="form-control" disabled />
-                    <select
-                        name="level"
-                        onChange={(e) => handleSelect(e, ind)}
-                        value={el.level}
+                <div className="row mb-3">
+                    <div className="col-6">
+                    <input
+                        key={ind}
+                        name="Player Name"
                         className="form-control"
-                    >
-                        <option value="1">Weak</option>
-                        <option value="2">Medium</option>
-                        <option value="3">Strong</option>
-                    </select>
+                        value={el.name}
+                        type="text"
+                        placeholder={`Player ${ind + 1} name`}
+                        onChange={(e) => handleChange(e, ind)}
+                    />
+                    </div>
+                </div>
+            ) : (
+                <div key={ind} className="row mb-3">
+                    <div className="col-6">
+                        <input value={el.name} type="text" className="form-control" disabled />
+                    </div>
+                    <div className={`col-3`}>
+                        <select
+                            className={styles.select}
+                            name="level"
+                            onChange={(e) => handleSelect(e, ind)}
+                            value={el.level}
+                            
+                        >
+                            <option value="1">Weak</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Strong</option>
+                        </select>
+                    </div>
                 </div>
             )
 
@@ -100,12 +109,12 @@ const GameInfo = ({ handleSubmit }) => {
         return (
             <div className={styles.horz}>
                 <div>Shuffle Players? </div>
-                <div className="ml-4">
+                <div>
                     <select
+                        className={styles.select}
                         name="shuffle"
                         onChange={handleSelectShuffle}
                         value={shufflePlayers}
-                        className="form-control"
                     >
                         <option value="0">No</option>
                         <option value="1">Yes</option>
@@ -124,7 +133,7 @@ const GameInfo = ({ handleSubmit }) => {
                         name="shuffle"
                         onChange={handleSelectDictCheck}
                         value={dictCheck}
-                        className="form-control"
+                        className={styles.select}
                     >
                         <option value="1">On</option>
                         <option value="0">Off</option>
@@ -157,7 +166,7 @@ const GameInfo = ({ handleSubmit }) => {
 
     return (
         <div>
-            <form
+            <form className="row g-3"
                 onSubmit={(e) =>
                     handleSubmit(
                         e,
