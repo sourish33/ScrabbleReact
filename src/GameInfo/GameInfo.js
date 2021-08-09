@@ -183,18 +183,18 @@ const GameInfo = ({ handleSubmit }) => {
                 </div> : null }
                 <div className="btn-toolbar">
                     {players.length < 4 ? (
-                        <button className = {`btn btn-primary btn-lg`} type="button" onClick={handleClickHuman}>
+                        <button className = {`btn btn-primary btn-lg ${styles["spacer-right"]}`} type="button" onClick={handleClickHuman}>
                             Add Human
                         </button>
                     ) : null}
                     {players.length < 4 ? (
-                        <button className = {`btn btn-primary btn-lg ${styles.spacer}`} type="button" onClick={handleClickAI}>
+                        <button className = {`btn btn-primary btn-lg ${styles["spacer-right"]}`} type="button" onClick={handleClickAI}>
                             Add Computer
                         </button>
                     ) : null}
 
                     {players.length !== 0 ? (
-                        <button className = {`btn btn-primary btn-lg ${styles.spacer}`} type="button" onClick={remove}>
+                        <button className = {`btn btn-primary btn-lg ${styles["spacer-right"]}`} type="button" onClick={remove}>
                             Remove
                         </button>
                     ) : null}
