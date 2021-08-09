@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Container } from "react-bootstrap"
 import GameInfo from "../GameInfo/GameInfo"
+import styles from './FrontPage.module.css'
 
 
 const FrontPage = () => {
@@ -11,6 +12,12 @@ const FrontPage = () => {
         if (players.length<2) {
             alert("At least two players are required")
             return
+        }
+        for (let i=0;i<players.length;i++){
+            if (players[i].name===""){
+                alert(`Please name player ${i+1}`)
+                return
+            }
         }
         let x={}
         x.players=players
@@ -29,7 +36,7 @@ const FrontPage = () => {
     }
     return (
         <div>
-            <div className="p-5 mb-4 bg-light rounded-3">
+            <div className={`p-5 mb-4 bg-light rounded-3 ${styles.headerImage}`}>
                 <h1 className={`display-4 `}>Scrabble React!</h1>
                 <h3>A scrabble game built using React.js</h3>
             </div>

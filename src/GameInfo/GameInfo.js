@@ -199,11 +199,12 @@ const GameInfo = ({ handleSubmit }) => {
                         </button>
                     ) : null}
                 </div>
+                {players.length >1 ? (
                 <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-6`}>
                 <ShouldShuffle />
                 <ShouldCheckDict />
                 <GameType />
-                </div>
+                </div>):null}
                 <div className="btn-toolbar">
                 <button className = {`btn btn-primary btn-lg`} type="submit">Start Game</button>
                 <button className = {`btn btn-info btn-lg ${styles.spacer}`} type="button">Help</button>
