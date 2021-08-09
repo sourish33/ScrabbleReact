@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Form, Button, Row, Col } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import { shuffle } from "../Utils/helpers"
 import styles from "./GameInfo.module.css"
 
@@ -177,7 +177,10 @@ const GameInfo = ({ handleSubmit }) => {
                     )
                 }
             >
-                {playerform}
+                {players.length>0 ? 
+                <div className={`${styles.card} ${styles.shadow2}`}>
+                    {playerform}
+                </div> : null }
                 <div className="btn-toolbar">
                     {players.length < 4 ? (
                         <button type="button" onClick={handleClickHuman}>
