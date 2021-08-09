@@ -26,7 +26,11 @@
     padding: 20px;
     background: #fff;
     /* max-width: 360px; */
-    width:50%;
+    /* width:50%; */
     border-radius: 20px;
     /* margin: 60px auto; */
+  }
+
+  .spacer {
+      margin-left: 20px !important;
   }

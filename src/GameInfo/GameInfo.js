@@ -69,7 +69,7 @@ const GameInfo = ({ handleSubmit }) => {
         let u =
             el.level === 0 ? (
                 <div className="row mb-3">
-                    <div className="col-6">
+                    <div className="col-lg-6 col-sm-12 col-md-6">
                     <input
                         key={ind}
                         name="Player Name"
@@ -178,23 +178,23 @@ const GameInfo = ({ handleSubmit }) => {
                 }
             >
                 {players.length>0 ? 
-                <div className={`${styles.card} ${styles.shadow2}`}>
+                <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-6`}>
                     {playerform}
                 </div> : null }
                 <div className="btn-toolbar">
                     {players.length < 4 ? (
-                        <button type="button" onClick={handleClickHuman}>
+                        <button className = {`btn btn-primary btn-lg`} type="button" onClick={handleClickHuman}>
                             Add Human
                         </button>
                     ) : null}
                     {players.length < 4 ? (
-                        <button type="button" onClick={handleClickAI}>
+                        <button className = {`btn btn-primary btn-lg ${styles.spacer}`} type="button" onClick={handleClickAI}>
                             Add Computer
                         </button>
                     ) : null}
 
                     {players.length !== 0 ? (
-                        <button type="button" onClick={remove}>
+                        <button className = {`btn btn-primary btn-lg ${styles.spacer}`} type="button" onClick={remove}>
                             Remove
                         </button>
                     ) : null}
