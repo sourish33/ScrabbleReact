@@ -107,9 +107,9 @@ const GameInfo = ({ handleSubmit }) => {
 
     const ShouldShuffle = () => {
         return (
-            <div className={styles.horz}>
-                <div>Shuffle Players? </div>
-                <div>
+            <div className="row mb-3">
+                <div className="col-6">Shuffle Players? </div>
+                <div className="col-6">
                     <select
                         className={styles.select}
                         name="shuffle"
@@ -126,14 +126,14 @@ const GameInfo = ({ handleSubmit }) => {
 
     const ShouldCheckDict = () => {
         return (
-            <div className={styles.horz}>
-                <div>Dictionary Checking: </div>
-                <div className="ml-4">
+            <div className="row mb-3">
+                <div className="col-6">Dictionary Checking: </div>
+                <div className="col-6">
                     <select
+                        className={styles.select}
                         name="shuffle"
                         onChange={handleSelectDictCheck}
                         value={dictCheck}
-                        className={styles.select}
                     >
                         <option value="1">On</option>
                         <option value="0">Off</option>
@@ -145,10 +145,11 @@ const GameInfo = ({ handleSubmit }) => {
 
     const GameType = () => {
         return (
-            <div className={styles.horz}>
-                <div>Dictionary Checking: </div>
-                <div className="ml-4">
+            <div className="row mb-3">
+                <div className="col-6">Game Type: </div>
+                <div className="col-6">
                     <select
+                        className={styles.select}
                         name="shuffle"
                         onChange={handleSelectGameType}
                         value={gameType}
@@ -199,10 +200,14 @@ const GameInfo = ({ handleSubmit }) => {
                         </button>
                     ) : null}
                 </div>
+                <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-6`}>
                 <ShouldShuffle />
                 <ShouldCheckDict />
                 <GameType />
-                <button type="submit">Start Game</button>
+                </div>
+                <div>
+                <button className = {`btn btn-primary btn-lg`} type="submit">Start Game</button>
+                </div>
             </form>
         </div>
     )
