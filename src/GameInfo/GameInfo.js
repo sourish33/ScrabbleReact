@@ -205,8 +205,9 @@ const GameInfo = ({ handleSubmit }) => {
                 <ShouldCheckDict />
                 <GameType />
                 </div>
-                <div>
+                <div className="btn-toolbar">
                 <button className = {`btn btn-primary btn-lg`} type="submit">Start Game</button>
+                <button className = {`btn btn-info btn-lg ${styles.spacer}`} type="button">Help</button>
                 </div>
             </form>
         </div>

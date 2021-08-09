@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { Button, Container } from "react-bootstrap"
+import { Container } from "react-bootstrap"
 import GameInfo from "../GameInfo/GameInfo"
-import styles from "./FrontPage.module.css"
+
 
 const FrontPage = () => {
     const [gameVariables, setGameVariables] = useState({})
