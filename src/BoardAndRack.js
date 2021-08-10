@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import Board from "./Board/Board"
+import styles from "./BoardAndRack.module.css"
 
 import move from "./Utils/movers"
 import {
@@ -105,7 +106,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
     }, [])
 
     return (
-        <div>
+        <div className ={styles.center}>
             <Board
                 tiles={tiles}
                 DragStart={DragStart}
@@ -114,8 +115,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
-                width={boardDims[0]}
-                height={boardDims[1]}
             />
             <Rack
                 whichRack={visibleRack}

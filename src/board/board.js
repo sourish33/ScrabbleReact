@@ -74,7 +74,13 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
         }
     }
 
-    return <div className={styles.wrappingBoard} style={{width: `${width}px`, height: `${height}px`}}>{squares}</div>
+    return (
+    <div className={styles.aspectratio}>
+        <div className={styles.innerwrapper}>
+            <div className={styles.wrappingBoard} style={{width: `100%`, height: `100%`}}>{squares}</div>
+        </div>
+    </div>
+    )
 }
 
 export default Board
