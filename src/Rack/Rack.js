@@ -50,7 +50,13 @@ const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMov
         }
     }
 
-    return <div className={styles.wrappingRack} style={{width: `${width}px`}}>{squares}</div>
+    return (
+        <div className={styles.aspectratio}>
+            <div className={styles.innerwrapper}>
+                <div className={styles.wrappingRack} style={{width: `60%`}}>{squares}</div>
+            </div>
+        </div>
+    )
 
 }
 
