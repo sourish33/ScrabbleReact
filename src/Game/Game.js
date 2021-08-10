@@ -13,7 +13,7 @@ const Game = ( {gameVariables, exitGame} ) => {
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
     
-    const [currentPlayer, setCurrentPlayer] = useState(2)
+    const [currentPlayer, setCurrentPlayer] = useState(0)
     const [tilesLeft, setTilesLeft] = useState(47)  
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
 
