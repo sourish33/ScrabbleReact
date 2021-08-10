@@ -22,10 +22,10 @@ const scoreTable = (playersAndPoints, currentPlayer) => {
                                     : null
                             }
                         >
-                            <td key={"plr" + ind}>
+                            <td>
                                 <span className={styles.bold}>{el.name}</span>
                             </td>
-                            <td key={"pts" + ind}>{el.points}</td>
+                            <td>{el.points}</td>
                         </tr>
                     )
                 })}
