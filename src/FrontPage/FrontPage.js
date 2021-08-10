@@ -58,7 +58,7 @@ const FrontPage = () => {
 
     return (
         <>
-        {Object.keys(gameVariables).length===0 ? <WelcomePage/> : <Game/>}
+        {Object.keys(gameVariables).length===0 ? <WelcomePage/> : <Game gameVariables={gameVariables}/>}
         </>
     )
 }

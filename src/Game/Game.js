@@ -5,16 +5,22 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { DUMMY_PLAYERS, TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 
-const Game = () => {
+const Game = ( {gameVariables} ) => {
+
+    const players = gameVariables.players
+    const shufflePlayers = gameVariables.shufflePlayers
+    const dictCheck = gameVariables.dictCheck
+    const maxPoints = parseInt(gameVariables.gameType)
 
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
+    const [whoseMove, setWhoseMove] = useState(1)
     const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
     const [playersAndPoints, setPlayersAndPoints] = useState(DUMMY_PLAYERS)
     const [currentPlayer, setCurrentPlayer] = useState(2)
     const [tilesLeft, setTilesLeft] = useState(47)
-    const [maxPoints, setMaxPoints] = useState(150)
+    
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
 
     const updateTiles = (tiles)=>{

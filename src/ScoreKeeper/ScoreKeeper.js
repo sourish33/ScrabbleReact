@@ -3,6 +3,11 @@ import { Table, Button } from "react-bootstrap"
 import styles from "./ScoreKeeper.module.css"
 
 
+const gameType = (points) =>{
+    return points===10000 ? "Till out of tiles" : `${points} point game`
+}
+
+
 
 const scoreTable = (playersAndPoints, currentPlayer) => {
     return (
@@ -33,7 +38,7 @@ const TilesAndPoints = ({ tilesLeft, maxPoints }) => {
     return (
         <div className={` ${styles["tpdiv"]}`}>
             <div className={styles.tpbox}>Tiles Left: {tilesLeft}</div>
-            <div className={styles.tpbox}>{maxPoints} point game</div>
+            <div className={styles.tpbox}>{gameType(maxPoints)}</div>
         </div>
     )
 }
