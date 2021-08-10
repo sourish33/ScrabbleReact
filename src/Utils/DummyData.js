@@ -25,9 +25,9 @@ export const TILE_LIST_ARR = [
 ]
 
 export const DUMMY_PLAYERS = [
-    {name: 'Ram', points: 122},
-    {name: 'Sita', points: 94},
-    {name: 'AI Lilly', points: 147},
+    {name: 'Ram', level: 0, points: 122},
+    {name: 'Sita', level: 0, points: 94},
+    {name: 'AI Lilly', level: 2, points: 147},
 ]
 
 export const LAST_PLAYED = [
