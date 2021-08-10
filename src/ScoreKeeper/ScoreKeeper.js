@@ -59,7 +59,7 @@ const LastPlayed = ({ lastPlayed }) => {
     )
 }
 
-const Buttons = () => {
+const Buttons = ({exitGame}) => {
     return (
         <div className={`d-flex flex-row justify-content-center`}>
             <div class="p-2 mt-0">
@@ -68,7 +68,7 @@ const Buttons = () => {
                 </Button>
             </div>
             <div class="p-2 mt-0">
-                <Button variant="danger">
+                <Button variant="danger" onClick={exitGame}>
                     <span className={styles.smallscreen}>Exit</span>
                 </Button>
             </div>
@@ -98,7 +98,7 @@ const ScoreKeeper = (props) => {
                 <LastPlayed lastPlayed={props.lastPlayed} />
             </div>
             <div className="p-1 mb-2 justify-content-center">
-                <Buttons />
+                <Buttons exitGame={props.exitGame}/>
             </div>
 
         </div>

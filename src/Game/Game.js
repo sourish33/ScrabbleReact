@@ -5,7 +5,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { DUMMY_PLAYERS, TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 
-const Game = ( {gameVariables} ) => {
+const Game = ( {gameVariables, exitGame} ) => {
 
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
     const [whoseMove, setWhoseMove] = useState(1)
@@ -47,6 +47,7 @@ const Game = ( {gameVariables} ) => {
                         tilesLeft={tilesLeft}
                         maxPoints ={maxPoints}
                         lastPlayed = {lastPlayed}
+                        exitGame = {exitGame}
                     />
                 </Col>
             </Row>

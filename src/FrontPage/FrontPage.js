@@ -31,6 +31,10 @@ const FrontPage = () => {
         setGameVariables(x)
     }
 
+    const exitGame = () => {
+        setGameVariables({})
+    }
+
     const ShowData = (props) =>{
         return(
             <div style={{ marginTop: 20 }}>
@@ -58,7 +62,7 @@ const FrontPage = () => {
 
     return (
         <>
-        {Object.keys(gameVariables).length===0 ? <WelcomePage/> : <Game gameVariables={gameVariables}/>}
+        {Object.keys(gameVariables).length===0 ? <WelcomePage/> : <Game gameVariables={gameVariables} exitGame={exitGame}/>}
         </>
     )
 }
