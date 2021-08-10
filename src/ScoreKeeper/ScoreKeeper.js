@@ -22,10 +22,10 @@ const scoreTable = (playersAndPoints, currentPlayer) => {
                                     : null
                             }
                         >
-                            <td key={"p" + ind}>
+                            <td key={"plr" + ind}>
                                 <span className={styles.bold}>{el.name}</span>
                             </td>
-                            <td>{el.points}</td>
+                            <td key={"pts" + ind}>{el.points}</td>
                         </tr>
                     )
                 })}
@@ -63,12 +63,12 @@ const LastPlayed = ({ lastPlayed }) => {
 const Buttons = ({exitGame}) => {
     return (
         <div className={`d-flex flex-row justify-content-center`}>
-            <div class="p-2 mt-0">
+            <div className="p-2 mt-0">
                 <Button variant="info">
                     <span className={styles.smallscreen}>Instructions</span>
                 </Button>
             </div>
-            <div class="p-2 mt-0">
+            <div className="p-2 mt-0">
                 <Button variant="danger" onClick={exitGame}>
                     <span className={styles.smallscreen}>Exit</span>
                 </Button>

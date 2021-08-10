@@ -12,11 +12,11 @@ const Game = ( {gameVariables, exitGame} ) => {
     const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
-    
     const [currentPlayer, setCurrentPlayer] = useState(0)
     const [tilesLeft, setTilesLeft] = useState(47)  
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
 
+    //parsing incoming data from the welcome page
     const players = gameVariables.players
     const shufflePlayers = gameVariables.shufflePlayers
     const dictCheck = gameVariables.dictCheck
@@ -26,6 +26,10 @@ const Game = ( {gameVariables, exitGame} ) => {
         return ({name: el.name, level: el.level, points: 0})
     })
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
+
+    const shuffleRack = () =>{
+        console.log("Shuffling away!!!!!")
+    }
 
     const updateTiles = (tiles)=>{
         setTiles(x=>tiles)
@@ -37,7 +41,7 @@ const Game = ( {gameVariables, exitGame} ) => {
                     <BoardAndRack tiles={tiles} visibleRack={visibleRack} updateTiles={updateTiles}></BoardAndRack>
                 </Col>
                 <Col sm={12} lg={2} md={12}>
-                    <ControlButtons disabled={buttonsDisabled} />
+                    <ControlButtons shuffleRack={shuffleRack} disabled={buttonsDisabled} />
                 </Col>
                 <Col sm={12} lg={3} md={12}>
                     <ScoreKeeper

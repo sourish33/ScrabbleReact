@@ -2,35 +2,35 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import styles from "./ControlButtons.module.css"
 
-const ControlButtons = (props) => {
+const ControlButtons = ({shuffleRack, disabled}) => {
     return (
         <div className={`d-flex flex-column ${styles["horz-btns"]}`}>
-            <div class="p-2 mt-0">
-                <Button className={styles.stretch} variant="primary" disabled={props.disabled}>
+            <div key="1" className="p-2 mt-0">
+                <Button className={styles.stretch} variant="primary" onClick={shuffleRack} disabled={disabled}>
                 <span className={styles.smallscreen}>Shuffle</span>
                 </Button>
             </div>
-            <div class="p-2 mt-0">
-                <Button className={styles.stretch} variant="primary" disabled={props.disabled}>
+            <div key="2" className="p-2 mt-0">
+                <Button className={styles.stretch} variant="primary" disabled={disabled}>
                 <span className={styles.smallscreen}>Recall</span>
                 </Button>
             </div>
-            <div class="p-2 mt-0">
-                <Button className={styles.stretch} variant="primary" disabled={props.disabled}>
+            <div key="3" className="p-2 mt-0">
+                <Button className={styles.stretch} variant="primary" disabled={disabled}>
                 <span className={styles.smallscreen}>Exchange</span>
                 </Button>
             </div>
-            <div class="p-2 mt-0">
-                <Button className={styles.stretch} variant="warning" disabled={props.disabled}>
+            <div key="4" className="p-2 mt-0">
+                <Button className={styles.stretch} variant="warning" disabled={disabled}>
                 <span className={styles.smallscreen}>Pass</span>
                     
                 </Button>
             </div>
-            <div class="p-2 mt-0">
+            <div key="5" className="p-2 mt-0">
                 <Button className={styles.stretch} variant="info"><span className={styles.smallscreen}>Dict</span></Button>
             </div>
-            <div class="p-2 mt-0">
-                <Button className={styles.stretch} variant="success" disabled={props.disabled}>
+            <div key="6" className="p-2 mt-0">
+                <Button className={styles.stretch} variant="success" disabled={disabled}>
                 <span className={styles.smallscreen}>Play</span>
                 </Button>
             </div>

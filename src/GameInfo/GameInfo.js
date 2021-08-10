@@ -93,9 +93,9 @@ const GameInfo = ({ handleSubmit }) => {
                             value={el.level}
                             
                         >
-                            <option value="1">Weak</option>
-                            <option value="2">Medium</option>
-                            <option value="3">Strong</option>
+                            <option key="W" value="1">Weak</option>
+                            <option key="M" value="2">Medium</option>
+                            <option key="S" value="3">Strong</option>
                         </select>
                     </div>
                 </div>
@@ -115,8 +115,8 @@ const GameInfo = ({ handleSubmit }) => {
                         onChange={handleSelectShuffle}
                         value={shufflePlayers}
                     >
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
+                        <option key="N" value="0">No</option>
+                        <option key="Y" value="1">Yes</option>
                     </select>
                 </div>
             </div>
@@ -134,8 +134,8 @@ const GameInfo = ({ handleSubmit }) => {
                         onChange={handleSelectDictCheck}
                         value={dictCheck}
                     >
-                        <option value="1">On</option>
-                        <option value="0">Off</option>
+                        <option key="on" value="1">On</option>
+                        <option key="off" value="0">Off</option>
                     </select>
                 </div>
             </div>
@@ -153,9 +153,9 @@ const GameInfo = ({ handleSubmit }) => {
                         onChange={handleSelectGameType}
                         value={gameType}
                     >
-                        <option value="75">75 Point Game</option>
-                        <option value="150">150 Point Game</option>
-                        <option value="10000">Till The Tiles Run Out</option>
+                        <option key="75" value="75">75 Point Game</option>
+                        <option key="150" value="150">150 Point Game</option>
+                        <option key="inf" value="10000">Till The Tiles Run Out</option>
                     </select>
                 </div>
             </div>
