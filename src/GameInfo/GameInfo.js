@@ -67,10 +67,9 @@ const GameInfo = ({ handleSubmit }) => {
     const playerform = players.map((el, ind) => {
         let u =
             el.level === 0 ? (
-                <div className="row mb-3">
+                <div key={ind} className="row mb-3">
                     <div className="col-lg-6 col-sm-12 col-md-6">
                     <input
-                        key={ind}
                         name="Player Name"
                         className="form-control"
                         value={el.name}

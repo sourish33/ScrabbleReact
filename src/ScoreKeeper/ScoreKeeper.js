@@ -15,7 +15,7 @@ const scoreTable = (playersAndPoints, currentPlayer) => {
             <tbody>
                 {playersAndPoints.map((el, ind) => {
                     return (
-                        <tr
+                        <tr  key={"row" + ind}
                             style={
                                 ind === currentPlayer
                                     ? { background: "yellow" }
