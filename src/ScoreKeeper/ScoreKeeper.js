@@ -45,6 +45,7 @@ const TilesAndPoints = ({ tilesLeft, maxPoints }) => {
 
 const LastPlayed = ({ lastPlayed }) => {
     return (
+        lastPlayed.length===0 ? null :
         <div className={styles.lastPlayed}>
             {lastPlayed.map((el, ind) => {
                 return (
