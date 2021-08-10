@@ -9,11 +9,9 @@ import {
     setTranslate,
 } from "./Utils/dragndropHelpers"
 import Rack from "./Rack/Rack"
-import { setBoardSize } from "./Utils/helpers"
 
 const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
     
-    const [boardDims, setBoardDims] = useState(setBoardSize())
 
     let startingloc = ""
     let endingloc = ""
@@ -28,7 +26,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
     const DragStart = (event) => {
         let whereArtThou = event.target.parentElement.parentElement.id
         event.dataTransfer.setData("text/plain", whereArtThou)
-        // console.log(whereArtThou)
     }
 
     const DragOver = (event) => {
@@ -91,19 +88,8 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
         document.getElementsByTagName("body")[0].style.touchAction = "auto"
     }
 
-    const handleResize = () => {
-        setBoardDims(() => setBoardSize())
-    }
 
-    React.useEffect(() => {
-        window.addEventListener("resize", handleResize)
 
-        // cleanup this component
-
-        return () => {
-            window.removeEventListener("resize", handleResize)
-        }
-    }, [])
 
     return (
         <div className ={styles.center}>
@@ -125,7 +111,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
-                width={parseInt(boardDims[0] * 0.66)}
             />
         </div>
     )

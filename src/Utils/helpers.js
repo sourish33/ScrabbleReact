@@ -51,16 +51,3 @@ export function arrayToMap(arr) {
     }
     return amap
   }
-
-export function setBoardSize() {
-    let n = 95
-    let w = window.innerWidth
-    let h = window.innerHeight
-    let ww = Math.min(w, h)
-    if (ww > 650) {
-        n = 85
-    }
-    let width = parseInt((ww * n) / 100)
-    let height = parseInt((ww * n) / 100)
-    return ([width, height])
-}
