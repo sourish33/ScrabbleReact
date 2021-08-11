@@ -3,7 +3,8 @@ import { Col, Container, Row } from "react-bootstrap"
 import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
-import { DUMMY_PLAYERS, TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
+import { TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
+import scrabbledict, {checkDict} from "../Utils/dictionary"
 
 const Game = ( {gameVariables, exitGame} ) => {
 
@@ -28,7 +29,8 @@ const Game = ( {gameVariables, exitGame} ) => {
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
 
     const shuffleRack = () =>{
-        console.log("Shuffling away!!!!!")
+        let word = "ZANY"
+        alert(`dictionary size is ${scrabbledict.size} and checkDict ${word} exists is ${checkDict(word)}`)
     }
 
     const updateTiles = (tiles)=>{
