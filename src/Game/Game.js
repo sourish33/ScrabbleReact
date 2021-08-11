@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
+import Swal from "sweetalert2";
 import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
@@ -28,8 +29,8 @@ const Game = ( {gameVariables, exitGame} ) => {
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
 
     const shuffleRack = () =>{
-        let word = "ZANY"
-        alert(`dictionary size is ${scrabbledict.size} and checkDict ${word} exists is ${checkDict(word)}`)
+        let word = "Cherub"
+        Swal.fire(`dictionary size is ${scrabbledict.size} and checkDict ${word} exists is ${checkDict(word)}`)
     }
 
     const updateTiles = (tiles)=>{

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Container } from "react-bootstrap"
-// import {BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom";
+import Swal from "sweetalert2";
 import Game from "../Game/Game";
 
 import GameInfo from "../GameInfo/GameInfo"
@@ -19,7 +19,11 @@ const FrontPage = () => {
         event.preventDefault()
         for (let i=0;i<players.length;i++){
             if (players[i].name===""){
-                alert(`Please name player ${i+1}`)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `Please name player ${i+1}`,
+                  })
                 return
             }
         }
