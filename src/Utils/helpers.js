@@ -51,3 +51,13 @@ export function arrayToMap(arr) {
     }
     return amap
   }
+
+
+export function makePlayertable (players, shouldShuffle) {
+    
+    let playerList = shouldShuffle==="0" ? players : shuffle(players)
+    const playerTable = playerList.map((el)=>{
+        return ({name: el.name, level: el.level, points: 0})
+    })
+    return playerTable
+}

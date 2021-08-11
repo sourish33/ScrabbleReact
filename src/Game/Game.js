@@ -5,6 +5,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 import scrabbledict, {checkDict} from "../Utils/dictionary"
+import { makePlayertable } from "../Utils/helpers"
 
 const Game = ( {gameVariables, exitGame} ) => {
 
@@ -20,12 +21,10 @@ const Game = ( {gameVariables, exitGame} ) => {
     //parsing incoming data from the welcome page
     const players = gameVariables.players
     const shufflePlayers = gameVariables.shufflePlayers
-    const dictCheck = gameVariables.dictCheck
+    const dictChecking = gameVariables.dictCheck
     const maxPoints = parseInt(gameVariables.gameType)
 
-    const playerTable = players.map((el)=>{
-        return ({name: el.name, level: el.level, points: 0})
-    })
+    const playerTable = makePlayertable(players, shufflePlayers)
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
 
     const shuffleRack = () =>{
