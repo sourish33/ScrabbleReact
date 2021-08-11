@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { shuffle } from "../Utils/helpers"
+import { randomUpTo, shuffle, subtractArrays } from "../Utils/helpers"
 import styles from "./GameInfo.module.css"
 
-let AI_LIST = shuffle([
+let AI_LIST = [
     "AI Lily",
     "AI Tori",
     "AI Parker",
@@ -11,7 +11,7 @@ let AI_LIST = shuffle([
     "AI Kashmir",
     "AI Dylan",
     "AI Sienna",
-])
+]
 const GameInfo = ({ handleSubmit }) => {
     const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
@@ -52,7 +52,12 @@ const GameInfo = ({ handleSubmit }) => {
     }
 
     const handleClickAI = (event) => {
-        let newInput = { name: AI_LIST.pop(), level: 1 }
+        let currentAIs = players.filter((el)=>{
+           return el.level>0
+        })
+        let currrentAInames = currentAIs.map(el=>el.name)
+        let unusedAIs = subtractArrays(AI_LIST, currrentAInames)
+        let newInput = { name: unusedAIs[randomUpTo(unusedAIs.length-1)], level: 1 }//pick a random AI name that hsnt been used
         setPlayers((x) => {
             return [...x, newInput]
         })

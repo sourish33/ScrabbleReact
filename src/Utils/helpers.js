@@ -24,6 +24,12 @@ export function shuffle(arr) {
     return sarr
 }
 
+
+export function subtractArrays(arr1, arr2) {
+    //returns the elements of the longer array (arr1) that are not present in the shorter array (arr2)
+    return arr1.filter((value) => !arr2.includes(value))
+}
+
 export function emptySpot(arr, whichRack){
     for (let i=1;i<8;i++){
       let u=arr.find(el=>{return el.pos===whichRack+i})
