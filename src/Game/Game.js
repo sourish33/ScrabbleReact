@@ -13,6 +13,7 @@ import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 
 const Game = ({ gameVariables, exitGame }) => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
+    const [showDict, setShowDict] = useState(false)
     const [whoseMove, setWhoseMove] = useState(1)
     const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
@@ -35,7 +36,11 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const lookup = () => {
-        Swal.fire("Will lookup dictionary!")
+        setShowDict(true)
+    }
+
+    const hideModal = () =>{
+        setShowDict(false)
     }
 
     const updateTiles = (tiles) => {
@@ -43,7 +48,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
-        <CheckDictionaryModal show={false}/>
+        <CheckDictionaryModal show={showDict} onHide={hideModal}/>
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>

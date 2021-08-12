@@ -27,7 +27,7 @@ const ControlButtons = ({shuffleRack, lookup, disabled}) => {
                 </Button>
             </div>
             <div key="5" className="p-2 mt-0">
-                <Button className={styles.stretch} variant="info"><span className={styles.smallscreen} onClick={lookup}>Dict</span></Button>
+                <Button className={styles.stretch} variant="info" onClick={lookup}><span className={styles.smallscreen}>Dict</span></Button>
             </div>
             <div key="6" className="p-2 mt-0">
                 <Button className={styles.stretch} variant="success" disabled={disabled}>

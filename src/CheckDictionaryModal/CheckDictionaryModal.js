@@ -8,8 +8,9 @@ import ModalBody from "react-bootstrap/ModalBody"
 import styles from './CheckDictionaryModal.module.css'
 import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
 import { useState } from "react"
+import { Button } from "react-bootstrap"
 
-const CheckDictionaryModal = ({show}) =>{
+const CheckDictionaryModal = ({show, onHide}) =>{
     const [word, setWord] = useState("")
 
     const Result = ({wordToCheck}) =>{
@@ -20,14 +21,15 @@ const CheckDictionaryModal = ({show}) =>{
         }
     }
 
+
     const handleChange = (event) =>{
         setWord(x=>event.target.value)
     }
-    const handleClick = () =>{
+    const clear = () =>{
         setWord("")
     }
     return (
-        <Modal show={show}>
+        <Modal show={show} onHide={onHide} onExit={clear}>
                 <ModalBody>
                 <div className="mt-0">
 				<form>
@@ -36,7 +38,7 @@ const CheckDictionaryModal = ({show}) =>{
                             value={word}
                             onChange={handleChange} />
 							<div className="input-group-append">
-							    <button className="btn btn-primary" type="button" onClick={handleClick}>Clear</button>
+							    <Button variant="primary" type="button" onClick={clear}>Clear</Button>
 							</div>
 						</div>
 				</form>
