@@ -32,7 +32,21 @@ const Game = ({ gameVariables, exitGame }) => {
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
 
     const shuffleRack = () => {
-        console.log("Shuffling rack")
+        Swal.fire("Shuffling rack")
+    }
+    const recall = () => {
+        Swal.fire("Recalling")
+    }
+    const exchange = () => {
+        Swal.fire({
+            icon: 'question',
+            title: 'Oops...',
+            text: 'Are you sure about exchanging?',
+          })
+    }
+
+    const passTurn = () => {
+        Swal.fire("Are you sure you want to pass?", "question")
     }
 
     const lookup = () => {
@@ -41,6 +55,10 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const hideModal = () =>{
         setShowDict(false)
+    }
+
+    const play = () => {
+        Swal.fire("Playing")
     }
 
     const updateTiles = (tiles) => {
@@ -61,7 +79,11 @@ const Game = ({ gameVariables, exitGame }) => {
                     <Col sm={12} lg={2} md={12}>
                         <ControlButtons
                             shuffleRack={shuffleRack}
+                            recall ={recall}
+                            exchange ={exchange}
+                            passTurn ={passTurn}
                             lookup = {lookup}
+                            play = {play}
                             disabled={buttonsDisabled}
                         />
                     </Col>
