@@ -2,7 +2,7 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import styles from "./ControlButtons.module.css"
 
-const ControlButtons = ({shuffleRack, disabled}) => {
+const ControlButtons = ({shuffleRack, lookup, disabled}) => {
     return (
         <div className={`d-flex flex-column ${styles["horz-btns"]}`}>
             <div key="1" className="p-2 mt-0">
@@ -27,7 +27,7 @@ const ControlButtons = ({shuffleRack, disabled}) => {
                 </Button>
             </div>
             <div key="5" className="p-2 mt-0">
-                <Button className={styles.stretch} variant="info"><span className={styles.smallscreen}>Dict</span></Button>
+                <Button className={styles.stretch} variant="info"><span className={styles.smallscreen} onClick={lookup}>Dict</span></Button>
             </div>
             <div key="6" className="p-2 mt-0">
                 <Button className={styles.stretch} variant="success" disabled={disabled}>

@@ -31,12 +31,11 @@ const Game = ({ gameVariables, exitGame }) => {
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
 
     const shuffleRack = () => {
-        let word = "Cherub"
-        Swal.fire(
-            `dictionary size is ${
-                scrabbledict.size
-            } and checkDict ${word} exists is ${checkDict(word)}`
-        )
+        console.log("Shuffling rack")
+    }
+
+    const lookup = () => {
+        Swal.fire("Will lookup dictionary!")
     }
 
     const updateTiles = (tiles) => {
@@ -44,7 +43,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
-        <CheckDictionaryModal show={true}/>
+        <CheckDictionaryModal show={false}/>
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>
@@ -57,6 +56,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     <Col sm={12} lg={2} md={12}>
                         <ControlButtons
                             shuffleRack={shuffleRack}
+                            lookup = {lookup}
                             disabled={buttonsDisabled}
                         />
                     </Col>
