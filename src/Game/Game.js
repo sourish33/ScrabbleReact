@@ -46,7 +46,11 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const passTurn = () => {
-        Swal.fire("Are you sure you want to pass?", "question")
+        Swal.fire({
+            icon: 'question',
+            title: 'Passing',
+            text: 'Are you sure about passing?',
+          })
     }
 
     const lookup = () => {
