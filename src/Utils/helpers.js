@@ -67,3 +67,5 @@ export function makePlayertable (players, shouldShuffle) {
     })
     return playerTable
 }
+
+
