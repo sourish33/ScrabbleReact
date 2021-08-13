@@ -1,6 +1,4 @@
-import { getUniqueInts} from './helpers'
 
-let arr=getUniqueInts(10)
 export const TILE_LIST_ARR = [
 // {pos: 15*7+7, letter: "A", points: 1},
 // {pos: "b"+arr[0], letter: "A", points: 1, submitted: true},
@@ -14,7 +12,7 @@ export const TILE_LIST_ARR = [
 {pos: "p1", letter: "L", points: 1, submitted: false},
 {pos: "p2", letter: "P", points: 2, submitted: false},
 {pos: "p3", letter: "J", points: 8, submitted: false},
-{pos: "p4", letter: "M", points: 3, submitted: false},
+{pos: "p4", letter: "_", points: 0, submitted: false},
 {pos: "p5", letter: "E", points: 1, submitted: false},
 {pos: "p6", letter: "E", points: 1, submitted: false},
 {pos: "p7", letter: "U", points: 1, submitted: false},

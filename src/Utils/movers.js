@@ -1,3 +1,5 @@
+import Swal from "sweetalert2"
+import { readPoints } from "../Game/GameHelperFunctions"
 import { emptySpot, formcheck } from "./helpers"
 
 const moveType = (orig, dest)=>{
@@ -60,6 +62,20 @@ const move = (origin, destination, tiles) => {
     if (!whatsHere) {
         console.log(`Nothing at origin ${origin}`)
         return tiles
+    }
+
+    if (fromRack && toBoard && readPoints(origin, tiles)===0 ) {
+        Swal.fire({
+            icon: 'question',
+            text: "Moving an empty tile to the board huh?",
+          })
+    }
+
+    if (fromBoard && toRack && readPoints(origin, tiles)===0 ) {
+        Swal.fire({
+            icon: 'question',
+            text: "Moving an empty tile to the rack huh?",
+          })
     }
 
     tiles = tiles.filter((el) => {
