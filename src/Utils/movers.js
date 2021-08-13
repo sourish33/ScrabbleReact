@@ -1,5 +1,5 @@
 import Swal from "sweetalert2"
-import { readPoints } from "../Game/GameHelperFunctions"
+import { changeLetter, readPoints } from "../Game/GameHelperFunctions"
 import { emptySpot, formcheck } from "./helpers"
 
 const moveType = (orig, dest)=>{
@@ -69,6 +69,7 @@ const move = (origin, destination, tiles) => {
             icon: 'question',
             text: "Moving an empty tile to the board huh?",
           })
+        tiles = changeLetter(origin, "X", tiles)
     }
 
     if (fromBoard && toRack && readPoints(origin, tiles)===0 ) {

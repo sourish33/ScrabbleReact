@@ -23,6 +23,13 @@ export const  readPoints = (position, tiles)=> {
     return slot.points
   }
 
+export const changeLetter = (position, newLetter, tiles) => {
+    let slot = tiles.filter((el)=>el.pos===position)[0]
+    slot.letter = newLetter
+    let slotRemoved = tiles.filter((el)=>el.pos!==position)
+    return [...slotRemoved, slot]
+}
+
 export const tilesOnRack = (tiles, rack) => {
     let rackTiles = tiles.filter((el) => {
         return el.pos[0] === rack
