@@ -1,5 +1,28 @@
 import { shuffle, subtractArrays } from "../Utils/helpers"
 
+
+export const contains = (position, tiles) => {
+    let u = tiles.filter((el)=>el.pos===position)[0]
+    return u ? true : false
+  }
+  
+
+export const readLetter = (position, tiles) => {
+    if (!contains(position, tiles)){
+      throw new Error(`${position} not included in tiles`)
+    }
+    let slot = tiles.filter((el)=>el.pos===position)[0]
+    return slot.letter
+  }
+  
+export const  readPoints = (position, tiles)=> {
+    if (!contains(position, tiles)){
+      throw new Error(`${position} not included in tiles`)
+    }
+    let slot = tiles.filter((el)=>el.pos===position)[0]
+    return slot.points
+  }
+
 export const tilesOnRack = (tiles, rack) => {
     let rackTiles = tiles.filter((el) => {
         return el.pos[0] === rack
@@ -8,7 +31,6 @@ export const tilesOnRack = (tiles, rack) => {
 }
 
 export const tilesOnBoard = (tiles) => {
-
     let boardTiles = tiles.filter((el) => {
         return el.pos[0] === "b"
     })
@@ -46,7 +68,6 @@ export const shuffleRackTiles = (tiles, rack) => {
 
 export const recallTiles = (tiles, rack) => {
 
-
     let boardTiles = tilesOnBoard(tiles)
 
     if (boardTiles.length ===0){
@@ -68,7 +89,7 @@ export const recallTiles = (tiles, rack) => {
     let returnedTiles = boardTiles
     for (let n=0;n<boardTiles.length;n++){
         returnedTiles[n].pos=freeSlots[n]
-    }/////NOT COMPLETE YET////////////////////////
+    }
 
     return [...subtractArrays(tiles, boardTiles), ...returnedTiles]
 
