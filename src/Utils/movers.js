@@ -77,6 +77,7 @@ const move = (origin, destination, tiles) => {
             icon: 'question',
             text: "Moving an empty tile to the rack huh?",
           })
+          tiles = changeLetter(origin, "_", tiles)
     }
 
     tiles = tiles.filter((el) => {
