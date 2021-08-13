@@ -7,7 +7,7 @@ import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
 import { makePlayertable } from "../Utils/helpers"
-import { shuffleRackTiles } from "./GameHelperFunctions"
+import { recallTiles, shuffleRackTiles } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 
 
@@ -39,7 +39,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     }
     const recall = () => {
-        Swal.fire("Recalling")
+        updateTiles(recallTiles(tiles, visibleRack))
     }
     const exchange = () => {
         Swal.fire({
