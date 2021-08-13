@@ -47,8 +47,10 @@ const CheckDictionaryModal = ({show, onHide}) =>{
 				FA, FE, FY, GI, GO, GU, HA, HE, HI, HM, HO, ID, IF, IN, IO, IS, IT, JA, JO, KA, KO, KI, KY, LA, LI, LO, MA, ME, MI, MM, MO, MU, MY, NA, NE, NO, NU, NY, OB, OD, OE, OF, OH, OI, OK, 
 				OM, ON, OO, OP, OR, OS, OU, OW, OX, OY, PA, PE, PI, PO, QI, RE, SH, SI, SO, ST, TA, TE, TI, TO, UG, UH, UM, UN, UP, UR, US, UT, WE, WO, XI, XU, YA, YE, YO, YU, ZA, ZE, ZO</p>
 			</div>
-
                 </ModalBody>
+                <Modal.Footer>
+                        <button onClick={onHide}>Cancel</button>
+                    </Modal.Footer>
         </Modal>
     )
 
