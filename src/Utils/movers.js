@@ -1,6 +1,6 @@
 import Swal from "sweetalert2"
 import { changeLetter, readPoints } from "../Game/GameHelperFunctions"
-import { emptySpot, formcheck } from "./helpers"
+import { emptySpot, formcheck, isLetter } from "./helpers"
 
 const moveType = (orig, dest)=>{
     let fromRack=false
@@ -65,11 +65,19 @@ const move = (origin, destination, tiles) => {
     }
 
     if (fromRack && toBoard && readPoints(origin, tiles)===0 ) {
-        Swal.fire({
-            icon: 'question',
-            text: "Moving an empty tile to the board huh?",
-          })
-        tiles = changeLetter(origin, "X", tiles)
+        // Swal.fire({
+        //     icon: 'question',
+        //     text: "Moving an empty tile to the board huh?",
+        //   })
+        let newLetter = prompt("Please choose a letter for this tile:", "")
+        if (newLetter == null || newLetter === "") {
+            return tiles
+        }
+        newLetter = newLetter.charAt(0)
+        if (!isLetter(newLetter)) {
+            return tiles
+        }
+        tiles = changeLetter(origin, newLetter, tiles)
     }
 
     if (fromBoard && toRack && readPoints(origin, tiles)===0 ) {

@@ -4,6 +4,10 @@ export function randomUpTo(max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+export function isLetter(c) {
+    return c.toLowerCase() !== c.toUpperCase()
+}
+
 export function getUniqueInts(n, N=225) {
     //returns a random integer from 1 to N
     let arr = Array.from({length: N}, (x, i) => i+1)
