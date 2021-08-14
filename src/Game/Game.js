@@ -18,6 +18,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const [tiles, setTiles] = useState([])
     const [bag, setBag] = useState(tilesBag)
     const [showDict, setShowDict] = useState(false)
+    const [showEx, setShowEx] = useState(false)
     const [whoseMove, setWhoseMove] = useState(1)
     const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
@@ -51,6 +52,7 @@ const Game = ({ gameVariables, exitGame }) => {
         //   })
         recallTiles(tiles, visibleRack)
         returnToBag()
+        setShowEx(true)
     }
 
     const passTurn = () => {
@@ -68,6 +70,9 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const hideModal = () =>{
         setShowDict(false)
+    }
+    const hideModalEx = () =>{
+        setShowEx(false)
     }
 
     const play = () => {
@@ -93,6 +98,9 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const returnToBag = () => {
         let tilesToReturn = tilesOnRack(tiles, visibleRack)
+        if (tilesToReturn.length===0){
+            return
+        }
         setTiles(subtractArrays(tiles, tilesToReturn))
 
         let srls = Array.from({length: 100}, (x, i) => i+1)
@@ -113,7 +121,7 @@ const Game = ({ gameVariables, exitGame }) => {
     return (
         <>
         <CheckDictionaryModal show={showDict} onHide={hideModal}/>
-        <ExchangeTilesModal show={false}/>
+        <ExchangeTilesModal show={showEx} onHide={hideModalEx}/>
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>
