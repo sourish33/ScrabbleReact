@@ -81,6 +81,12 @@ export const recallTiles = (tiles, rack) => {
         console.log("nothing to return")
         return tiles
     }
+    //check for and handle blank tiles
+    for (let tile of boardTiles) {
+        if (tile.points === 0) {
+            tile.letter = "_"
+        }
+    }
 
     let rackTiles = tilesOnRack(tiles, rack)
 
@@ -93,6 +99,7 @@ export const recallTiles = (tiles, rack) => {
     if (freeSlots.length!==boardTiles.length){
         throw new Error("number of tiles on board doesnt match number of empty spots  on rack")
     }
+    //making a copy of boardtiles to for changing positions to the free positions on the rack
     let returnedTiles = boardTiles
     for (let n=0;n<boardTiles.length;n++){
         returnedTiles[n].pos=freeSlots[n]

@@ -1,4 +1,4 @@
-import Swal from "sweetalert2"
+// import Swal from "sweetalert2"
 import { changeLetter, readPoints } from "../Game/GameHelperFunctions"
 import { emptySpot, formcheck, isLetter } from "./helpers"
 
