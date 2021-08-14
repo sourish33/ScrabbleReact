@@ -75,8 +75,9 @@ const Game = ({ gameVariables, exitGame }) => {
         if (freeSlots.length===0) {return}
         let removeFromBag =[]
         let addToTiles = []
-        let inds = getUniqueInts(freeSlots.length, bag.length)
+        let inds = getUniqueInts(freeSlots.length, bag.length-1)
         for (let i=0;i<freeSlots.length;i++) {
+            console.log(inds[i])
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
         }
