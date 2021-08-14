@@ -7,7 +7,7 @@ import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
 import { getUniqueInts, makePlayertable, randomUpTo, subtractArrays } from "../Utils/helpers"
-import { emptyOnRack, recallTiles, shuffleRackTiles } from "./GameHelperFunctions"
+import { emptyOnRack, recallTiles, shuffleRackTiles, tilesOnRack } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 
@@ -51,11 +51,12 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const passTurn = () => {
-        Swal.fire({
-            icon: 'question',
-            title: 'Passing',
-            text: 'Are you sure about passing?',
-          })
+        // Swal.fire({
+        //     icon: 'question',
+        //     title: 'Passing',
+        //     text: 'Are you sure about passing?',
+        //   })
+        returnToBag()
     }
 
     const lookup = () => {
@@ -77,14 +78,27 @@ const Game = ({ gameVariables, exitGame }) => {
         let addToTiles = []
         let inds = getUniqueInts(freeSlots.length, bag.length-1)
         for (let i=0;i<freeSlots.length;i++) {
-            console.log(inds[i])
+            // console.log(inds[i])
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
         }
-        console.log(removeFromBag)
-        console.log(addToTiles)
+        // console.log(removeFromBag)
+        // console.log(addToTiles)
         setBag(x=>subtractArrays(bag, removeFromBag))
         updateTiles([...tiles, ...addToTiles])
+    }
+
+    const returnToBag = () => {
+        let tilesToReturn = tilesOnRack(tiles, visibleRack)
+        let srl = bag.length
+        setTiles(subtractArrays(tiles, tilesToReturn))
+
+        let bagTiles = []
+        for (let i=0;i<tilesToReturn.length;i++) {
+            bagTiles.push([srl+i, tilesToReturn[i].letter, tilesToReturn[i].points])
+        }
+        // console.log(bagTiles)
+        setBag(x=>[...bag, ...bagTiles])
     }
 
     const updateTiles = (newTiles) => {
