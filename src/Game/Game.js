@@ -9,18 +9,19 @@ import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
 import { makePlayertable } from "../Utils/helpers"
 import { recallTiles, shuffleRackTiles } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
+import tilesBag from "../Utils/tilesBag"
 
 
 
 const Game = ({ gameVariables, exitGame }) => {
     const [tiles, setTiles] = useState(TILE_LIST_ARR)
+    const [bag, setBag] = useState(tilesBag)
     const [showDict, setShowDict] = useState(false)
     const [whoseMove, setWhoseMove] = useState(1)
     const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
     const [currentPlayer, setCurrentPlayer] = useState(0)
-    const [tilesLeft, setTilesLeft] = useState(47)
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
 
     //parsing incoming data from the welcome page
@@ -100,7 +101,7 @@ const Game = ({ gameVariables, exitGame }) => {
                             pointsPossible={pointsPossible}
                             playersAndPoints={playersAndPoints}
                             currentPlayer={currentPlayer}
-                            tilesLeft={tilesLeft}
+                            tilesLeft={bag.length}
                             maxPoints={maxPoints}
                             lastPlayed={lastPlayed}
                             exitGame={exitGame}
