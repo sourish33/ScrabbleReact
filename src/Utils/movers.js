@@ -81,10 +81,6 @@ const move = (origin, destination, tiles) => {
     }
 
     if (fromBoard && toRack && readPoints(origin, tiles)===0 ) {
-        Swal.fire({
-            icon: 'question',
-            text: "Moving an empty tile to the rack huh?",
-          })
           tiles = changeLetter(origin, "_", tiles)
     }
 
