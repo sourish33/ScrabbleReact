@@ -43,20 +43,22 @@ const Game = ({ gameVariables, exitGame }) => {
         updateTiles(recallTiles(tiles, visibleRack))
     }
     const exchange = () => {
-        Swal.fire({
-            icon: 'question',
-            title: 'Oops...',
-            text: 'Are you sure about exchanging?',
-          })
+        // Swal.fire({
+        //     icon: 'question',
+        //     title: 'Oops...',
+        //     text: 'Are you sure about exchanging?',
+        //   })
+        recallTiles(tiles, visibleRack)
+        returnToBag()
     }
 
     const passTurn = () => {
-        // Swal.fire({
-        //     icon: 'question',
-        //     title: 'Passing',
-        //     text: 'Are you sure about passing?',
-        //   })
-        returnToBag()
+        Swal.fire({
+            icon: 'question',
+            title: 'Passing',
+            text: 'Are you sure about passing?',
+          })
+        
     }
 
     const lookup = () => {
@@ -90,12 +92,15 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const returnToBag = () => {
         let tilesToReturn = tilesOnRack(tiles, visibleRack)
-        let srl = bag.length
         setTiles(subtractArrays(tiles, tilesToReturn))
+
+        let srls = Array.from({length: 100}, (x, i) => i+1)
+        let usedSrls = bag.map((el)=>el[0])
+        let unusedSrls = subtractArrays(srls, usedSrls)
 
         let bagTiles = []
         for (let i=0;i<tilesToReturn.length;i++) {
-            bagTiles.push([srl+i, tilesToReturn[i].letter, tilesToReturn[i].points])
+            bagTiles.push([unusedSrls[i], tilesToReturn[i].letter, tilesToReturn[i].points])
         }
         // console.log(bagTiles)
         setBag(x=>[...bag, ...bagTiles])
