@@ -10,6 +10,7 @@ import { getUniqueInts, makePlayertable, randomUpTo, subtractArrays } from "../U
 import { emptyOnRack, recallTiles, shuffleRackTiles, tilesOnRack } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
+import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
 
 
 
@@ -112,6 +113,7 @@ const Game = ({ gameVariables, exitGame }) => {
     return (
         <>
         <CheckDictionaryModal show={showDict} onHide={hideModal}/>
+        <ExchangeTilesModal show={false}/>
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>
