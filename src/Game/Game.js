@@ -14,7 +14,7 @@ import tilesBag from "../Utils/tilesBag"
 
 
 const Game = ({ gameVariables, exitGame }) => {
-    const [tiles, setTiles] = useState(TILE_LIST_ARR)
+    const [tiles, setTiles] = useState([])
     const [bag, setBag] = useState(tilesBag)
     const [showDict, setShowDict] = useState(false)
     const [whoseMove, setWhoseMove] = useState(1)
@@ -71,7 +71,9 @@ const Game = ({ gameVariables, exitGame }) => {
         let tile = bag[ind]
         let bagMinusTile = bag.filter((el)=>{return el[0]!==ind})
         setBag(x=>bagMinusTile)
-        console.log(tile)
+        let slot = {pos: visibleRack+1, letter: tile[1], points: tile[2]}
+        console.log(slot)
+        updateTiles([...tiles, slot])
     }
 
     const updateTiles = (newTiles) => {
