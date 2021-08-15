@@ -4,7 +4,7 @@ import styles from "./RackSquareEx.module.css"
 const RackSquareEx = ({children}) => {
 
     return (
-        <div className={styles.racksquare}>
+        <div className={`${styles.racksquare}` }>
             {children}
         </div>
     )

@@ -32,16 +32,11 @@
     user-select: none;
 }
 
-/* 
-  @media only screen and (max-width: 992px) {
-
-    .letter {
-      font-size: 0.8em;
-    }
-
-    .points {
-      font-size: 0.6em;
-    }
+.pushup {
+  -ms-transform: scale(1.3); /* IE 9 */
+  -webkit-transform: scale(1.3); /* Safari 3-8 */
+  transform: scale(1.3); 
+  transform: translate(0,-20px);
+}
 
 
-  } */
