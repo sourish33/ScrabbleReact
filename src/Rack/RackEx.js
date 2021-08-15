@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./RackEx.module.css";
 import { arrayToMap } from "../Utils/helpers";
 import TileEx from "../Tile/TileEx";
@@ -7,6 +7,7 @@ import RackSquareEx from "../RackSquare/RackSquareEx";
 const RackEx = ({ whichRack, tiles }) => {
   // console.log(tiles.length)
   let tilesMap = arrayToMap(tiles);
+  const [selectedTiles, setSelectedTiles] = useState([false, false, false, false, false, false, false])
 
   const clickHandler = (event) => {
     console.log(event.currentTarget.parentNode.parentNode.id);
