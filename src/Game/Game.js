@@ -51,7 +51,7 @@ const Game = ({ gameVariables, exitGame }) => {
         //     text: 'Are you sure about exchanging?',
         //   })
         recallTiles(tiles, visibleRack)
-        returnToBag()
+        // returnToBag()
         setShowEx(true)
     }
 
@@ -86,12 +86,9 @@ const Game = ({ gameVariables, exitGame }) => {
         let addToTiles = []
         let inds = getUniqueInts(freeSlots.length, bag.length-1)
         for (let i=0;i<freeSlots.length;i++) {
-            // console.log(inds[i])
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
         }
-        // console.log(removeFromBag)
-        // console.log(addToTiles)
         setBag(x=>subtractArrays(bag, removeFromBag))
         updateTiles([...tiles, ...addToTiles])
     }
@@ -120,8 +117,8 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
-        <CheckDictionaryModal show={showDict} onHide={hideModal}/>
-        <ExchangeTilesModal show={showEx} onHide={hideModalEx}/>
+        <CheckDictionaryModal show={showDict} onHide={hideModal} />
+        <ExchangeTilesModal show={showEx} onHide={hideModalEx} whichRack={visibleRack} tiles={tiles}/>
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>
