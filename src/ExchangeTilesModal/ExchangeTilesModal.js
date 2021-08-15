@@ -29,7 +29,6 @@ const ExchangeTilesModal = ({show, onHide, whichRack, tiles}) => {
         </Modal.Body>
         <Modal.Footer>
             <Button variant="primary" size="lg" className={styles.buttonstyle}>Submit</Button>
-            {/* <Button onClick={onHide}>Cancel</Button> */}
            
         </Modal.Footer>
 

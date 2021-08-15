@@ -15,7 +15,6 @@ const RackEx = ({whichRack, tiles}) => {
 
     const squares = []
     for (let i = 1; i < 8; i++) {
-        if (tilesMap.has(whichRack+i)) {
             let piece = (
                 <TileEx
                     letter={tilesMap.get(whichRack+i)[0]}
@@ -33,19 +32,7 @@ const RackEx = ({whichRack, tiles}) => {
                 </div>
             )
             squares.push(thisSquare)
-        } else {
-            let thisSquare = (
-                <div
-                    key={i}
-                    className={styles.wrappingSquare}
-                    id={"e"+i}
-                >
-                     <RackSquareEx></RackSquareEx>
-                </div>
-            )
-            squares.push(thisSquare)
         }
-    }
 
     return (
         <div className={styles.aspectratio}>
