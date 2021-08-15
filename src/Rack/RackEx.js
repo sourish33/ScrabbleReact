@@ -9,6 +9,10 @@ const RackEx = ({whichRack, tiles}) => {
     // console.log(tiles.length)
     let tilesMap = arrayToMap(tiles)
 
+    const clickHandler = (event) =>{
+        console.log(event.currentTarget.parentNode.parentNode.id)
+    }
+
     const squares = []
     for (let i = 1; i < 8; i++) {
         if (tilesMap.has(whichRack+i)) {
@@ -16,13 +20,14 @@ const RackEx = ({whichRack, tiles}) => {
                 <TileEx
                     letter={tilesMap.get(whichRack+i)[0]}
                     points={tilesMap.get(whichRack+i)[1]}
+                    clickHandler={clickHandler}
                 />
             )
             let thisSquare = (
                 <div
                     key={i}
                     className={styles.wrappingSquare}
-                    id={whichRack+i}
+                    id={"e"+i}
                 >
                      <RackSquareEx>{piece}</RackSquareEx>
                 </div>
@@ -33,7 +38,7 @@ const RackEx = ({whichRack, tiles}) => {
                 <div
                     key={i}
                     className={styles.wrappingSquare}
-                    id={whichRack+i}
+                    id={"e"+i}
                 >
                      <RackSquareEx></RackSquareEx>
                 </div>
