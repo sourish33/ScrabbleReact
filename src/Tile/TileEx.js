@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './TileEx.module.css'
 
-const TileEx = ({letter, points, clickHandler }) => {
-    const styling = `${styles.tile} ${styles.pushup}`
+const TileEx = ({letter, points, clickHandler, selected }) => {
+    const styling = selected ? `${styles.tile} ${styles.pushup}` : `${styles.tile}`
 
     return (
         <div onClick = {clickHandler} className={styling} >
