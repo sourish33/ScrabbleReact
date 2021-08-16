@@ -34,7 +34,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const playerTable = makePlayertable(players, shufflePlayers)
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
-
+///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
     const [selectedTiles, setSelectedTiles] = useState(new Set())
     const clickHandlerExt = (event) => {
         let clickedTileNo = parseInt(
@@ -50,11 +50,22 @@ const Game = ({ gameVariables, exitGame }) => {
         })
         
     }
+    const exchange = () => {
+        recallTiles(tiles, visibleRack)
+        setShowEx(true)
+    }
+    const hideModalEx = () =>{
+        setSelectedTiles((x)=>{
+            return new Set()
+        })
+        setShowEx(false)
+    }
 
     
     const handleSubmit = () => {
         console.log(selectedTiles)
     }
+    /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
     const shuffleRack = () => {
         // Swal.fire("Shuffling rack")
@@ -65,16 +76,8 @@ const Game = ({ gameVariables, exitGame }) => {
     const recall = () => {
         updateTiles(recallTiles(tiles, visibleRack))
     }
-    const exchange = () => {
-        // Swal.fire({
-        //     icon: 'question',
-        //     title: 'Oops...',
-        //     text: 'Are you sure about exchanging?',
-        //   })
-        recallTiles(tiles, visibleRack)
-        // returnToBag()
-        setShowEx(true)
-    }
+
+
 
     const passTurn = () => {
         Swal.fire({
@@ -92,12 +95,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const hideModal = () =>{
         setShowDict(false)
     }
-    const hideModalEx = () =>{
-        setSelectedTiles((x)=>{
-            return new Set()
-        })
-        setShowEx(false)
-    }
+
 
     const play = () => {
         replenishRack()
