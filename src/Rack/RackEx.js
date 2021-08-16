@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styles from "./RackEx.module.css";
-import { arrayToMap } from "../Utils/helpers";
 import TileEx from "../Tile/TileEx";
 import RackSquareEx from "../RackSquare/RackSquareEx";
 
 const RackEx = ({ whichRack, tiles, clickHandlerExt }) => {
-  // console.log(tiles.length)
-  let tilesMap = arrayToMap(tiles);
+  console.log("tiles length is "+ tiles.length)
+
   
 
 
@@ -15,8 +14,8 @@ const RackEx = ({ whichRack, tiles, clickHandlerExt }) => {
   for (let i = 1; i < 8; i++) {
     let piece = (
       <TileEx
-        letter={tilesMap.get(whichRack + i)[0]}
-        points={tilesMap.get(whichRack + i)[1]}
+        letter={tiles.filter((el)=>{return el.pos === whichRack+i})[0].letter}
+        points={tiles.filter((el)=>{return el.pos === whichRack+i})[0].points}
         clickHandlerExt = {clickHandlerExt}
       />
     );

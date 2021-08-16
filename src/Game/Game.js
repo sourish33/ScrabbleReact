@@ -63,7 +63,17 @@ const Game = ({ gameVariables, exitGame }) => {
     
     const handleSubmit = () => {
         if (selectedTiles.size===0){return}
-        console.log(selectedTiles)
+
+        let toReturn = Array.from(selectedTiles)
+        let tilesToReturn = []
+        for (let id of toReturn) {
+            tilesToReturn.push(tiles.filter((el)=>el.pos===id)[0])
+        }
+        console.log(tilesToReturn)
+        // console.log(subtractArrays(tiles, tilesToReturn))
+        // updateTiles(subtractArrays(tiles, tilesToReturn))
+        // console.log(tilesOnRack(tiles, visibleRack))
+        // returnToBag(slotsToReturn)
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
@@ -115,8 +125,8 @@ const Game = ({ gameVariables, exitGame }) => {
         updateTiles([...tiles, ...addToTiles])
     }
 
-    const returnToBag = () => {
-        let tilesToReturn = tilesOnRack(tiles, visibleRack)
+    const returnToBag = (tilesToReturn) => {
+        // let tilesToReturn = tilesOnRack(tiles, visibleRack)
         if (tilesToReturn.length===0){
             return
         }
