@@ -71,7 +71,8 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         console.log(tilesToReturn)
         // console.log(subtractArrays(tiles, tilesToReturn))
-        // updateTiles(subtractArrays(tiles, tilesToReturn))
+        hideModalEx()
+        updateTiles(subtractArrays(tiles, tilesToReturn))
         // console.log(tilesOnRack(tiles, visibleRack))
         // returnToBag(slotsToReturn)
     }

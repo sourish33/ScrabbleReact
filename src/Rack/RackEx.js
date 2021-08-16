@@ -12,10 +12,11 @@ const RackEx = ({ whichRack, tiles, clickHandlerExt }) => {
 
   const squares = [];
   for (let i = 1; i < 8; i++) {
+      let tile = tiles.filter((el)=>{return el.pos === whichRack+i})[0]
     let piece = (
       <TileEx
-        letter={tiles.filter((el)=>{return el.pos === whichRack+i})[0].letter}
-        points={tiles.filter((el)=>{return el.pos === whichRack+i})[0].points}
+        letter={tile ? tile.letter : null} //just in case tile is undefined
+        points={tile ? tile.points : null}
         clickHandlerExt = {clickHandlerExt}
       />
     );
