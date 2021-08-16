@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import Swal from "sweetalert2"
 import BoardAndRack from "../BoardAndRack"
@@ -25,17 +25,23 @@ const Game = ({ gameVariables, exitGame }) => {
     const [pointsPossible, setPointsPossible] = useState(0)
     const [currentPlayer, setCurrentPlayer] = useState(0)
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
+    const [selectedTiles, setSelectedTiles] = useState(new Set())
 
     //parsing incoming data from the welcome page
     const players = gameVariables.players
     const shufflePlayers = gameVariables.shufflePlayers
     const dictChecking = gameVariables.dictCheck
     const maxPoints = parseInt(gameVariables.gameType)
-
     const playerTable = makePlayertable(players, shufflePlayers)
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
+    
+
+
+    useEffect(() => {  
+        replenishRack()
+    },[visibleRack])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
-    const [selectedTiles, setSelectedTiles] = useState(new Set())
+   
     const clickHandlerExt = (event) => {
         let clickedTileNo =visibleRack + event.currentTarget.parentNode.parentNode.id[1]
         
@@ -132,7 +138,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
-        replenishRack()
+        
     }
 
     const replenishRack = () => {
