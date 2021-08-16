@@ -63,15 +63,18 @@ const Game = ({ gameVariables, exitGame }) => {
     
     const handleSubmit = () => {
         if (selectedTiles.size===0){return}
-
+        //get the tiles to return to bag and covert them to the form {pos: p1, letter: J, points: 8} etc
         let toReturn = Array.from(selectedTiles)
         let tilesToReturn = []
         for (let id of toReturn) {
             tilesToReturn.push(tiles.filter((el)=>el.pos===id)[0])
         }
-        console.log(tilesToReturn)
+        //get rid of the modal
         hideModalEx()
-        updateTiles(subtractArrays(tiles, tilesToReturn))
+        //get the tiles that would remain after deleting tilesTo Return 
+        let tilesRemoved = subtractArrays(tiles, tilesToReturn)
+
+        //assign serial numbers to these tiles before adding them to the bag
         let srls = Array.from({length: 100}, (x, i) => i+1)
         let usedSrls = bag.map((el)=>el[0])
         let unusedSrls = subtractArrays(srls, usedSrls)
@@ -80,7 +83,21 @@ const Game = ({ gameVariables, exitGame }) => {
         for (let i=0;i<tilesToReturn.length;i++) {
             bagTiles.push([unusedSrls[i], tilesToReturn[i].letter, tilesToReturn[i].points])
         }
-        setBag(x=>[...bag, ...bagTiles])
+        //this would be the state of the bag after adding the returned tiles to it
+        let addToBag = [...bag, ...bagTiles]
+
+        //now replenishing the array. Create a list of tiles to remove from the bag
+        let removeFromBag =[]
+        let addToTiles = []
+        let inds = getUniqueInts(toReturn.length, bag.length-1)
+        for (let i=0;i<toReturn.length;i++) {
+            removeFromBag.push(bag[inds[i]])
+            addToTiles.push({pos: toReturn[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
+        }
+        //update the states
+        setBag(x=>subtractArrays(addToBag, removeFromBag))
+        updateTiles([...tilesRemoved, ...addToTiles])
+        
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
