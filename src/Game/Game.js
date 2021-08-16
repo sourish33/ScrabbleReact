@@ -70,11 +70,17 @@ const Game = ({ gameVariables, exitGame }) => {
             tilesToReturn.push(tiles.filter((el)=>el.pos===id)[0])
         }
         console.log(tilesToReturn)
-        // console.log(subtractArrays(tiles, tilesToReturn))
         hideModalEx()
         updateTiles(subtractArrays(tiles, tilesToReturn))
-        // console.log(tilesOnRack(tiles, visibleRack))
-        // returnToBag(slotsToReturn)
+        let srls = Array.from({length: 100}, (x, i) => i+1)
+        let usedSrls = bag.map((el)=>el[0])
+        let unusedSrls = subtractArrays(srls, usedSrls)
+
+        let bagTiles = []
+        for (let i=0;i<tilesToReturn.length;i++) {
+            bagTiles.push([unusedSrls[i], tilesToReturn[i].letter, tilesToReturn[i].points])
+        }
+        setBag(x=>[...bag, ...bagTiles])
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
