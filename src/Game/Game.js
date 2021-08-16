@@ -37,9 +37,8 @@ const Game = ({ gameVariables, exitGame }) => {
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
     const [selectedTiles, setSelectedTiles] = useState(new Set())
     const clickHandlerExt = (event) => {
-        let clickedTileNo = parseInt(
-            event.currentTarget.parentNode.parentNode.id[1]
-        )
+        let clickedTileNo =visibleRack + event.currentTarget.parentNode.parentNode.id[1]
+        
         setSelectedTiles((x) => {
             if (x.has(clickedTileNo)) {
                 x.delete(clickedTileNo)
@@ -63,6 +62,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     
     const handleSubmit = () => {
+        if (selectedTiles.size===0){return}
         console.log(selectedTiles)
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
