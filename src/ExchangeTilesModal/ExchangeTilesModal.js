@@ -11,6 +11,20 @@ import styles from './ExchangeTilesModal.module.css'
 
 const ExchangeTilesModal = ({show, onHide, whichRack, tiles}) => {
 
+    const [selectedTiles, setSelectedTiles] = useState(new Set())
+    const clickHandlerExt = (event) => {
+        let clickedTileNo = parseInt(event.currentTarget.parentNode.parentNode.id[1])
+        setSelectedTiles((x)=>{
+            if (x.has(clickedTileNo)) {
+                x.delete(clickedTileNo)
+            } else {
+                x.add(clickedTileNo)
+            }
+            return x
+        })
+        console.log(selectedTiles)
+      };
+
     return (
         <Modal show = {show} onHide={onHide}>
        <Modal.Header>
@@ -22,7 +36,8 @@ const ExchangeTilesModal = ({show, onHide, whichRack, tiles}) => {
             <div>
                 <RackEx
                 whichRack = {whichRack}
-                tiles = {tiles}>
+                tiles = {tiles}
+                clickHandlerExt={clickHandlerExt}>
                 </RackEx>
             </div>
 

@@ -4,23 +4,12 @@ import { arrayToMap } from "../Utils/helpers";
 import TileEx from "../Tile/TileEx";
 import RackSquareEx from "../RackSquare/RackSquareEx";
 
-const RackEx = ({ whichRack, tiles }) => {
+const RackEx = ({ whichRack, tiles, clickHandlerExt }) => {
   // console.log(tiles.length)
   let tilesMap = arrayToMap(tiles);
-  const [selectedTiles, setSelectedTiles] = useState(new Set())
+  
 
-  const clickHandlerExt = (event) => {
-    let clickedTileNo = parseInt(event.currentTarget.parentNode.parentNode.id[1])
-    setSelectedTiles((x)=>{
-        if (x.has(clickedTileNo)) {
-            x.delete(clickedTileNo)
-        } else {
-            x.add(clickedTileNo)
-        }
-        return x
-    })
-    console.log(selectedTiles)
-  };
+
 
   const squares = [];
   for (let i = 1; i < 8; i++) {
