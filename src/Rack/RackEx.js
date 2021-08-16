@@ -7,13 +7,13 @@ import RackSquareEx from "../RackSquare/RackSquareEx";
 const RackEx = ({ whichRack, tiles }) => {
   // console.log(tiles.length)
   let tilesMap = arrayToMap(tiles);
-  const [selected, setSelected] = useState([false, false, false, false, false, false, false])
+//   const [selected, setSelected] = useState([false, false, false, false, false, false, false])
 
-  const clickHandler = (event) => {
-    // console.log(event.currentTarget.parentNode.parentNode.id);
-    let clickedTileNo = parseInt(event.currentTarget.parentNode.parentNode.id[1])
-    console.log("Tile clicked was number "+clickedTileNo)
-  };
+//   const clickHandler = (event) => {
+//     // console.log(event.currentTarget.parentNode.parentNode.id);
+//     let clickedTileNo = parseInt(event.currentTarget.parentNode.parentNode.id[1])
+//     console.log("Tile clicked was number "+clickedTileNo)
+//   };
 
   const squares = [];
   for (let i = 1; i < 8; i++) {
@@ -21,8 +21,6 @@ const RackEx = ({ whichRack, tiles }) => {
       <TileEx
         letter={tilesMap.get(whichRack + i)[0]}
         points={tilesMap.get(whichRack + i)[1]}
-        clickHandler={clickHandler}
-        selected = {selected[i-1]}
       />
     );
     let thisSquare = (
