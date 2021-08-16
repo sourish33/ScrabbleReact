@@ -8,26 +8,10 @@ import { Button } from "react-bootstrap"
 import RackEx from "../Rack/RackEx"
 import styles from "./ExchangeTilesModal.module.css"
 
-const ExchangeTilesModal = ({ show, onHide, whichRack, tiles }) => {
-    const [selectedTiles, setSelectedTiles] = useState(new Set())
-    const clickHandlerExt = (event) => {
-        let clickedTileNo = parseInt(
-            event.currentTarget.parentNode.parentNode.id[1]
-        )
-        setSelectedTiles((x) => {
-            if (x.has(clickedTileNo)) {
-                x.delete(clickedTileNo)
-            } else {
-                x.add(clickedTileNo)
-            }
-            return x
-        })
-        
-    }
+const ExchangeTilesModal = ({ show, onHide, whichRack, tiles, clickHandlerExt, handleSubmit }) => {
+    
 
-    const handleSubmit = () => {
-        console.log(selectedTiles)
-    }
+
 
     return (
         <Modal show={show} onHide={onHide}>

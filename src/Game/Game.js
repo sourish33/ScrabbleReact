@@ -35,6 +35,27 @@ const Game = ({ gameVariables, exitGame }) => {
     const playerTable = makePlayertable(players, shufflePlayers)
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
 
+    const [selectedTiles, setSelectedTiles] = useState(new Set())
+    const clickHandlerExt = (event) => {
+        let clickedTileNo = parseInt(
+            event.currentTarget.parentNode.parentNode.id[1]
+        )
+        setSelectedTiles((x) => {
+            if (x.has(clickedTileNo)) {
+                x.delete(clickedTileNo)
+            } else {
+                x.add(clickedTileNo)
+            }
+            return x
+        })
+        
+    }
+
+    
+    const handleSubmit = () => {
+        console.log(selectedTiles)
+    }
+
     const shuffleRack = () => {
         // Swal.fire("Shuffling rack")
         console.log("Shuffling Rack")
@@ -72,6 +93,9 @@ const Game = ({ gameVariables, exitGame }) => {
         setShowDict(false)
     }
     const hideModalEx = () =>{
+        setSelectedTiles((x)=>{
+            return new Set()
+        })
         setShowEx(false)
     }
 
@@ -118,7 +142,14 @@ const Game = ({ gameVariables, exitGame }) => {
     return (
         <>
         <CheckDictionaryModal show={showDict} onHide={hideModal} />
-        <ExchangeTilesModal show={showEx} onHide={hideModalEx} whichRack={visibleRack} tiles={tiles}/>
+        <ExchangeTilesModal 
+            show={showEx} 
+            onHide={hideModalEx} 
+            whichRack={visibleRack} 
+            tiles={tiles} 
+            clickHandlerExt={clickHandlerExt}
+            handleSubmit={handleSubmit}
+        />
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>
