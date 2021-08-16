@@ -44,6 +44,13 @@ export const tilesOnBoard = (tiles) => {
     return boardTiles
 }
 
+export const tilesPlayedNotSubmitted = (tiles) => {
+    let tilesPlayedNotSubmitted = tiles.filter((el)=>{
+        return el.pos[0]==="b" && !el.submitted
+    })
+    return tilesPlayedNotSubmitted
+}
+
 export const emptyOnRack = (tiles, rack) =>{
     let rackTiles = tilesOnRack(tiles, rack)
   let occupiedSlots = rackTiles.map((el)=>el.pos[1])
@@ -75,14 +82,14 @@ export const shuffleRackTiles = (tiles, rack) => {
 
 export const recallTiles = (tiles, rack) => {
 
-    let boardTiles = tilesOnBoard(tiles)
+    let unsubmittedTiles = tilesPlayedNotSubmitted(tiles)
 
-    if (boardTiles.length ===0){
+    if (unsubmittedTiles.length ===0){
         console.log("nothing to return")
         return tiles
     }
     //check for and handle blank tiles
-    for (let tile of boardTiles) {
+    for (let tile of unsubmittedTiles) {
         if (tile.points === 0) {
             tile.letter = "_"
         }
@@ -96,15 +103,15 @@ export const recallTiles = (tiles, rack) => {
     }
 
     let freeSlots = emptyOnRack(tiles, rack)
-    if (freeSlots.length!==boardTiles.length){
+    if (freeSlots.length!==unsubmittedTiles.length){
         throw new Error("number of tiles on board doesnt match number of empty spots  on rack")
     }
     //making a copy of boardtiles to for changing positions to the free positions on the rack
-    let returnedTiles = boardTiles
-    for (let n=0;n<boardTiles.length;n++){
+    let returnedTiles = unsubmittedTiles
+    for (let n=0;n<unsubmittedTiles.length;n++){
         returnedTiles[n].pos=freeSlots[n]
     }
 
-    return [...subtractArrays(tiles, boardTiles), ...returnedTiles]
+    return [...subtractArrays(tiles, unsubmittedTiles), ...returnedTiles]
 
 }

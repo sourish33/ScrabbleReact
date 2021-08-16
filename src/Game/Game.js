@@ -151,6 +151,10 @@ const Game = ({ gameVariables, exitGame }) => {
         console.log("now submitted")
         console.log(tilesNowSubmitted)
         updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
+        setVisibleRack(x=>{
+            if (x==="p") {return "q"}
+            else {return "p"}
+        })
         
     }
 
