@@ -39,7 +39,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     useEffect(() => {  
         replenishRack()
-    },[visibleRack])
+    }, [visibleRack])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
     const clickHandlerExt = (event) => {
@@ -138,6 +138,13 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
+        let submittedTiles = tiles.filter((el)=>el.submitted)
+        let unSubmittedTiles = subtractArrays(tiles, submittedTiles)
+        let nowSubmittedTiles =[]
+        for (let tile of unSubmittedTiles) {
+            nowSubmittedTiles.push(tile.submitted=true)
+        }
+        updateTiles([...unSubmittedTiles, ...nowSubmittedTiles])
         
     }
 
