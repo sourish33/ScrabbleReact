@@ -138,13 +138,19 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
-        let submittedTiles = tiles.filter((el)=>el.submitted)
-        let unSubmittedTiles = subtractArrays(tiles, submittedTiles)
-        let nowSubmittedTiles =[]
-        for (let tile of unSubmittedTiles) {
-            nowSubmittedTiles.push(tile.submitted=true)
+        let tilesPlayedNotSubmitted = tiles.filter((el)=>{
+            return el.pos[0]==="b" && !el.submitted
+        })
+        console.log("played not submitted")
+        console.log(tilesPlayedNotSubmitted)
+        let tilesNowSubmitted = []
+        for (let tile of tilesPlayedNotSubmitted){
+            tile.submitted = true
+            tilesNowSubmitted.push(tile)
         }
-        updateTiles([...unSubmittedTiles, ...nowSubmittedTiles])
+        console.log("now submitted")
+        console.log(tilesNowSubmitted)
+        updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
         
     }
 
@@ -156,7 +162,7 @@ const Game = ({ gameVariables, exitGame }) => {
         let inds = getUniqueInts(freeSlots.length, bag.length-1)
         for (let i=0;i<freeSlots.length;i++) {
             removeFromBag.push(bag[inds[i]])
-            addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
+            addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: false })
         }
         setBag(x=>subtractArrays(bag, removeFromBag))
         updateTiles([...tiles, ...addToTiles])
