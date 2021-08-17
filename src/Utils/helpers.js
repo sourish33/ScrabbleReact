@@ -68,6 +68,14 @@ export const loc = (down, across) => {
     return 15 * (down - 1) + across - 1
 }
 
+
+export const coords = (n) => {
+    //inverse of loc
+    let x = Math.floor(n/15)+1
+    let y = n%15+1
+    return [x,y]
+  }
+
 export function formcheck(id) {
     return /[bpqrs]\d+$/.test(id)
 }
