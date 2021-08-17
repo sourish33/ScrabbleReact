@@ -141,15 +141,14 @@ const Game = ({ gameVariables, exitGame }) => {
         let tilesPlayedNotSubmitted = tiles.filter((el)=>{
             return el.pos[0]==="b" && !el.submitted
         })
-        console.log("played not submitted")
         console.log(tilesPlayedNotSubmitted)
         let tilesNowSubmitted = []
         for (let tile of tilesPlayedNotSubmitted){
             tile.submitted = true
             tilesNowSubmitted.push(tile)
         }
-        console.log("now submitted")
-        console.log(tilesNowSubmitted)
+        console.log(`${tilesPlayedNotSubmitted} tiles not submitted`)
+        // console.log(tilesNowSubmitted)
         updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
         setVisibleRack(x=>{
             if (x==="p") {return "q"}
