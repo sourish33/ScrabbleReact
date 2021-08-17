@@ -1,4 +1,4 @@
-import { shuffle, subtractArrays } from "../Utils/helpers"
+import { loc, shuffle, subtractArrays } from "../Utils/helpers"
 
 
 export const contains = (position, tiles) => {
@@ -8,6 +8,11 @@ export const contains = (position, tiles) => {
   
 
 export const readLetter = (position, tiles) => {
+    if (!(typeof(position) === "string" || Array.isArray(position))) { throw new Error(`${position} not string or array`)}
+    if (Array.isArray(position)) {
+        if (position.length===0){ throw new Error(`${position} empty array given to readLetter`) }
+        position = 'b'+loc(position[0], position[1])
+    }
     if (!contains(position, tiles)){
       throw new Error(`${position} not included in tiles`)
     }
@@ -15,7 +20,12 @@ export const readLetter = (position, tiles) => {
     return slot.letter
   }
   
-export const  readPoints = (position, tiles)=> {
+export const readPoints = (position, tiles)=> {
+    if (!(typeof(position) === "string" || Array.isArray(position))) { throw new Error(`${position} not string or array`)}
+    if (Array.isArray(position)) {
+        if (position.length===0){ throw new Error(`${position} empty array given to readPoints`) }
+        position = 'b'+loc(position[0], position[1])
+    }
     if (!contains(position, tiles)){
       throw new Error(`${position} not included in tiles`)
     }
