@@ -6,8 +6,8 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
-import { getUniqueInts, makePlayertable, randomUpTo, subtractArrays } from "../Utils/helpers"
-import { emptyOnRack, recallTiles, shuffleRackTiles, tilesOnRack } from "./GameHelperFunctions"
+import { coords, getConsecutives, getUniqueInts, getUniques, makePlayertable, randomUpTo, subtractArrays } from "../Utils/helpers"
+import { emptyOnRack, recallTiles, shuffleRackTiles, tilesOnBoard, tilesOnRack } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -120,11 +120,25 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        Swal.fire({
-            icon: 'question',
-            title: 'Passing',
-            text: 'Are you sure about passing?',
-          })
+        // Swal.fire({
+        //     icon: 'question',
+        //     title: 'Passing',
+        //     text: 'Are you sure about passing?',
+        //   })
+        let tb = tilesOnBoard(tiles)
+        let boardnums = tb.map((el)=>parseInt(el.pos.substring(1)))
+        let xys = boardnums.map((el)=>coords(el))
+        let ys = getUniques(xys.map((el)=>el[0]))
+        let xs = getUniques(xys.map((el)=>el[1]))
+        // let horwords = xys.filter((el)=>el[0]===8)
+        let horwords =[]
+        for (let y of ys) {
+            let rows= xys.filter((el)=>el[0]===y)
+            let xofy = rows.map((el)=>el[1])
+            horwords.push(getConsecutives(xofy))
+        }
+        console.log(horwords.flat())
+
         
     }
 
@@ -138,6 +152,8 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
+
+        //Change the subitted field to true
         let tilesPlayedNotSubmitted = tiles.filter((el)=>{
             return el.pos[0]==="b" && !el.submitted
         })
@@ -148,8 +164,8 @@ const Game = ({ gameVariables, exitGame }) => {
             tilesNowSubmitted.push(tile)
         }
         console.log(`${tilesPlayedNotSubmitted} tiles not submitted`)
-        // console.log(tilesNowSubmitted)
         updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
+        //switch the setVisibleRack
         setVisibleRack(x=>{
             if (x==="p") {return "q"}
             else {return "p"}

@@ -45,7 +45,7 @@ export function emptySpot(arr, whichRack) {
     return false
 }
 
-export const findConsecutives = (data) => {
+export const getConsecutives = (data) => {
     //returns arrays of consecutive numbers from an array of numbers
     data.sort((x, y) => x - y)
     let groups = []
@@ -61,6 +61,11 @@ export const findConsecutives = (data) => {
         }
     }
     return groups
+}
+
+export function getUniques(arr) {
+    //returns unique elements in an array
+    return Array.from(new Set(arr))
 }
 
 export const loc = (down, across) => {
@@ -95,8 +100,9 @@ export function arrayToMap(arr) {
 
 export function makePlayertable(players, shouldShuffle) {
     let playerList = shouldShuffle === "0" ? players : shuffle(players)
-    const playerTable = playerList.map((el) => {
-        return { name: el.name, level: el.level, points: 0 }
+    const racks = ["p", "q", "r", "s"]
+    const playerTable = playerList.map((el, ind) => {
+        return { name: el.name, level: el.level, points: 0, rack: racks[ind] }
     })
     return playerTable
 }
