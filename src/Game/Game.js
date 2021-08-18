@@ -41,7 +41,8 @@ const Game = ({ gameVariables, exitGame }) => {
     useEffect(() => {  
         setCurrentPlayer(x => moveNumber%numPlayers)
         Swal.fire({
-            text: `Please pass to ${currentPlayer}`,
+            title: "Quite a wordsmith there!",
+            text: `Please pass to ${playersAndPoints[currentPlayer].name}`,
             showCancelButton: true,
             confirmButtonText: `OK`,
           }).then((result) => {
