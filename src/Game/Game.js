@@ -40,6 +40,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     useEffect(() => {  
         setCurrentPlayer(x => moveNumber%numPlayers)
+        Swal.fire(`Please pass to ${currentPlayer}`)
         replenishRack()
     }, [moveNumber, currentPlayer])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
@@ -145,10 +146,6 @@ const Game = ({ gameVariables, exitGame }) => {
             tile.submitted = true
             tilesNowSubmitted.push(tile)
         }
-        // let submittedIds = tilesNowSubmitted.map((el)=>el.pos)
-        // for (let id of submittedIds) {
-        //     document.getElementById(id).classList.add("sub")
-        // }
 
         setMoveNumber(x=>x+1)
         
