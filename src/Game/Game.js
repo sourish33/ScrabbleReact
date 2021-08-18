@@ -4,13 +4,13 @@ import Swal from "sweetalert2"
 import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
-import { TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
-import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
-import { coords, getConsecutives, getUniqueInts, getUniques, makePlayertable, randomUpTo, subtractArrays } from "../Utils/helpers"
-import { emptyOnRack, getAllWords, readAllWords, recallTiles, shuffleRackTiles, tilesOnBoard, tilesOnRack } from "./GameHelperFunctions"
+import {LAST_PLAYED } from "../Utils/DummyData"
+import {getUniqueInts, makePlayertable, subtractArrays } from "../Utils/helpers"
+import { emptyOnRack, getAllWords, readAllWords, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
+// import styles from '../Tile/Tile.module.css'
 
 
 
@@ -120,23 +120,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        // let tb = tilesOnBoard(tiles)
-        // let boardnums = tb.map((el)=>parseInt(el.pos.substring(1)))
-        // let xys = boardnums.map((el)=>coords(el))
-        // let ys = getUniques(xys.map((el)=>el[0]))
-        // let xs = getUniques(xys.map((el)=>el[1]))
-        // // let horwords = xys.filter((el)=>el[0]===8)
-        // let horwords =[]
-        // for (let y of ys) {
-        //     let rowWords = []
-        //     let rows= xys.filter((el)=>el[0]===y)
-        //     let xofy = rows.map((el)=>el[1])
-        //     horwords.push(getConsecutives(xofy))
-        // }
-        // console.log(horwords.flat())
-        console.log(readAllWords(getAllWords(tiles), tiles))
-
-        
+        console.log(readAllWords(getAllWords(tiles), tiles))  
     }
 
     const lookup = () => {
@@ -159,6 +143,11 @@ const Game = ({ gameVariables, exitGame }) => {
             tile.submitted = true
             tilesNowSubmitted.push(tile)
         }
+        // let submittedIds = tilesNowSubmitted.map((el)=>el.pos)
+        // for (let id of submittedIds) {
+        //     document.getElementById(id).classList.add("sub")
+        // }
+
         updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
         //switch the setVisibleRack
         setVisibleRack(x=>{

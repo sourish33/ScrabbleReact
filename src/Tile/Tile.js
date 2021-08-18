@@ -2,8 +2,10 @@ import React from 'react'
 import styles from './Tile.module.css'
 
 const Tile = (props) => {
+    //the opposite of submitted is sent to this component from Board - could be refactored later
+    let classes = !props.submitted? `${styles['tile']} ${styles['submitted']}`: styles['tile']
     return (
-        <div draggable = {props.submitted} className={styles.tile}                     
+        <div draggable = {props.submitted} className={classes}                     
         onTouchStart = {props.submitted ? props.TouchStart : null}
         onTouchMove = {props.submitted ? props.TouchMove: null}
         onTouchEnd = {props.submitted ? props.TouchEnd: null}
