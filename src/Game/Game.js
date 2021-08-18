@@ -5,7 +5,7 @@ import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
-import {getUniqueInts, makePlayertable, subtractArrays } from "../Utils/helpers"
+import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
 import { emptyOnRack, getAllWords, readAllWords, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
@@ -22,6 +22,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
+    const [moveNumber, setMoveNumber] = useState(0)
     const [currentPlayer, setCurrentPlayer] = useState(0)
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
     const [selectedTiles, setSelectedTiles] = useState(new Set())
@@ -32,13 +33,18 @@ const Game = ({ gameVariables, exitGame }) => {
     const dictChecking = gameVariables.dictCheck
     const maxPoints = parseInt(gameVariables.gameType)
     const playerTable = makePlayertable(players, shufflePlayers)
+    const numPlayers = playerTable.length
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
     
 
 
     useEffect(() => {  
         replenishRack()
-    }, [visibleRack])
+        setCurrentPlayer(x => moveNumber%numPlayers)
+        setVisibleRack(x=>{
+            return playersAndPoints[currentPlayer].rack
+        })
+    }, [moveNumber, currentPlayer, visibleRack])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
     const clickHandlerExt = (event) => {
@@ -147,12 +153,10 @@ const Game = ({ gameVariables, exitGame }) => {
         //     document.getElementById(id).classList.add("sub")
         // }
 
+        setMoveNumber(x=>x+1)
+        
         updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
         //switch the setVisibleRack
-        setVisibleRack(x=>{
-            if (x==="p") {return "q"}
-            else {return "p"}
-        })
         
     }
 
@@ -170,24 +174,6 @@ const Game = ({ gameVariables, exitGame }) => {
         updateTiles([...tiles, ...addToTiles])
     }
 
-    // const returnToBag = (tilesToReturn) => {
-    //     // let tilesToReturn = tilesOnRack(tiles, visibleRack)
-    //     if (tilesToReturn.length===0){
-    //         return
-    //     }
-    //     setTiles(subtractArrays(tiles, tilesToReturn))
-
-    //     let srls = Array.from({length: 100}, (x, i) => i+1)
-    //     let usedSrls = bag.map((el)=>el[0])
-    //     let unusedSrls = subtractArrays(srls, usedSrls)
-
-    //     let bagTiles = []
-    //     for (let i=0;i<tilesToReturn.length;i++) {
-    //         bagTiles.push([unusedSrls[i], tilesToReturn[i].letter, tilesToReturn[i].points])
-    //     }
-    //     // console.log(bagTiles)
-    //     setBag(x=>[...bag, ...bagTiles])
-    // }
 
     const updateTiles = (newTiles) => {
         setTiles((x) => newTiles)
