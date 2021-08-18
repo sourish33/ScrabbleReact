@@ -10,6 +10,7 @@ import { emptyOnRack, getAllWords, readAllWords, recallTiles, shuffleRackTiles, 
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
+import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageModal"
 // import styles from '../Tile/Tile.module.css'
 
 
@@ -19,7 +20,8 @@ const Game = ({ gameVariables, exitGame }) => {
     const [bag, setBag] = useState(tilesBag)
     const [showDict, setShowDict] = useState(false)
     const [showEx, setShowEx] = useState(false)
-    // const [visibleRack, setVisibleRack] = useState("p")
+    
+
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
     const [moveNumber, setMoveNumber] = useState(0)
@@ -35,22 +37,13 @@ const Game = ({ gameVariables, exitGame }) => {
     const playerTable = makePlayertable(players, shufflePlayers)
     const numPlayers = playerTable.length
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
-    
+    const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[currentPlayer].level===0)
 
 
     useEffect(() => {  
         setCurrentPlayer(x => moveNumber%numPlayers)
-        Swal.fire({
-            title: "Quite a wordsmith there!",
-            text: `Please pass to ${playersAndPoints[currentPlayer].name}`,
-            showCancelButton: true,
-            confirmButtonText: `OK`,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              replenishRack()
-            } 
-          })
-        
+        setShowPassDevice(playersAndPoints[currentPlayer].level===0)
+        replenishRack()
     }, [moveNumber, currentPlayer])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
@@ -76,6 +69,10 @@ const Game = ({ gameVariables, exitGame }) => {
             return new Set()
         })
         setShowEx(false)
+    }
+
+    const hideModalPassDevice = () => {
+        setShowPassDevice(false)
     }
 
     
@@ -183,6 +180,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
+        <PassDeviceMessageModal show={showPassDevice} onHide = {hideModalPassDevice}/>
         <CheckDictionaryModal show={showDict} onHide={hideModal} />
         <ExchangeTilesModal 
             show={showEx} 
