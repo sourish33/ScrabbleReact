@@ -19,7 +19,6 @@ const Game = ({ gameVariables, exitGame }) => {
     const [bag, setBag] = useState(tilesBag)
     const [showDict, setShowDict] = useState(false)
     const [showEx, setShowEx] = useState(false)
-    const [whoseMove, setWhoseMove] = useState(1)
     const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
