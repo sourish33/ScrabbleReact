@@ -19,7 +19,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const [bag, setBag] = useState(tilesBag)
     const [showDict, setShowDict] = useState(false)
     const [showEx, setShowEx] = useState(false)
-    const [visibleRack, setVisibleRack] = useState("p")
+    // const [visibleRack, setVisibleRack] = useState("p")
     const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
     const [pointsPossible, setPointsPossible] = useState(0)
     const [moveNumber, setMoveNumber] = useState(0)
@@ -39,16 +39,13 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(() => {  
-        replenishRack()
         setCurrentPlayer(x => moveNumber%numPlayers)
-        setVisibleRack(x=>{
-            return playersAndPoints[currentPlayer].rack
-        })
-    }, [moveNumber, currentPlayer, visibleRack])
+        replenishRack()
+    }, [moveNumber, currentPlayer])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
     const clickHandlerExt = (event) => {
-        let clickedTileNo =visibleRack + event.currentTarget.parentNode.parentNode.id[1]
+        let clickedTileNo =playersAndPoints[currentPlayer].rack + event.currentTarget.parentNode.parentNode.id[1]
         
         setSelectedTiles((x) => {
             if (x.has(clickedTileNo)) {
@@ -61,7 +58,7 @@ const Game = ({ gameVariables, exitGame }) => {
         
     }
     const exchange = () => {
-        recallTiles(tiles, visibleRack)
+        recallTiles(tiles, playersAndPoints[currentPlayer].rack)
         setShowEx(true)
     }
     const hideModalEx = () =>{
@@ -115,11 +112,11 @@ const Game = ({ gameVariables, exitGame }) => {
     const shuffleRack = () => {
         // Swal.fire("Shuffling rack")
         console.log("Shuffling Rack")
-        updateTiles(shuffleRackTiles(tiles, visibleRack))
+        updateTiles(shuffleRackTiles(tiles, playersAndPoints[currentPlayer].rack))
 
     }
     const recall = () => {
-        updateTiles(recallTiles(tiles, visibleRack))
+        updateTiles(recallTiles(tiles, playersAndPoints[currentPlayer].rack))
     }
 
 
@@ -161,7 +158,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const replenishRack = () => {
-        let freeSlots = emptyOnRack(tiles, visibleRack)
+        let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
         if (freeSlots.length===0) {return}
         let removeFromBag =[]
         let addToTiles = []
@@ -184,7 +181,7 @@ const Game = ({ gameVariables, exitGame }) => {
         <ExchangeTilesModal 
             show={showEx} 
             onHide={hideModalEx} 
-            whichRack={visibleRack} 
+            whichRack={playersAndPoints[currentPlayer].rack} 
             tiles={tiles} 
             clickHandlerExt={clickHandlerExt}
             handleSubmit={handleExchSubmit}
@@ -194,7 +191,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     <Col sm={12} lg={7} md={12}>
                         <BoardAndRack
                             tiles={tiles}
-                            visibleRack={visibleRack}
+                            visibleRack={playersAndPoints[currentPlayer].rack}
                             updateTiles={updateTiles}
                         ></BoardAndRack>
                     </Col>
