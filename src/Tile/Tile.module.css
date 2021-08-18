@@ -67,11 +67,8 @@
             transform: scale(1.2); 
           } */
           0% { transform: translateX(0%); } 
-          15% { transform: translateX(-25%) rotate(-15deg); } 
-          30% { transform: translateX(20%) rotate(17deg); } 
-          45% { transform: translateX(-15%) rotate(-13deg); } 
-          60% { transform: translateX(10%) rotate(12deg); } 
-          75% { transform: translateX(-5%) rotate(-19deg); } 
+          25% { transform: translateX(+25%) rotate(90deg) scale(1.2); } 
+          75% { transform: translateX(-25%) rotate(-90deg) scale(1.2); } 
           100% { transform: translateX(0%); } 
   }
 
