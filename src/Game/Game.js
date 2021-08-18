@@ -67,7 +67,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     
-    const handleSubmit = () => {
+    const handleExchSubmit = () => {
         if (selectedTiles.size===0){return}
         //get the tiles to return to bag and covert them to the form {pos: p1, letter: J, points: 8} etc
         let toReturn = Array.from(selectedTiles)
@@ -182,24 +182,24 @@ const Game = ({ gameVariables, exitGame }) => {
         updateTiles([...tiles, ...addToTiles])
     }
 
-    const returnToBag = (tilesToReturn) => {
-        // let tilesToReturn = tilesOnRack(tiles, visibleRack)
-        if (tilesToReturn.length===0){
-            return
-        }
-        setTiles(subtractArrays(tiles, tilesToReturn))
+    // const returnToBag = (tilesToReturn) => {
+    //     // let tilesToReturn = tilesOnRack(tiles, visibleRack)
+    //     if (tilesToReturn.length===0){
+    //         return
+    //     }
+    //     setTiles(subtractArrays(tiles, tilesToReturn))
 
-        let srls = Array.from({length: 100}, (x, i) => i+1)
-        let usedSrls = bag.map((el)=>el[0])
-        let unusedSrls = subtractArrays(srls, usedSrls)
+    //     let srls = Array.from({length: 100}, (x, i) => i+1)
+    //     let usedSrls = bag.map((el)=>el[0])
+    //     let unusedSrls = subtractArrays(srls, usedSrls)
 
-        let bagTiles = []
-        for (let i=0;i<tilesToReturn.length;i++) {
-            bagTiles.push([unusedSrls[i], tilesToReturn[i].letter, tilesToReturn[i].points])
-        }
-        // console.log(bagTiles)
-        setBag(x=>[...bag, ...bagTiles])
-    }
+    //     let bagTiles = []
+    //     for (let i=0;i<tilesToReturn.length;i++) {
+    //         bagTiles.push([unusedSrls[i], tilesToReturn[i].letter, tilesToReturn[i].points])
+    //     }
+    //     // console.log(bagTiles)
+    //     setBag(x=>[...bag, ...bagTiles])
+    // }
 
     const updateTiles = (newTiles) => {
         setTiles((x) => newTiles)
@@ -213,7 +213,7 @@ const Game = ({ gameVariables, exitGame }) => {
             whichRack={visibleRack} 
             tiles={tiles} 
             clickHandlerExt={clickHandlerExt}
-            handleSubmit={handleSubmit}
+            handleSubmit={handleExchSubmit}
         />
             <Container>
                 <Row>
