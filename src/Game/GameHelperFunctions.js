@@ -1,4 +1,4 @@
-import { loc, shuffle, subtractArrays } from "../Utils/helpers"
+import { addLeftAll, addRightAll, coords, getConsecutivesNums, getUniques, loc, shuffle, subtractArrays } from "../Utils/helpers"
 
 
 export const contains = (position, tiles) => {
@@ -19,6 +19,18 @@ export const readLetter = (position, tiles) => {
     let slot = tiles.filter((el)=>el.pos===position)[0]
     return slot.letter
   }
+
+export function readWord(letterArr, tiles){
+    let word = []
+    for (let letter of letterArr) {
+        word.push(readLetter(letter,tiles))
+    }
+    return word.join('')
+}
+
+export function readAllWords(wordArr, tiles){
+    return wordArr.map((el)=>readWord(el, tiles))
+}
   
 export const readPoints = (position, tiles)=> {
     if (!(typeof(position) === "string" || Array.isArray(position))) { throw new Error(`${position} not string or array`)}
@@ -124,4 +136,33 @@ export const recallTiles = (tiles, rack) => {
 
     return [...subtractArrays(tiles, unsubmittedTiles), ...returnedTiles]
 
+}
+
+export function getAllWords(tiles) {
+    let tb = tilesOnBoard(tiles)
+    let boardnums = tb.map((el)=>parseInt(el.pos.substring(1)))
+    let xys = boardnums.map((el)=>coords(el))
+    let ys = getUniques(xys.map((el)=>el[0]))
+    let xs = getUniques(xys.map((el)=>el[1]))
+
+    let verwords = []
+    for (let n of xs) {
+        let lettersInThisCol=xys.filter((el)=>el[1]===n)
+        let ysInThisCol = lettersInThisCol.map(el=>el[0])
+        let groups = getConsecutivesNums(ysInThisCol)
+        let words = addRightAll(n, groups)
+        verwords.push(words)
+    }
+    verwords=verwords.flat()
+
+    let horwords = []
+    for (let n of ys) {
+        let lettersInThisRow=xys.filter((el)=>el[0]===n)
+        let xsInThisRow = lettersInThisRow.map(el=>el[1])
+        let groups = getConsecutivesNums(xsInThisRow)
+        let words = addLeftAll(n, groups)
+        horwords.push(words)
+    }
+    horwords = horwords.flat()
+    return [...horwords, ...verwords]
 }

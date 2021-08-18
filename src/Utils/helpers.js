@@ -45,7 +45,7 @@ export function emptySpot(arr, whichRack) {
     return false
 }
 
-export const getConsecutives = (data) => {
+export const getConsecutivesNums = (data) => {
     //returns arrays of consecutive numbers from an array of numbers
     data.sort((x, y) => x - y)
     let groups = []
@@ -60,8 +60,29 @@ export const getConsecutives = (data) => {
             end = i + 1
         }
     }
-    return groups
+    return groups.filter((x)=>x.length>1)
 }
+
+export function addLeft(n, arr) {
+    return arr.map((el)=>[n, el])
+}
+
+export function addLeftAll(n, Arr) {
+    return Arr.map((el)=>addLeft(n, el))
+}
+
+
+export function addRight(n, arr) {
+    return arr.map((el)=>[el, n])
+}
+
+export function addRightAll(n, Arr) {
+    return Arr.map((el)=>addRight(n, el))
+}
+
+
+
+
 
 export function getUniques(arr) {
     //returns unique elements in an array

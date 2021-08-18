@@ -7,7 +7,7 @@ import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { TILE_LIST_ARR, LAST_PLAYED } from "../Utils/DummyData"
 import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
 import { coords, getConsecutives, getUniqueInts, getUniques, makePlayertable, randomUpTo, subtractArrays } from "../Utils/helpers"
-import { emptyOnRack, recallTiles, shuffleRackTiles, tilesOnBoard, tilesOnRack } from "./GameHelperFunctions"
+import { emptyOnRack, getAllWords, readAllWords, recallTiles, shuffleRackTiles, tilesOnBoard, tilesOnRack } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -120,24 +120,21 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        // Swal.fire({
-        //     icon: 'question',
-        //     title: 'Passing',
-        //     text: 'Are you sure about passing?',
-        //   })
-        let tb = tilesOnBoard(tiles)
-        let boardnums = tb.map((el)=>parseInt(el.pos.substring(1)))
-        let xys = boardnums.map((el)=>coords(el))
-        let ys = getUniques(xys.map((el)=>el[0]))
-        let xs = getUniques(xys.map((el)=>el[1]))
-        // let horwords = xys.filter((el)=>el[0]===8)
-        let horwords =[]
-        for (let y of ys) {
-            let rows= xys.filter((el)=>el[0]===y)
-            let xofy = rows.map((el)=>el[1])
-            horwords.push(getConsecutives(xofy))
-        }
-        console.log(horwords.flat())
+        // let tb = tilesOnBoard(tiles)
+        // let boardnums = tb.map((el)=>parseInt(el.pos.substring(1)))
+        // let xys = boardnums.map((el)=>coords(el))
+        // let ys = getUniques(xys.map((el)=>el[0]))
+        // let xs = getUniques(xys.map((el)=>el[1]))
+        // // let horwords = xys.filter((el)=>el[0]===8)
+        // let horwords =[]
+        // for (let y of ys) {
+        //     let rowWords = []
+        //     let rows= xys.filter((el)=>el[0]===y)
+        //     let xofy = rows.map((el)=>el[1])
+        //     horwords.push(getConsecutives(xofy))
+        // }
+        // console.log(horwords.flat())
+        console.log(readAllWords(getAllWords(tiles), tiles))
 
         
     }
