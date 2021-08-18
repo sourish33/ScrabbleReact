@@ -40,8 +40,16 @@ const Game = ({ gameVariables, exitGame }) => {
 
     useEffect(() => {  
         setCurrentPlayer(x => moveNumber%numPlayers)
-        Swal.fire(`Please pass to ${currentPlayer}`)
-        replenishRack()
+        Swal.fire({
+            text: `Please pass to ${currentPlayer}`,
+            showCancelButton: true,
+            confirmButtonText: `OK`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              replenishRack()
+            } 
+          })
+        
     }, [moveNumber, currentPlayer])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
