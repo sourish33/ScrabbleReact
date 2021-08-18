@@ -50,8 +50,8 @@
 
   .submitted {
     animation-name: animate;
-    animation-duration: .3s;
-    animation-iteration-count: 2;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
     animation-direction: alternate;
   }
 
@@ -59,13 +59,20 @@
   
   @keyframes animate
   {     
-          from {
+          /* from {
           transform: scale(1);
           }
 
           to {
             transform: scale(1.2); 
-          }
+          } */
+          0% { transform: translateX(0%); } 
+          15% { transform: translateX(-25%) rotate(-15deg); } 
+          30% { transform: translateX(20%) rotate(17deg); } 
+          45% { transform: translateX(-15%) rotate(-13deg); } 
+          60% { transform: translateX(10%) rotate(12deg); } 
+          75% { transform: translateX(-5%) rotate(-19deg); } 
+          100% { transform: translateX(0%); } 
   }
 
 
