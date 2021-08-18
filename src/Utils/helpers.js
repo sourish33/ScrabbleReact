@@ -127,3 +127,7 @@ export function makePlayertable(players, shouldShuffle) {
     })
     return playerTable
 }
+
+export function whichPlayer(moveNumber, numPlayers){
+    return (moveNumber)%numPlayers
+}
