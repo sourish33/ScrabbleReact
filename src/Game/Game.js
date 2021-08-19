@@ -42,7 +42,10 @@ const Game = ({ gameVariables, exitGame }) => {
 
     useEffect(() => {  
         setCurrentPlayer(x => moveNumber%numPlayers)
-        setShowPassDevice(playersAndPoints[currentPlayer].level===0)
+        setShowPassDevice(x=>{
+            let AIPlayers = playersAndPoints.filter((el)=>el.level>0)
+            let AIPlayersExist = AIPlayers.length>0
+            return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
         replenishRack()
     }, [moveNumber, currentPlayer])
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
@@ -197,6 +200,7 @@ const Game = ({ gameVariables, exitGame }) => {
                             tiles={tiles}
                             visibleRack={playersAndPoints[currentPlayer].rack}
                             updateTiles={updateTiles}
+                            showTiles={!showPassDevice}
                         ></BoardAndRack>
                     </Col>
                     <Col sm={12} lg={2} md={12}>

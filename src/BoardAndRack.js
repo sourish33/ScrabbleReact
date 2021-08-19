@@ -10,7 +10,7 @@ import {
 } from "./Utils/dragndropHelpers"
 import Rack from "./Rack/Rack"
 
-const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
+const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     
 
     let startingloc = ""
@@ -111,6 +111,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
+                showTiles={showTiles}
             />
         </div>
     )

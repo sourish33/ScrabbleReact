@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal"
 import ModalBody from "react-bootstrap/ModalBody"
 import ModalHeader from "react-bootstrap/ModalHeader"
-// import ModalFooter from "react-bootstrap/ModalFooter"
+import ModalFooter from "react-bootstrap/ModalFooter"
 // import ModalTitle from "react-bootstrap/ModalTitle"
 import { useState } from "react"
 import { Button } from "react-bootstrap"
@@ -15,14 +15,14 @@ const ExchangeTilesModal = ({ show, onHide, whichRack, tiles, clickHandlerExt, h
 
     return (
         <Modal show={show} onHide={onHide}>
-            <Modal.Header>
+            <ModalHeader>
                 <Modal.Title> Select tiles to exchange </Modal.Title>
                 <span className={styles.close} onClick={onHide}>
                     &times;
                 </span>
-            </Modal.Header>
+            </ModalHeader>
 
-            <Modal.Body>
+            <ModalBody>
                 <div>
                     <RackEx
                         whichRack={whichRack}
@@ -30,8 +30,8 @@ const ExchangeTilesModal = ({ show, onHide, whichRack, tiles, clickHandlerExt, h
                         clickHandlerExt={clickHandlerExt}
                     ></RackEx>
                 </div>
-            </Modal.Body>
-            <Modal.Footer>
+            </ModalBody>
+            <ModalFooter>
                 <Button
                     variant="primary"
                     size="lg"
@@ -40,7 +40,7 @@ const ExchangeTilesModal = ({ show, onHide, whichRack, tiles, clickHandlerExt, h
                 >
                     Submit
                 </Button>
-            </Modal.Footer>
+            </ModalFooter>
         </Modal>
     )
 }

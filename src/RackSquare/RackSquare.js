@@ -1,12 +1,13 @@
 import React from "react"
 import styles from "./RackSquare.module.css"
 
-const RackSquare = ({children}) => {
+const RackSquare = ({children, showTiles}) => {
+
 
     return (
-        <div className={styles.racksquare}>
+        showTiles? <div className={styles.racksquare}>
             {children}
-        </div>
+        </div>: null
     )
 
 }

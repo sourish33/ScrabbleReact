@@ -19,7 +19,7 @@ const PassDeviceMessageModal = ({show, onHide}) =>{
             Please pass to Ram
         </ModalBody>
         <ModalFooter>
-            <button onClick={onHide}>Cancel</button>
+            <Button onClick={onHide}>OK</Button>
         </ModalFooter>
     </Modal>
     )
