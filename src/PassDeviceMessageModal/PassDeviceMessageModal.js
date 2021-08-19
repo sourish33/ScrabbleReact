@@ -7,7 +7,7 @@ import styles from './PassDevice.module.css'
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 
-const PassDeviceMessageModal = ({show, onHide}) =>{
+const PassDeviceMessageModal = ({show, onHide, name}) =>{
 
 
     return (
@@ -16,7 +16,7 @@ const PassDeviceMessageModal = ({show, onHide}) =>{
             Quite a wordsmith there!
         </ModalHeader>
         <ModalBody>
-            Please pass to Ram
+            Please pass to {name}
         </ModalBody>
         <ModalFooter>
             <Button onClick={onHide}>OK</Button>

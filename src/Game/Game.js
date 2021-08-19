@@ -36,15 +36,15 @@ const Game = ({ gameVariables, exitGame }) => {
     const maxPoints = parseInt(gameVariables.gameType)
     const playerTable = makePlayertable(players, shufflePlayers)
     const numPlayers = playerTable.length
+    const AIPlayersExist = playerTable.filter((el)=>el.level>0).length>0
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
     const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[currentPlayer].level===0)
+    
 
 
     useEffect(() => {  
         setCurrentPlayer(x => moveNumber%numPlayers)
         setShowPassDevice(x=>{
-            let AIPlayers = playersAndPoints.filter((el)=>el.level>0)
-            let AIPlayersExist = AIPlayers.length>0
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
         replenishRack()
     }, [moveNumber, currentPlayer])
@@ -183,7 +183,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
-        <PassDeviceMessageModal show={showPassDevice} onHide = {hideModalPassDevice}/>
+        <PassDeviceMessageModal show={showPassDevice} onHide = {hideModalPassDevice} name ={playersAndPoints[currentPlayer].name}/>
         <CheckDictionaryModal show={showDict} onHide={hideModal} />
         <ExchangeTilesModal 
             show={showEx} 
