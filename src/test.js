@@ -364,8 +364,31 @@ function getAllNewWords (tiles) {
   let tpnsLoc = tpns.map((el=>el.pos))
   let allWords = getAllWords(tiles)
   let allwordsLoc= coordsTolocWordArr(allWords)
-  return allwordsLoc.filter((el)=>anyCommonElements(el, tpnsLoc))
+  let newWords = allwordsLoc.filter((el)=>anyCommonElements(el, tpnsLoc))
+  return newWords
 }
+ function featuredNewWord (newWords, tiles) {
+   if (newWords.length===0) {
+     throw new Error ("featuredNewWord called with empty array of words")
+   } 
+   if (newWords.length===1) {
+    return newWords[0]  
+  } 
+  let tpns= tilesPlayedNotSubmitted(tiles)
+  let tpnsLoc = tpns.map((el=>el.pos))
+  newWords.sort((x,y)=>{
+    return intersection(x,tpnsLoc).length- intersection(y,tpnsLoc).length
+  })
+  return newWords[0]
+ }
+
 
 console.log(readAllWords(getAllNewWords(tiles), tiles))
 
+let u = getAllNewWords(tiles)
+let tpns= tilesPlayedNotSubmitted(tiles)
+let tpnsLoc = tpns.map((el=>el.pos))
+u.sort((x,y)=>{
+  return x.length-intersection(x,tpnsLoc).length- (y.length-intersection(y,tpnsLoc).length)
+})
+console.log(featuredNewWord(u,tiles))
