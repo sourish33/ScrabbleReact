@@ -11,15 +11,17 @@ import { Button } from "react-bootstrap"
 
 const PassDeviceMessageModal = ({show, onHide, name, greeting}) =>{
 
+    const theGreeting = <h2 >{greeting}</h2>
+
     return (
     <Modal show={show} onHide={onHide} >
-        <Modal.Header>
+        <Modal.Header className={styles.centerTop}>
             <Modal.Title>
-            {greeting}
+            {theGreeting}
             </Modal.Title>
         </Modal.Header>
         <ModalBody>
-            Please pass to {name}
+            <h4 className={styles.centerMid} >Please pass to {name}</h4>
         </ModalBody>
         <ModalFooter>
             <Button variant="primary" size="lg" type= "button" onClick={onHide} className={styles.buttonstyle}>OK</Button>

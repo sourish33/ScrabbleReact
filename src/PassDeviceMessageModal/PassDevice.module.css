@@ -3,3 +3,11 @@
     margin-right: auto;
     width:50%;
   }
+
+.centerTop {
+    justify-content: center;
+}
+
+.centerMid {
+    text-align: center;
+}
