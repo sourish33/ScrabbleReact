@@ -41,10 +41,12 @@ const Game = ({ gameVariables, exitGame }) => {
     const AIPlayersExist = playerTable.filter((el)=>el.level>0).length>0
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
     const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[currentPlayer].level===0)
+    const [greeting, setGreeting] = useState("")
     
 
 
     useEffect(() => {  
+        moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length)])
         setCurrentPlayer(x => moveNumber%numPlayers)
         setShowPassDevice(x=>{
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
@@ -189,7 +191,7 @@ const Game = ({ gameVariables, exitGame }) => {
         show={showPassDevice} 
         onHide = {hideModalPassDevice} 
         name ={playersAndPoints[currentPlayer].name}
-        greeting ={passGreetings[randomUpTo(passGreetings.length)]}/>
+        greeting ={greeting}/>
         <CheckDictionaryModal show={showDict} onHide={hideModal} />
         <ExchangeTilesModal 
             show={showEx} 
