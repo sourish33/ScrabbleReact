@@ -11,6 +11,8 @@ import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
 import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageModal"
+import { randomUpTo } from "../Utils/helpers"
+import { passGreetings } from "../Utils/DummyData"
 // import styles from '../Tile/Tile.module.css'
 
 
@@ -183,7 +185,11 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
-        <PassDeviceMessageModal show={showPassDevice} onHide = {hideModalPassDevice} name ={playersAndPoints[currentPlayer].name}/>
+        <PassDeviceMessageModal 
+        show={showPassDevice} 
+        onHide = {hideModalPassDevice} 
+        name ={playersAndPoints[currentPlayer].name}
+        greeting ={passGreetings[randomUpTo(passGreetings.length)]}/>
         <CheckDictionaryModal show={showDict} onHide={hideModal} />
         <ExchangeTilesModal 
             show={showEx} 

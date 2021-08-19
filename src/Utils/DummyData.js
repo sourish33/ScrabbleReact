@@ -34,3 +34,19 @@ export const LAST_PLAYED = [
     { player: "Ram", word: "LIT", points: 6 },
     { player: "Sita", word: "TO", points: 2 },
 ]
+
+export const passGreetings = [
+    "Nice!",
+    "Finally!",
+    "Good Job!",
+    "INCREDIBLE!",
+    "Noice",
+    "Wowza!",
+    "Woot Woot!",
+    "That's LITERALLY awesome!",
+    "Groovy!",
+    "Righteous!",
+    "Copacetic!",
+    "Nifty!",
+    "Quite a wordsmith there!",
+]

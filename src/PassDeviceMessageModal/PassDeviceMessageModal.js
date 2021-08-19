@@ -7,19 +7,25 @@ import styles from './PassDevice.module.css'
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 
-const PassDeviceMessageModal = ({show, onHide, name}) =>{
+
+
+
+const PassDeviceMessageModal = ({show, onHide, name, greeting}) =>{
+
 
 
     return (
-    <Modal show={show} onHide={onHide}>
-        <ModalHeader>
-            Quite a wordsmith there!
-        </ModalHeader>
+    <Modal show={show} onHide={onHide} >
+        <Modal.Header>
+            <Modal.Title>
+            {greeting}
+            </Modal.Title>
+        </Modal.Header>
         <ModalBody>
             Please pass to {name}
         </ModalBody>
         <ModalFooter>
-            <Button onClick={onHide}>OK</Button>
+            <Button variant="primary" size="lg" type= "button" onClick={onHide} className={styles.buttonstyle}>OK</Button>
         </ModalFooter>
     </Modal>
     )
