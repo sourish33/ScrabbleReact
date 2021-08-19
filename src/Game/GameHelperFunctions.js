@@ -1,4 +1,4 @@
-import { addLeftAll, addRightAll, coords, getConsecutivesNums, getUniques, loc, shuffle, subtractArrays } from "../Utils/helpers"
+import { addLeftAll, addRightAll, anyCommonElements, coords, coordsTolocWordArr, getConsecutivesNums, getUniques, loc, shuffle, subtractArrays } from "../Utils/helpers"
 
 
 export const contains = (position, tiles) => {
@@ -166,3 +166,12 @@ export function getAllWords(tiles) {
     horwords = horwords.flat()
     return [...horwords, ...verwords]
 }
+
+
+export function getAllNewWords(tiles) {
+    let tpns= tilesPlayedNotSubmitted(tiles)
+    let tpnsLoc = tpns.map((el=>el.pos))
+    let allWords = getAllWords(tiles)
+    let allwordsLoc= coordsTolocWordArr(allWords)
+    return allwordsLoc.filter((el)=>anyCommonElements(el, tpnsLoc))
+  }

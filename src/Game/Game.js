@@ -6,7 +6,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
 import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { emptyOnRack, getAllWords, readAllWords, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
+import { emptyOnRack, getAllNewWords, getAllWords, readAllWords, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -38,7 +38,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const maxPoints = parseInt(gameVariables.gameType)
     const playerTable = makePlayertable(players, shufflePlayers)
     const numPlayers = playerTable.length
-    const AIPlayersExist = playerTable.filter((el)=>el.level>0).length>0
+    const AIPlayersExist = playerTable.filter((el)=>el.level>0).length>0//whether AI players exist
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
     const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[currentPlayer].level===0)
     const [greeting, setGreeting] = useState("")
@@ -46,7 +46,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(() => {  
-        moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length)])
+        moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
         setCurrentPlayer(x => moveNumber%numPlayers)
         setShowPassDevice(x=>{
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
@@ -136,7 +136,8 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        console.log(readAllWords(getAllWords(tiles), tiles))  
+        console.log(tiles)
+        console.log(readAllWords(getAllNewWords(tiles), tiles))  
     }
 
     const lookup = () => {
