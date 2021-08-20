@@ -392,3 +392,14 @@ u.sort((x,y)=>{
   return x.length-intersection(x,tpnsLoc).length- (y.length-intersection(y,tpnsLoc).length)
 })
 console.log(featuredNewWord(u,tiles))
+
+u = [1,2,3,4,5,6,7]
+
+function shorten(arr) {
+    arr = arr.slice(0,3)
+    return arr
+}
+
+console.log(shorten(u))
+
+console.log(u)

@@ -44,6 +44,9 @@ const TilesAndPoints = ({ tilesLeft, maxPoints }) => {
 }
 
 const LastPlayed = ({ lastPlayed }) => {
+    if (lastPlayed.length >10) {
+        lastPlayed = lastPlayed.slice(0,10)
+    }
     return (
         lastPlayed.length===0 ? null :
         <div className={styles.lastPlayed}>
