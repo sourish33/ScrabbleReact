@@ -1,26 +1,12 @@
-import { getAllWords, readAllWords, readWord, tilesPlayedNotSubmitted, readLetter, readPoints, tilesOnBoard  } from "./Game/GameHelperFunctions";
-import { loc } from "./Utils/helpers";
+import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, } from "./Game/GameHelperFunctions";
+import { anyCommonElements, intersection, formcheck, loc, coordsTolocWordArr} from "./Utils/helpers";
+
+import {TWs, DWs, TLs, DLs, S} from './Board/BoardMarkings.js'
 
 
 
 
-function coordsTolocWord(word) {
-  //converts an array of tiles in form (1,2) to  form "b112"
-    return word.map((el)=>{return "b"+loc(el[0], el[1])})
-}
 
-function coordsTolocWordArr(wordArr) {
-  //applies coordsTolocWord to each word in the array
-    return wordArr.map((el)=>{return coordsTolocWord(el)})
-}
-
-function intersection (array1, array2){
-  return  array1.filter(value => array2.includes(value))
-}
-
-function anyCommonElements (array1, array2){
-  return intersection(array1,array2).length>0 ? true :false
-}
 
 // import { coords, getUniques, loc,  } from "./Utils/helpers";
 
@@ -359,47 +345,24 @@ let tiles1 = [
 // console.log(readAllWords(getAllWords(tiles), tiles))
 // console.log(readAllWords(allwordsLoc, tiles))
 
-function getAllNewWords (tiles) {
-  let tpns= tilesPlayedNotSubmitted(tiles)
-  let tpnsLoc = tpns.map((el=>el.pos))
-  let allWords = getAllWords(tiles)
-  let allwordsLoc= coordsTolocWordArr(allWords)
-  let newWords = allwordsLoc.filter((el)=>anyCommonElements(el, tpnsLoc))
-  return newWords
-}
- function featuredNewWord (newWords, tiles) {
-   if (newWords.length===0) {
-     throw new Error ("featuredNewWord called with empty array of words")
-   } 
-   if (newWords.length===1) {
-    return newWords[0]  
-  } 
-  let tpns= tilesPlayedNotSubmitted(tiles)
-  let tpnsLoc = tpns.map((el=>el.pos))
-  newWords.sort((x,y)=>{
-    return intersection(x,tpnsLoc).length- intersection(y,tpnsLoc).length
-  })
-  return newWords[0]
- }
+
+// function anyCommonElements(array1, array2) {
+//     return intersection(array1, array2).length > 0 ? true : false;
+// }
 
 
-console.log(readAllWords(getAllNewWords(tiles), tiles))
+let allWords = getAllWords(tiles)
+coordsTolocWordArr(allWords)
 
 let u = getAllNewWords(tiles)
-let tpns= tilesPlayedNotSubmitted(tiles)
-let tpnsLoc = tpns.map((el=>el.pos))
-u.sort((x,y)=>{
-  return x.length-intersection(x,tpnsLoc).length- (y.length-intersection(y,tpnsLoc).length)
-})
-console.log(featuredNewWord(u,tiles))
-
-u = [1,2,3,4,5,6,7]
-
-function shorten(arr) {
-    arr = arr.slice(0,3)
-    return arr
-}
-
-console.log(shorten(u))
-
 console.log(u)
+
+console.log(DWs)
+
+let dws = DWs
+
+DWs = DWs.filter((el)=>el!==16)
+
+console.log(dws)
+
+

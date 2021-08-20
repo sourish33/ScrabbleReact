@@ -1,0 +1,5 @@
+{
+    "prettier.jsxBracketSameLine": true,
+    "prettier.semi": false,
+    "prettier.tabWidth": 4
+}
