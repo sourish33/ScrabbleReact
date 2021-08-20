@@ -6,7 +6,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
 import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { emptyOnRack, featuredNewWord, getAllNewWords, getAllWords, readAllWords, readWord, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
+import { emptyOnRack, getAllNewWords, getAllWords, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -24,7 +24,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const [showEx, setShowEx] = useState(false)
     
 
-    const [lastPlayed, setLastPlayed] = useState(LAST_PLAYED)
+    const [lastPlayed, setLastPlayed] = useState([])
     const [pointsPossible, setPointsPossible] = useState(0)
     const [moveNumber, setMoveNumber] = useState(0)
     const [currentPlayer, setCurrentPlayer] = useState(0)
@@ -119,7 +119,6 @@ const Game = ({ gameVariables, exitGame }) => {
         //update the states
         setBag(x=>subtractArrays(addToBag, removeFromBag))
         updateTiles([...tilesRemoved, ...addToTiles])
-        
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
@@ -139,7 +138,7 @@ const Game = ({ gameVariables, exitGame }) => {
         // console.log(tiles)
         let newWords = getAllNewWords(tiles)
         console.log(readAllWords(newWords, tiles)) 
-        console.log(readWord(featuredNewWord(newWords), tiles)) 
+        console.log(readWord(longestNewWord(newWords), tiles)) 
     }
 
     const lookup = () => {
@@ -153,6 +152,8 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const play = () => {
 
+        let newWords = getAllNewWords(tiles)
+        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: 8 },...lastPlayed])
         //Change the subitted field to true
         let tilesPlayedNotSubmitted = tiles.filter((el)=>{
             return el.pos[0]==="b" && !el.submitted
@@ -166,8 +167,6 @@ const Game = ({ gameVariables, exitGame }) => {
         setMoveNumber(x=>x+1)
         
         updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
-        //switch the setVisibleRack
-        
     }
 
     const replenishRack = () => {

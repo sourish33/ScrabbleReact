@@ -194,9 +194,9 @@ export function getAllNewWords(tiles) {
     return allwordsLoc.filter((el) => anyCommonElements(el, tpnsLoc));
 }
 
-export function featuredNewWord(newWords) {
+export function longestNewWord(newWords) {
     if (newWords.length === 0) {
-        throw new Error("featuredNewWord called with empty array of words");
+        throw new Error("longestNewWord called with empty array of words");
     }
     if (newWords.length === 1) {
         return newWords[0];
