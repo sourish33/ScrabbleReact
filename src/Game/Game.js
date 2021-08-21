@@ -6,7 +6,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
 import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { emptyOnRack, getAllNewWords, getAllWords, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
+import { emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -135,10 +135,9 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        // console.log(tiles)
-        let newWords = getAllNewWords(tiles)
-        console.log(readAllWords(newWords, tiles)) 
-        console.log(readWord(longestNewWord(newWords), tiles)) 
+        console.log(tiles)
+        console.log(legalPositions(tiles))
+
     }
 
     const lookup = () => {

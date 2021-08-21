@@ -45,6 +45,37 @@ export function emptySpot(arr, whichRack) {
     return false
 }
 
+
+export function multiplyArrays(arr1, arr2) {
+    //dot product
+    if (arr1.length !== arr2.length) {
+        console.log("cant multiply arrays of different sizes")
+        return null
+    }
+    var result = 0
+    for (var i = 0; i < arr1.length; i++) {
+        result += arr1[i] * arr2[i]
+    }
+    return result
+}
+
+export function multiplyScalar(a, b) {
+    //multiply a scalar with each element of an array
+    let num, arr
+    if (Array.isArray(a)) {
+        arr = a
+        num = b
+    } else {
+        arr = b
+        num = a
+    }
+    let result = []
+    for (let i = 0; i < arr.length; i++) {
+        result.push(arr[i] * num)
+    }
+    return result
+}
+
 export const getConsecutivesNums = (data) => {
     //returns arrays of consecutive numbers from an array of numbers
     data.sort((x, y) => x - y)
@@ -141,4 +172,25 @@ export function intersection(array1, array2) {
 
 export function anyCommonElements(array1, array2) {
     return intersection(array1, array2).length > 0 ? true : false
+}
+
+export function neighbors(pos){
+    let n = parseInt(pos.substring(1))
+    if (n<0 || n>224) {
+      throw new Error (`${pos} invalid input for neighbors`)
+    }
+    let bors = []
+    if (n-1>=0){
+      bors.push("b"+(n-1).toString())
+    }
+    if (n-15>=0){
+      bors.push("b"+(n-15).toString())
+    }
+    if (n+1<=224){
+      bors.push("b"+(n+1).toString())
+    }
+    if (n+15<=224){
+      bors.push("b"+(n+15).toString())
+    }
+    return bors
 }

@@ -6,8 +6,8 @@ import {
     coordsTolocWordArr,
     getConsecutivesNums,
     getUniques,
-    intersection,
     loc,
+    neighbors,
     shuffle,
     subtractArrays,
 } from "../Utils/helpers"
@@ -90,6 +90,13 @@ export const tilesPlayedNotSubmitted = (tiles) => {
     })
     return tilesPlayedNotSubmitted
 }
+
+export const tilesSubmitted = (tiles) => {
+    let tilesSubmitted = tiles.filter((el) => {
+        return el.pos[0] === "b" && el.submitted
+    })
+    return tilesSubmitted
+  }
 
 export const emptyOnRack = (tiles, rack) => {
     let rackTiles = tilesOnRack(tiles, rack)
@@ -206,3 +213,17 @@ export function longestNewWord(newWords) {
     })
     return newWords[0]
 }
+
+export function legalPositions(tiles) {
+    let ts = tilesSubmitted(tiles).map((el)=>el.pos)
+    if (ts.length ===0) {
+      return ['b112']
+    }
+    
+    let allNeighbors = []
+    for (let pos of ts) {
+      allNeighbors = [...allNeighbors, ...neighbors(pos)]
+    }
+    
+    return getUniques(subtractArrays(allNeighbors, ts))
+  }
