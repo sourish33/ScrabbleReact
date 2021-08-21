@@ -6,7 +6,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
 import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, tile } from "./GameHelperFunctions"
+import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, tile, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -150,10 +150,11 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
-        let tilesPlayedNotSubmitted = tiles.filter((el)=>{
-            return el.pos[0]==="b" && !el.submitted
-        })
-        if (tilesPlayedNotSubmitted.length===0){return}
+        // let tilesPlayedNotSubmitted = tiles.filter((el)=>{
+        //     return el.pos[0]==="b" && !el.submitted
+        // })
+        let tpns = tilesPlayedNotSubmitted(tiles)
+        if (tpns.length===0){return}
         let newWords = getAllNewWords(tiles)
         if (!checkLegalPlacement(newWords, tiles)){
             Swal.fire("Illegal tile placement")
@@ -163,14 +164,14 @@ const Game = ({ gameVariables, exitGame }) => {
         //Change the subitted field to true
 
         let tilesNowSubmitted = []
-        for (let tile of tilesPlayedNotSubmitted){
+        for (let tile of tpns){
             tile.submitted = true
             tilesNowSubmitted.push(tile)
         }
 
         setMoveNumber(x=>x+1)
         
-        updateTiles([...subtractArrays(tiles,tilesPlayedNotSubmitted), ...tilesNowSubmitted])
+        updateTiles([...subtractArrays(tiles,tpns), ...tilesNowSubmitted])
     }
 
     const replenishRack = () => {
