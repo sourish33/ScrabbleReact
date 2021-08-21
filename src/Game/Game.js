@@ -164,7 +164,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         let newWords = getAllNewWords(tiles)
-        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: 8 },...lastPlayed])
+        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: playersAndPoints[currentPlayer].points+=pointsPossible },...lastPlayed])
         //Change the subitted field to true
 
         let tilesNowSubmitted = []
