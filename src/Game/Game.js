@@ -52,6 +52,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
         replenishRack()
     }, [moveNumber, currentPlayer])
+
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
     const clickHandlerExt = (event) => {
@@ -152,10 +153,11 @@ const Game = ({ gameVariables, exitGame }) => {
     const play = () => {
         let tpns = tilesPlayedNotSubmitted(tiles)
         if (tpns.length===0){return}
-        let newWords = getAllNewWords(tiles)
-        if (!checkLegalPlacement(newWords, tiles, dictChecking)){
+        
+        if (!checkLegalPlacement(tiles, dictChecking)){
             return
         }
+        let newWords = getAllNewWords(tiles)
         setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: 8 },...lastPlayed])
         //Change the subitted field to true
 

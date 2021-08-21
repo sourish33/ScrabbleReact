@@ -298,7 +298,8 @@ export function dictCheckWords(tiles){
     return badWords
   }
 
-export function checkLegalPlacement(newWords, tiles, dictChecking) {
+export function checkLegalPlacement(tiles, dictChecking) {
+    let newWords = getAllNewWords(tiles)
     if (!gapWords(tiles)) {
         Swal.fire({
             icon: 'error',
