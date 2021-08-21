@@ -1,3 +1,5 @@
+import Swal from "sweetalert2"
+import { checkDict } from "../Utils/Dictionary/dictionary"
 import {
     addLeftAll,
     addRightAll,
@@ -290,9 +292,20 @@ export function gapWords(tiles) {
     return true
 }
 
-export function checkLegalPlacement(newWords, tiles) {
+export function dictCheckWords(tiles){
+    let wordlist = readAllWords(getAllNewWords(tiles), tiles)
+    let badWords=wordlist.filter((el)=>!checkDict(el))
+    return badWords
+  }
+
+export function checkLegalPlacement(newWords, tiles, dictChecking) {
     if (!gapWords(tiles)) {
-        // console.log("gapwords failed")
+        Swal.fire({
+            icon: 'error',
+            title: 'Tile Placement Illegal',
+            text: 'All new tiles should be contiguous and in the same row or column ',
+            footer: '<a href="https://scrabble.hasbro.com/en-us/rules">Scrabble Rules</a>'
+          })
         return false
     }
     if (newWords.length === 0) {
@@ -301,7 +314,20 @@ export function checkLegalPlacement(newWords, tiles) {
     }
     for (let word of newWords) {
         if (!containsOneLegalPosition(word, tiles)) {
-            // console.log("one legal position")
+            Swal.fire({
+                icon: 'error',
+                title: 'Tile Placement Illegal',
+                text: 'All new tiles should be contiguous and in the same row or column ',
+                footer: '<a href="https://scrabble.hasbro.com/en-us/rules">Scrabble Rules</a>'
+              })
+            return false
+        }
+    }
+
+    if (dictChecking) {
+        let badWords = dictCheckWords(tiles)
+        if (badWords.length!==0) {
+            Swal.fire(`${dictCheckWords(tiles).join(", ")} not valid`)
             return false
         }
     }

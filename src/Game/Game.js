@@ -153,13 +153,7 @@ const Game = ({ gameVariables, exitGame }) => {
         let tpns = tilesPlayedNotSubmitted(tiles)
         if (tpns.length===0){return}
         let newWords = getAllNewWords(tiles)
-        if (!checkLegalPlacement(newWords, tiles)){
-            Swal.fire({
-                icon: 'error',
-                title: 'Tile Placement Illegal',
-                text: 'All new tiles should be contiguous and in the same row or column ',
-                footer: '<a href="https://scrabble.hasbro.com/en-us/rules">Scrabble Rules</a>'
-              })
+        if (!checkLegalPlacement(newWords, tiles, dictChecking)){
             return
         }
         setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: 8 },...lastPlayed])

@@ -1,10 +1,11 @@
 import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, tilesSubmitted, legalPositions, contains, } from "./Game/GameHelperFunctions";
 import { anyCommonElements, intersection, formcheck, loc, 
   coordsTolocWordArr, arrayToMap, multiplyArrays, coords, 
-  subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous
+  subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous, range
 } from "./Utils/helpers";
 
 import {TWs, DWs, TLs, DLs, S} from './Board/BoardMarkings.js'
+import { checkDict } from "./Utils/Dictionary/dictionary";
 
 
 
@@ -28,7 +29,7 @@ let tiles =[
   },
   {
     "pos": "b114",
-    "letter": "T",
+    "letter": "X",
     "points": 1,
     "submitted": true
   },
@@ -261,6 +262,17 @@ export function gapWords(tiles){
 
 
 console.log(gapWords(tiles))
+
+let u = getAllNewWords(tiles)
+console.log(readAllWords(u, tiles))
+
+function dictCheckWords(tiles){
+  let wordlist = readAllWords(getAllNewWords(tiles), tiles)
+  let badWords=wordlist.filter((el)=>!checkDict(el))
+  return badWords
+}
+
+console.log(dictCheckWords(tiles).join(", ") +" not valid")
 
 
 
