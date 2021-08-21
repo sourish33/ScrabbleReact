@@ -257,64 +257,51 @@ export function singleRowOrColAndContiguous(word) {
     return true
 }
 
-export function gapWords(tiles){
+export function gapWords(tiles) {
     let tpns = tilesPlayedNotSubmitted(tiles)
     let boardnums = tpns.map((el) => parseInt(el.pos.substring(1)))
     let xys = boardnums.map((el) => coords(el))
-    console.log(xys)
     let ys = getUniques(xys.map((el) => el[0])).sort()
     let xs = getUniques(xys.map((el) => el[1])).sort()
-    console.log(xs)
-  
-    if (xs.length>1 && ys.length>1) {
-        console.log(`xs.length = ${xs.length}, ys.length= ${ys.length}`)
-      return false
+
+    if (xs.length > 1 && ys.length > 1) {
+        return false
     }
-    if (xs.length===1) {
-        let yrange = range(Math.min(...ys), Math.max(...ys)+1)
-        console.log(yrange)
-        for (let y of yrange){
-          let posn = "b"+loc(y, xs[0]).toString()
-          if (!contains(posn, tiles)){ 
-              console.log(`${posn} or (${y}, ${xs[0]} ) not found`)
-              return false
+    if (xs.length === 1) {
+        let yrange = range(Math.min(...ys), Math.max(...ys) + 1)
+        for (let y of yrange) {
+            let posn = "b" + loc(y, xs[0]).toString()
+            if (!contains(posn, tiles)) {
+                return false
             }
         }
-  
-      }
-    
-    if (ys.length===1) {
-      let xrange = range(Math.min(...xs), Math.max(...xs))
-      console.log(xrange)
-      for (let x of xrange){
-        let posn = "b"+loc(ys[0],x).toString()
-        if (!contains(posn, tiles)){ 
-            console.log(`${posn} or (${ys[0]}, ${x} ) not found`)
-            return false}
-      }
-  
-      }
-    
+    }
+
+    if (ys.length === 1) {
+        let xrange = range(Math.min(...xs), Math.max(...xs))
+        for (let x of xrange) {
+            let posn = "b" + loc(ys[0], x).toString()
+            if (!contains(posn, tiles)) {
+                return false
+            }
+        }
+    }
+
     return true
-  }
-  
+}
 
 export function checkLegalPlacement(newWords, tiles) {
-    if (!gapWords(tiles)){
-        console.log("gapwords failed")
+    if (!gapWords(tiles)) {
+        // console.log("gapwords failed")
         return false
     }
     if (newWords.length === 0) {
-        console.log("new words length 0")
+        // console.log("new words length 0")
         return false
     }
     for (let word of newWords) {
         if (!containsOneLegalPosition(word, tiles)) {
-            console.log("one legal position")
-            return false
-        }
-        if (!singleRowOrColAndContiguous(word)) {
-            console.log("singleRowOrColAndContiguous")
+            // console.log("one legal position")
             return false
         }
     }
