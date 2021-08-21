@@ -298,15 +298,17 @@ export function dictCheckWords(tiles){
     return badWords
   }
 
-export function checkLegalPlacement(tiles, dictChecking) {
+export function checkLegalPlacement(tiles, dictChecking, verbose=false) {
     let newWords = getAllNewWords(tiles)
     if (!gapWords(tiles)) {
+        if (verbose) {
         Swal.fire({
             icon: 'error',
             title: 'Tile Placement Illegal',
             text: 'All new tiles should be contiguous and in the same row or column ',
             footer: '<a href="https://scrabble.hasbro.com/en-us/rules">Scrabble Rules</a>'
           })
+        }
         return false
     }
     if (newWords.length === 0) {
@@ -315,12 +317,14 @@ export function checkLegalPlacement(tiles, dictChecking) {
     }
     for (let word of newWords) {
         if (!containsOneLegalPosition(word, tiles)) {
+            if (verbose) {
             Swal.fire({
                 icon: 'error',
                 title: 'Tile Placement Illegal',
                 text: 'All new tiles should be contiguous and in the same row or column ',
                 footer: '<a href="https://scrabble.hasbro.com/en-us/rules">Scrabble Rules</a>'
               })
+            }
             return false
         }
     }

@@ -53,6 +53,12 @@ const Game = ({ gameVariables, exitGame }) => {
         replenishRack()
     }, [moveNumber, currentPlayer])
 
+
+    useEffect(()=>{
+        checkLegalPlacement(tiles, false) ? setPointsPossible(x=>14) : setPointsPossible(x=>0)
+
+    }, [tiles])
+
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
     const clickHandlerExt = (event) => {
@@ -154,7 +160,7 @@ const Game = ({ gameVariables, exitGame }) => {
         let tpns = tilesPlayedNotSubmitted(tiles)
         if (tpns.length===0){return}
         
-        if (!checkLegalPlacement(tiles, dictChecking)){
+        if (!checkLegalPlacement(tiles, dictChecking, true)){
             return
         }
         let newWords = getAllNewWords(tiles)
