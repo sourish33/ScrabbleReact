@@ -126,6 +126,7 @@ const Game = ({ gameVariables, exitGame }) => {
         //update the states
         setBag(x=>subtractArrays(addToBag, removeFromBag))
         updateTiles([...tilesRemoved, ...addToTiles])
+        setMoveNumber(x=>x+1)
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
