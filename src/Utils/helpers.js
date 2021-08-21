@@ -14,6 +14,9 @@ export function getUniqueInts(n, N = 225) {
     return shuffle(arr).slice(0, n)
 }
 
+export const range = (start, stop, step = 1) =>
+  Array(Math.ceil((stop - start) / step)).fill(start).map((x, y) => x + y * step)
+
 export function shuffle(arr) {
     //takes an array and returns a shuffled version
     let L = arr.length - 1
@@ -76,6 +79,19 @@ export function multiplyScalar(a, b) {
     return result
 }
 
+export function isContiguous(arr){
+    if (arr.length===1){ return true}
+    arr.sort((x,y)=>x-y)
+    for (let i = 0; i < arr.length - 1; i++) {
+      let u = arr[i]
+      let v = arr[i + 1]
+      if (v !== u + 1) {
+          return false
+      }
+    }
+    return true
+  }
+
 export const getConsecutivesNums = (data) => {
     //returns arrays of consecutive numbers from an array of numbers
     data.sort((x, y) => x - y)
@@ -116,6 +132,8 @@ export function getUniques(arr) {
 }
 
 export const loc = (down, across) => {
+    down=parseInt(down)
+    across=parseInt(across)
     //gives the number of a square on the board when given the down and across coordinates from the top left corner (1,1)
     return 15 * (down - 1) + across - 1
 }

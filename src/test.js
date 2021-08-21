@@ -1,5 +1,8 @@
-import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, tilesSubmitted, } from "./Game/GameHelperFunctions";
-import { anyCommonElements, intersection, formcheck, loc, coordsTolocWordArr, arrayToMap, multiplyArrays, coords, subtractArrays, getUniques} from "./Utils/helpers";
+import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, tilesSubmitted, legalPositions, contains, } from "./Game/GameHelperFunctions";
+import { anyCommonElements, intersection, formcheck, loc, 
+  coordsTolocWordArr, arrayToMap, multiplyArrays, coords, 
+  subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous
+} from "./Utils/helpers";
 
 import {TWs, DWs, TLs, DLs, S} from './Board/BoardMarkings.js'
 
@@ -10,130 +13,118 @@ import {TWs, DWs, TLs, DLs, S} from './Board/BoardMarkings.js'
 
 // import { coords, getUniques, loc,  } from "./Utils/helpers";
 
-let tiles = [
+let tiles =[
   {
-    "pos": "b100",
-    "letter": "I",
+    "pos": "b112",
+    "letter": "A",
     "points": 1,
     "submitted": true
   },
   {
-    "pos": "b112",
-    "letter": "P",
-    "points": 3,
-    "submitted": true
-  },
-  {
     "pos": "b113",
-    "letter": "E",
+    "letter": "N",
     "points": 1,
     "submitted": true
   },
   {
     "pos": "b114",
-    "letter": "E",
+    "letter": "T",
     "points": 1,
-    "submitted": true
-  },
-  {
-    "pos": "b115",
-    "letter": "D",
-    "points": 2,
-    "submitted": true
-  },
-  {
-    "pos": "b85",
-    "letter": "M",
-    "points": 3,
     "submitted": true
   },
   {
     "pos": "p1",
-    "letter": "L",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "p2",
     "letter": "N",
     "points": 1,
     "submitted": false
   },
   {
-    "pos": "p3",
+    "pos": "p2",
     "letter": "U",
     "points": 1,
     "submitted": false
   },
   {
+    "pos": "p3",
+    "letter": "_",
+    "points": 0,
+    "submitted": false
+  },
+  {
     "pos": "p4",
+    "letter": "Y",
+    "points": 4,
+    "submitted": false
+  },
+  {
+    "pos": "p5",
     "letter": "O",
     "points": 1,
     "submitted": false
   },
   {
     "pos": "p6",
-    "letter": "O",
+    "letter": "U",
     "points": 1,
     "submitted": false
   },
   {
     "pos": "p7",
+    "letter": "I",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q2",
+    "letter": "G",
+    "points": 2,
+    "submitted": false
+  },
+  {
+    "pos": "q3",
+    "letter": "A",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q4",
     "letter": "V",
     "points": 4,
     "submitted": false
   },
   {
-    "pos": "q1",
-    "letter": "J",
-    "points": 8,
-    "submitted": false
-  },
-  {
-    "pos": "q2",
-    "letter": "T",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "q3",
-    "letter": "W",
-    "points": 4,
-    "submitted": false
-  },
-  {
-    "pos": "q4",
-    "letter": "_",
-    "points": 0,
-    "submitted": false
-  },
-  {
     "pos": "q5",
-    "letter": "S",
-    "points": 1,
+    "letter": "D",
+    "points": 2,
     "submitted": false
   },
   {
     "pos": "q6",
-    "letter": "L",
-    "points": 1,
+    "letter": "Y",
+    "points": 4,
     "submitted": false
   },
   {
-    "pos": "q7",
-    "letter": "N",
+    "pos": "b97",
+    "letter": "E",
     "points": 1,
     "submitted": false
   },
   {
     "pos": "b99",
-    "letter": "M",
-    "points": 3,
-    "submitted": true
+    "letter": "S",
+    "points": 1,
+    "submitted": false
   },
   {
-    "pos": "p5",
-    "letter": "E",
+    "pos": "q1",
+    "letter": "S",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q7",
+    "letter": "L",
     "points": 1,
     "submitted": false
   }
@@ -146,73 +137,152 @@ coordsTolocWordArr(allWords)
 let newWords = getAllNewWords(tiles)
 console.log(readAllWords(newWords, tiles))
 
+let lp = legalPositions(tiles)
+console.log(lp)
+
 ///////TODO
-////1) getLegalPositions
 //////checkLegalPlacement
+console.log(newWords[0])
+console.log(anyCommonElements(newWords[1], lp))
 
-console.log(loc(15,15))
+let word=newWords[0]
+// let xs =[]
+// let ys =[]
+// for (let el of word){
+//     console.log(el)
+//     let n = parseInt(el.substring(1))
+//     console.log(n)
+//     let [y,x ] = coords(n)
+//     ys.push(y)
+//     xs.push(x)
+// }
+// ys = getUniques(ys)
+// xs = getUniques(xs)
+// console.log()
 
-function neighbors(pos){
-    let n = parseInt(pos.substring(1))
-    if (n<0 || n>224) {
-      throw new Error (`${pos} invalid input for neighbors`)
-    }
-    let bors = []
-    if (n-1>=0){
-      bors.push("b"+(n-1).toString())
-    }
-    if (n-15>=0){
-      bors.push("b"+(n-15).toString())
-    }
-    if (n+1<=224){
-      bors.push("b"+(n+1).toString())
-    }
-    if (n+15<=224){
-      bors.push("b"+(n+15).toString())
-    }
-    return bors
+function checkLegalPlacement (tiles) {
+  let newWords = getAllNewWords(tiles)
+  console.log(newWords)
+  if (newWords.length===0) {return false}
+  for (let word of newWords){
+    if (!containsOneLegalPosition(word, tiles)) {return false}
+    if (!singleRowOrColAndContiguous(word)) {return false}
+  }
+  return true
 }
 
-// const tilesSubmitted = (tiles) => {
-//   let tilesSubmitted = tiles.filter((el) => {
-//       return el.pos[0] === "b" && el.submitted
-//   })
-//   return tilesSubmitted
+console.log(checkLegalPlacement(tiles))
+
+function containsOneLegalPosition(word, tiles){
+    let lp = legalPositions(tiles)
+    console.log(lp)
+    console.log(word)
+    return anyCommonElements(word, lp)
+}
+
+function singleRowOrColAndContiguous(word) {
+    let xs =[]
+    let ys =[]
+    for (let el of word){
+        console.log(el)
+        let n = parseInt(el.substring(1))
+        console.log(n)
+        let [y,x ] = coords(n)
+        ys.push(y)
+        xs.push(x)
+    }
+    ys=getUniques(ys)
+    xs=getUniques(xs)
+    if (xs.length>1 && ys.length>1) {
+      console.log("multirow")
+      return false
+    }
+    if (!isContiguous(xs) && !isContiguous(ys)){
+      console.log("not contiguous")
+      return false
+    }
+    return true
+
+}
+
+// console.log(containsOneLegalPosition(newWords[3], tiles))
+// console.log(singleRowOrColAndContiguous(newWords[3]))
+
+
+
+
+console.log(lp.sort())
+console.log(lp.length)
+
+
+
+  console.log(range(7,10))
+
+export function gapWords(tiles){
+  let tpns = tilesPlayedNotSubmitted(tiles)
+  let boardnums = tpns.map((el) => parseInt(el.pos.substring(1)))
+  let xys = boardnums.map((el) => coords(el))
+  console.log(xys)
+  let ys = getUniques(xys.map((el) => el[0])).sort()
+  let xs = getUniques(xys.map((el) => el[1])).sort()
+  console.log(xs)
+
+  if (xs.length>1 && ys.length>1) {
+      console.log(`xs.length = ${xs.length}, ys.length= ${ys.length}`)
+    return false
+  }
+  if (xs.length===1) {
+      let yrange = range(Math.min(...ys), Math.max(...ys)+1)
+      console.log(yrange)
+      for (let y of yrange){
+        let posn = "b"+loc(y, xs[0]).toString()
+        if (!contains(posn, tiles)){ 
+            console.log(`${posn} or (${y}, ${xs[0]} ) not found`)
+            return false
+          }
+      }
+
+    }
+  
+  if (ys.length===1) {
+    let xrange = range(Math.min(...xs), Math.max(...xs))
+    console.log(xrange)
+    for (let x of xrange){
+      let posn = "b"+loc(ys[0],x).toString()
+      if (!contains(posn, tiles)){ 
+          console.log(`${posn} or (${ys[0]}, ${x} ) not found`)
+          return false}
+    }
+
+    }
+  
+  return true
+}
+
+
+console.log(gapWords(tiles))
+
+
+
+
+
+
+
+
+
+// function showdis(arr) {
+//   for (let el of arr) {
+//     let u = document.getElementById(el)
+//     u.style.border = "thick solid #0000FF"
+//   }
 // }
 
-
-
-function legalPositions(tiles) {
-  let ts = tilesSubmitted(tiles).map((el)=>el.pos)
-  if (ts.length ===0) {
-    return ['b112']
-  }
-  
-  let allNeighbors = []
-  for (let pos of ts) {
-    allNeighbors = [...allNeighbors, ...neighbors(pos)]
-  }
-  
-  return getUniques(subtractArrays(allNeighbors, ts))
-}
-
-console.log(legalPositions(tiles).sort())
-console.log(legalPositions(tiles).length)
-
-
-function showdis(arr) {
-  for (let el of arr) {
-    let u = document.getElementById(el)
-    u.style.border = "thick solid #0000FF"
-  }
-}
-
-function removedis(arr) {
-  for (let el of arr) {
-    let u = document.getElementById(el)
-    u.style.border = ""
-  }
-}
+// function removedis(arr) {
+//   for (let el of arr) {
+//     let u = document.getElementById(el)
+//     u.style.border = ""
+//   }
+// }
 
 // function getMultiplierOne(posn, tilesNotSubmittedPositions) {
 

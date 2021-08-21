@@ -6,7 +6,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
 import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, } from "./GameHelperFunctions"
+import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, tile } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -150,13 +150,18 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
-
-        let newWords = getAllNewWords(tiles)
-        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: 8 },...lastPlayed])
-        //Change the subitted field to true
         let tilesPlayedNotSubmitted = tiles.filter((el)=>{
             return el.pos[0]==="b" && !el.submitted
         })
+        if (tilesPlayedNotSubmitted.length===0){return}
+        let newWords = getAllNewWords(tiles)
+        if (!checkLegalPlacement(newWords, tiles)){
+            Swal.fire("Illegal tile placement")
+            return
+        }
+        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: 8 },...lastPlayed])
+        //Change the subitted field to true
+
         let tilesNowSubmitted = []
         for (let tile of tilesPlayedNotSubmitted){
             tile.submitted = true
