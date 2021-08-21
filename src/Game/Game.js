@@ -234,6 +234,7 @@ const Game = ({ gameVariables, exitGame }) => {
                             maxPoints={maxPoints}
                             lastPlayed={lastPlayed}
                             exitGame={exitGame}
+                            dictChecking ={dictChecking}
                         />
                     </Col>
                 </Row>

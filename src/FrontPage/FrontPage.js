@@ -39,13 +39,6 @@ const FrontPage = () => {
         setGameVariables({})
     }
 
-    const ShowData = (props) =>{
-        return(
-            <div style={{ marginTop: 20 }}>
-                    {JSON.stringify(props.data, null, 2)}
-             </div>
-        )
-    }
     const WelcomePage = () => {
         return (
             <div>
@@ -55,7 +48,6 @@ const FrontPage = () => {
             </div>
                 <Container>
                     <GameInfo handleSubmit={handleSubmit}/>  
-                    {/* <ShowData data={gameVariables}/>    */}
                 </Container>
             </div>
             

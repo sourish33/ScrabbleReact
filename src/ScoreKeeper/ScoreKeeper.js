@@ -34,11 +34,13 @@ const scoreTable = (playersAndPoints, currentPlayer) => {
     )
 }
 
-const TilesAndPoints = ({ tilesLeft, maxPoints }) => {
+const TilesAndPoints = ({ tilesLeft, maxPoints, dictChecking }) => {
+    const dc=dictChecking ? "Dictionary checking ON" : "Dictionary checking OFF"
     return (
         <div className={` ${styles["tpdiv"]}`}>
             <div className={styles.tpbox}>Tiles Left: {tilesLeft}</div>
             <div className={styles.tpbox}>{gameType(maxPoints)}</div>
+            <div className={styles.tpbox}>{dc}</div>
         </div>
     )
 }
@@ -96,6 +98,7 @@ const ScoreKeeper = (props) => {
                 <TilesAndPoints
                     tilesLeft={props.tilesLeft}
                     maxPoints={props.maxPoints}
+                    dictChecking ={props.dictChecking}
                 />
             </div>
             <div className="p-1 mb-2 justify-content-center">
