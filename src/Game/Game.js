@@ -150,14 +150,16 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
-        // let tilesPlayedNotSubmitted = tiles.filter((el)=>{
-        //     return el.pos[0]==="b" && !el.submitted
-        // })
         let tpns = tilesPlayedNotSubmitted(tiles)
         if (tpns.length===0){return}
         let newWords = getAllNewWords(tiles)
         if (!checkLegalPlacement(newWords, tiles)){
-            Swal.fire("Illegal tile placement")
+            Swal.fire({
+                icon: 'error',
+                title: 'Tile Placement Illegal',
+                text: 'All new tiles should be contiguous and in the same row or column ',
+                footer: '<a href="https://scrabble.hasbro.com/en-us/rules">Scrabble Rules</a>'
+              })
             return
         }
         setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: 8 },...lastPlayed])
