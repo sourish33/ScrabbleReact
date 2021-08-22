@@ -100,6 +100,12 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         //get rid of the modal
         hideModalEx()
+        Swal.fire({
+            title: 'Tiles Returned',
+            text: 'Better luck next time!',
+            showConfirmButton: false,
+            timer: 1500
+          })
         //get the tiles that would remain after deleting tilesTo Return 
         let tilesRemoved = subtractArrays(tiles, tilesToReturn)
 
