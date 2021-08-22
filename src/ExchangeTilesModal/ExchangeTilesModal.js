@@ -10,11 +10,17 @@ import styles from "./ExchangeTilesModal.module.css"
 
 const ExchangeTilesModal = ({ show, onHide, whichRack, tiles, clickHandlerExt, handleSubmit }) => {
     
+    const [showRack, setShowRack] = useState("true")
+    const handleExit = () => {
+        setShowRack(x=>false)
+    }
 
-
+    const restoreRack = () => {
+        setShowRack(x=>true)
+    }
 
     return (
-        <Modal show={show} onHide={onHide}>
+        <Modal show={show} onHide={onHide} onExit={handleExit} onExited={restoreRack}>
             <ModalHeader>
                 <Modal.Title> Select tiles to exchange </Modal.Title>
                 <span className={styles.close} onClick={onHide}>
@@ -24,11 +30,11 @@ const ExchangeTilesModal = ({ show, onHide, whichRack, tiles, clickHandlerExt, h
 
             <ModalBody>
                 <div>
-                    <RackEx
+                    {showRack && <RackEx
                         whichRack={whichRack}
                         tiles={tiles}
                         clickHandlerExt={clickHandlerExt}
-                    ></RackEx>
+                    ></RackEx>}
                 </div>
             </ModalBody>
             <ModalFooter>
