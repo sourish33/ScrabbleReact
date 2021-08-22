@@ -1,4 +1,4 @@
-import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, tilesSubmitted, legalPositions, contains, } from "./Game/GameHelperFunctions";
+import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, tilesSubmitted, legalPositions, contains, tilesOnRack, } from "./Game/GameHelperFunctions";
 import { anyCommonElements, intersection, formcheck, loc, 
   coordsTolocWordArr, arrayToMap, multiplyArrays, coords, 
   subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous, range
@@ -17,104 +17,86 @@ import { checkDict } from "./Utils/Dictionary/dictionary";
 let tiles =[
   {
     "pos": "b112",
-    "letter": "A",
-    "points": 1,
+    "letter": "F",
+    "points": 4,
     "submitted": true
   },
   {
     "pos": "b113",
-    "letter": "N",
+    "letter": "E",
     "points": 1,
     "submitted": true
   },
   {
     "pos": "b114",
-    "letter": "X",
+    "letter": "E",
     "points": 1,
     "submitted": true
   },
   {
-    "pos": "p1",
-    "letter": "N",
+    "pos": "b115",
+    "letter": "L",
     "points": 1,
-    "submitted": false
+    "submitted": true
   },
   {
-    "pos": "p2",
-    "letter": "U",
+    "pos": "b116",
+    "letter": "S",
     "points": 1,
-    "submitted": false
+    "submitted": true
   },
   {
-    "pos": "p3",
-    "letter": "_",
-    "points": 0,
-    "submitted": false
-  },
-  {
-    "pos": "p4",
-    "letter": "Y",
-    "points": 4,
-    "submitted": false
-  },
-  {
-    "pos": "p5",
-    "letter": "O",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "p6",
-    "letter": "U",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "p7",
-    "letter": "I",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "q2",
-    "letter": "G",
-    "points": 2,
-    "submitted": false
-  },
-  {
-    "pos": "q3",
-    "letter": "A",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "q4",
-    "letter": "V",
-    "points": 4,
-    "submitted": false
-  },
-  {
-    "pos": "q5",
+    "pos": "b84",
     "letter": "D",
     "points": 2,
     "submitted": false
   },
   {
-    "pos": "q6",
+    "pos": "b85",
+    "letter": "R",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "b86",
     "letter": "Y",
     "points": 4,
     "submitted": false
   },
   {
-    "pos": "b97",
-    "letter": "E",
+    "pos": "b98",
+    "letter": "Y",
+    "points": 4,
+    "submitted": true
+  },
+  {
+    "pos": "b99",
+    "letter": "A",
+    "points": 1,
+    "submitted": true
+  },
+  {
+    "pos": "p1",
+    "letter": "V",
+    "points": 4,
+    "submitted": false
+  },
+  {
+    "pos": "p3",
+    "letter": "L",
     "points": 1,
     "submitted": false
   },
   {
-    "pos": "b99",
-    "letter": "S",
+    "pos": "p6",
+    "letter": "N",
     "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "p7",
+    "letter": "G",
+    "points": 2,
     "submitted": false
   },
   {
@@ -124,8 +106,38 @@ let tiles =[
     "submitted": false
   },
   {
+    "pos": "q2",
+    "letter": "O",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q3",
+    "letter": "Z",
+    "points": 10,
+    "submitted": false
+  },
+  {
+    "pos": "q4",
+    "letter": "T",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q5",
+    "letter": "U",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q6",
+    "letter": "A",
+    "points": 1,
+    "submitted": false
+  },
+  {
     "pos": "q7",
-    "letter": "L",
+    "letter": "A",
     "points": 1,
     "submitted": false
   }
@@ -263,8 +275,56 @@ export function gapWords(tiles){
 
 console.log(gapWords(tiles))
 
-let u = getAllNewWords(tiles)
-console.log(readAllWords(u, tiles))
+let nw = getAllNewWords(tiles)
+console.log(readAllWords(nw, tiles))
+
+function scoreWord(word){
+  let sum =0
+  let doublers = 0
+  let triplers = 0
+  for (let l of word){
+    let num = parseInt(l.substring(1))
+    let points = readPoints(l, tiles)
+    if (DLs.includes(num)) {
+      sum += 2*points
+    }
+    else if (TLs.includes(num)) {
+      sum += 3*points
+    }
+    else if (DWs.includes(num)){
+      doublers += 1
+    }
+    else if (TWs.includes(num)){
+      triplers += 1
+    }
+    else {
+      sum += points
+    }
+  }
+  if (doublers>0) {
+    sum = sum*2*doublers
+  }
+  if (triplers>0) {
+    sum = sum*3*triplers
+  }
+  return sum
+}
+
+function score(tiles, visibleRack) {
+  let newWords = getAllNewWords(tiles)
+  let score = 0
+  for (let word of newWords){
+    score += scoreWord(word)
+  }
+  let tr = tilesOnRack(tiles, visibleRack)
+  if (tr.length ===0) {
+    score += 50 //bingo
+  }
+  return score
+}
+
+console.log(score(tiles,'p'))
+
 
 function dictCheckWords(tiles){
   let wordlist = readAllWords(getAllNewWords(tiles), tiles)

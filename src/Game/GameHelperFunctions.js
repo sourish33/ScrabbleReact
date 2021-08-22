@@ -1,4 +1,5 @@
 import Swal from "sweetalert2"
+import { DLs, DWs, S, TLs, TWs } from "../Board/BoardMarkings"
 import { checkDict } from "../Utils/Dictionary/dictionary"
 import {
     addLeftAll,
@@ -343,3 +344,51 @@ export function checkLegalPlacement(tiles, dictChecking, verbose=false) {
     }
     return true
 }
+
+export function scoreWord(word, tiles){
+    let sum =0
+    let doublers = 0
+    let triplers = 0
+    for (let l of word){
+      let num = parseInt(l.substring(1))
+      let points = readPoints(l, tiles)
+      if (DLs.includes(num)) {
+        sum += 2*points
+      }
+      if (TLs.includes(num)) {
+        sum += 3*points
+      }
+      if (DWs.includes(num)){
+        doublers += 1
+      }
+      if (S===num){
+          doublers += 1
+      }
+      if (TWs.includes(num)){
+        triplers += 1
+      }
+      else {
+        sum += points
+      }
+    }
+    if (doublers>0) {
+      sum = sum*2*doublers
+    }
+    if (triplers>0) {
+      sum = sum*3*triplers
+    }
+    return sum
+  }
+  
+  export function score(tiles, visibleRack) {
+    let newWords = getAllNewWords(tiles)
+    let score = 0
+    for (let word of newWords){
+      score += scoreWord(word, tiles)
+    }
+    let tr = tilesOnRack(tiles, visibleRack)
+    if (tr.length ===0) {
+      score += 50 //bingo
+    }
+    return score
+  }
