@@ -345,32 +345,47 @@ export function checkLegalPlacement(tiles, dictChecking, verbose=false) {
     return true
 }
 
-export function scoreWord(word, tiles){
+function scoreWord(word, tiles){
     let sum =0
     let doublers = 0
     let triplers = 0
+    let tpns = tilesPlayedNotSubmitted(tiles).map((el)=>el.pos)
+    // console.log(tpns)
     for (let l of word){
+      // console.log(l)
       let num = parseInt(l.substring(1))
+      // console.log(num)
       let points = readPoints(l, tiles)
-      if (DLs.includes(num)) {
-        sum += 2*points
-      }
-      if (TLs.includes(num)) {
-        sum += 3*points
-      }
-      if (DWs.includes(num)){
-        doublers += 1
-      }
-      if (S===num){
+      if (tpns.includes(l) ) {
+        if (DLs.includes(num)) {
+          sum += 2*points
+        }
+        else if (TLs.includes(num) ) {
+          sum += 3*points
+        }
+        else if (DWs.includes(num) ) {
+          sum += points
           doublers += 1
-      }
-      if (TWs.includes(num)){
-        triplers += 1
+        }
+        else if (S===num ){
+          sum += points
+          doublers += 1
+        }
+        else if (TWs.includes(num) ){
+          sum += points
+          triplers += 1
+        }
+        else {
+          sum += points
+        }
+  
       }
       else {
         sum += points
       }
     }
+    // console.log(doublers)
+    // console.log(sum)
     if (doublers>0) {
       sum = sum*2*doublers
     }
@@ -378,7 +393,7 @@ export function scoreWord(word, tiles){
       sum = sum*3*triplers
     }
     return sum
-  }
+  }  
   
   export function score(tiles, visibleRack) {
     let newWords = getAllNewWords(tiles)

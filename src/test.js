@@ -17,128 +17,44 @@ import { checkDict } from "./Utils/Dictionary/dictionary";
 let tiles =[
   {
     "pos": "b112",
-    "letter": "F",
-    "points": 4,
-    "submitted": true
-  },
-  {
-    "pos": "b113",
-    "letter": "E",
-    "points": 1,
-    "submitted": true
-  },
-  {
-    "pos": "b114",
-    "letter": "E",
-    "points": 1,
-    "submitted": true
-  },
-  {
-    "pos": "b115",
-    "letter": "L",
-    "points": 1,
-    "submitted": true
-  },
-  {
-    "pos": "b116",
-    "letter": "S",
-    "points": 1,
-    "submitted": true
-  },
-  {
-    "pos": "b84",
-    "letter": "D",
-    "points": 2,
-    "submitted": false
-  },
-  {
-    "pos": "b85",
-    "letter": "R",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "b86",
-    "letter": "Y",
-    "points": 4,
-    "submitted": false
-  },
-  {
-    "pos": "b98",
-    "letter": "Y",
-    "points": 4,
-    "submitted": true
-  },
-  {
-    "pos": "b99",
-    "letter": "A",
-    "points": 1,
-    "submitted": true
-  },
-  {
-    "pos": "p1",
-    "letter": "V",
-    "points": 4,
-    "submitted": false
-  },
-  {
-    "pos": "p3",
-    "letter": "L",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "p6",
-    "letter": "N",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "p7",
     "letter": "G",
     "points": 2,
     "submitted": false
   },
   {
-    "pos": "q1",
-    "letter": "S",
-    "points": 1,
-    "submitted": false
-  },
-  {
-    "pos": "q2",
+    "pos": "b113",
     "letter": "O",
     "points": 1,
     "submitted": false
   },
   {
-    "pos": "q3",
-    "letter": "Z",
-    "points": 10,
-    "submitted": false
-  },
-  {
-    "pos": "q4",
-    "letter": "T",
+    "pos": "b114",
+    "letter": "E",
     "points": 1,
     "submitted": false
   },
   {
-    "pos": "q5",
-    "letter": "U",
+    "pos": "b115",
+    "letter": "S",
     "points": 1,
     "submitted": false
   },
   {
-    "pos": "q6",
-    "letter": "A",
+    "pos": "p1",
+    "letter": "E",
     "points": 1,
     "submitted": false
   },
   {
-    "pos": "q7",
-    "letter": "A",
+    "pos": "p2",
+    "letter": "I",
     "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "p5",
+    "letter": "_",
+    "points": 0,
     "submitted": false
   }
 ]
@@ -156,7 +72,8 @@ console.log(lp)
 ///////TODO
 //////checkLegalPlacement
 console.log(newWords[0])
-console.log(anyCommonElements(newWords[1], lp))
+
+
 
 let word=newWords[0]
 // let xs =[]
@@ -276,31 +193,50 @@ export function gapWords(tiles){
 console.log(gapWords(tiles))
 
 let nw = getAllNewWords(tiles)
+console.log(nw)
 console.log(readAllWords(nw, tiles))
 
-function scoreWord(word){
+function scoreWord(word, tiles){
   let sum =0
   let doublers = 0
   let triplers = 0
+  let tpns = tilesPlayedNotSubmitted(tiles).map((el)=>el.pos)
+  // console.log(tpns)
   for (let l of word){
+    // console.log(l)
     let num = parseInt(l.substring(1))
+    // console.log(num)
     let points = readPoints(l, tiles)
-    if (DLs.includes(num)) {
-      sum += 2*points
-    }
-    else if (TLs.includes(num)) {
-      sum += 3*points
-    }
-    else if (DWs.includes(num)){
-      doublers += 1
-    }
-    else if (TWs.includes(num)){
-      triplers += 1
+    if (tpns.includes(l) ) {
+      if (DLs.includes(num)) {
+        sum += 2*points
+      }
+      else if (TLs.includes(num) ) {
+        sum += 3*points
+      }
+      else if (DWs.includes(num) ) {
+        sum += points
+        doublers += 1
+      }
+      else if (S===num ){
+        sum += points
+        doublers += 1
+      }
+      else if (TWs.includes(num) ){
+        sum += points
+        triplers += 1
+      }
+      else {
+        sum += points
+      }
+
     }
     else {
       sum += points
     }
   }
+  // console.log(doublers)
+  // console.log(sum)
   if (doublers>0) {
     sum = sum*2*doublers
   }
@@ -310,29 +246,26 @@ function scoreWord(word){
   return sum
 }
 
+
 function score(tiles, visibleRack) {
   let newWords = getAllNewWords(tiles)
   let score = 0
   for (let word of newWords){
-    score += scoreWord(word)
+    score += scoreWord(word, tiles)
   }
   let tr = tilesOnRack(tiles, visibleRack)
   if (tr.length ===0) {
-    score += 50 //bingo
+    score += 50 
+    //bingo
   }
   return score
 }
 
-console.log(score(tiles,'p'))
+console.log(scoreWord(nw[0],tiles))
+// console.log(scoreWord(nw[1],tiles))
+console.log(score(tiles, 'p'))
 
 
-function dictCheckWords(tiles){
-  let wordlist = readAllWords(getAllNewWords(tiles), tiles)
-  let badWords=wordlist.filter((el)=>!checkDict(el))
-  return badWords
-}
-
-console.log(dictCheckWords(tiles).join(", ") +" not valid")
 
 
 

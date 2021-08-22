@@ -6,7 +6,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
 import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, shuffleRackTiles, tile, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
+import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, score, shuffleRackTiles, tile, tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -55,7 +55,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(()=>{
-        checkLegalPlacement(tiles, false) ? setPointsPossible(x=>14) : setPointsPossible(x=>0)
+        checkLegalPlacement(tiles, false) ? setPointsPossible(x=>score(tiles, playersAndPoints[currentPlayer].rack)) : setPointsPossible(x=>0)
 
     }, [tiles])
 
@@ -173,10 +173,19 @@ const Game = ({ gameVariables, exitGame }) => {
             tile.submitted = true
             tilesNowSubmitted.push(tile)
         }
+        updateTiles([...subtractArrays(tiles,tpns), ...tilesNowSubmitted])
+        let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+        if (tr.length ===0) {//bingo
+            Swal.fire({
+                icon: 'success',
+                title: 'All Tiles Used!!!',
+                text: 'Great Job!!',
+              })
+          }
 
         setMoveNumber(x=>x+1)
         
-        updateTiles([...subtractArrays(tiles,tpns), ...tilesNowSubmitted])
+        
     }
 
     const replenishRack = () => {
