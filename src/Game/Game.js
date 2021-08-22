@@ -46,7 +46,9 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(() => {  
-        moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
+        if (greeting!=="Better Luck Next Time!") {
+            moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
+        }
         setCurrentPlayer(x => moveNumber%numPlayers)
         setShowPassDevice(x=>{
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
@@ -87,6 +89,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const hideModalPassDevice = () => {
         setShowPassDevice(false)
+        setGreeting("")
     }
 
     
@@ -100,12 +103,13 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         //get rid of the modal
         hideModalEx()
-        Swal.fire({
-            title: 'Tiles Returned',
-            text: 'Better luck next time!',
-            showConfirmButton: false,
-            timer: 1500
-          })
+        // Swal.fire({
+        //     title: 'Tiles Returned',
+        //     text: 'Better luck next time!',
+        //     showConfirmButton: false,
+        //     timer: 1500
+        //   })
+        setGreeting("Better Luck Next Time!")
         //get the tiles that would remain after deleting tilesTo Return 
         let tilesRemoved = subtractArrays(tiles, tilesToReturn)
 
