@@ -21,7 +21,7 @@ const RackEx = ({ whichRack, tiles, clickHandlerExt }) => {
       />
     );
     let thisSquare = (
-      <div key={i} className={styles.wrappingSquare} id={"e" + i} style={{display:'none'}}>
+      <div key={i} className={styles.wrappingSquare} id={"e" + i} >
         <RackSquareEx>{piece}</RackSquareEx>
       </div>
     );
