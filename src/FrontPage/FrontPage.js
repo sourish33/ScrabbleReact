@@ -17,6 +17,14 @@ const FrontPage = () => {
 
     const handleSubmit = (event, players, shufflePlayers, dictCheck, gameType) =>{
         event.preventDefault()
+        if (players.length<2) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `At least two players required`,
+              })
+              return
+        }
         for (let i=0;i<players.length;i++){
             if (players[i].name===""){
                 Swal.fire({

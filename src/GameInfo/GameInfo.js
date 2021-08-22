@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Swal from "sweetalert2"
 import { randomUpTo, shuffle, subtractArrays } from "../Utils/helpers"
 import styles from "./GameInfo.module.css"
 
@@ -209,9 +210,7 @@ const GameInfo = ({ handleSubmit }) => {
                 <GameType />
                 </div>
                 <div className="btn-toolbar">
-                {players.length >1 ? (
                 <button className = {`btn btn-primary btn-lg ${styles["spacer-right"]}`} type="submit">Start Game</button>
-                ) : null}
                 <button className = {`btn btn-info btn-lg `} type="button">Help</button>
                 </div>
             </form>
