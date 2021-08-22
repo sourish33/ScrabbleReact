@@ -15,7 +15,7 @@ let AI_LIST = [
 const GameInfo = ({ handleSubmit }) => {
     const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
-    const [dictCheck, setDictCheck] = useState(true)
+    const [dictCheck, setDictCheck] = useState("1")
     const [gameType, setGameType] = useState("75")
 
     const handleChange = (event, index) => {
@@ -37,8 +37,7 @@ const GameInfo = ({ handleSubmit }) => {
     }
 
     const handleSelectDictCheck = (event) => {
-        let val = event.target.value=== "1" ? true : false 
-        setDictCheck(val)
+        setDictCheck(event.target.value)
     }
 
     const handleSelectGameType = (event) => {

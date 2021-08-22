@@ -34,7 +34,7 @@ const Game = ({ gameVariables, exitGame }) => {
     //parsing incoming data from the welcome page
     const players = gameVariables.players
     const shufflePlayers = gameVariables.shufflePlayers
-    const dictChecking = gameVariables.dictCheck
+    const dictChecking =  gameVariables.dictCheck === "1" ? true : false 
     const maxPoints = parseInt(gameVariables.gameType)
     const playerTable = makePlayertable(players, shufflePlayers)
     const numPlayers = playerTable.length
