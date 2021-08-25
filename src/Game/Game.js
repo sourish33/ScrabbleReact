@@ -49,8 +49,10 @@ const Game = ({ gameVariables, exitGame }) => {
 
     useEffect(() => { 
         if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
-            console.log(`points: ${playersAndPoints[currentPlayer].points} maxPoints = ${maxPoints}`)
+            // setCurrentPlayer(x => moveNumber%numPlayers)
+            // console.log(`points: ${playersAndPoints[currentPlayer].points} maxPoints = ${maxPoints}`)
             setShowVictoryBox(x=>true)
+            return
         } 
         if (greeting!=="Better Luck Next Time!") {
             moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
@@ -109,12 +111,6 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         //get rid of the modal
         hideModalEx()
-        // Swal.fire({
-        //     title: 'Tiles Returned',
-        //     text: 'Better luck next time!',
-        //     showConfirmButton: false,
-        //     timer: 1500
-        //   })
         setGreeting("Better Luck Next Time!")
         //get the tiles that would remain after deleting tilesTo Return 
         let tilesRemoved = subtractArrays(tiles, tilesToReturn)
@@ -172,6 +168,10 @@ const Game = ({ gameVariables, exitGame }) => {
         setShowDict(false)
     }
 
+    const hideModalVictory = () => {
+        setShowVictoryBox(x=>false)
+    }
+
 
     const play = () => {
         let tpns = tilesPlayedNotSubmitted(tiles)
@@ -224,7 +224,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
-        <VictoryModal show={showVictoryBox} winner={playersAndPoints[currentPlayer].name}/>
+        <VictoryModal show={showVictoryBox} winner={playersAndPoints[currentPlayer].name} onClickClose={hideModalVictory}/>
         <PassDeviceMessageModal 
         show={showPassDevice} 
         onHide = {hideModalPassDevice} 

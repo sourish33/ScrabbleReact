@@ -3,13 +3,13 @@ import { Image } from "react-bootstrap"
 import victory1 from "../Assets/victory1.gif"
 import styles from "./VictoryModal.module.css"
 
-const VictoryModal = ({ show, winner }) => {
+const VictoryModal = ({ show, winner, onClickClose }) => {
     return (
         <>
             {show && (
                 <div className={styles.victorybox}>
                     <div>
-                        <span className={styles.close}>
+                        <span className={styles.close} onClick={onClickClose}>
                             &times;
                         </span>
                     </div>
