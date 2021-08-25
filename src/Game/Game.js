@@ -43,10 +43,15 @@ const Game = ({ gameVariables, exitGame }) => {
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
     const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[currentPlayer].level===0)
     const [greeting, setGreeting] = useState("")
+    const [showVictoryBox, setShowVictoryBox] = useState(false)
     
 
 
-    useEffect(() => {  
+    useEffect(() => { 
+        if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
+            console.log(`points: ${playersAndPoints[currentPlayer].points} maxPoints = ${maxPoints}`)
+            setShowVictoryBox(x=>true)
+        } 
         if (greeting!=="Better Luck Next Time!") {
             moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
         }
@@ -219,7 +224,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
-        <VictoryModal show={true}/>
+        <VictoryModal show={showVictoryBox} winner={playersAndPoints[currentPlayer].name}/>
         <PassDeviceMessageModal 
         show={showPassDevice} 
         onHide = {hideModalPassDevice} 

@@ -3,7 +3,7 @@ import { Image } from "react-bootstrap"
 import victory1 from "../Assets/victory1.gif"
 import styles from "./VictoryModal.module.css"
 
-const VictoryModal = ({ show }) => {
+const VictoryModal = ({ show, winner }) => {
     return (
         <>
             {show && (
@@ -15,7 +15,7 @@ const VictoryModal = ({ show }) => {
                     </div>
                     <div  className={styles.victory}>
                         <h1>
-                            <span>Ram</span> has won!!!
+                            <span>{winner}</span> has won!!!
                         </h1>
                     </div>
                     <div>
