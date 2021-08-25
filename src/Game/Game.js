@@ -49,10 +49,19 @@ const Game = ({ gameVariables, exitGame }) => {
 
     useEffect(() => { 
         if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
-            // setCurrentPlayer(x => moveNumber%numPlayers)
-            // console.log(`points: ${playersAndPoints[currentPlayer].points} maxPoints = ${maxPoints}`)
             setShowVictoryBox(x=>true)
             setButtonsDisabled(x=>true)
+            //disabling tiles still on rack
+            let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+            if (tr.length>0){
+                let tilesOnRackDisabled = []
+                for (let tile of tr){
+                    tile.submitted = true
+                    tilesOnRackDisabled.push(tile)
+                }
+                updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
+            }
+            
             return
         } 
         if (greeting!=="Better Luck Next Time!") {
