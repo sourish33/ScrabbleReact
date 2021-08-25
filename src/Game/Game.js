@@ -52,6 +52,7 @@ const Game = ({ gameVariables, exitGame }) => {
             // setCurrentPlayer(x => moveNumber%numPlayers)
             // console.log(`points: ${playersAndPoints[currentPlayer].points} maxPoints = ${maxPoints}`)
             setShowVictoryBox(x=>true)
+            setButtonsDisabled(x=>true)
             return
         } 
         if (greeting!=="Better Luck Next Time!") {
@@ -155,9 +156,10 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        console.log(tiles)
-        console.log(legalPositions(tiles))
-
+        // console.log(tiles)
+        // console.log(legalPositions(tiles))
+        // let tilesLocked = tiles.map((el)=>el.submitted=true)
+        // updateTiles(tilesLocked)
     }
 
     const lookup = () => {
