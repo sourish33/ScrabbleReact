@@ -13,6 +13,7 @@ import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
 import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageModal"
 import { randomUpTo } from "../Utils/helpers"
 import { passGreetings } from "../Utils/DummyData"
+import VictoryModal from "../VictoryModal/VictoryModal"
 // import styles from '../Tile/Tile.module.css'
 
 
@@ -218,6 +219,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     return (
         <>
+        <VictoryModal show={true}/>
         <PassDeviceMessageModal 
         show={showPassDevice} 
         onHide = {hideModalPassDevice} 
