@@ -17,50 +17,159 @@ import { checkDict } from "./Utils/Dictionary/dictionary";
 let tiles =[
   {
     "pos": "b112",
-    "letter": "G",
-    "points": 2,
-    "submitted": false
+    "letter": "B",
+    "points": 3,
+    "submitted": true
   },
   {
     "pos": "b113",
-    "letter": "O",
+    "letter": "A",
     "points": 1,
-    "submitted": false
+    "submitted": true
   },
   {
     "pos": "b114",
-    "letter": "E",
-    "points": 1,
-    "submitted": false
+    "letter": "Y",
+    "points": 4,
+    "submitted": true
   },
   {
-    "pos": "b115",
-    "letter": "S",
+    "pos": "b128",
+    "letter": "T",
     "points": 1,
-    "submitted": false
+    "submitted": true
+  },
+  {
+    "pos": "b129",
+    "letter": "E",
+    "points": 1,
+    "submitted": true
+  },
+  {
+    "pos": "b130",
+    "letter": "E",
+    "points": 1,
+    "submitted": true
+  },
+  {
+    "pos": "b131",
+    "letter": "M",
+    "points": 3,
+    "submitted": true
+  },
+  {
+    "pos": "b98",
+    "letter": "V",
+    "points": 4,
+    "submitted": true
   },
   {
     "pos": "p1",
-    "letter": "E",
+    "letter": "T",
     "points": 1,
     "submitted": false
   },
   {
     "pos": "p2",
+    "letter": "L",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "p3",
+    "letter": "D",
+    "points": 2,
+    "submitted": false
+  },
+  {
+    "pos": "p4",
+    "letter": "V",
+    "points": 4,
+    "submitted": false
+  },
+  {
+    "pos": "p5",
+    "letter": "T",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "p6",
+    "letter": "F",
+    "points": 4,
+    "submitted": false
+  },
+  {
+    "pos": "p7",
+    "letter": "E",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q3",
+    "letter": "U",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q4",
+    "letter": "E",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q5",
+    "letter": "R",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q6",
     "letter": "I",
     "points": 1,
     "submitted": false
   },
   {
-    "pos": "p5",
-    "letter": "_",
-    "points": 0,
+    "pos": "b146",
+    "letter": "O",
+    "points": 1,
+    "submitted": true
+  },
+  {
+    "pos": "b161",
+    "letter": "O",
+    "points": 1,
+    "submitted": true
+  },
+  {
+    "pos": "b176",
+    "letter": "N",
+    "points": 1,
+    "submitted": true
+  },
+  {
+    "pos": "q1",
+    "letter": "E",
+    "points": 1,
+    "submitted": false
+  },
+  {
+    "pos": "q2",
+    "letter": "X",
+    "points": 8,
+    "submitted": false
+  },
+  {
+    "pos": "q7",
+    "letter": "T",
+    "points": 1,
     "submitted": false
   }
 ]
 console.log(tilesOnBoard (tiles))
 
 let allWords = getAllWords(tiles)
+console.log(readAllWords(allWords, tiles))
 coordsTolocWordArr(allWords)
 
 let newWords = getAllNewWords(tiles)
@@ -73,7 +182,19 @@ console.log(lp)
 //////checkLegalPlacement
 console.log(newWords[0])
 
+let playerRacks = ['p', 'q']
 
+
+function rackPoints(rack, tiles) {
+      let rackTiles=tiles.filter((el)=>el.pos[0]===rack)
+      let totalPoints=0
+      for (let tile of rackTiles){
+        totalPoints += tile.points
+      }
+      return totalPoints
+}
+
+console.log(rackPoints('q', tiles))
 
 let word=newWords[0]
 // let xs =[]
@@ -141,137 +262,6 @@ function singleRowOrColAndContiguous(word) {
 
 
 
-console.log(lp.sort())
-console.log(lp.length)
-
-
-
-  console.log(range(7,10))
-
-export function gapWords(tiles){
-  let tpns = tilesPlayedNotSubmitted(tiles)
-  let boardnums = tpns.map((el) => parseInt(el.pos.substring(1)))
-  let xys = boardnums.map((el) => coords(el))
-  console.log(xys)
-  let ys = getUniques(xys.map((el) => el[0])).sort()
-  let xs = getUniques(xys.map((el) => el[1])).sort()
-  console.log(xs)
-
-  if (xs.length>1 && ys.length>1) {
-      console.log(`xs.length = ${xs.length}, ys.length= ${ys.length}`)
-    return false
-  }
-  if (xs.length===1) {
-      let yrange = range(Math.min(...ys), Math.max(...ys)+1)
-      console.log(yrange)
-      for (let y of yrange){
-        let posn = "b"+loc(y, xs[0]).toString()
-        if (!contains(posn, tiles)){ 
-            console.log(`${posn} or (${y}, ${xs[0]} ) not found`)
-            return false
-          }
-      }
-
-    }
-  
-  if (ys.length===1) {
-    let xrange = range(Math.min(...xs), Math.max(...xs))
-    console.log(xrange)
-    for (let x of xrange){
-      let posn = "b"+loc(ys[0],x).toString()
-      if (!contains(posn, tiles)){ 
-          console.log(`${posn} or (${ys[0]}, ${x} ) not found`)
-          return false}
-    }
-
-    }
-  
-  return true
-}
-
-
-console.log(gapWords(tiles))
-
-let nw = getAllNewWords(tiles)
-console.log(nw)
-console.log(readAllWords(nw, tiles))
-
-function scoreWord(word, tiles){
-  let sum =0
-  let doublers = 0
-  let triplers = 0
-  let tpns = tilesPlayedNotSubmitted(tiles).map((el)=>el.pos)
-  // console.log(tpns)
-  for (let l of word){
-    // console.log(l)
-    let num = parseInt(l.substring(1))
-    // console.log(num)
-    let points = readPoints(l, tiles)
-    if (tpns.includes(l) ) {
-      if (DLs.includes(num)) {
-        sum += 2*points
-      }
-      else if (TLs.includes(num) ) {
-        sum += 3*points
-      }
-      else if (DWs.includes(num) ) {
-        sum += points
-        doublers += 1
-      }
-      else if (S===num ){
-        sum += points
-        doublers += 1
-      }
-      else if (TWs.includes(num) ){
-        sum += points
-        triplers += 1
-      }
-      else {
-        sum += points
-      }
-
-    }
-    else {
-      sum += points
-    }
-  }
-  // console.log(doublers)
-  // console.log(sum)
-  if (doublers>0) {
-    sum = sum*2*doublers
-  }
-  if (triplers>0) {
-    sum = sum*3*triplers
-  }
-  return sum
-}
-
-
-function score(tiles, visibleRack) {
-  let newWords = getAllNewWords(tiles)
-  let score = 0
-  for (let word of newWords){
-    score += scoreWord(word, tiles)
-  }
-  let tr = tilesOnRack(tiles, visibleRack)
-  if (tr.length ===0) {
-    score += 50 
-    //bingo
-  }
-  return score
-}
-
-console.log(scoreWord(nw[0],tiles))
-// console.log(scoreWord(nw[1],tiles))
-console.log(score(tiles, 'p'))
-
-
-
-
-
-
-
-
 
 
 
@@ -288,49 +278,4 @@ console.log(score(tiles, 'p'))
 //     u.style.border = ""
 //   }
 // }
-
-// function getMultiplierOne(posn, tilesNotSubmittedPositions) {
-
-//   if (!tilesNotSubmittedPositions.includes(posn)){
-//     return 1
-//   }
-//   let n = parseInt(posn.substring(1))
-//   if (TLs.includes(n)){ return 3}
-//   if (DLs.includes(n)) { return 2}
-//   return 1
-// }
-
-
-// function getPoints(wordArr, tiles){
-//   let pointArr = []
-//   for (let word of wordArr){
-//     pointArr.push(word.map((el)=>readPoints(el,tiles)))
-//   }
-//   return pointArr
-// }
-
-
-// function getMultipliersWord(word, tilesNotSubmittedPositions){
-//   return word.map((el)=>getMultiplierOne(el, tilesNotSubmittedPositions))
-// }
-
-
-// function calculateScore(words, tiles) {
-//   let tpnsPositions = tilesPlayedNotSubmitted(tiles).map((el)=>el.pos)
-//   let multipliersArray = words.map((el)=>getMultipliersWord(el, tpnsPositions))
-//   let pointArray = getPoints(words, tiles)
-//   console.log(multipliersArray)
-//   console.log(pointArray)
-//   let score = 0
-//   for (let i=0;i<words.length;i++){
-//     score += multiplyArrays(multipliersArray[i], pointArray[i])
-//   }
-//   return score
-// }
-
-
-// console.log(calculateScore(newWords, tiles))
-
-
-
 

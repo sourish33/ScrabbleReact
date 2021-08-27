@@ -238,27 +238,27 @@ function containsOneLegalPosition(word, tiles) {
     return anyCommonElements(word, lp)
 }
 
-export function singleRowOrColAndContiguous(word) {
-    let xs = []
-    let ys = []
-    for (let el of word) {
-        let n = parseInt(el.substring(1))
-        let [y, x] = coords(n)
-        ys.push(y)
-        xs.push(x)
-    }
-    ys = getUniques(ys)
-    xs = getUniques(xs)
-    if (xs.length > 1 && ys.length > 1) {
-        console.log("multirow")
-        return false
-    }
-    if (!isContiguous(xs) && !isContiguous(ys)) {
-        console.log("not contiguous")
-        return false
-    }
-    return true
-}
+// function singleRowOrColAndContiguous(word) {
+//     let xs = []
+//     let ys = []
+//     for (let el of word) {
+//         let n = parseInt(el.substring(1))
+//         let [y, x] = coords(n)
+//         ys.push(y)
+//         xs.push(x)
+//     }
+//     ys = getUniques(ys)
+//     xs = getUniques(xs)
+//     if (xs.length > 1 && ys.length > 1) {
+//         console.log("multirow")
+//         return false
+//     }
+//     if (!isContiguous(xs) && !isContiguous(ys)) {
+//         console.log("not contiguous")
+//         return false
+//     }
+//     return true
+// }
 
 export function gapWords(tiles) {
     let tpns = tilesPlayedNotSubmitted(tiles)
@@ -350,11 +350,8 @@ function scoreWord(word, tiles){
     let doublers = 0
     let triplers = 0
     let tpns = tilesPlayedNotSubmitted(tiles).map((el)=>el.pos)
-    // console.log(tpns)
     for (let l of word){
-      // console.log(l)
       let num = parseInt(l.substring(1))
-      // console.log(num)
       let points = readPoints(l, tiles)
       if (tpns.includes(l) ) {
         if (DLs.includes(num)) {
@@ -384,8 +381,6 @@ function scoreWord(word, tiles){
         sum += points
       }
     }
-    // console.log(doublers)
-    // console.log(sum)
     if (doublers>0) {
       sum = sum*2*doublers
     }
@@ -407,3 +402,14 @@ function scoreWord(word, tiles){
     }
     return score
   }
+
+  
+export function rackPoints(rack, tiles) {
+    //adds up the points for the tiles on the rack, "rack"
+    let rackTiles=tiles.filter((el)=>el.pos[0]===rack)
+    let totalPoints=0
+    for (let tile of rackTiles){
+      totalPoints += tile.points
+    }
+    return totalPoints
+}
