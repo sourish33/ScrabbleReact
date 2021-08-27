@@ -84,12 +84,22 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             return true
         }
-        ////////TODO: Complete this
         if (bag.length===0){//no tiles left
             for (let i =0; i<playersAndPoints.length; i++){
                 playersAndPoints[i].points -= rackPoints(playersAndPoints[i].rack, tiles)
             }
-
+            setShowVictoryBox(x=>true)
+            setButtonsDisabled(x=>true)
+            let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+            if (tr.length>0){
+                let tilesOnRackDisabled = []
+                for (let tile of tr){
+                    tile.submitted = true
+                    tilesOnRackDisabled.push(tile)
+                }
+                updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
+            }
+            return true
         }
 
 
@@ -159,8 +169,10 @@ const Game = ({ gameVariables, exitGame }) => {
         //now replenishing the array. Create a list of tiles to remove from the bag
         let removeFromBag =[]
         let addToTiles = []
-        let inds = getUniqueInts(toReturn.length, bag.length-1)
-        for (let i=0;i<toReturn.length;i++) {
+        let howManyToRemove = Math.min(toReturn.length, bag.length)
+        let inds = getUniqueInts(howManyToRemove, bag.length)-1
+        console.log(inds)
+        for (let i=0;i<howManyToRemove;i++) {
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: toReturn[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
         }
@@ -237,8 +249,10 @@ const Game = ({ gameVariables, exitGame }) => {
         if (freeSlots.length===0) {return}
         let removeFromBag =[]
         let addToTiles = []
-        let inds = getUniqueInts(freeSlots.length, bag.length-1)
-        for (let i=0;i<freeSlots.length;i++) {
+        let howManyToRemove = Math.min(freeSlots.length, bag.length)
+        let inds = getUniqueInts(howManyToRemove, bag.length)-1
+        console.log(inds)
+        for (let i=0;i<howManyToRemove;i++) {
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: false })
         }

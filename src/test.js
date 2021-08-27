@@ -1,7 +1,7 @@
 import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, tilesSubmitted, legalPositions, contains, tilesOnRack, } from "./Game/GameHelperFunctions";
 import { anyCommonElements, intersection, formcheck, loc, 
   coordsTolocWordArr, arrayToMap, multiplyArrays, coords, 
-  subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous, range
+  subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous, range, getUniqueInts
 } from "./Utils/helpers";
 
 import {TWs, DWs, TLs, DLs, S} from './Board/BoardMarkings.js'
@@ -211,71 +211,9 @@ let word=newWords[0]
 // xs = getUniques(xs)
 // console.log()
 
-function checkLegalPlacement (tiles) {
-  let newWords = getAllNewWords(tiles)
-  console.log(newWords)
-  if (newWords.length===0) {return false}
-  for (let word of newWords){
-    if (!containsOneLegalPosition(word, tiles)) {return false}
-    if (!singleRowOrColAndContiguous(word)) {return false}
-  }
-  return true
-}
-
-console.log(checkLegalPlacement(tiles))
-
-function containsOneLegalPosition(word, tiles){
-    let lp = legalPositions(tiles)
-    console.log(lp)
-    console.log(word)
-    return anyCommonElements(word, lp)
-}
-
-function singleRowOrColAndContiguous(word) {
-    let xs =[]
-    let ys =[]
-    for (let el of word){
-        console.log(el)
-        let n = parseInt(el.substring(1))
-        console.log(n)
-        let [y,x ] = coords(n)
-        ys.push(y)
-        xs.push(x)
-    }
-    ys=getUniques(ys)
-    xs=getUniques(xs)
-    if (xs.length>1 && ys.length>1) {
-      console.log("multirow")
-      return false
-    }
-    if (!isContiguous(xs) && !isContiguous(ys)){
-      console.log("not contiguous")
-      return false
-    }
-    return true
-
-}
-
-// console.log(containsOneLegalPosition(newWords[3], tiles))
-// console.log(singleRowOrColAndContiguous(newWords[3]))
-
-
-
-
-
-
-
-// function showdis(arr) {
-//   for (let el of arr) {
-//     let u = document.getElementById(el)
-//     u.style.border = "thick solid #0000FF"
-//   }
-// }
-
-// function removedis(arr) {
-//   for (let el of arr) {
-//     let u = document.getElementById(el)
-//     u.style.border = ""
-//   }
-// }
-
+console.log(getUniqueInts(3, 5))
+console.log(getUniqueInts(3, 5))
+console.log(getUniqueInts(3, 5))
+console.log(getUniqueInts(3, 5))
+console.log(getUniqueInts(3, 5))
+console.log(getUniqueInts(3, 5))
