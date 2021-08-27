@@ -48,20 +48,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(() => { 
-        if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
-            setShowVictoryBox(x=>true)
-            setButtonsDisabled(x=>true)
-            //disabling tiles still on rack
-            let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
-            if (tr.length>0){
-                let tilesOnRackDisabled = []
-                for (let tile of tr){
-                    tile.submitted = true
-                    tilesOnRackDisabled.push(tile)
-                }
-                updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
-            }
-            
+        if (gameOver()){
             return
         } 
         if (greeting!=="Better Luck Next Time!") {
@@ -78,6 +65,31 @@ const Game = ({ gameVariables, exitGame }) => {
         checkLegalPlacement(tiles, false) ? setPointsPossible(x=>score(tiles, playersAndPoints[currentPlayer].rack)) : setPointsPossible(x=>0)
 
     }, [tiles])
+
+    ////////START GAME OVER FUNCTION//////////
+
+    const gameOver = () => {   
+        if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
+            setShowVictoryBox(x=>true)
+            setButtonsDisabled(x=>true)
+            //disabling tiles still on rack
+            let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+            if (tr.length>0){
+                let tilesOnRackDisabled = []
+                for (let tile of tr){
+                    tile.submitted = true
+                    tilesOnRackDisabled.push(tile)
+                }
+                updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
+            }
+            return true
+        }
+
+
+        return false
+    }
+
+    ///////END GAME OVER FUNCTION///////////////
 
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    

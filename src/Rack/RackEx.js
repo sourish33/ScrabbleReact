@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./RackEx.module.css";
 import TileEx from "../Tile/TileEx";
 import RackSquareEx from "../RackSquare/RackSquareEx";
