@@ -165,10 +165,8 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        // console.log(tiles)
+        console.log(tiles)
         // console.log(legalPositions(tiles))
-        // let tilesLocked = tiles.map((el)=>el.submitted=true)
-        // updateTiles(tilesLocked)
     }
 
     const lookup = () => {
