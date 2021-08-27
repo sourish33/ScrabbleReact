@@ -6,7 +6,7 @@ import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {LAST_PLAYED } from "../Utils/DummyData"
 import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, readAllWords, readWord, recallTiles, score, shuffleRackTiles, tile, tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
+import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, rackPoints, readAllWords, readWord, recallTiles, score, shuffleRackTiles, tile, tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -68,7 +68,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     ////////START GAME OVER FUNCTION//////////
 
-    const gameOver = () => {   
+    const gameOver = () => { //a player has reached or exceeded max points  
         if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
             setShowVictoryBox(x=>true)
             setButtonsDisabled(x=>true)
@@ -83,6 +83,13 @@ const Game = ({ gameVariables, exitGame }) => {
                 updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
             }
             return true
+        }
+        ////////TODO: Complete this
+        if (bag.length===0){//no tiles left
+            for (let i =0; i<playersAndPoints.length; i++){
+                playersAndPoints[i].points -= rackPoints(playersAndPoints[i].rack, tiles)
+            }
+
         }
 
 
@@ -239,13 +246,19 @@ const Game = ({ gameVariables, exitGame }) => {
         updateTiles([...tiles, ...addToTiles])
     }
 
+    const theWinner = () => {
+        let playerArray = Array.from(playersAndPoints)
+        playerArray.sort((x,y)=> y.points-x.points)
+        return playerArray[0].name
+    }
+
 
     const updateTiles = (newTiles) => {
         setTiles((x) => newTiles)
     }
     return (
         <>
-        <VictoryModal show={showVictoryBox} winner={playersAndPoints[currentPlayer].name} onClickClose={hideModalVictory}/>
+        <VictoryModal show={showVictoryBox} winner={theWinner()} onClickClose={hideModalVictory}/>
         <PassDeviceMessageModal 
         show={showPassDevice} 
         onHide = {hideModalPassDevice} 
