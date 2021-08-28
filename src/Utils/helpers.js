@@ -14,6 +14,12 @@ export function getUniqueInts(n, N = 225) {
     return shuffle(arr).slice(0, n)
 }
 
+export function getUniqueInts0(n, N = 225) {
+    //returns a random integer from 0 to N-1
+    let arr = Array.from({ length: N }, (x, i) => i )
+    return shuffle(arr).slice(0, n)
+}
+
 export const range = (start, stop, step = 1) =>
   Array(Math.ceil((stop - start) / step)).fill(start).map((x, y) => x + y * step)
 

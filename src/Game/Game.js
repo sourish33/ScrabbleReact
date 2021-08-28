@@ -4,9 +4,8 @@ import Swal from "sweetalert2"
 import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
-import {LAST_PLAYED } from "../Utils/DummyData"
-import {getUniqueInts, makePlayertable, subtractArrays, whichPlayer } from "../Utils/helpers"
-import { checkLegalPlacement, emptyOnRack, getAllNewWords, getAllWords, legalPositions, longestNewWord, rackPoints, readAllWords, readWord, recallTiles, score, shuffleRackTiles, tile, tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
+import { getUniqueInts0, makePlayertable, subtractArrays } from "../Utils/helpers"
+import { checkLegalPlacement, emptyOnRack, getAllNewWords, longestNewWord, rackPoints,  readWord, recallTiles, score, shuffleRackTiles,  tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -14,7 +13,7 @@ import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageM
 import { randomUpTo } from "../Utils/helpers"
 import { passGreetings } from "../Utils/DummyData"
 import VictoryModal from "../VictoryModal/VictoryModal"
-// import styles from '../Tile/Tile.module.css'
+
 
 
 
@@ -159,7 +158,7 @@ const Game = ({ gameVariables, exitGame }) => {
         //now replenishing the array. Create a list of tiles to remove from the bag
         let removeFromBag =[]
         let addToTiles = []
-        let inds = getUniqueInts(toReturn.length, bag.length-1)
+        let inds = getUniqueInts0(toReturn.length, bag.length)
         for (let i=0;i<toReturn.length;i++) {
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: toReturn[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
@@ -237,7 +236,7 @@ const Game = ({ gameVariables, exitGame }) => {
         if (freeSlots.length===0) {return}
         let removeFromBag =[]
         let addToTiles = []
-        let inds = getUniqueInts(freeSlots.length, bag.length-1)
+        let inds = getUniqueInts0(freeSlots.length, bag.length)
         for (let i=0;i<freeSlots.length;i++) {
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: false })

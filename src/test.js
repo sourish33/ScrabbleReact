@@ -1,7 +1,7 @@
 import { getAllWords, getAllNewWords, tilesPlayedNotSubmitted,  readPoints, tilesOnBoard, readAllWords, readWord, tilesSubmitted, legalPositions, contains, tilesOnRack, } from "./Game/GameHelperFunctions";
 import { anyCommonElements, intersection, formcheck, loc, 
   coordsTolocWordArr, arrayToMap, multiplyArrays, coords, 
-  subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous, range
+  subtractArrays, getUniques, neighbors, getConsecutivesNums, isContiguous, range, getUniqueInts0
 } from "./Utils/helpers";
 
 import {TWs, DWs, TLs, DLs, S} from './Board/BoardMarkings.js'
@@ -259,6 +259,9 @@ function singleRowOrColAndContiguous(word) {
 // console.log(containsOneLegalPosition(newWords[3], tiles))
 // console.log(singleRowOrColAndContiguous(newWords[3]))
 
+console.log(getUniqueInts0(5, 6))
+console.log(getUniqueInts0(5, 6))
+console.log(getUniqueInts0(5, 6))
 
 
 
