@@ -83,11 +83,23 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             return true
         }
-        ////////TODO: Complete this
+        ///////
         if (bag.length===0){//no tiles left
             for (let i =0; i<playersAndPoints.length; i++){
                 playersAndPoints[i].points -= rackPoints(playersAndPoints[i].rack, tiles)
             }
+            setShowVictoryBox(x=>true)
+            setButtonsDisabled(x=>true)
+            let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+            if (tr.length>0){
+                let tilesOnRackDisabled = []
+                for (let tile of tr){
+                    tile.submitted = true
+                    tilesOnRackDisabled.push(tile)
+                }
+                updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
+            }
+            return true
 
         }
 
@@ -236,8 +248,9 @@ const Game = ({ gameVariables, exitGame }) => {
         if (freeSlots.length===0) {return}
         let removeFromBag =[]
         let addToTiles = []
-        let inds = getUniqueInts0(freeSlots.length, bag.length)
-        for (let i=0;i<freeSlots.length;i++) {
+        let howManyToPick = Math.min(freeSlots.length, bag.length)
+        let inds = getUniqueInts0(howManyToPick, bag.length)
+        for (let i=0;i<howManyToPick;i++) {
             removeFromBag.push(bag[inds[i]])
             addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: false })
         }

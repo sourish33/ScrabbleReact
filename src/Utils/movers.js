@@ -77,7 +77,7 @@ const move = (origin, destination, tiles) => {
         if (!isLetter(newLetter)) {
             return tiles
         }
-        tiles = changeLetter(origin, newLetter, tiles)
+        tiles = changeLetter(origin, newLetter.toUpperCase(), tiles)
     }
 
     if (fromBoard && toRack && readPoints(origin, tiles)===0 ) {
