@@ -10,6 +10,7 @@ import {
     legalPositions,
     contains,
     tilesOnRack,
+    score,
 } from "./Game/GameHelperFunctions"
 import {
     anyCommonElements,
@@ -27,6 +28,7 @@ import {
     isContiguous,
     range,
     getUniqueInts0,
+    b_coords,
 } from "./Utils/helpers"
 
 import { TWs, DWs, TLs, DLs, S } from "./Board/BoardMarkings.js"
@@ -298,6 +300,16 @@ function b_loc(posn) {
 //   return slots.some((el)=>arraysIsomorphic(el,s))
 // }
 
+
+function mapToArray(myMap) {
+  let myArr = []
+  for (const [key, value] of myMap ) {
+    let row = {letter: value[0], points: value[1], pos: key, submitted: value[2] }
+    myArr.push(row)
+  }
+  return myArr
+}
+
 function getXsAndYs(letterArray) {
     let xs = []
     let ys = []
@@ -312,9 +324,6 @@ function getXsAndYs(letterArray) {
     return [xs, ys]
 }
 
-let [xs, ys] = getXsAndYs(lp)
-console.log(xs)
-console.log(ys)
 
 function makeVerSlots(x, n, legalPos, submittedTiles) {
     if (n > 15) {
@@ -459,3 +468,49 @@ function removedis() {
         u.style.border = ""
     }
 }
+
+function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
+    let tilesCopy = Array.from(tiles)
+    let tilesCopyMap = arrayToMap(tilesCopy)
+    for (let i=0;i<tilesCopyMap.size;i++) {
+      let st = rackTiles[i]
+      let end = boardPositions[i]
+      let val = tilesCopyMap.get(st)
+      tilesCopyMap.set(end, val)
+      tilesCopyMap.delete(st)
+    }
+    tilesCopy = mapToArray(tilesCopyMap)
+    let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
+    let anyBadWords = nWords.some((el)=>!checkDict(el))
+    return anyBadWords ? null : score(tilesCopy, visibleRack)
+}
+
+
+let rackTiles = ['q2', 'q4']
+let boardPositions = [b_loc([2,13]), b_loc([3,13])]
+
+console.log(evaluateMove(rackTiles, boardPositions, tiles, 'q'))
+
+console.log(b_loc([6,14]))
+
+let tilesCopy = Array.from(tiles)
+let tilesCopyMap = arrayToMap(tilesCopy)
+for (let i=0;i<tilesCopyMap.size;i++) {
+  let st = rackTiles[i]
+  let end = boardPositions[i]
+  let val = tilesCopyMap.get(st)
+  tilesCopyMap.set(end, val)
+  tilesCopyMap.delete(st)
+}
+tilesCopy = mapToArray(tilesCopyMap)
+let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
+console.log(nWords)
+console.log(nWords.some((el)=>!checkDict(el)))
+console.log(score(tilesCopy, 'q'))
+
+
+console.log(tilesCopy)
+
+
+
+console.log(mapToArray(tilesCopyMap))
