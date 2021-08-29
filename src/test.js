@@ -11,6 +11,7 @@ import {
     contains,
     tilesOnRack,
     score,
+    checkLegalPlacement,
 } from "./Game/GameHelperFunctions"
 import {
     anyCommonElements,
@@ -471,10 +472,10 @@ function removedis() {
 
 function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     if (rackTiles.length!==boardPositions.length){
-      throw new Error (`${rackTiles} and ${boardPosition} unequal length in evaluateMove`)
+      throw new Error (`${rackTiles} and ${boardPositions} unequal length in evaluateMove`)
     }
     let tilesCopy = Array.from(tiles)
-    let tilesCopyMap = arrayToMap(tilesCopy)
+    let tilesCopyMap = arrayToMap(tiles)
     for (let i=0;i<tilesCopyMap.size;i++) {
       let st = rackTiles[i]
       let end = boardPositions[i]
@@ -483,14 +484,18 @@ function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
       tilesCopyMap.delete(st)
     }
     tilesCopy = mapToArray(tilesCopyMap)
+    console.log(tilesCopy)
     let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
     let anyBadWords = nWords.some((el)=>!checkDict(el))
-    return anyBadWords ? null : score(tilesCopy, visibleRack)
+    let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
+    return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
 }
 
+console.log(tiles)
 
-let rackTiles = ['q2', 'q4']
-let boardPositions = [b_loc([2,13]), b_loc([3,13])]
+
+let rackTiles = ['q2']
+let boardPositions = [b_loc([13,3])]
 
 console.log(evaluateMove(rackTiles, boardPositions, tiles, 'q'))
 
