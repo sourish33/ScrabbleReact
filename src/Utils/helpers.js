@@ -151,6 +151,12 @@ export const coords = (n) => {
     return [x, y]
 }
 
+export function b_coords(posn){
+    //takes b17 and returns [2,3]
+    let n = parseInt(posn.substring(1))
+    return coords(n)
+  }
+
 export function formcheck(id) {
     return /[bpqrs]\d+$/.test(id)
 }
