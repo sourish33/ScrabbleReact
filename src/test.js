@@ -470,6 +470,9 @@ function removedis() {
 }
 
 function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
+    if (rackTiles.length!==boardPositions.length){
+      throw new Error (`${rackTiles} and ${boardPosition} unequal length in evaluateMove`)
+    }
     let tilesCopy = Array.from(tiles)
     let tilesCopyMap = arrayToMap(tilesCopy)
     for (let i=0;i<tilesCopyMap.size;i++) {
