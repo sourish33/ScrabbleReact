@@ -195,7 +195,8 @@ export function intersection(array1, array2) {
 }
 
 export function anyCommonElements(array1, array2) {
-    return intersection(array1, array2).length > 0 ? true : false
+    // return intersection(array1, array2).length > 0 ? true : false
+    return array1.some((el)=>array2.includes(el))
 }
 
 export function neighbors(pos){
