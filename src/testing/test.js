@@ -12,7 +12,7 @@ import {
     tilesOnRack,
     score,
     checkLegalPlacement,
-} from "./Game/GameHelperFunctions"
+} from "../Game/GameHelperFunctions"
 import {
     anyCommonElements,
     intersection,
@@ -30,10 +30,10 @@ import {
     range,
     getUniqueInts0,
     b_coords,
-} from "./Utils/helpers"
+} from "../Utils/helpers"
 
-import { TWs, DWs, TLs, DLs, S } from "./Board/BoardMarkings.js"
-import { checkDict } from "./Utils/Dictionary/dictionary"
+import { TWs, DWs, TLs, DLs, S } from "../Board/BoardMarkings.js"
+import { checkDict } from "../Utils/Dictionary/dictionary"
 
 // import { coords, getUniques, loc,  } from "./Utils/helpers";
 
@@ -274,8 +274,6 @@ let lp = legalPositions(tiles)
 let sub = tilesSubmitted(tiles).map((el) => el.pos)
 console.log(sub)
 
-///////TODO
-//////checkLegalPlacement
 console.log(newWords[0])
 
 function b_loc(posn) {
@@ -488,14 +486,18 @@ function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
     let anyBadWords = nWords.some((el)=>!checkDict(el))
     let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
+    if (badPlacement){
+        throw new Error (`${rackTiles} and ${boardPositions} giving bad placement`)
+    }
     return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
 }
 
 console.log(tiles)
 
 
-let rackTiles = ['q2']
-let boardPositions = [b_loc([13,3])]
+let rackTiles = ['q1', 'q2','q3', 'q4', 'q6']
+let boardPositions = s5[130]
+console.log(boardPositions)
 
 console.log(evaluateMove(rackTiles, boardPositions, tiles, 'q'))
 

@@ -61,8 +61,8 @@ export function multiplyArrays(arr1, arr2) {
         console.log("cant multiply arrays of different sizes")
         return null
     }
-    var result = 0
-    for (var i = 0; i < arr1.length; i++) {
+    let result = 0
+    for (let i = 0; i < arr1.length; i++) {
         result += arr1[i] * arr2[i]
     }
     return result
@@ -225,3 +225,84 @@ export function neighbors(pos){
     }
     return bors
 }
+
+export function permute(permutation) {
+    let length = permutation.length,
+        result = [permutation.slice()],
+        c = new Array(length).fill(0),
+        i = 1, k, p;
+  
+    while (i < length) {
+      if (c[i] < i) {
+        k = i % 2 && c[i];
+        p = permutation[i];
+        permutation[i] = permutation[k];
+        permutation[k] = p;
+        ++c[i];
+        i = 1;
+        result.push(permutation.slice());
+      } else {
+        c[i] = 0;
+        ++i;
+      }
+    }
+    return result;
+  }
+
+
+  
+function k_combinations(arr, k) {
+    let i, j, combs, head, tailcombs;
+    
+    // There is no way to take e.g. arrs of 5 elements from
+    // a arr of 4.
+    if (k > arr.length || k <= 0) {
+        return [];
+    }
+    
+    // K-sized arr has only one K-sized subarr.
+    if (k === arr.length) {
+        return [arr];
+    }
+    
+    // There is N 1-sized subarrs in a N-sized arr.
+    if (k === 1) {
+        combs = [];
+        for (i = 0; i < arr.length; i++) {
+            combs.push([arr[i]]);
+        }
+        return combs;
+    }
+    
+    
+    combs = [];
+    for (i = 0; i < arr.length - k + 1; i++) {
+        // head is a list that includes only our current element.
+        head = arr.slice(i, i + 1);
+        // We take smaller combinations from the subsequent elements
+        tailcombs = k_combinations(arr.slice(i + 1), k - 1);
+        // For each (k-1)-combination we join it with the current
+        // and store it to the arr of k-combinations.
+        for (j = 0; j < tailcombs.length; j++) {
+            combs.push(head.concat(tailcombs[j]));
+        }
+    }
+    return combs;
+}
+
+
+
+export function combinations(arr) {
+    let k, i, combs, k_combs;
+    combs = [];
+    
+    // Calculate all non-empty k-combinations of size 2 and higher
+    for (k = 2; k <= arr.length; k++) {
+        k_combs = k_combinations(arr, k);
+        for (i = 0; i < k_combs.length; i++) {
+            combs.push(k_combs[i]);
+        }
+    }
+    return combs;
+}
+ 

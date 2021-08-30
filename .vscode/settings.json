@@ -1,5 +1,6 @@
 {
     "prettier.jsxBracketSameLine": true,
     "prettier.semi": false,
-    "prettier.tabWidth": 4
+    "prettier.tabWidth": 4,
+    "javascript-repl.detectInfiniteLoops": 500000
 }
