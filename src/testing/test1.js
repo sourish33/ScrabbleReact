@@ -229,7 +229,6 @@ let rackpos = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"]
 let combs = combinations(rackpos)
 
 console.log(combs.length)
-let lilcombs = combs.slice(0, 116)
 
 // console.log(combs[100])
 
@@ -254,3 +253,4 @@ console.log(p4.length)
 console.log(p5.length)
 console.log(p6.length)
 console.log(p7.length)
+

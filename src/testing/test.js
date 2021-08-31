@@ -30,6 +30,8 @@ import {
     range,
     getUniqueInts0,
     b_coords,
+    combinations,
+    permute,
 } from "../Utils/helpers"
 
 import { TWs, DWs, TLs, DLs, S } from "../Board/BoardMarkings.js"
@@ -39,228 +41,150 @@ import { checkDict } from "../Utils/Dictionary/dictionary"
 
 let tiles = [
     {
-        pos: "b111",
-        letter: "N",
-        points: 1,
-        submitted: true,
+      "pos": "b112",
+      "letter": "C",
+      "points": 3,
+      "submitted": true
     },
     {
-        pos: "b112",
-        letter: "A",
-        points: 1,
-        submitted: true,
+      "pos": "b126",
+      "letter": "F",
+      "points": 4,
+      "submitted": true
     },
     {
-        pos: "b113",
-        letter: "M",
-        points: 3,
-        submitted: true,
+      "pos": "b127",
+      "letter": "O",
+      "points": 1,
+      "submitted": true
     },
     {
-        pos: "b114",
-        letter: "E",
-        points: 1,
-        submitted: true,
+      "pos": "b128",
+      "letter": "R",
+      "points": 1,
+      "submitted": true
     },
     {
-        pos: "b125",
-        letter: "R",
-        points: 1,
-        submitted: true,
+      "pos": "b142",
+      "letter": "I",
+      "points": 1,
+      "submitted": true
     },
     {
-        pos: "b126",
-        letter: "A",
-        points: 1,
-        submitted: true,
+      "pos": "b157",
+      "letter": "L",
+      "points": 1,
+      "submitted": true
     },
     {
-        pos: "b127",
-        letter: "M",
-        points: 3,
-        submitted: true,
+      "pos": "p1",
+      "letter": "U",
+      "points": 1,
+      "submitted": false
     },
     {
-        pos: "b140",
-        letter: "A",
-        points: 1,
-        submitted: true,
+      "pos": "p3",
+      "letter": "I",
+      "points": 1,
+      "submitted": false
     },
     {
-        pos: "b155",
-        letter: "V",
-        points: 4,
-        submitted: true,
+      "pos": "p4",
+      "letter": "M",
+      "points": 3,
+      "submitted": false
     },
     {
-        pos: "b168",
-        letter: "L",
-        points: 1,
-        submitted: true,
+      "pos": "q1",
+      "letter": "O",
+      "points": 1,
+      "submitted": false
     },
     {
-        pos: "b169",
-        letter: "E",
-        points: 1,
-        submitted: true,
+      "pos": "q2",
+      "letter": "F",
+      "points": 4,
+      "submitted": false
     },
     {
-        pos: "b170",
-        letter: "E",
-        points: 1,
-        submitted: true,
+      "pos": "q3",
+      "letter": "I",
+      "points": 1,
+      "submitted": false
     },
     {
-        pos: "b183",
-        letter: "O",
-        points: 1,
-        submitted: true,
+      "pos": "q4",
+      "letter": "S",
+      "points": 1,
+      "submitted": false
     },
     {
-        pos: "b198",
-        letter: "O",
-        points: 1,
-        submitted: true,
+      "pos": "q5",
+      "letter": "O",
+      "points": 1,
+      "submitted": false
     },
     {
-        pos: "b69",
-        letter: "H",
-        points: 4,
-        submitted: true,
+      "pos": "q6",
+      "letter": "J",
+      "points": 8,
+      "submitted": false
     },
     {
-        pos: "b70",
-        letter: "A",
-        points: 1,
-        submitted: true,
+      "pos": "q7",
+      "letter": "E",
+      "points": 1,
+      "submitted": false
     },
     {
-        pos: "b71",
-        letter: "W",
-        points: 4,
-        submitted: true,
+      "pos": "b169",
+      "letter": "D",
+      "points": 2,
+      "submitted": true
     },
     {
-        pos: "b84",
-        letter: "O",
-        points: 1,
-        submitted: true,
+      "pos": "b170",
+      "letter": "E",
+      "points": 1,
+      "submitted": true
     },
     {
-        pos: "b97",
-        letter: "J",
-        points: 8,
-        submitted: true,
+      "pos": "b171",
+      "letter": "N",
+      "points": 1,
+      "submitted": true
     },
     {
-        pos: "b99",
-        letter: "K",
-        points: 5,
-        submitted: true,
+      "pos": "b172",
+      "letter": "S",
+      "points": 1,
+      "submitted": true
     },
     {
-        pos: "p1",
-        letter: "S",
-        points: 1,
-        submitted: false,
+      "pos": "p2",
+      "letter": "G",
+      "points": 2,
+      "submitted": false
     },
     {
-        pos: "p2",
-        letter: "D",
-        points: 2,
-        submitted: false,
+      "pos": "p5",
+      "letter": "B",
+      "points": 3,
+      "submitted": false
     },
     {
-        pos: "p3",
-        letter: "S",
-        points: 1,
-        submitted: false,
+      "pos": "p6",
+      "letter": "C",
+      "points": 3,
+      "submitted": false
     },
     {
-        pos: "p7",
-        letter: "U",
-        points: 1,
-        submitted: false,
-    },
-    {
-        pos: "q1",
-        letter: "E",
-        points: 1,
-        submitted: false,
-    },
-    {
-        pos: "q2",
-        letter: "P",
-        points: 3,
-        submitted: false,
-    },
-    {
-        pos: "q3",
-        letter: "V",
-        points: 4,
-        submitted: false,
-    },
-    {
-        pos: "q4",
-        letter: "I",
-        points: 1,
-        submitted: false,
-    },
-    {
-        pos: "q5",
-        letter: "_",
-        points: 0,
-        submitted: false,
-    },
-    {
-        pos: "q6",
-        letter: "G",
-        points: 2,
-        submitted: false,
-    },
-    {
-        pos: "q7",
-        letter: "U",
-        points: 1,
-        submitted: false,
-    },
-    {
-        pos: "b41",
-        letter: "L",
-        points: 1,
-        submitted: true,
-    },
-    {
-        pos: "b56",
-        letter: "E",
-        points: 1,
-        submitted: true,
-    },
-    {
-        pos: "b86",
-        letter: "D",
-        points: 2,
-        submitted: true,
-    },
-    {
-        pos: "p4",
-        letter: "P",
-        points: 3,
-        submitted: false,
-    },
-    {
-        pos: "p5",
-        letter: "N",
-        points: 1,
-        submitted: false,
-    },
-    {
-        pos: "p6",
-        letter: "O",
-        points: 1,
-        submitted: false,
-    },
-]
+      "pos": "p7",
+      "letter": "N",
+      "points": 1,
+      "submitted": false
+    }
+  ]
 console.log(tilesOnBoard(tiles))
 
 let allWords = getAllWords(tiles)
@@ -468,6 +392,7 @@ function removedis() {
     }
 }
 
+
 function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     if (rackTiles.length!==boardPositions.length){
       throw new Error (`${rackTiles} and ${boardPositions} unequal length in evaluateMove`)
@@ -496,31 +421,56 @@ console.log(tiles)
 
 
 let rackTiles = ['q1', 'q2','q3', 'q4', 'q6']
-let boardPositions = s5[130]
+let boardPositions = s5[s5.length-1]
 console.log(boardPositions)
 
 console.log(evaluateMove(rackTiles, boardPositions, tiles, 'q'))
 
-console.log(b_loc([6,14]))
-
-let tilesCopy = Array.from(tiles)
-let tilesCopyMap = arrayToMap(tilesCopy)
-for (let i=0;i<tilesCopyMap.size;i++) {
-  let st = rackTiles[i]
-  let end = boardPositions[i]
-  let val = tilesCopyMap.get(st)
-  tilesCopyMap.set(end, val)
-  tilesCopyMap.delete(st)
+function makeRackPerms(tiles, visibleRack) {
+    let nums = Array.from({ length: 7 }, (x, i) => i + 1)
+    let rackPos = nums.map((el)=>visibleRack+el)
+    let combs = combinations(rackPos)
+    let perms = []
+    for (let comb of combs) {
+        perms = [...perms, ...permute(comb)]
+    }
+    let permsMap = new Map()
+    for (let perm of perms){
+        let word = readWord(perm, tiles)
+        if (!permsMap.has(word) && countBlanks(word)<2 ) {
+            permsMap.set(readWord(perm, tiles), perm)
+        }
+    }
+    perms =  Array.from(permsMap.values())
+    let p2 = perms.filter((el)=>el.length===2)
+    let p3 = perms.filter((el)=>el.length===3)
+    let p4 = perms.filter((el)=>el.length===4)
+    let p5 = perms.filter((el)=>el.length===5)
+    let p6 = perms.filter((el)=>el.length===6)
+    let p7 = perms.filter((el)=>el.length===7)
+    return [p2, p3, p4, p5, p6, p7]
 }
-tilesCopy = mapToArray(tilesCopyMap)
-let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
-console.log(nWords)
-console.log(nWords.some((el)=>!checkDict(el)))
-console.log(score(tilesCopy, 'q'))
+
+let [p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, 'q')
+
+console.log(p2.length)
+console.log(p3.length)
+console.log(p4.length)
+console.log(p5.length)
+console.log(p6.length)
+console.log(p7.length)
 
 
-console.log(tilesCopy)
 
 
+function countBlanks(str){
+    let blanks =0
+    for (let l of str){
+        if (l=== "_"){
+            blanks+=1
+        }
+    }
+    return blanks
+}
 
-console.log(mapToArray(tilesCopyMap))
+console.log(countBlanks("CA_T"))
