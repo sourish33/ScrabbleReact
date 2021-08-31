@@ -13,6 +13,7 @@ import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageM
 import { randomUpTo } from "../Utils/helpers"
 import { passGreetings } from "../Utils/DummyData"
 import VictoryModal from "../VictoryModal/VictoryModal"
+import { makeAllSlots, makeRackPerms } from "./AIHelperFunctions"
 
 
 
@@ -195,8 +196,16 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        console.log(tiles)
-        // console.log(legalPositions(tiles))
+        // console.log(tiles)
+        let [p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
+        let [s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles)
+        console.log(`${p2.length*s2.length} 2-letter possibilities`)
+        console.log(`${p3.length*s3.length} 3-letter possibilities`)
+        console.log(`${p4.length*s4.length} 4-letter possibilities`)
+        console.log(`${p5.length*s5.length} 5-letter possibilities`)
+        console.log(`${p6.length*s6.length} 6-letter possibilities`)
+        console.log(`${p7.length*s7.length} 2-letter possibilities`)
+    
     }
 
     const lookup = () => {
