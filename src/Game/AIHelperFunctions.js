@@ -220,3 +220,19 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     }
     return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
 }
+
+
+export const evaluateMoves = (rackPerms, slots, tiles, rack) =>{
+    let moves = []
+    for (let rp of rackPerms) {
+        for (let s of slots) {
+            let pts = evaluateMove(rp, s, tiles, rack)
+            if (pts) {
+                moves.push({rackPerm: rp, slot: s, points: pts})
+            }
+
+        }
+    }
+    return moves
+
+}

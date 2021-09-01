@@ -13,7 +13,7 @@ import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageM
 import { randomUpTo } from "../Utils/helpers"
 import { passGreetings } from "../Utils/DummyData"
 import VictoryModal from "../VictoryModal/VictoryModal"
-import { evaluateMove, makeAllSlots, makeRackPerms } from "./AIHelperFunctions"
+import { evaluateMove, evaluateMoves, makeAllSlots, makeRackPerms } from "./AIHelperFunctions"
 
 
 
@@ -200,18 +200,9 @@ const Game = ({ gameVariables, exitGame }) => {
         let [p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let [s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles)
         let moves = []
-        for (let i=0;i<p2.length;i++){ 
-           for (let j=0;j<s2.length;j++){
-            let points = evaluateMove(p2[i], s2[j], tiles, playersAndPoints[currentPlayer].rack)
-            if (points) {
-                moves.push({p: p2[i], s: s2[j], pts: points})
-            }
-
-           }
-        }
+        let moves2 = evaluateMoves(p2, s2, tiles, playersAndPoints[currentPlayer].rack)
+        moves = [...moves, ...moves2].sort((x,y)=>y.points-x.points)
         console.log(moves)
-
-    
     }
 
     const lookup = () => {

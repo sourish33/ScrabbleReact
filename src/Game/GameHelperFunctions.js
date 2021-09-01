@@ -413,3 +413,5 @@ export function rackPoints(rack, tiles) {
     }
     return totalPoints
 }
+
+
