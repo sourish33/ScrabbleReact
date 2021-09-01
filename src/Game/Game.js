@@ -201,8 +201,10 @@ const Game = ({ gameVariables, exitGame }) => {
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
         let moves = []
-        let moves1 = evaluateMoves(p1, s1, tiles, playersAndPoints[currentPlayer].rack)
-        moves = [...moves, ...moves1].sort((x,y)=>y.points-x.points)
+        let moves1 = moveNumber !== 0 ? evaluateMoves(p1, s1, tiles, playersAndPoints[currentPlayer].rack) : []
+        let moves2 = evaluateMoves(p2, s2, tiles, playersAndPoints[currentPlayer].rack)
+        let moves3 = evaluateMoves(p3, s3, tiles, playersAndPoints[currentPlayer].rack)
+        moves = [...moves, ...moves1, ...moves2, ...moves3].sort((x,y)=>y.points-x.points)
         console.log(moves)
     }
 
