@@ -468,11 +468,8 @@ function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
 console.log(tiles)
 
 
-let rackTiles = ['q1', 'q2','q3', 'q4', 'q6']
-let boardPositions = s5[s5.length-1]
-console.log(boardPositions)
 
-console.log(evaluateMove(rackTiles, boardPositions, tiles, 'q'))
+
 
 function makeRackPerms(tiles, visibleRack) {
     let nums = Array.from({ length: 7 }, (x, i) => i + 1)
@@ -485,7 +482,7 @@ function makeRackPerms(tiles, visibleRack) {
     let permsMap = new Map()
     for (let perm of perms){
         let word = readWord(perm, tiles)
-        if (!permsMap.has(word) && countBlanks(word)<2 ) {
+        if (!permsMap.has(word) && countBlanks(word)<1 ) {
             permsMap.set(readWord(perm, tiles), perm)
         }
     }
@@ -508,7 +505,10 @@ console.log(p5.length)
 console.log(p6.length)
 console.log(p7.length)
 
-
+let rackTiles = p5[47]
+let boardPositions = s5[2]
+console.log(boardPositions)
+console.log(evaluateMove(rackTiles, boardPositions, tiles, 'q'))
 
 
 function countBlanks(str){
@@ -521,4 +521,19 @@ function countBlanks(str){
     return blanks
 }
 
-console.log(countBlanks("CA_T"))
+let pointillist =[]
+
+// for (let racktiles of s2) {
+//     for (let boardpos of p2) {
+//         console.log(racktiles)
+//         console.log(boardpos)
+//         let points = evaluateMove(racktiles, boardpos, tiles, "p")
+//         if (points!== null) {
+//             pointillist.push({rt: racktiles, bp: boardpos, pts: points })
+//         }
+//     }
+// }
+
+// evaluateMove(s2[0], p2[0], tiles, "p")
+
+console.log(pointillist)

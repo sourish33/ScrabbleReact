@@ -209,7 +209,7 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
         tilesCopyMap.delete(st)
     }
     tilesCopy = mapToArray(tilesCopyMap)
-    console.log(tilesCopy)
+    // console.log(tilesCopy)
     let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
     let anyBadWords = nWords.some((el) => !checkDict(el))
     let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
