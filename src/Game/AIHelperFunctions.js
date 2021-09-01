@@ -160,13 +160,14 @@ export function makeAllSlots(tiles, verSlots=true) {
         ...allHorSlots,
         ...allVerSlots,
     ]
+    let s1 = lp.map((el)=>[el])
     let s2 = allSlots.filter((el) => el.length === 2)
     let s3 = allSlots.filter((el) => el.length === 3)
     let s4 = allSlots.filter((el) => el.length === 4)
     let s5 = allSlots.filter((el) => el.length === 5)
     let s6 = allSlots.filter((el) => el.length === 6)
     let s7 = allSlots.filter((el) => el.length === 7)
-    let bins = [s2, s3, s4, s5, s6, s7]
+    let bins = [s1, s2, s3, s4, s5, s6, s7]
     return bins.map((el) => prioritySort(el))
 }
 
@@ -181,18 +182,19 @@ export function makeRackPerms(tiles, visibleRack) {
     let permsMap = new Map()
     for (let perm of perms) {
         let word = readWord(perm, tiles)
-        if (!permsMap.has(word) && countBlanks(word) < 2) {
+        if (!permsMap.has(word) && countBlanks(word) < 1) {//ignoring all blank tiles
             permsMap.set(readWord(perm, tiles), perm)
         }
     }
     perms = Array.from(permsMap.values())
+    let p1 = rackPos.map((el)=>[el])
     let p2 = perms.filter((el) => el.length === 2)
     let p3 = perms.filter((el) => el.length === 3)
     let p4 = perms.filter((el) => el.length === 4)
     let p5 = perms.filter((el) => el.length === 5)
     let p6 = perms.filter((el) => el.length === 6)
     let p7 = perms.filter((el) => el.length === 7)
-    return [p2, p3, p4, p5, p6, p7]
+    return [p1, p2, p3, p4, p5, p6, p7]
 }
 
 export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {

@@ -197,12 +197,12 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const passTurn = () => {
         // console.log(tiles)
-        let [p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
+        let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
-        let [s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
+        let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
         let moves = []
-        let moves2 = evaluateMoves(p2, s2, tiles, playersAndPoints[currentPlayer].rack)
-        moves = [...moves, ...moves2].sort((x,y)=>y.points-x.points)
+        let moves1 = evaluateMoves(p1, s1, tiles, playersAndPoints[currentPlayer].rack)
+        moves = [...moves, ...moves1].sort((x,y)=>y.points-x.points)
         console.log(moves)
     }
 
