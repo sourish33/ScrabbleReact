@@ -5,7 +5,7 @@ import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import { getUniqueInts0, makePlayertable, subtractArrays } from "../Utils/helpers"
-import { checkLegalPlacement, emptyOnRack, getAllNewWords, longestNewWord, rackPoints,  readWord, recallTiles, score, shuffleRackTiles,  tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
+import { checkLegalPlacement, emptyOnRack, getAllNewWords, longestNewWord, rackPoints,  readWord, recallTiles, score, shuffleRackTiles,  tilesOnBoard,  tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
@@ -198,7 +198,8 @@ const Game = ({ gameVariables, exitGame }) => {
     const passTurn = () => {
         // console.log(tiles)
         let [p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
-        let [s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles)
+        let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
+        let [s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
         let moves = []
         let moves2 = evaluateMoves(p2, s2, tiles, playersAndPoints[currentPlayer].rack)
         moves = [...moves, ...moves2].sort((x,y)=>y.points-x.points)

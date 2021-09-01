@@ -151,12 +151,14 @@ function makeAllVerSlots(tiles, lp, sub) {
     return [...arrMap.values()]
 }
 
-export function makeAllSlots(tiles) {
+export function makeAllSlots(tiles, verSlots=true) {
     let lp = legalPositions(tiles)
     let sub = tilesSubmitted(tiles).map((el) => el.pos)
+    let allHorSlots = makeAllHorSlots(tiles, lp, sub)
+    let allVerSlots = verSlots ? makeAllVerSlots(tiles, lp, sub): []
     let allSlots = [
-        ...makeAllHorSlots(tiles, lp, sub),
-        ...makeAllVerSlots(tiles, lp, sub),
+        ...allHorSlots,
+        ...allVerSlots,
     ]
     let s2 = allSlots.filter((el) => el.length === 2)
     let s3 = allSlots.filter((el) => el.length === 3)
