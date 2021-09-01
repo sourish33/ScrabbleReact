@@ -42,56 +42,140 @@ import { checkDict } from "../Utils/Dictionary/dictionary"
 let tiles = [
     {
       "pos": "b112",
-      "letter": "C",
-      "points": 3,
-      "submitted": true
-    },
-    {
-      "pos": "b126",
-      "letter": "F",
-      "points": 4,
-      "submitted": true
-    },
-    {
-      "pos": "b127",
-      "letter": "O",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b128",
-      "letter": "R",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b142",
-      "letter": "I",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b157",
       "letter": "L",
       "points": 1,
       "submitted": true
     },
     {
+      "pos": "b113",
+      "letter": "E",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b114",
+      "letter": "X",
+      "points": 8,
+      "submitted": true
+    },
+    {
+      "pos": "b128",
+      "letter": "N",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b129",
+      "letter": "U",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b130",
+      "letter": "T",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b145",
+      "letter": "I",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b160",
+      "letter": "N",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b162",
+      "letter": "Z",
+      "points": 10,
+      "submitted": true
+    },
+    {
+      "pos": "b175",
+      "letter": "T",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b176",
+      "letter": "E",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b177",
+      "letter": "E",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b192",
+      "letter": "D",
+      "points": 2,
+      "submitted": true
+    },
+    {
+      "pos": "b193",
+      "letter": "O",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b194",
+      "letter": "O",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b98",
+      "letter": "Y",
+      "points": 4,
+      "submitted": true
+    },
+    {
       "pos": "p1",
+      "letter": "T",
+      "points": 1,
+      "submitted": false
+    },
+    {
+      "pos": "p2",
       "letter": "U",
       "points": 1,
       "submitted": false
     },
     {
       "pos": "p3",
-      "letter": "I",
+      "letter": "O",
       "points": 1,
       "submitted": false
     },
     {
       "pos": "p4",
-      "letter": "M",
+      "letter": "O",
+      "points": 1,
+      "submitted": false
+    },
+    {
+      "pos": "p5",
+      "letter": "I",
+      "points": 1,
+      "submitted": false
+    },
+    {
+      "pos": "p6",
+      "letter": "P",
       "points": 3,
+      "submitted": false
+    },
+    {
+      "pos": "p7",
+      "letter": "_",
+      "points": 0,
       "submitted": false
     },
     {
@@ -102,85 +186,49 @@ let tiles = [
     },
     {
       "pos": "q2",
-      "letter": "F",
-      "points": 4,
+      "letter": "E",
+      "points": 1,
       "submitted": false
     },
     {
       "pos": "q3",
-      "letter": "I",
+      "letter": "E",
       "points": 1,
       "submitted": false
     },
     {
       "pos": "q4",
-      "letter": "S",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "q5",
-      "letter": "O",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "q6",
       "letter": "J",
       "points": 8,
       "submitted": false
     },
     {
+      "pos": "q5",
+      "letter": "Q",
+      "points": 10,
+      "submitted": false
+    },
+    {
+      "pos": "b209",
+      "letter": "A",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b224",
+      "letter": "T",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "q6",
+      "letter": "E",
+      "points": 1,
+      "submitted": false
+    },
+    {
       "pos": "q7",
       "letter": "E",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "b169",
-      "letter": "D",
-      "points": 2,
-      "submitted": true
-    },
-    {
-      "pos": "b170",
-      "letter": "E",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b171",
-      "letter": "N",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b172",
-      "letter": "S",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "p2",
-      "letter": "G",
-      "points": 2,
-      "submitted": false
-    },
-    {
-      "pos": "p5",
-      "letter": "B",
-      "points": 3,
-      "submitted": false
-    },
-    {
-      "pos": "p6",
-      "letter": "C",
-      "points": 3,
-      "submitted": false
-    },
-    {
-      "pos": "p7",
-      "letter": "N",
       "points": 1,
       "submitted": false
     }
