@@ -207,6 +207,7 @@ const Game = ({ gameVariables, exitGame }) => {
         ]
         moves.sort((x,y)=>y.points-x.points)
         let toShow = moves.length> 10 ? 10: moves.length
+        console.log(`${moves.length} moves considered`)
         console.log(moves.slice(0, toShow))
     }
 
