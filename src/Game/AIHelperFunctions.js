@@ -226,15 +226,17 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
 }
 
 
-export const evaluateMoves = (rackPerms, slots, tiles, rack) =>{
+export const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 10000) =>{
     let moves = []
+    let tries = 0
     for (let rp of rackPerms) {
+        if (tries>cutoff){break}
         for (let s of slots) {
             let pts = evaluateMove(rp, s, tiles, rack)
             if (pts) {
-                moves.push({rackPerm: rp, slot: s, points: pts})
+                moves.push({rackPerm: rp, slot: s, points: pts, letter: ""})
             }
-
+            tries+=1
         }
     }
     return moves

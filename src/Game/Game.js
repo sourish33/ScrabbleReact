@@ -197,17 +197,26 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const passTurn = () => {
         // console.log(tiles)
+        
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
+        let t0 = performance.now()
         let moves = [
             ...moveNumber !== 0 ? evaluateMoves(p1, s1, tiles, playersAndPoints[currentPlayer].rack) : [], 
             ...evaluateMoves(p2, s2, tiles, playersAndPoints[currentPlayer].rack), 
-            ...evaluateMoves(p3, s3, tiles, playersAndPoints[currentPlayer].rack)
+            ...evaluateMoves(p3, s3, tiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p4, s4, tiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p5, s5, tiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p6, s6, tiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p7, s7, tiles, playersAndPoints[currentPlayer].rack),
         ]
+        let t1 = performance.now()
+        console.log("starting search at" + t1)
+        let numPossibilities = p1.length*s1.length+p2.length*s2.length+p3.length*s3.length+p4.length*s4.length+p5.length*s5.length+p6.length*s6.length+p7.length*s7.length
         moves.sort((x,y)=>y.points-x.points)
         let toShow = moves.length> 10 ? 10: moves.length
-        console.log(`${moves.length} moves considered`)
+        console.log(`${moves.length} words found out of ${numPossibilities} in ${(t1-t0)/1000} sec`)
         console.log(moves.slice(0, toShow))
     }
 
