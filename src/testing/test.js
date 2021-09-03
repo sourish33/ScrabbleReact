@@ -39,118 +39,70 @@ import { checkDict } from "../Utils/Dictionary/dictionary"
 
 // import { coords, getUniques, loc,  } from "./Utils/helpers";
 
-let tiles = [
+let tiles =[
     {
       "pos": "b112",
-      "letter": "L",
+      "letter": "R",
       "points": 1,
       "submitted": true
     },
     {
-      "pos": "b113",
-      "letter": "E",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b114",
-      "letter": "X",
-      "points": 8,
-      "submitted": true
-    },
-    {
-      "pos": "b128",
-      "letter": "N",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b129",
-      "letter": "U",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b130",
+      "pos": "b126",
       "letter": "T",
       "points": 1,
       "submitted": true
     },
     {
-      "pos": "b145",
+      "pos": "b127",
       "letter": "I",
       "points": 1,
       "submitted": true
     },
     {
-      "pos": "b160",
+      "pos": "b128",
+      "letter": "L",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b129",
+      "letter": "E",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "b142",
       "letter": "N",
       "points": 1,
       "submitted": true
     },
     {
-      "pos": "b162",
-      "letter": "Z",
-      "points": 10,
-      "submitted": true
-    },
-    {
-      "pos": "b175",
-      "letter": "T",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b176",
-      "letter": "E",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b177",
-      "letter": "E",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b192",
-      "letter": "D",
-      "points": 2,
-      "submitted": true
-    },
-    {
-      "pos": "b193",
+      "pos": "b143",
       "letter": "O",
       "points": 1,
       "submitted": true
     },
     {
-      "pos": "b194",
-      "letter": "O",
+      "pos": "b157",
+      "letter": "E",
       "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b98",
-      "letter": "Y",
-      "points": 4,
       "submitted": true
     },
     {
       "pos": "p1",
-      "letter": "_",
-      "points": 0,
+      "letter": "I",
+      "points": 1,
       "submitted": false
     },
     {
       "pos": "p2",
-      "letter": "U",
+      "letter": "_",
       "points": 1,
       "submitted": false
     },
     {
       "pos": "p3",
-      "letter": "O",
+      "letter": "I",
       "points": 1,
       "submitted": false
     },
@@ -162,73 +114,67 @@ let tiles = [
     },
     {
       "pos": "p5",
-      "letter": "I",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "p6",
-      "letter": "P",
-      "points": 3,
-      "submitted": false
-    },
-    {
-      "pos": "p7",
-      "letter": "R",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "q1",
       "letter": "O",
       "points": 1,
       "submitted": false
     },
     {
-      "pos": "q2",
-      "letter": "E",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "q3",
-      "letter": "E",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "q4",
+      "pos": "p6",
       "letter": "J",
       "points": 8,
       "submitted": false
     },
     {
-      "pos": "q5",
-      "letter": "Q",
-      "points": 10,
+      "pos": "p7",
+      "letter": "W",
+      "points": 4,
       "submitted": false
     },
     {
-      "pos": "b209",
-      "letter": "A",
-      "points": 1,
-      "submitted": true
+      "pos": "q1",
+      "letter": "P",
+      "points": 3,
+      "submitted": false
     },
     {
-      "pos": "b224",
-      "letter": "T",
+      "pos": "q2",
+      "letter": "O",
       "points": 1,
-      "submitted": true
+      "submitted": false
+    },
+    {
+      "pos": "q3",
+      "letter": "A",
+      "points": 1,
+      "submitted": false
+    },
+    {
+      "pos": "q5",
+      "letter": "E",
+      "points": 1,
+      "submitted": false
     },
     {
       "pos": "q6",
-      "letter": "E",
-      "points": 1,
+      "letter": "M",
+      "points": 3,
       "submitted": false
     },
     {
       "pos": "q7",
-      "letter": "E",
+      "letter": "I",
+      "points": 1,
+      "submitted": false
+    },
+    {
+      "pos": "b158",
+      "letter": "X",
+      "points": 8,
+      "submitted": true
+    },
+    {
+      "pos": "q4",
+      "letter": "U",
       "points": 1,
       "submitted": false
     }
@@ -521,22 +467,40 @@ function countBlanks(str){
     return blanks
 }
 
+// function evaluateMoveBlank(rackTilesWithBlank, boardPositions, tiles, visibleRack, letter){
+//     //find the rack tile that is the blank
+//     let tilesCopy = Array.from(tiles)
+//     let tilesCopyMap = arrayToMap(tiles)
+//     console.log(tilesCopyMap)
+//     for (let i=0;i<rackTilesWithBlank.length;i++) {
+//         let val = tilesCopyMap.get(rackTilesWithBlank[i])
+//         console.log(val)
+//         if (val[0] === "_") {
+//             val[0] = letter
+//             tilesCopyMap.set(rackTilesWithBlank[i], val)
+//             break
+//         }
+//     }
+//     tilesCopy = mapToArray(tilesCopyMap)
+//     console.log(tilesCopy)
+//     return evaluateMove(rackTilesWithBlank, boardPositions, tilesCopy, visibleRack)
+// }
+
 function evaluateMoveBlank(rackTilesWithBlank, boardPositions, tiles, visibleRack, letter){
-    //find the rack tile that is the blank
+    let rackLetters = readWord(rackTilesWithBlank, tiles)
+    let blankInd = rackLetters.indexOf('_')
+    if (blankInd===-1){
+        throw new Error(`${rackTilesWithBlank} does not have any blanks in evaluateMoveBlank`)
+    }
+    let blankpos = rackTilesWithBlank[blankInd]
     let tilesCopy = Array.from(tiles)
-    let tilesCopyMap = arrayToMap(tiles)
-    console.log(tilesCopyMap)
-    for (let i=0;i<rackTilesWithBlank.length;i++) {
-        let val = tilesCopyMap.get(rackTilesWithBlank[i])
-        console.log(val)
-        if (val[0] === "_") {
-            val[0] = letter
-            tilesCopyMap.set(rackTilesWithBlank[i], val)
+    for (let n=0; n<tilesCopy.length; n++){
+        if (tilesCopy[n].pos === blankpos){
+            tilesCopy[n].letter = letter
             break
         }
     }
-    tilesCopy = mapToArray(tilesCopyMap)
-    console.log(tilesCopy)
+    // console.log(tilesCopy.filter(el=>el.pos==='p2'))
     return evaluateMove(rackTilesWithBlank, boardPositions, tilesCopy, visibleRack)
 }
 
@@ -556,7 +520,10 @@ export const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 10000) =>{
     return moves
 }
 
-console.log(evaluateMoveBlank(['p1', 'p2'], s2[0], tiles, 'p', "S"))
+console.log(evaluateMoveBlank(['p1', 'p2'], ['b115', 'b130'], tiles, 'p', "S"))
 // let moves = evaluateMoves(p2, s2, tiles, "p")
 // moves.sort((x,y)=>y.points-x.points)
 // console.log(moves.slice(0, 3))
+
+let grp = readWord(['p1', 'p2'], tiles)
+console.log(grp.indexOf('_'))

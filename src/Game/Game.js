@@ -196,7 +196,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        // console.log(tiles)
+        console.log(tiles)
         
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
