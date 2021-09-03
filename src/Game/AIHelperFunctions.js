@@ -197,6 +197,22 @@ export function makeRackPerms(tiles, visibleRack) {
     return [p1, p2, p3, p4, p5, p6, p7]
 }
 
+// function evaluateMoveBlank(rackTilesWithBlank, boardPositions, tiles, visibleRack, letter){
+//     //find the rack tile that is the blank
+//     let tilesCopy = Array.from(tiles)
+//     let tilesCopyMap = arrayToMap(tiles)
+//     for (let i=0;i<rackTilesWithBlank.length;i++) {
+//         let val = tilesCopyMap.get(rackTilesWithBlank[i])
+//         if (val.letter === "_") {
+//             val.letter = letter
+//             tilesCopyMap.set(rackTilesWithBlank[i], val)
+//             break
+//         }
+//     }
+//     tilesCopy = mapToArray(tilesCopyMap)
+//     return evaluateMove(rackTilesWithBlank, boardPositions, tilesCopy, visibleRack)
+// }
+
 export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     if (rackTiles.length !== boardPositions.length) {
         throw new Error(
