@@ -209,7 +209,7 @@ export function evaluateMoveBlank(rackTilesWithBlank, blankInd, boardPositions, 
     // let blankInd = the index of the blank tile
 
     let blankpos = rackTilesWithBlank[blankInd]
-    let tilesCopy = Array.from(tiles)
+    let tilesCopy = JSON.parse(JSON.stringify(tiles))
     for (let n=0; n<tilesCopy.length; n++){
         if (tilesCopy[n].pos === blankpos){
             tilesCopy[n].letter = letter
@@ -226,7 +226,7 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
             `${rackTiles} and ${boardPositions} unequal length in evaluateMove`
         )
     }
-    let tilesCopy = Array.from(tiles)
+    let tilesCopy = JSON.parse(JSON.stringify(tiles))
     let tilesCopyMap = arrayToMap(tiles)
     for (let i = 0; i < tilesCopyMap.size; i++) {
         let st = rackTiles[i]
@@ -236,16 +236,16 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
         tilesCopyMap.delete(st)
     }
     tilesCopy = mapToArray(tilesCopyMap)
-    // console.log(tilesCopy)
     let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
     let anyBadWords = nWords.some((el) => !checkDict(el))
-    let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
-    if (badPlacement) {
-        throw new Error(
-            `${rackTiles} and ${boardPositions} giving bad placement`
-        )
-    }
-    return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
+    // let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
+    // if (badPlacement) {
+    //     throw new Error(
+    //         `${rackTiles} and ${boardPositions} giving bad placement`
+    //     )
+    // }
+    // return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
+    return anyBadWords ? null : score(tilesCopy, visibleRack)
 }
 
 

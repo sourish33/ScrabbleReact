@@ -120,8 +120,8 @@ const GameInfo = ({ handleSubmit }) => {
                         onChange={handleSelectShuffle}
                         value={shufflePlayers}
                     >
-                        <option key="N" value="1">No</option>
-                        <option key="Y" value="0">Yes</option>
+                        <option key="N" value="0">No</option>
+                        <option key="Y" value="1">Yes</option>
                     </select>
                 </div>
             </div>

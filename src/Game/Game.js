@@ -217,6 +217,7 @@ const Game = ({ gameVariables, exitGame }) => {
         console.log("starting search at" + t1)
         let numPossibilities = p1.length*s1.length+p2.length*s2.length+p3.length*s3.length+p4.length*s4.length+p5.length*s5.length+p6.length*s6.length+p7.length*s7.length
         moves.sort((x,y)=>y.points-x.points)
+        // moves.sort((x,y)=>y.letter.localeCompare(x.letter))
         let toShow = moves.length> 10 ? 10: moves.length
         console.log(`${moves.length} words found out of ${numPossibilities} in ${(t1-t0)/1000} sec`)
         console.log(moves.slice(0, toShow))
