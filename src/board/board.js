@@ -44,6 +44,7 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
                     DragStart={DragStart}
                     DragOver={DragOver}
                     Drop={Drop}
+                    boardTile= {true}
                 />
             )
             let thisSquare = (

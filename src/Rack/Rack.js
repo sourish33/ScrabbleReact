@@ -22,6 +22,7 @@ const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMov
                     DragStart={DragStart}
                     DragOver={DragOver}
                     Drop={Drop}
+                    boardTile={false}
                 />
             )
             let thisSquare = (
