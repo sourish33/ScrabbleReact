@@ -86,9 +86,11 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         ///////
         if (bag.length===0){//no tiles left
-            for (let i =0; i<playersAndPoints.length; i++){
-                playersAndPoints[i].points -= rackPoints(playersAndPoints[i].rack, tiles)
+            let playersAndPointsCopy = Array.from(playersAndPoints)
+            for (let i =0; i<playersAndPointsCopy.length; i++){
+                playersAndPointsCopy[i].points -= rackPoints(playersAndPointsCopy[i].rack, tiles)
             }
+            setPlayersAndPoints(playersAndPointsCopy)
             setShowVictoryBox(x=>true)
             setButtonsDisabled(x=>true)
             let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
