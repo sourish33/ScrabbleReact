@@ -369,7 +369,7 @@ console.log(s5.length)
 console.log(s6.length)
 console.log(s7.length)
 
-console.log(s4[1])
+console.log(s2[1])
 
 function showdis(arr) {
     for (let el of arr) {
@@ -442,7 +442,7 @@ function makeRackPerms(tiles, visibleRack) {
     return [p2, p3, p4, p5, p6, p7]
 }
 
-let [p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, 'q')
+let [p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, 'p')
 
 console.log(p2.length)
 console.log(p3.length)
@@ -451,10 +451,10 @@ console.log(p5.length)
 console.log(p6.length)
 console.log(p7.length)
 
-let rackTiles = p5[47]
-let boardPositions = s5[2]
+let rackTiles = p2[17]
+let boardPositions = s2[2]
 console.log(boardPositions)
-console.log(evaluateMove(rackTiles, boardPositions, tiles, 'q'))
+// console.log(evaluateMove(rackTiles, boardPositions, tiles, 'p'))
 
 
 function countBlanks(str){
@@ -486,12 +486,10 @@ function countBlanks(str){
 //     return evaluateMove(rackTilesWithBlank, boardPositions, tilesCopy, visibleRack)
 // }
 
-function evaluateMoveBlank(rackTilesWithBlank, boardPositions, tiles, visibleRack, letter){
-    let rackLetters = readWord(rackTilesWithBlank, tiles)
-    let blankInd = rackLetters.indexOf('_')
-    if (blankInd===-1){
-        throw new Error(`${rackTilesWithBlank} does not have any blanks in evaluateMoveBlank`)
-    }
+function evaluateMoveBlank(rackTilesWithBlank, blankInd, boardPositions, tiles, visibleRack, letter){
+    // rackTilesWithBlank: a group of rack tiles containing a blank tile
+    // let blankInd = the index of the blank tile
+
     let blankpos = rackTilesWithBlank[blankInd]
     let tilesCopy = Array.from(tiles)
     for (let n=0; n<tilesCopy.length; n++){
@@ -504,26 +502,74 @@ function evaluateMoveBlank(rackTilesWithBlank, boardPositions, tiles, visibleRac
     return evaluateMove(rackTilesWithBlank, boardPositions, tilesCopy, visibleRack)
 }
 
-export const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 10000) =>{
-    let moves = []
-    let tries = 0
-    for (let rp of rackPerms) {
-        if (tries>cutoff){break}
-        for (let s of slots) {
-            let pts = evaluateMove(rp, s, tiles, rack)
-            if (pts) {
-                moves.push({rackPerm: rp, slot: s, points: pts, letter: ""})
-            }
-            tries+=1
-        }
-    }
-    return moves
+// export const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 10000) =>{
+//     let moves = []
+//     let tries = 0
+//     for (let rp of rackPerms) {
+//         if (tries>cutoff){break}
+//         for (let s of slots) {
+//             let pts = evaluateMove(rp, s, tiles, rack)
+//             if (pts) {
+//                 moves.push({rackPerm: rp, slot: s, points: pts, letter: ""})
+//             }
+//             tries+=1
+//         }
+//     }
+//     return moves
+// }
+
+function findBlankTile(rackTiles, tiles){
+    //returns index of tile containing blank and -1 if none found
+    console.log(rackTiles)
+    let rackLetters = readWord(rackTiles, tiles)
+    return rackLetters.indexOf('_')
 }
 
-console.log(evaluateMoveBlank(['p1', 'p2'], ['b115', 'b130'], tiles, 'p', "S"))
+// console.log(evaluateMoveBlank(['p1', 'p2'], ['b115', 'b130'], tiles, 'p', "S"))
 // let moves = evaluateMoves(p2, s2, tiles, "p")
 // moves.sort((x,y)=>y.points-x.points)
 // console.log(moves.slice(0, 3))
 
-let grp = readWord(['p1', 'p2'], tiles)
-console.log(grp.indexOf('_'))
+const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 10000) =>{
+    let moves = []
+    let tries = 0
+    let LETTERS = ['S', 'A', 'E']
+    for (let rp of rackPerms) {
+        console.log(rp)
+        let blankInd = findBlankTile(rp, tiles)
+        if (blankInd === -1) {
+            for (let s of slots) {
+                if (tries>cutoff){break}
+                let pts = evaluateMove(rp, s, tiles, rack)
+                if (pts) {
+                    moves.push({rackPerm: rp, slot: s, points: pts, letter: ""})
+                }
+                tries+=1
+            }
+        }
+        else {
+            for (let letter of LETTERS){
+                    for (let s of slots) {
+                        if (tries>cutoff){break}
+                        let pts = evaluateMoveBlank(rp, blankInd, s, tiles, rack, letter)
+                        if (pts) {
+                            moves.push({rackPerm: rp, slot: s, points: pts, letter: letter})
+                        }
+                        tries+=1
+                    }
+                }
+
+            }
+
+
+        }
+
+    return moves
+
+}
+
+let moves = evaluateMoves(p2, s2, tiles, "p")
+moves.sort((x,y)=>y.points-x.points)
+console.log(moves)
+
+console.log(tiles)

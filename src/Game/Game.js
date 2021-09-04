@@ -196,7 +196,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        console.log(tiles)
+        // console.log(tiles)
         
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
@@ -241,7 +241,8 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         let newWords = getAllNewWords(tiles)
-        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: playersAndPoints[currentPlayer].points+=pointsPossible },...lastPlayed])
+        playersAndPoints[currentPlayer].points+=pointsPossible
+        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: pointsPossible },...lastPlayed])
         //Change the subitted field to true
 
         let tilesNowSubmitted = []

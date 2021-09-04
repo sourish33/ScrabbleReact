@@ -197,13 +197,17 @@ export function makeRackPerms(tiles, visibleRack) {
     return [p1, p2, p3, p4, p5, p6, p7]
 }
 
+function findBlankTile(rackTiles, tiles){
+    //returns index of tile containing blank and -1 if none found
+    let rackLetters = readWord(rackTiles, tiles)
+    return rackLetters.indexOf('_')
+}
 
-export function evaluateMoveBlank(rackTilesWithBlank, boardPositions, tiles, visibleRack, letter){
-    let rackLetters = readWord(rackTilesWithBlank, tiles)
-    let blankInd = rackLetters.indexOf('_')
-    if (blankInd===-1){
-        throw new Error(`${rackTilesWithBlank} does not have any blanks in evaluateMoveBlank`)
-    }
+
+export function evaluateMoveBlank(rackTilesWithBlank, blankInd, boardPositions, tiles, visibleRack, letter){
+    // rackTilesWithBlank: a group of rack tiles containing a blank tile
+    // let blankInd = the index of the blank tile
+
     let blankpos = rackTilesWithBlank[blankInd]
     let tilesCopy = Array.from(tiles)
     for (let n=0; n<tilesCopy.length; n++){
@@ -248,16 +252,36 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
 export const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 10000) =>{
     let moves = []
     let tries = 0
+    let LETTERS = ['S', 'A', 'E']
     for (let rp of rackPerms) {
-        if (tries>cutoff){break}
-        for (let s of slots) {
-            let pts = evaluateMove(rp, s, tiles, rack)
-            if (pts) {
-                moves.push({rackPerm: rp, slot: s, points: pts, letter: ""})
+        //console.log(rp)
+        let blankInd = findBlankTile(rp, tiles)
+        if (blankInd === -1) {
+            for (let s of slots) {
+                if (tries>cutoff){break}
+                let pts = evaluateMove(rp, s, tiles, rack)
+                if (pts) {
+                    moves.push({rackPerm: rp, slot: s, points: pts, letter: ""})
+                }
+                tries+=1
             }
-            tries+=1
         }
-    }
-    return moves
+        else {
+            for (let letter of LETTERS){
+                    for (let s of slots) {
+                        if (tries>cutoff){break}
+                        let pts = evaluateMoveBlank(rp, blankInd, s, tiles, rack, letter)
+                        if (pts) {
+                            moves.push({rackPerm: rp, slot: s, points: pts, letter: letter})
+                        }
+                        tries+=1
+                    }
+                }
 
+            }
+
+
+        }
+
+    return moves
 }
