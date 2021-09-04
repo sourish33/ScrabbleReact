@@ -241,7 +241,9 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         let newWords = getAllNewWords(tiles)
-        playersAndPoints[currentPlayer].points+=pointsPossible
+        let playersAndPointsCopy = Array.from(playersAndPoints)
+        playersAndPointsCopy[currentPlayer].points+=pointsPossible
+        setPlayersAndPoints(playersAndPointsCopy)
         setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tiles), points: pointsPossible },...lastPlayed])
         //Change the subitted field to true
 
