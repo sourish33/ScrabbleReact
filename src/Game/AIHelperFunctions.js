@@ -151,16 +151,13 @@ function makeAllVerSlots(tiles, lp, sub) {
     return [...arrMap.values()]
 }
 
-export function makeAllSlots(tiles, verSlots=true) {
+export function makeAllSlots(tiles, verSlots = true) {
     let lp = legalPositions(tiles)
     let sub = tilesSubmitted(tiles).map((el) => el.pos)
     let allHorSlots = makeAllHorSlots(tiles, lp, sub)
-    let allVerSlots = verSlots ? makeAllVerSlots(tiles, lp, sub): []
-    let allSlots = [
-        ...allHorSlots,
-        ...allVerSlots,
-    ]
-    let s1 = lp.map((el)=>[el])
+    let allVerSlots = verSlots ? makeAllVerSlots(tiles, lp, sub) : []
+    let allSlots = [...allHorSlots, ...allVerSlots]
+    let s1 = lp.map((el) => [el])
     let s2 = allSlots.filter((el) => el.length === 2)
     let s3 = allSlots.filter((el) => el.length === 3)
     let s4 = allSlots.filter((el) => el.length === 4)
@@ -182,12 +179,13 @@ export function makeRackPerms(tiles, visibleRack) {
     let permsMap = new Map()
     for (let perm of perms) {
         let word = readWord(perm, tiles)
-        if (!permsMap.has(word) && countBlanks(word) < 1) {//ignoring all blank tiles
+        if (!permsMap.has(word) && countBlanks(word) < 2) {
+            //upto one blank tile
             permsMap.set(readWord(perm, tiles), perm)
         }
     }
     perms = Array.from(permsMap.values())
-    let p1 = rackPos.map((el)=>[el])
+    let p1 = rackPos.map((el) => [el])
     let p2 = perms.filter((el) => el.length === 2)
     let p3 = perms.filter((el) => el.length === 3)
     let p4 = perms.filter((el) => el.length === 4)
@@ -197,27 +195,38 @@ export function makeRackPerms(tiles, visibleRack) {
     return [p1, p2, p3, p4, p5, p6, p7]
 }
 
-function findBlankTile(rackTiles, tiles){
+function findBlankTile(rackTiles, tiles) {
     //returns index of tile containing blank and -1 if none found
     let rackLetters = readWord(rackTiles, tiles)
-    return rackLetters.indexOf('_')
+    return rackLetters.indexOf("_")
 }
 
-
-export function evaluateMoveBlank(rackTilesWithBlank, blankInd, boardPositions, tiles, visibleRack, letter){
+export function evaluateMoveBlank(
+    rackTilesWithBlank,
+    blankInd,
+    boardPositions,
+    tiles,
+    visibleRack,
+    letter
+) {
     // rackTilesWithBlank: a group of rack tiles containing a blank tile
     // let blankInd = the index of the blank tile
 
     let blankpos = rackTilesWithBlank[blankInd]
     let tilesCopy = JSON.parse(JSON.stringify(tiles))
-    for (let n=0; n<tilesCopy.length; n++){
-        if (tilesCopy[n].pos === blankpos){
+    for (let n = 0; n < tilesCopy.length; n++) {
+        if (tilesCopy[n].pos === blankpos) {
             tilesCopy[n].letter = letter
             break
         }
     }
     // console.log(tilesCopy.filter(el=>el.pos==='p2'))
-    return evaluateMove(rackTilesWithBlank, boardPositions, tilesCopy, visibleRack)
+    return evaluateMove(
+        rackTilesWithBlank,
+        boardPositions,
+        tilesCopy,
+        visibleRack
+    )
 }
 
 export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
@@ -248,40 +257,63 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     return anyBadWords ? null : score(tilesCopy, visibleRack)
 }
 
-
-export const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 10000) =>{
+export const evaluateMoves = (
+    rackPerms,
+    slots,
+    tiles,
+    rack,
+    cutoff = 10000
+) => {
     let moves = []
     let tries = 0
-    let LETTERS = ['S', 'A', 'E']
+    let LETTERS = Array.from("SAEOQUXBCDFGHIJKLMNPRTVWYZ")
+    let triesBlank = 0
+    let cutoffTriesBlank = 10000
     for (let rp of rackPerms) {
-        //console.log(rp)
         let blankInd = findBlankTile(rp, tiles)
         if (blankInd === -1) {
             for (let s of slots) {
-                if (tries>cutoff){break}
+                if (tries > cutoff) {
+                    break
+                }
                 let pts = evaluateMove(rp, s, tiles, rack)
                 if (pts) {
-                    moves.push({rackPerm: rp, slot: s, points: pts, letter: ""})
+                    moves.push({
+                        rackPerm: rp,
+                        slot: s,
+                        points: pts,
+                        letter: "",
+                    })
                 }
-                tries+=1
+                tries += 1
             }
-        }
-        else {
-            for (let letter of LETTERS){
-                    for (let s of slots) {
-                        if (tries>cutoff){break}
-                        let pts = evaluateMoveBlank(rp, blankInd, s, tiles, rack, letter)
-                        if (pts) {
-                            moves.push({rackPerm: rp, slot: s, points: pts, letter: letter})
-                        }
-                        tries+=1
+        } else {
+            for (let letter of LETTERS) {
+                for (let s of slots) {
+                    if (triesBlank > cutoffTriesBlank) {
+                        break
                     }
+                    let pts = evaluateMoveBlank(
+                        rp,
+                        blankInd,
+                        s,
+                        tiles,
+                        rack,
+                        letter
+                    )
+                    if (pts) {
+                        moves.push({
+                            rackPerm: rp,
+                            slot: s,
+                            points: pts,
+                            letter: letter,
+                        })
+                    }
+                    triesBlank += 1
                 }
-
             }
-
-
         }
+    }
 
     return moves
 }
