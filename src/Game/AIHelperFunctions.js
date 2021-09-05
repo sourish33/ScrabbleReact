@@ -317,3 +317,20 @@ export const evaluateMoves = (
 
     return moves
 }
+
+export function aiMove(starts, ends, letter, tiles) {
+    
+    let tilesMap = arrayToMap(tiles)
+    console.log(tilesMap)
+    for (let i=0; i<starts.length;i++) {
+        let val = tilesMap.get(starts[i])
+        if (val[0] === "_"){
+            val[0] = letter
+        }
+        val[2] = false
+        tilesMap.set(ends[i], val)
+        tilesMap.delete(starts[i])
+    }
+    return  mapToArray(tilesMap)
+
+}

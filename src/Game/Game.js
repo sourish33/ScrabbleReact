@@ -13,7 +13,7 @@ import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageM
 import { randomUpTo } from "../Utils/helpers"
 import { passGreetings } from "../Utils/DummyData"
 import VictoryModal from "../VictoryModal/VictoryModal"
-import { evaluateMove, evaluateMoves, makeAllSlots, makeRackPerms } from "./AIHelperFunctions"
+import { aiMove, evaluateMove, evaluateMoves, makeAllSlots, makeRackPerms } from "./AIHelperFunctions"
 
 
 
@@ -198,12 +198,16 @@ const Game = ({ gameVariables, exitGame }) => {
             ...evaluateMoves(p6, s6, tiles, playersAndPoints[currentPlayer].rack),
             ...evaluateMoves(p7, s7, tiles, playersAndPoints[currentPlayer].rack),
         ]
-        let t1 = performance.now()
-        let numPossibilities = p1.length*s1.length+p2.length*s2.length+p3.length*s3.length+p4.length*s4.length+p5.length*s5.length+p6.length*s6.length+p7.length*s7.length
         moves.sort((x,y)=>y.points-x.points)
-        // let toShow = moves.length> 10 ? 10: moves.length
-        console.log(`${moves.length} words found out of ${numPossibilities} in ${(t1-t0)/1000} sec`)
-        return moves
+        if (moves.length === 0) { 
+            console.log("No moves found")
+            return
+        }
+
+        let starts = moves[0].rackPerm
+        let ends = moves[0].slot
+        let letter = moves[0].letter
+        updateTiles(aiMove(starts, ends, letter, tiles))
     }
 
     
@@ -227,12 +231,12 @@ const Game = ({ gameVariables, exitGame }) => {
     const passTurn = () => {
         // console.log(tiles)
         // disableRack()
-        let moves = aiPlay()
-        let coords = moves[0].slot.map((el)=>{
-            let [x,y] = b_coords(el)
-            return `(${x}, ${y}) `
-        })
-        alert(`${moves[0].rackPerm} to ${coords} for ${moves[0].points} with ${moves[0].letter}`)
+        aiPlay()
+        // let coords = moves[0].slot.map((el)=>{
+        //     let [x,y] = b_coords(el)
+        //     return `(${x}, ${y}) `
+        // })
+        // alert(`${moves[0].rackPerm} to ${coords} for ${moves[0].points} with ${moves[0].letter}`)
 
     }
 

@@ -1,4 +1,5 @@
-import { combinations, permute } from "../Utils/helpers"
+import { arrayToMap } from "../Utils/helpers"
+
 
 let tiles = [
     {
@@ -153,8 +154,8 @@ let tiles = [
     },
     {
         pos: "q2",
-        letter: "P",
-        points: 3,
+        letter: "_",
+        points: 0,
         submitted: false,
     },
     {
@@ -224,33 +225,40 @@ let tiles = [
         submitted: false,
     },
 ]
-let rackpos = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"]
 
-let combs = combinations(rackpos)
+function mapToArray(myMap) {
+    let myArr = []
+    for (const [key, value] of myMap ) {
+      let row = {letter: value[0], points: value[1], pos: key, submitted: value[2] }
+      myArr.push(row)
+    }
+    return myArr
+  }
 
-console.log(combs.length)
 
-// console.log(combs[100])
+let starts = ['q1', 'q2']
+let ends = ['b100', 'b101']
+let letter = 'H'
 
-let perms = []
-for (let comb of combs) {
-    perms = [...perms, ...permute(comb)]
+function aiMove(starts, ends, letter, tiles) {
+    
+    let tilesMap = arrayToMap(tiles)
+    console.log(tilesMap)
+    for (let i=0; i<starts.length;i++) {
+        let val = tilesMap.get(starts[i])
+        if (val[0] === "_"){
+            val[0] = letter
+        }
+        val[2] = false
+        tilesMap.set(ends[i], val)
+        tilesMap.delete(starts[i])
+    }
+    return  mapToArray(tilesMap)
+
 }
 
-console.log(perms.length)
 
-console.log(perms)
+let tilesNew = aiMove(starts, ends, letter, tiles)
 
-let p2 = perms.filter((el)=>el.length===2)
-let p3 = perms.filter((el)=>el.length===3)
-let p4 = perms.filter((el)=>el.length===4)
-let p5 = perms.filter((el)=>el.length===5)
-let p6 = perms.filter((el)=>el.length===6)
-let p7 = perms.filter((el)=>el.length===7)
-console.log(p2.length)
-console.log(p3.length)
-console.log(p4.length)
-console.log(p5.length)
-console.log(p6.length)
-console.log(p7.length)
+console.log(tilesNew)
 
