@@ -238,27 +238,7 @@ function containsOneLegalPosition(word, tiles) {
     return anyCommonElements(word, lp)
 }
 
-// function singleRowOrColAndContiguous(word) {
-//     let xs = []
-//     let ys = []
-//     for (let el of word) {
-//         let n = parseInt(el.substring(1))
-//         let [y, x] = coords(n)
-//         ys.push(y)
-//         xs.push(x)
-//     }
-//     ys = getUniques(ys)
-//     xs = getUniques(xs)
-//     if (xs.length > 1 && ys.length > 1) {
-//         console.log("multirow")
-//         return false
-//     }
-//     if (!isContiguous(xs) && !isContiguous(ys)) {
-//         console.log("not contiguous")
-//         return false
-//     }
-//     return true
-// }
+
 
 export function gapWords(tiles) {
     let tpns = tilesPlayedNotSubmitted(tiles)
