@@ -73,15 +73,7 @@ const Game = ({ gameVariables, exitGame }) => {
             setShowVictoryBox(x=>true)
             setButtonsDisabled(x=>true)
             //disabling tiles still on rack
-            let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
-            if (tr.length>0){
-                let tilesOnRackDisabled = []
-                for (let tile of tr){
-                    tile.submitted = true
-                    tilesOnRackDisabled.push(tile)
-                }
-                updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
-            }
+            disableRack()
             return true
         }
         ///////
@@ -93,15 +85,7 @@ const Game = ({ gameVariables, exitGame }) => {
             setPlayersAndPoints(playersAndPointsCopy)
             setShowVictoryBox(x=>true)
             setButtonsDisabled(x=>true)
-            let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
-            if (tr.length>0){
-                let tilesOnRackDisabled = []
-                for (let tile of tr){
-                    tile.submitted = true
-                    tilesOnRackDisabled.push(tile)
-                }
-                updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
-            }
+            disableRack()
             return true
 
         }
@@ -185,6 +169,36 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
+    //////START AI PLAY GROUP///////////////////////////////////////////
+    const disableRack = () => {
+        let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+        if (tr.length>0){
+            let tilesOnRackDisabled = []
+            for (let tile of tr){
+                tile.submitted = true
+                tilesOnRackDisabled.push(tile)
+            }
+            updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
+        }
+    }
+
+    const enableRack = () => {
+        let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+        if (tr.length>0){
+            let tilesOnRackDisabled = []
+            for (let tile of tr){
+                tile.submitted = false
+                tilesOnRackDisabled.push(tile)
+            }
+            updateTiles([...subtractArrays(tiles,tr), ...tilesOnRackDisabled])
+        }
+    }
+    
+
+
+
+    //////END AI PLAY GROUP/////////////////////////////////////////
+
     const shuffleRack = () => {
         // Swal.fire("Shuffling rack")
         console.log("Shuffling Rack")
@@ -199,6 +213,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const passTurn = () => {
         // console.log(tiles)
+        // disableRack()
         
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
