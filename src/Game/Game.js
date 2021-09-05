@@ -160,7 +160,7 @@ const Game = ({ gameVariables, exitGame }) => {
         let inds = getUniqueInts0(toReturn.length, bag.length)
         for (let i=0;i<toReturn.length;i++) {
             removeFromBag.push(bag[inds[i]])
-            addToTiles.push({pos: toReturn[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]) })
+            addToTiles.push({pos: toReturn[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: playersAndPoints[currentPlayer].level>0 })
         }
         //update the states
         setBag(x=>subtractArrays(addToBag, removeFromBag))
@@ -292,7 +292,7 @@ const Game = ({ gameVariables, exitGame }) => {
         let inds = getUniqueInts0(howManyToPick, bag.length)
         for (let i=0;i<howManyToPick;i++) {
             removeFromBag.push(bag[inds[i]])
-            addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: false })
+            addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: playersAndPoints[currentPlayer].level>0 })
         }
         setBag(x=>subtractArrays(bag, removeFromBag))
         updateTiles([...tiles, ...addToTiles])
