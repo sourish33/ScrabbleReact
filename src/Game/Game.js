@@ -48,13 +48,16 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(() => { 
+        setCurrentPlayer(x => moveNumber%numPlayers)
+        // if (playersAndPoints[currentPlayer].level>0){
+        //     aiPlay()
+        // }
         if (gameOver()){
             return
         } 
         if (greeting!=="Better Luck Next Time!") {
             moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
         }
-        setCurrentPlayer(x => moveNumber%numPlayers)
         setShowPassDevice(x=>{
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
         replenishRack()
@@ -188,7 +191,6 @@ const Game = ({ gameVariables, exitGame }) => {
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
-        let t0 = performance.now()
         let moves = [
             ...moveNumber !== 0 ? evaluateMoves(p1, s1, tiles, playersAndPoints[currentPlayer].rack) : [], 
             ...evaluateMoves(p2, s2, tiles, playersAndPoints[currentPlayer].rack), 
@@ -207,7 +209,24 @@ const Game = ({ gameVariables, exitGame }) => {
         let starts = moves[0].rackPerm
         let ends = moves[0].slot
         let letter = moves[0].letter
-        updateTiles(aiMove(starts, ends, letter, tiles))
+        let tilesNew = aiMove(starts, ends, letter, tiles)
+        //We can only update tiles once, so we do all calculations off of tilesNew and then update tiles in the end
+        let newWords = getAllNewWords(tilesNew)
+        let aiScore = score(tilesNew, playersAndPoints[currentPlayer].rack)
+        let playersAndPointsCopy = Array.from(playersAndPoints)
+        playersAndPointsCopy[currentPlayer].points+=score(tilesNew, playersAndPoints[currentPlayer].rack)
+        setPlayersAndPoints(playersAndPointsCopy)
+        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tilesNew), points: aiScore },...lastPlayed])
+        //Change the subitted field to true
+        let tpns = tilesPlayedNotSubmitted(tilesNew)
+
+        let tilesNowSubmitted = []
+        for (let tile of tpns){
+            tile.submitted = true
+            tilesNowSubmitted.push(tile)
+        }
+        updateTiles([...subtractArrays(tilesNew,tpns), ...tilesNowSubmitted])
+        setMoveNumber(x=>x+1)
     }
 
     
