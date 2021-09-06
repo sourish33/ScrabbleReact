@@ -187,6 +187,16 @@ const Game = ({ gameVariables, exitGame }) => {
 
     //////START AI PLAY GROUP///////////////////////////////////////////
 
+    const moveNPlay = (moves) =>{
+        return new Promise ((resolve, reject)=>{
+            let starts = moves[0].rackPerm
+            let ends = moves[0].slot
+            let letter = moves[0].letter
+            setTiles(tiles=>aiMove(starts, ends, letter, tiles))
+            resolve(aiMove(starts, ends, letter, tiles))
+        })
+    }
+
     const aiPlay = () =>{         
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
@@ -206,10 +216,26 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
 
-        let starts = moves[0].rackPerm
-        let ends = moves[0].slot
-        let letter = moves[0].letter
-        setTiles(tiles=>aiMove(starts, ends, letter, tiles))
+        moveNPlay(moves).then((newTiles)=>{
+            
+                let tpns = tilesPlayedNotSubmitted(newTiles)
+                let newWords = getAllNewWords(newTiles)
+                let aiScore = score(newTiles, playersAndPoints[currentPlayer].rack)
+                let playersAndPointsCopy = Array.from(playersAndPoints)
+                playersAndPointsCopy[currentPlayer].points+=aiScore
+                setPlayersAndPoints(playersAndPointsCopy)
+                setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), newTiles), points: aiScore },...lastPlayed])
+                //Change the subitted field to true
+
+                let tilesNowSubmitted = []
+                for (let tile of tpns){
+                    tile.submitted = true
+                    tilesNowSubmitted.push(tile)
+                }
+                updateTiles([...subtractArrays(newTiles,tpns), ...tilesNowSubmitted])
+                setMoveNumber(x=>x+1)
+            }
+        )
         //We can only update tiles once, so we do all calculations off of tilesNew and then update tiles in the end
         // let newWords = getAllNewWords(tilesNew)
         // let aiScore = score(tilesNew, playersAndPoints[currentPlayer].rack)
