@@ -48,13 +48,13 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(() => { 
+        if (gameOver()){
+            return
+        } 
         setCurrentPlayer(x => moveNumber%numPlayers)
         // if (playersAndPoints[currentPlayer].level>0){
         //     aiPlay()
         // }
-        if (gameOver()){
-            return
-        } 
         if (greeting!=="Better Luck Next Time!") {
             moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
         }
