@@ -249,9 +249,9 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
     if (badPlacement) {
         // throw new Error(
-            console.log(tiles)
-            console.log(legalPositions)
-           alert(`${rackTiles} and ${boardPositions} giving bad placement. lp is ${legalPositions(tiles)}`)
+        //     console.log(tiles)
+        //     console.log(legalPositions)
+        //    alert(`${rackTiles} and ${boardPositions} giving bad placement. lp is ${legalPositions(tiles)}`)
         // )
     }
     return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
