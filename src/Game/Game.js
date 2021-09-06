@@ -197,7 +197,7 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
-    const aiPlay = () =>{         
+    const aiPlay = (tiles) =>{         
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
@@ -276,7 +276,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const passTurn = () => {
         // console.log(tiles)
         // disableRack()
-        aiPlay()
+        aiPlay(tiles)
         // let coords = moves[0].slot.map((el)=>{
         //     let [x,y] = b_coords(el)
         //     return `(${x}, ${y}) `
