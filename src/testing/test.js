@@ -24,7 +24,7 @@ import {
     coords,
     subtractArrays,
     getUniques,
-    neighbors,
+    // neighbors,
     getConsecutivesNums,
     isContiguous,
     range,
@@ -41,51 +41,249 @@ import { checkDict } from "../Utils/Dictionary/dictionary"
 
 let tiles =[
     {
-      "pos": "b112",
-      "letter": "R",
-      "points": 1,
+      "letter": "J",
+      "points": 8,
+      "pos": "b109",
       "submitted": true
     },
     {
-      "pos": "b126",
-      "letter": "T",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b127",
-      "letter": "I",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b128",
-      "letter": "L",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b129",
-      "letter": "E",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b142",
-      "letter": "N",
-      "points": 1,
-      "submitted": true
-    },
-    {
-      "pos": "b143",
       "letter": "O",
       "points": 1,
+      "pos": "b110",
       "submitted": true
     },
     {
-      "pos": "b157",
       "letter": "E",
       "points": 1,
+      "pos": "b111",
+      "submitted": true
+    },
+    {
+      "letter": "Y",
+      "points": 4,
+      "pos": "b112",
+      "submitted": true
+    },
+    {
+      "letter": "N",
+      "points": 1,
+      "pos": "p7",
+      "submitted": false
+    },
+    {
+      "letter": "A",
+      "points": 1,
+      "pos": "q6",
+      "submitted": false
+    },
+    {
+      "letter": "F",
+      "points": 4,
+      "pos": "b126",
+      "submitted": true
+    },
+    {
+      "letter": "E",
+      "points": 1,
+      "pos": "b127",
+      "submitted": true
+    },
+    {
+      "letter": "G",
+      "points": 2,
+      "pos": "b128",
+      "submitted": true
+    },
+    {
+      "letter": "D",
+      "points": 2,
+      "pos": "b96",
+      "submitted": true
+    },
+    {
+      "letter": "E",
+      "points": 1,
+      "pos": "b97",
+      "submitted": true
+    },
+    {
+      "letter": "B",
+      "points": 3,
+      "pos": "b98",
+      "submitted": true
+    },
+    {
+      "letter": "G",
+      "points": 2,
+      "pos": "b140",
+      "submitted": true
+    },
+    {
+      "letter": "I",
+      "points": 1,
+      "pos": "b141",
+      "submitted": true
+    },
+    {
+      "letter": "D",
+      "points": 2,
+      "pos": "b142",
+      "submitted": true
+    },
+    {
+      "letter": "E",
+      "points": 1,
+      "pos": "q7",
+      "submitted": false
+    },
+    {
+      "letter": "L",
+      "points": 1,
+      "pos": "b114",
+      "submitted": true
+    },
+    {
+      "letter": "S",
+      "points": 1,
+      "pos": "b129",
+      "submitted": true
+    },
+    {
+      "letter": "C",
+      "points": 3,
+      "pos": "b84",
+      "submitted": true
+    },
+    {
+      "letter": "E",
+      "points": 1,
+      "pos": "b99",
+      "submitted": true
+    },
+    {
+      "letter": "B",
+      "points": 0,
+      "pos": "b64",
+      "submitted": true
+    },
+    {
+      "letter": "E",
+      "points": 1,
+      "pos": "b79",
+      "submitted": true
+    },
+    {
+      "letter": "N",
+      "points": 1,
+      "pos": "b94",
+      "submitted": true
+    },
+    {
+      "letter": "D",
+      "points": 2,
+      "pos": "q5",
+      "submitted": false
+    },
+    {
+      "letter": "V",
+      "points": 4,
+      "pos": "b154",
+      "submitted": true
+    },
+    {
+      "letter": "I",
+      "points": 1,
+      "pos": "b155",
+      "submitted": true
+    },
+    {
+      "letter": "S",
+      "points": 0,
+      "pos": "b156",
+      "submitted": true
+    },
+    {
+      "letter": "I",
+      "points": 1,
+      "pos": "p6",
+      "submitted": false
+    },
+    {
+      "letter": "V",
+      "points": 4,
+      "pos": "b76",
+      "submitted": true
+    },
+    {
+      "letter": "O",
+      "points": 1,
+      "pos": "b77",
+      "submitted": true
+    },
+    {
+      "letter": "T",
+      "points": 1,
+      "pos": "b78",
+      "submitted": true
+    },
+    {
+      "letter": "D",
+      "points": 2,
+      "pos": "b80",
+      "submitted": true
+    },
+    {
+      "letter": "N",
+      "points": 1,
+      "pos": "q1",
+      "submitted": false
+    },
+    {
+      "letter": "L",
+      "points": 1,
+      "pos": "q2",
+      "submitted": false
+    },
+    {
+      "letter": "E",
+      "points": 1,
+      "pos": "q3",
+      "submitted": false
+    },
+    {
+      "letter": "S",
+      "points": 1,
+      "pos": "q4",
+      "submitted": false
+    },
+    {
+      "letter": "U",
+      "points": 1,
+      "pos": "b115",
+      "submitted": true
+    },
+    {
+      "letter": "N",
+      "points": 1,
+      "pos": "b116",
+      "submitted": true
+    },
+    {
+      "letter": "A",
+      "points": 1,
+      "pos": "b117",
+      "submitted": true
+    },
+    {
+      "letter": "T",
+      "points": 1,
+      "pos": "b118",
+      "submitted": true
+    },
+    {
+      "letter": "E",
+      "points": 1,
+      "pos": "b119",
       "submitted": true
     },
     {
@@ -96,90 +294,30 @@ let tiles =[
     },
     {
       "pos": "p2",
-      "letter": "_",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "p3",
-      "letter": "I",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "p4",
-      "letter": "O",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "p5",
-      "letter": "O",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "p6",
-      "letter": "J",
-      "points": 8,
-      "submitted": false
-    },
-    {
-      "pos": "p7",
-      "letter": "W",
-      "points": 4,
-      "submitted": false
-    },
-    {
-      "pos": "q1",
-      "letter": "P",
-      "points": 3,
-      "submitted": false
-    },
-    {
-      "pos": "q2",
-      "letter": "O",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "q3",
       "letter": "A",
       "points": 1,
       "submitted": false
     },
     {
-      "pos": "q5",
-      "letter": "E",
+      "pos": "p3",
+      "letter": "T",
       "points": 1,
       "submitted": false
     },
     {
-      "pos": "q6",
-      "letter": "M",
-      "points": 3,
-      "submitted": false
-    },
-    {
-      "pos": "q7",
-      "letter": "I",
+      "pos": "p4",
+      "letter": "R",
       "points": 1,
       "submitted": false
     },
     {
-      "pos": "b158",
-      "letter": "X",
-      "points": 8,
-      "submitted": true
-    },
-    {
-      "pos": "q4",
-      "letter": "U",
+      "pos": "p5",
+      "letter": "R",
       "points": 1,
       "submitted": false
     }
   ]
-console.log(tilesOnBoard(tiles))
+console.log(legalPositions(tiles))
 
 let allWords = getAllWords(tiles)
 console.log(readAllWords(allWords, tiles))
@@ -385,4 +523,31 @@ function removedis() {
         u.style.border = ""
     }
 }
+
+function neighbors(pos){
+    let n = parseInt(pos.substring(1))
+    if (n<0 || n>224) {
+      throw new Error (`${pos} invalid input for neighbors`)
+    }
+    let bors = []
+    let [y,x] = coords(n)
+    if (n-1>=0 && coords(n-1)[0]===y){
+      bors.push("b"+(n-1).toString())
+    }
+    if (n-15>=0 && coords(n-15)[1]===x){
+      bors.push("b"+(n-15).toString())
+    }
+    if (n+1<=224 && coords(n+1)[0]===y){
+      bors.push("b"+(n+1).toString())
+    }
+    if (n+15<=224 && coords(n+15)[1]===x){
+      bors.push("b"+(n+15).toString())
+    }
+    return bors
+}
+
+console.log(coords(119))
+console.log(coords(120))
+
+console.log(neighbors('b22'))
 

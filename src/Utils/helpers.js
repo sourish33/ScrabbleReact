@@ -226,16 +226,17 @@ export function neighbors(pos){
       throw new Error (`${pos} invalid input for neighbors`)
     }
     let bors = []
-    if (n-1>=0){
+    let [y,x] = coords(n)
+    if (n-1>=0 && coords(n-1)[0]===y){
       bors.push("b"+(n-1).toString())
     }
-    if (n-15>=0){
+    if (n-15>=0 && coords(n-15)[1]===x){
       bors.push("b"+(n-15).toString())
     }
-    if (n+1<=224){
+    if (n+1<=224 && coords(n+1)[0]===y){
       bors.push("b"+(n+1).toString())
     }
-    if (n+15<=224){
+    if (n+15<=224 && coords(n+15)[1]===x){
       bors.push("b"+(n+15).toString())
     }
     return bors

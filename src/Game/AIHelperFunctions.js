@@ -220,7 +220,6 @@ export function evaluateMoveBlank(
             break
         }
     }
-    // console.log(tilesCopy.filter(el=>el.pos==='p2'))
     return evaluateMove(
         rackTilesWithBlank,
         boardPositions,
@@ -247,14 +246,16 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     tilesCopy = mapToArray(tilesCopyMap)
     let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
     let anyBadWords = nWords.some((el) => !checkDict(el))
-    // let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
-    // if (badPlacement) {
-    //     throw new Error(
-    //         `${rackTiles} and ${boardPositions} giving bad placement`
-    //     )
-    // }
-    // return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
-    return anyBadWords ? null : score(tilesCopy, visibleRack)
+    let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
+    if (badPlacement) {
+        // throw new Error(
+            console.log(tiles)
+            console.log(legalPositions)
+           alert(`${rackTiles} and ${boardPositions} giving bad placement. lp is ${legalPositions(tiles)}`)
+        // )
+    }
+    return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
+    // return anyBadWords ? null : score(tilesCopy, visibleRack)
 }
 
 export const evaluateMoves = (
@@ -321,7 +322,7 @@ export const evaluateMoves = (
 export function aiMove(starts, ends, letter, tiles) {
     
     let tilesMap = arrayToMap(tiles)
-    console.log(tilesMap)
+    // console.log(tilesMap)
     for (let i=0; i<starts.length;i++) {
         let val = tilesMap.get(starts[i])
         if (val[0] === "_"){

@@ -209,24 +209,24 @@ const Game = ({ gameVariables, exitGame }) => {
         let starts = moves[0].rackPerm
         let ends = moves[0].slot
         let letter = moves[0].letter
-        let tilesNew = aiMove(starts, ends, letter, tiles)
+        setTiles(tiles=>aiMove(starts, ends, letter, tiles))
         //We can only update tiles once, so we do all calculations off of tilesNew and then update tiles in the end
-        let newWords = getAllNewWords(tilesNew)
-        let aiScore = score(tilesNew, playersAndPoints[currentPlayer].rack)
-        let playersAndPointsCopy = Array.from(playersAndPoints)
-        playersAndPointsCopy[currentPlayer].points+=score(tilesNew, playersAndPoints[currentPlayer].rack)
-        setPlayersAndPoints(playersAndPointsCopy)
-        setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tilesNew), points: aiScore },...lastPlayed])
-        //Change the subitted field to true
-        let tpns = tilesPlayedNotSubmitted(tilesNew)
+        // let newWords = getAllNewWords(tilesNew)
+        // let aiScore = score(tilesNew, playersAndPoints[currentPlayer].rack)
+        // let playersAndPointsCopy = Array.from(playersAndPoints)
+        // playersAndPointsCopy[currentPlayer].points+=score(tilesNew, playersAndPoints[currentPlayer].rack)
+        // setPlayersAndPoints(playersAndPointsCopy)
+        // setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tilesNew), points: aiScore },...lastPlayed])
+        // //Change the subitted field to true
+        // let tpns = tilesPlayedNotSubmitted(tilesNew)
 
-        let tilesNowSubmitted = []
-        for (let tile of tpns){
-            tile.submitted = true
-            tilesNowSubmitted.push(tile)
-        }
-        updateTiles([...subtractArrays(tilesNew,tpns), ...tilesNowSubmitted])
-        setMoveNumber(x=>x+1)
+        // let tilesNowSubmitted = []
+        // for (let tile of tpns){
+        //     tile.submitted = true
+        //     tilesNowSubmitted.push(tile)
+        // }
+        // updateTiles([...subtractArrays(tilesNew,tpns), ...tilesNowSubmitted])
+        // setMoveNumber(x=>x+1)
     }
 
     
