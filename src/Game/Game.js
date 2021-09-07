@@ -200,6 +200,12 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
+    function delay(t, v) {
+        return new Promise(function(resolve) { 
+            setTimeout(resolve.bind(null, v), t)
+        });
+     }
+
     const aiPlay = (theTiles) =>{  
         console.log(theTiles)
         console.log(playersAndPoints[currentPlayer].rack)       
@@ -224,9 +230,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
 
-        moveNPlay(moves, theTiles).then(
-            
-            (newTiles)=>{
+        moveNPlay(moves, theTiles).then( (newTiles)=>delay(1000, newTiles).then((newTiles)=>{
                 let tpns = tilesPlayedNotSubmitted(newTiles)
                 let newWords = getAllNewWords(newTiles)
                 let aiScore = score(newTiles, playersAndPoints[currentPlayer].rack)
@@ -244,7 +248,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 updateTiles([...subtractArrays(newTiles,tpns), ...tilesNowSubmitted])
                 setMoveNumber(x=>x+1)
             }
-        )
+        ))
         //We can only update tiles once, so we do all calculations off of tilesNew and then update tiles in the end
         // let newWords = getAllNewWords(tilesNew)
         // let aiScore = score(tilesNew, playersAndPoints[currentPlayer].rack)
