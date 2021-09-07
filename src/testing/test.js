@@ -24,7 +24,7 @@ import {
     coords,
     subtractArrays,
     getUniques,
-    // neighbors,
+    neighbors,
     getConsecutivesNums,
     isContiguous,
     range,
@@ -36,285 +36,106 @@ import {
 
 import { TWs, DWs, TLs, DLs, S } from "../Board/BoardMarkings.js"
 import { checkDict } from "../Utils/Dictionary/dictionary"
+import { evaluateMoves, makeRackPerms } from "../Game/AIHelperFunctions"
 
 // import { coords, getUniques, loc,  } from "./Utils/helpers";
 
 let tiles =[
     {
-      "letter": "J",
-      "points": 8,
-      "pos": "b109",
-      "submitted": true
-    },
-    {
-      "letter": "O",
-      "points": 1,
-      "pos": "b110",
-      "submitted": true
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "b111",
-      "submitted": true
-    },
-    {
-      "letter": "Y",
-      "points": 4,
-      "pos": "b112",
-      "submitted": true
-    },
-    {
-      "letter": "N",
-      "points": 1,
-      "pos": "p7",
-      "submitted": false
-    },
-    {
-      "letter": "A",
-      "points": 1,
-      "pos": "q6",
-      "submitted": false
-    },
-    {
-      "letter": "F",
-      "points": 4,
-      "pos": "b126",
-      "submitted": true
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "b127",
-      "submitted": true
-    },
-    {
-      "letter": "G",
-      "points": 2,
-      "pos": "b128",
-      "submitted": true
-    },
-    {
-      "letter": "D",
-      "points": 2,
-      "pos": "b96",
-      "submitted": true
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "b97",
-      "submitted": true
-    },
-    {
-      "letter": "B",
-      "points": 3,
-      "pos": "b98",
-      "submitted": true
-    },
-    {
-      "letter": "G",
-      "points": 2,
-      "pos": "b140",
-      "submitted": true
-    },
-    {
-      "letter": "I",
-      "points": 1,
-      "pos": "b141",
-      "submitted": true
-    },
-    {
-      "letter": "D",
-      "points": 2,
-      "pos": "b142",
-      "submitted": true
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "q7",
-      "submitted": false
-    },
-    {
-      "letter": "L",
-      "points": 1,
-      "pos": "b114",
-      "submitted": true
-    },
-    {
-      "letter": "S",
-      "points": 1,
-      "pos": "b129",
-      "submitted": true
-    },
-    {
+      "pos": "p1",
       "letter": "C",
       "points": 3,
-      "pos": "b84",
-      "submitted": true
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "b99",
-      "submitted": true
-    },
-    {
-      "letter": "B",
-      "points": 0,
-      "pos": "b64",
-      "submitted": true
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "b79",
-      "submitted": true
-    },
-    {
-      "letter": "N",
-      "points": 1,
-      "pos": "b94",
-      "submitted": true
-    },
-    {
-      "letter": "D",
-      "points": 2,
-      "pos": "q5",
-      "submitted": false
-    },
-    {
-      "letter": "V",
-      "points": 4,
-      "pos": "b154",
-      "submitted": true
-    },
-    {
-      "letter": "I",
-      "points": 1,
-      "pos": "b155",
-      "submitted": true
-    },
-    {
-      "letter": "S",
-      "points": 0,
-      "pos": "b156",
-      "submitted": true
-    },
-    {
-      "letter": "I",
-      "points": 1,
-      "pos": "p6",
-      "submitted": false
-    },
-    {
-      "letter": "V",
-      "points": 4,
-      "pos": "b76",
-      "submitted": true
-    },
-    {
-      "letter": "O",
-      "points": 1,
-      "pos": "b77",
-      "submitted": true
-    },
-    {
-      "letter": "T",
-      "points": 1,
-      "pos": "b78",
-      "submitted": true
-    },
-    {
-      "letter": "D",
-      "points": 2,
-      "pos": "b80",
-      "submitted": true
-    },
-    {
-      "letter": "N",
-      "points": 1,
-      "pos": "q1",
-      "submitted": false
-    },
-    {
-      "letter": "L",
-      "points": 1,
-      "pos": "q2",
-      "submitted": false
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "q3",
-      "submitted": false
-    },
-    {
-      "letter": "S",
-      "points": 1,
-      "pos": "q4",
-      "submitted": false
-    },
-    {
-      "letter": "U",
-      "points": 1,
-      "pos": "b115",
-      "submitted": true
-    },
-    {
-      "letter": "N",
-      "points": 1,
-      "pos": "b116",
-      "submitted": true
-    },
-    {
-      "letter": "A",
-      "points": 1,
-      "pos": "b117",
-      "submitted": true
-    },
-    {
-      "letter": "T",
-      "points": 1,
-      "pos": "b118",
-      "submitted": true
-    },
-    {
-      "letter": "E",
-      "points": 1,
-      "pos": "b119",
-      "submitted": true
-    },
-    {
-      "pos": "p1",
-      "letter": "I",
-      "points": 1,
       "submitted": false
     },
     {
       "pos": "p2",
-      "letter": "A",
-      "points": 1,
-      "submitted": false
-    },
-    {
-      "pos": "p3",
-      "letter": "T",
+      "letter": "R",
       "points": 1,
       "submitted": false
     },
     {
       "pos": "p4",
-      "letter": "R",
+      "letter": "E",
       "points": 1,
       "submitted": false
     },
     {
       "pos": "p5",
-      "letter": "R",
+      "letter": "X",
+      "points": 8,
+      "submitted": false
+    },
+    {
+      "pos": "p7",
+      "letter": "S",
       "points": 1,
       "submitted": false
+    },
+    {
+      "pos": "b112",
+      "letter": "M",
+      "points": 3,
+      "submitted": true
+    },
+    {
+      "pos": "b113",
+      "letter": "E",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "p3",
+      "letter": "N",
+      "points": 1,
+      "submitted": false
+    },
+    {
+      "pos": "p6",
+      "letter": "O",
+      "points": 1,
+      "submitted": false
+    },
+    {
+      "pos": "q1",
+      "letter": "I",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "q2",
+      "letter": "A",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "q3",
+      "letter": "D",
+      "points": 2,
+      "submitted": true
+    },
+    {
+      "pos": "q4",
+      "letter": "A",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "q5",
+      "letter": "T",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "q6",
+      "letter": "I",
+      "points": 1,
+      "submitted": true
+    },
+    {
+      "pos": "q7",
+      "letter": "M",
+      "points": 3,
+      "submitted": true
     }
   ]
 console.log(legalPositions(tiles))
@@ -509,6 +330,55 @@ console.log(s7.length)
 
 console.log(s2[1])
 
+let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, 'q')
+console.log(p2)
+console.log(s2)
+
+function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
+    if (rackTiles.length !== boardPositions.length) {
+        throw new Error(
+            `${rackTiles} and ${boardPositions} unequal length in evaluateMove`
+        )
+    }
+    let tilesCopy = JSON.parse(JSON.stringify(tiles))
+    let tilesCopyMap = arrayToMap(tiles)
+    
+    for (let i = 0; i < rackTiles.length; i++) {
+        let st = rackTiles[i]
+        let end = boardPositions[i]
+        let val = tilesCopyMap.get(st)
+        val[2] = false
+        console.log(val)
+        tilesCopyMap.set(end, val)
+        tilesCopyMap.delete(st)
+    }
+    // console.log(tilesCopyMap)
+    tilesCopy = mapToArray(tilesCopyMap)
+    console.log(tilesCopy)
+    let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
+    console.log(nWords)
+    let anyBadWords = nWords.some((el) => !checkDict(el))
+    // let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
+    // if (badPlacement) {
+    //     throw new Error(
+    //         console.log(tiles)
+    //         console.log(legalPositions)
+    //        alert(`${rackTiles} and ${boardPositions} giving bad placement. lp is ${legalPositions(tiles)}`)
+    //     )
+    // }
+    // return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
+    return anyBadWords ? null : score(tilesCopy, visibleRack)
+}
+
+console.log(evaluateMoves(p3, s3, tiles, 'q'))
+
+
+console.log(p2[3])
+console.log(s2[3])
+
+console.log(evaluateMove(['q5', 'q2'], ['b114', 'b115'], tiles, 'q'))
+
+
 function showdis(arr) {
     for (let el of arr) {
         let u = document.getElementById(el)
@@ -524,30 +394,27 @@ function removedis() {
     }
 }
 
-function neighbors(pos){
-    let n = parseInt(pos.substring(1))
-    if (n<0 || n>224) {
-      throw new Error (`${pos} invalid input for neighbors`)
-    }
-    let bors = []
-    let [y,x] = coords(n)
-    if (n-1>=0 && coords(n-1)[0]===y){
-      bors.push("b"+(n-1).toString())
-    }
-    if (n-15>=0 && coords(n-15)[1]===x){
-      bors.push("b"+(n-15).toString())
-    }
-    if (n+1<=224 && coords(n+1)[0]===y){
-      bors.push("b"+(n+1).toString())
-    }
-    if (n+15<=224 && coords(n+15)[1]===x){
-      bors.push("b"+(n+15).toString())
-    }
-    return bors
-}
+// function neighbors(pos){
+//     let n = parseInt(pos.substring(1))
+//     if (n<0 || n>224) {
+//       throw new Error (`${pos} invalid input for neighbors`)
+//     }
+//     let bors = []
+//     let [y,x] = coords(n)
+//     if (n-1>=0 && coords(n-1)[0]===y){
+//       bors.push("b"+(n-1).toString())
+//     }
+//     if (n-15>=0 && coords(n-15)[1]===x){
+//       bors.push("b"+(n-15).toString())
+//     }
+//     if (n+1<=224 && coords(n+1)[0]===y){
+//       bors.push("b"+(n+1).toString())
+//     }
+//     if (n+15<=224 && coords(n+15)[1]===x){
+//       bors.push("b"+(n+15).toString())
+//     }
+//     return bors
+// }
 
-console.log(coords(119))
-console.log(coords(120))
 
-console.log(neighbors('b22'))
 

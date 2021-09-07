@@ -236,29 +236,27 @@ function mapToArray(myMap) {
   }
 
 
-let starts = ['q1', 'q2']
-let ends = ['b100', 'b101']
-let letter = 'H'
+// let starts = ['q1', 'q2']
+// let ends = ['b100', 'b101']
+// let letter = 'H'
 
-function aiMove(starts, ends, letter, tiles) {
+// function aiMove(starts, ends, letter, tiles) {
     
-    let tilesMap = arrayToMap(tiles)
-    console.log(tilesMap)
-    for (let i=0; i<starts.length;i++) {
-        let val = tilesMap.get(starts[i])
-        if (val[0] === "_"){
-            val[0] = letter
-        }
-        val[2] = false
-        tilesMap.set(ends[i], val)
-        tilesMap.delete(starts[i])
-    }
-    return  mapToArray(tilesMap)
+//     let tilesMap = arrayToMap(tiles)
+//     console.log(tilesMap)
+//     for (let i=0; i<starts.length;i++) {
+//         let val = tilesMap.get(starts[i])
+//         if (val[0] === "_"){
+//             val[0] = letter
+//         }
+//         val[2] = false
+//         tilesMap.set(ends[i], val)
+//         tilesMap.delete(starts[i])
+//     }
+//     return  mapToArray(tilesMap)
 
-}
+// }
 
 
-let tilesNew = aiMove(starts, ends, letter, tiles)
 
-console.log(tilesNew)
 

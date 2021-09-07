@@ -52,15 +52,18 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         } 
         setCurrentPlayer(x => moveNumber%numPlayers)
-        // if (playersAndPoints[currentPlayer].level>0){
-        //     aiPlay()
-        // }
+
         if (greeting!=="Better Luck Next Time!") {
             moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
         }
         setShowPassDevice(x=>{
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
+
+        if (playersAndPoints[currentPlayer].level>0){
+            aiReplenishRack().then((newTiles)=>aiPlay(newTiles))
+        } else{
         replenishRack()
+        }
     }, [moveNumber, currentPlayer])
 
 
@@ -187,28 +190,33 @@ const Game = ({ gameVariables, exitGame }) => {
 
     //////START AI PLAY GROUP///////////////////////////////////////////
 
-    const moveNPlay = (moves) =>{
+    const moveNPlay = (moves, theTiles) =>{
         return new Promise ((resolve, reject)=>{
             let starts = moves[0].rackPerm
             let ends = moves[0].slot
             let letter = moves[0].letter
-            setTiles(tiles=>aiMove(starts, ends, letter, tiles))
-            resolve(aiMove(starts, ends, letter, tiles))
+            setTiles(tiles=>aiMove(starts, ends, letter, theTiles))
+            resolve(aiMove(starts, ends, letter, theTiles))
         })
     }
 
-    const aiPlay = (tiles) =>{         
-        let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(tiles, playersAndPoints[currentPlayer].rack)
-        let makeVerslots = tilesOnBoard(tiles).length !== 0 //no need to make vertical slots if the board is empty
-        let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(tiles, makeVerslots)
+    const aiPlay = (theTiles) =>{  
+        console.log(theTiles)
+        console.log(playersAndPoints[currentPlayer].rack)       
+        let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(theTiles, playersAndPoints[currentPlayer].rack)
+        let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
+        let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
+        console.log(`p2 length = ${p2.length}, s2 length = ${s2.length} moves = ${evaluateMoves(p2, s2, theTiles, playersAndPoints[currentPlayer].rack).length}`)
+        console.log(p2)
+        console.log(s2)
         let moves = [
-            ...moveNumber !== 0 ? evaluateMoves(p1, s1, tiles, playersAndPoints[currentPlayer].rack) : [], 
-            ...evaluateMoves(p2, s2, tiles, playersAndPoints[currentPlayer].rack), 
-            ...evaluateMoves(p3, s3, tiles, playersAndPoints[currentPlayer].rack),
-            ...evaluateMoves(p4, s4, tiles, playersAndPoints[currentPlayer].rack),
-            ...evaluateMoves(p5, s5, tiles, playersAndPoints[currentPlayer].rack),
-            ...evaluateMoves(p6, s6, tiles, playersAndPoints[currentPlayer].rack),
-            ...evaluateMoves(p7, s7, tiles, playersAndPoints[currentPlayer].rack),
+            ...moveNumber !== 0 ? evaluateMoves(p1, s1, theTiles, playersAndPoints[currentPlayer].rack) : [], 
+            ...evaluateMoves(p2, s2, theTiles, playersAndPoints[currentPlayer].rack), 
+            ...evaluateMoves(p3, s3, theTiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p4, s4, theTiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p5, s5, theTiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p6, s6, theTiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p7, s7, theTiles, playersAndPoints[currentPlayer].rack),
         ]
         moves.sort((x,y)=>y.points-x.points)
         if (moves.length === 0) { 
@@ -216,7 +224,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
 
-        moveNPlay(moves).then((newTiles)=>{
+        moveNPlay(moves, theTiles).then((newTiles)=>{
             
                 let tpns = tilesPlayedNotSubmitted(newTiles)
                 let newWords = getAllNewWords(newTiles)
@@ -330,6 +338,25 @@ const Game = ({ gameVariables, exitGame }) => {
         setMoveNumber(x=>x+1)
         
         
+    }
+
+    const aiReplenishRack = () => {
+        return new Promise ((resolve, reject) => {
+            let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
+            if (freeSlots.length===0) {return}
+            let removeFromBag =[]
+            let addToTiles = []
+            let howManyToPick = Math.min(freeSlots.length, bag.length)
+            let inds = getUniqueInts0(howManyToPick, bag.length)
+            for (let i=0;i<howManyToPick;i++) {
+                removeFromBag.push(bag[inds[i]])
+                addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: playersAndPoints[currentPlayer].level>0 })
+            }
+            setBag(x=>subtractArrays(bag, removeFromBag))
+            updateTiles([...tiles, ...addToTiles])
+            resolve([...tiles, ...addToTiles])
+        })
+
     }
 
     const replenishRack = () => {

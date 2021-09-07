@@ -236,27 +236,31 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     }
     let tilesCopy = JSON.parse(JSON.stringify(tiles))
     let tilesCopyMap = arrayToMap(tiles)
-    for (let i = 0; i < tilesCopyMap.size; i++) {
+    
+    for (let i = 0; i < rackTiles.length; i++) {
         let st = rackTiles[i]
         let end = boardPositions[i]
         let val = tilesCopyMap.get(st)
+        val[2] = false
         tilesCopyMap.set(end, val)
         tilesCopyMap.delete(st)
     }
     tilesCopy = mapToArray(tilesCopyMap)
     let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
+    // console.log(nWords)
     let anyBadWords = nWords.some((el) => !checkDict(el))
-    let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
-    if (badPlacement) {
-        // throw new Error(
-        //     console.log(tiles)
-        //     console.log(legalPositions)
-        //    alert(`${rackTiles} and ${boardPositions} giving bad placement. lp is ${legalPositions(tiles)}`)
-        // )
-    }
-    return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
-    // return anyBadWords ? null : score(tilesCopy, visibleRack)
+    // let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
+    // if (badPlacement) {
+    //     throw new Error(
+    //         console.log(tiles)
+    //         console.log(legalPositions)
+    //        alert(`${rackTiles} and ${boardPositions} giving bad placement. lp is ${legalPositions(tiles)}`)
+    //     )
+    // }
+    // return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
+    return anyBadWords ? null : score(tilesCopy, visibleRack)
 }
+
 
 export const evaluateMoves = (
     rackPerms,
@@ -270,6 +274,7 @@ export const evaluateMoves = (
     let LETTERS = Array.from("SAEOQUXBCDFGHIJKLMNPRTVWYZ")
     let triesBlank = 0
     let cutoffTriesBlank = 10000
+    // debugger
     for (let rp of rackPerms) {
         let blankInd = findBlankTile(rp, tiles)
         if (blankInd === -1) {
