@@ -224,8 +224,9 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
 
-        moveNPlay(moves, theTiles).then((newTiles)=>{
+        moveNPlay(moves, theTiles).then(
             
+            (newTiles)=>{
                 let tpns = tilesPlayedNotSubmitted(newTiles)
                 let newWords = getAllNewWords(newTiles)
                 let aiScore = score(newTiles, playersAndPoints[currentPlayer].rack)
