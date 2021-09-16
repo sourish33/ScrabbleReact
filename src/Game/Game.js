@@ -243,10 +243,12 @@ const Game = ({ gameVariables, exitGame }) => {
                         tile.submitted = true
                         tilesNowSubmitted.push(tile)
                     }
-                    updateTiles([...subtractArrays(newTiles,tpns), ...tilesNowSubmitted])
+                    resolve([...subtractArrays(newTiles,tpns), ...tilesNowSubmitted])
                     })
                 }
-            )
+            ).then((newTiles)=>{
+                aiReplenishRack(newTiles)
+            })
         }
         
         // setCurrentPlayer(x => moveNumber%numPlayers)
@@ -350,8 +352,8 @@ const Game = ({ gameVariables, exitGame }) => {
         
     }
 
-    const aiReplenishRack = () => {
-        return new Promise ((resolve, reject) => {
+    const aiReplenishRack = (tiles) => {
+        // return new Promise ((resolve, reject) => {
             let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
             if (freeSlots.length===0) {return}
             let removeFromBag =[]
@@ -364,8 +366,9 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             setBag(x=>subtractArrays(bag, removeFromBag))
             updateTiles([...tiles, ...addToTiles])
-            resolve([...tiles, ...addToTiles])
-        })
+            setMoveNumber(x=>x+1)
+            // resolve([...tiles, ...addToTiles])
+        // })
 
     }
 
