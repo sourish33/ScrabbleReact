@@ -227,7 +227,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         else {
-        moveNPlay(moves, theTiles).then( (newTiles)=>delay(1000, newTiles).then((newTiles)=>{
+        moveNPlay(moves, theTiles).then( (newTiles)=>delay(1000, newTiles)).then((newTiles)=>{
                 return new Promise((resolve, reject)=>{
                     let tpns = tilesPlayedNotSubmitted(newTiles)
                     let newWords = getAllNewWords(newTiles)
@@ -246,7 +246,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     updateTiles([...subtractArrays(newTiles,tpns), ...tilesNowSubmitted])
                     })
                 }
-            )).then(()=>{setMoveNumber(x=>x+1)})
+            )
         }
         
         // setCurrentPlayer(x => moveNumber%numPlayers)
@@ -295,6 +295,7 @@ const Game = ({ gameVariables, exitGame }) => {
         //     return `(${x}, ${y}) `
         // })
         // alert(`${moves[0].rackPerm} to ${coords} for ${moves[0].points} with ${moves[0].letter}`)
+        // aiReplenishRack().then((newTiles)=>delay(1000, newTiles).then((newTiles)=>aiPlay(newTiles)))   
 
     }
 
