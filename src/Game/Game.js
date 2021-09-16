@@ -60,7 +60,8 @@ const Game = ({ gameVariables, exitGame }) => {
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
 
         if (playersAndPoints[currentPlayer].level>0){
-            aiReplenishRack().then((newTiles)=>delay(1000, newTiles).then((newTiles)=>aiPlay(newTiles)))
+            aiReplenishRack1().then((newTiles)=>delay(1000, newTiles).then((newTiles)=>aiPlay(newTiles)))
+            // aiPlay(tiles)
             return
         }
         replenishRack()
@@ -250,24 +251,6 @@ const Game = ({ gameVariables, exitGame }) => {
                 aiReplenishRack(newTiles)
             })
         }
-        
-        // setCurrentPlayer(x => moveNumber%numPlayers)
-        //We can only update tiles once, so we do all calculations off of tilesNew and then update tiles in the end
-        // let newWords = getAllNewWords(tilesNew)
-        // let aiScore = score(tilesNew, playersAndPoints[currentPlayer].rack)
-        // let playersAndPointsCopy = Array.from(playersAndPoints)
-        // playersAndPointsCopy[currentPlayer].points+=score(tilesNew, playersAndPoints[currentPlayer].rack)
-        // setPlayersAndPoints(playersAndPointsCopy)
-        // setLastPlayed([{ player: playersAndPoints[currentPlayer].name, word: readWord(longestNewWord(newWords), tilesNew), points: aiScore },...lastPlayed])
-        // //Change the subitted field to true
-        // let tpns = tilesPlayedNotSubmitted(tilesNew)
-
-        // let tilesNowSubmitted = []
-        // for (let tile of tpns){
-        //     tile.submitted = true
-        //     tilesNowSubmitted.push(tile)
-        // }
-        // updateTiles([...subtractArrays(tilesNew,tpns), ...tilesNowSubmitted])
     }
 
     
@@ -289,16 +272,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const passTurn = () => {
-        // console.log(tiles)
-        // disableRack()
         aiPlay(tiles)
-        // let coords = moves[0].slot.map((el)=>{
-        //     let [x,y] = b_coords(el)
-        //     return `(${x}, ${y}) `
-        // })
-        // alert(`${moves[0].rackPerm} to ${coords} for ${moves[0].points} with ${moves[0].letter}`)
-        // aiReplenishRack().then((newTiles)=>delay(1000, newTiles).then((newTiles)=>aiPlay(newTiles)))   
-
     }
 
     const lookup = () => {
@@ -369,6 +343,29 @@ const Game = ({ gameVariables, exitGame }) => {
             setMoveNumber(x=>x+1)
             // resolve([...tiles, ...addToTiles])
         // })
+
+    }
+
+    const aiReplenishRack1= () => {
+        return new Promise ((resolve, reject) => {
+            let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
+            if (freeSlots.length===0) {
+                resolve(tiles)
+                return
+            }
+            let removeFromBag =[]
+            let addToTiles = []
+            let howManyToPick = Math.min(freeSlots.length, bag.length)
+            let inds = getUniqueInts0(howManyToPick, bag.length)
+            for (let i=0;i<howManyToPick;i++) {
+                removeFromBag.push(bag[inds[i]])
+                addToTiles.push({pos: freeSlots[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: playersAndPoints[currentPlayer].level>0 })
+            }
+            setBag(x=>subtractArrays(bag, removeFromBag))
+            updateTiles([...tiles, ...addToTiles])
+            // setMoveNumber(x=>x+1)
+            resolve([...tiles, ...addToTiles])
+        })
 
     }
 
