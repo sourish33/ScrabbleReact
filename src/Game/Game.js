@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useReducer, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import Swal from "sweetalert2"
 import BoardAndRack from "../BoardAndRack"
@@ -27,8 +27,6 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const [lastPlayed, setLastPlayed] = useState([])
     const [pointsPossible, setPointsPossible] = useState(0)
-    const [moveNumber, setMoveNumber] = useState(0)
-    const [currentPlayer, setCurrentPlayer] = useState(0)
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
     const [selectedTiles, setSelectedTiles] = useState(new Set())
 
@@ -41,9 +39,28 @@ const Game = ({ gameVariables, exitGame }) => {
     const numPlayers = playerTable.length
     const AIPlayersExist = playerTable.filter((el)=>el.level>0).length>0//whether AI players exist
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
-    const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[currentPlayer].level===0)
+    const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[0].level===0)
     const [greeting, setGreeting] = useState("")
     const [showVictoryBox, setShowVictoryBox] = useState(false)
+    
+
+    const gsreducer = (state, action) => {
+        switch(action.type) {
+            case "ADVANCE":
+                return {
+                    ...state, 
+                    mn : state.mn+1,
+                    cp : (state.mn+1)%numPlayers
+                }
+            default:
+                return state
+        }
+    }
+    const initialState = {mn: 0, cp: 0}
+    const [gameState, dispatch] = useReducer(gsreducer, initialState)
+    const advanceGameState = () => {
+        dispatch({ type: 'ADVANCE' });
+      }
     
 
 
@@ -51,7 +68,7 @@ const Game = ({ gameVariables, exitGame }) => {
         if (gameOver()){
             return
         } 
-        setCurrentPlayer(x => moveNumber%numPlayers)
+        const {mn: moveNumber, cp: currentPlayer}  = gameState
 
         if (greeting!=="Better Luck Next Time!") {
             moveNumber===0 ? setGreeting("Lets Get Started!") : setGreeting(passGreetings[randomUpTo(passGreetings.length-1)])
@@ -66,10 +83,11 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         replenishRack()
         
-    }, [moveNumber, currentPlayer])
+    }, [gameState])
 
 
     useEffect(()=>{
+        const {mn: moveNumber, cp: currentPlayer}  = gameState
         checkLegalPlacement(tiles, false) ? setPointsPossible(x=>score(tiles, playersAndPoints[currentPlayer].rack)) : setPointsPossible(x=>0)
 
     }, [tiles])
@@ -77,6 +95,7 @@ const Game = ({ gameVariables, exitGame }) => {
     ////////START GAME OVER FUNCTION//////////
 
     const gameOver = () => { //a player has reached or exceeded max points  
+        const {mn: moveNumber, cp: currentPlayer}  = gameState
         if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
             setShowVictoryBox(x=>true)
             setButtonsDisabled(x=>true)
@@ -107,7 +126,7 @@ const Game = ({ gameVariables, exitGame }) => {
 ///////////////////////// START EXCHANGE TILES MODAL///////////////////////////////////////
    
     const clickHandlerExt = (event) => {
-        let clickedTileNo =playersAndPoints[currentPlayer].rack + event.currentTarget.parentNode.parentNode.id[1]
+        let clickedTileNo =playersAndPoints[gameState.cp].rack + event.currentTarget.parentNode.parentNode.id[1]
         
         setSelectedTiles((x) => {
             if (x.has(clickedTileNo)) {
@@ -120,6 +139,7 @@ const Game = ({ gameVariables, exitGame }) => {
         
     }
     const exchange = () => {
+        const {mn: moveNumber, cp: currentPlayer}  = gameState
         recallTiles(tiles, playersAndPoints[currentPlayer].rack)
         setShowEx(true)
     }
@@ -168,16 +188,17 @@ const Game = ({ gameVariables, exitGame }) => {
         let inds = getUniqueInts0(toReturn.length, bag.length)
         for (let i=0;i<toReturn.length;i++) {
             removeFromBag.push(bag[inds[i]])
-            addToTiles.push({pos: toReturn[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: playersAndPoints[currentPlayer].level>0 })
+            addToTiles.push({pos: toReturn[i], letter: bag[inds[i]][1], points: parseInt(bag[inds[i]][2]), submitted: playersAndPoints[gameState.cp].level>0 })
         }
         //update the states
         setBag(x=>subtractArrays(addToBag, removeFromBag))
         updateTiles([...tilesRemoved, ...addToTiles])
-        setMoveNumber(x=>x+1)
+        advanceGameState()
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
     const disableRack = () => {
+        const {cp: currentPlayer}  = gameState
         let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
         if (tr.length>0){
             let tilesOnRackDisabled = []
@@ -208,7 +229,8 @@ const Game = ({ gameVariables, exitGame }) => {
         });
      }
 
-    const aiPlay = (theTiles) =>{      
+    const aiPlay = (theTiles) =>{   
+        const {mn: moveNumber, cp: currentPlayer}  = gameState   
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(theTiles, playersAndPoints[currentPlayer].rack)
         let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
@@ -224,7 +246,7 @@ const Game = ({ gameVariables, exitGame }) => {
         moves.sort((x,y)=>y.points-x.points)
         if (moves.length === 0) { 
             console.log("No moves found")
-            setMoveNumber(x=>x+1)
+            advanceGameState()
             return
         }
         else {
@@ -261,11 +283,13 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const shuffleRack = () => {
         // Swal.fire("Shuffling rack")
+        const {cp: currentPlayer}  = gameState
         console.log("Shuffling Rack")
         updateTiles(shuffleRackTiles(tiles, playersAndPoints[currentPlayer].rack))
 
     }
     const recall = () => {
+        const {cp: currentPlayer}  = gameState
         updateTiles(recallTiles(tiles, playersAndPoints[currentPlayer].rack))
     }
 
@@ -289,6 +313,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     const play = () => {
+        const {cp: currentPlayer}  = gameState
         let tpns = tilesPlayedNotSubmitted(tiles)
         if (tpns.length===0){return}
         
@@ -321,13 +346,14 @@ const Game = ({ gameVariables, exitGame }) => {
               })
           }
 
-        setMoveNumber(x=>x+1)
+        advanceGameState()
         
         
     }
 
     const aiReplenishRack = (tiles) => {
         // return new Promise ((resolve, reject) => {
+            const {cp: currentPlayer}  = gameState
             let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
             if (freeSlots.length===0) {return}
             let removeFromBag =[]
@@ -340,13 +366,14 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             setBag(x=>subtractArrays(bag, removeFromBag))
             updateTiles([...tiles, ...addToTiles])
-            setMoveNumber(x=>x+1)
+            advanceGameState()
             // resolve([...tiles, ...addToTiles])
         // })
 
     }
 
     const aiReplenishRack1= () => {
+        const {cp: currentPlayer}  = gameState
         return new Promise ((resolve, reject) => {
             let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
             if (freeSlots.length===0) {
@@ -363,13 +390,13 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             setBag(x=>subtractArrays(bag, removeFromBag))
             updateTiles([...tiles, ...addToTiles])
-            // setMoveNumber(x=>x+1)
             resolve([...tiles, ...addToTiles])
         })
 
     }
 
     const replenishRack = () => {
+        const {cp: currentPlayer}  = gameState
         let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
         if (freeSlots.length===0) {return}
         let removeFromBag =[]
@@ -400,13 +427,13 @@ const Game = ({ gameVariables, exitGame }) => {
         <PassDeviceMessageModal 
         show={showPassDevice} 
         onHide = {hideModalPassDevice} 
-        name ={playersAndPoints[currentPlayer].name}
+        name ={playersAndPoints[gameState.cp].name}
         greeting ={greeting}/>
         <CheckDictionaryModal show={showDict} onHide={hideModal} />
         <ExchangeTilesModal 
             show={showEx} 
             onHide={hideModalEx} 
-            whichRack={playersAndPoints[currentPlayer].rack} 
+            whichRack={playersAndPoints[gameState.cp].rack} 
             tiles={tiles} 
             clickHandlerExt={clickHandlerExt}
             handleSubmit={handleExchSubmit}
@@ -416,7 +443,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     <Col sm={12} lg={7} md={12}>
                         <BoardAndRack
                             tiles={tiles}
-                            visibleRack={playersAndPoints[currentPlayer].rack}
+                            visibleRack={playersAndPoints[gameState.cp].rack}
                             updateTiles={updateTiles}
                             showTiles={!showPassDevice}
                         ></BoardAndRack>
@@ -436,7 +463,7 @@ const Game = ({ gameVariables, exitGame }) => {
                         <ScoreKeeper
                             pointsPossible={pointsPossible}
                             playersAndPoints={playersAndPoints}
-                            currentPlayer={currentPlayer}
+                            currentPlayer={gameState.cp}
                             tilesLeft={bag.length}
                             maxPoints={maxPoints}
                             lastPlayed={lastPlayed}
