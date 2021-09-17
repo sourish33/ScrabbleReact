@@ -77,7 +77,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return !AIPlayersExist && playersAndPoints[currentPlayer].level===0})
 
         if (playersAndPoints[currentPlayer].level>0){
-            aiReplenishRack1().then((newTiles)=>delay(1000, newTiles).then((newTiles)=>aiPlay(newTiles)))
+            aiGetTiles().then((newTiles)=>delay(1000, newTiles).then((newTiles)=>aiPlay(newTiles)))
             return
         }
         replenishRack()
@@ -372,7 +372,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     }
 
-    const aiReplenishRack1= () => {
+    const aiGetTiles= () => {
         const {cp: currentPlayer}  = gameState
         return new Promise ((resolve, reject) => {
             let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
