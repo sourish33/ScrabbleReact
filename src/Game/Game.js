@@ -78,7 +78,6 @@ const Game = ({ gameVariables, exitGame }) => {
 
         if (playersAndPoints[currentPlayer].level>0){
             aiReplenishRack1().then((newTiles)=>delay(1000, newTiles).then((newTiles)=>aiPlay(newTiles)))
-            // aiPlay(tiles)
             return
         }
         replenishRack()
