@@ -4,7 +4,7 @@ import Swal from "sweetalert2"
 import BoardAndRack from "../BoardAndRack"
 import ControlButtons from "../ControlButtons/ControlButtons"
 import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
-import { b_coords, getUniqueInts0, makePlayertable, subtractArrays } from "../Utils/helpers"
+import { getUniqueInts0, makePlayertable, subtractArrays } from "../Utils/helpers"
 import { checkLegalPlacement, emptyOnRack, getAllNewWords, longestNewWord, rackPoints,  readWord, recallTiles, score, shuffleRackTiles,  tilesOnBoard,  tilesOnRack, tilesPlayedNotSubmitted } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
 import tilesBag from "../Utils/tilesBag"
@@ -13,7 +13,7 @@ import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageM
 import { randomUpTo } from "../Utils/helpers"
 import { passGreetings } from "../Utils/DummyData"
 import VictoryModal from "../VictoryModal/VictoryModal"
-import { aiMove, evaluateMove, evaluateMoves, makeAllSlots, makeRackPerms } from "./AIHelperFunctions"
+import { aiMove, evaluateMoves, makeAllSlots, makeRackPerms } from "./AIHelperFunctions"
 
 
 
@@ -86,7 +86,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     useEffect(()=>{
-        const {mn: moveNumber, cp: currentPlayer}  = gameState
+        const {cp: currentPlayer}  = gameState
         checkLegalPlacement(tiles, false) ? setPointsPossible(x=>score(tiles, playersAndPoints[currentPlayer].rack)) : setPointsPossible(x=>0)
 
     }, [tiles])
