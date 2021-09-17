@@ -448,7 +448,6 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const aiReplenishRack = (tiles) => {
-        // return new Promise ((resolve, reject) => {
         const { cp: currentPlayer } = gameState
         let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
         if (freeSlots.length === 0) {
@@ -470,8 +469,6 @@ const Game = ({ gameVariables, exitGame }) => {
         setBag((x) => subtractArrays(bag, removeFromBag))
         updateTiles([...tiles, ...addToTiles])
         advanceGameState()
-        // resolve([...tiles, ...addToTiles])
-        // })
     }
 
     const aiGetTiles = () => {
