@@ -96,7 +96,8 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const gameOver = () => { //a player has reached or exceeded max points  
         const {mn: moveNumber, cp: currentPlayer}  = gameState
-        if (parseInt(playersAndPoints[currentPlayer].points) >= maxPoints){
+        const prevPlayer = Math.max((moveNumber-1)%numPlayers, 0)
+        if (parseInt(playersAndPoints[prevPlayer].points) >= maxPoints){
             setShowVictoryBox(x=>true)
             setButtonsDisabled(x=>true)
             //disabling tiles still on rack
