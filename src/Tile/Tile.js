@@ -9,13 +9,14 @@ const Tile = (props) => {
     }
 
     const handleDoubleClick = (e) =>{
-        switch (e.detail) {
-            case 2:
-              console.log("double click");
-              break;
-            default:
-                //do nothing
-          }
+        // switch (e.detail) {
+        //     case 2:
+        //       console.log("double click");
+        //       break;
+        //     default:
+        //         //do nothing
+        //   }
+        console.log('Double Click detected!!!!!')
     }
 
     return (
@@ -26,7 +27,7 @@ const Tile = (props) => {
         onDragStart={props.submitted ? props.DragStart: null}
         onDragOver={props.submitted ? props.DragOver: null}
         onDrop={props.submitted ? props.Drop: null}
-        onClick = {props.submitted ? handleDoubleClick: null}
+        onDoubleClick = {props.submitted ? handleDoubleClick: null}
         >
             <div className={styles.letter}>{props.letter}</div>
             <div className={styles.points}>{props.points}</div>
