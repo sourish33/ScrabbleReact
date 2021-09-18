@@ -24,7 +24,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     let currentX
     let currentY
 
-    const doubleClick = (e) =>{
+    const backToRack = (e) =>{
         let u = e.currentTarget
         let src = getSquareIdFromPos(getXY(u))
         if (src[0]!=='b'){
@@ -102,7 +102,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         yOffset = 0
         setTranslate(0, 0, lastMoved)
         if (startingloc === endingloc){//return tile to rack upon tapping a played-not-submitted tile
-            doubleClick(e)
+            backToRack(e)
         } else{
             updateTiles(move(startingloc, endingloc, tiles))
         }
@@ -122,7 +122,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
-                doubleClick = {doubleClick}
+                backToRack = {backToRack}
             />
             <Rack
                 whichRack={visibleRack}
@@ -134,7 +134,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
                 showTiles={showTiles}
-                doubleClick = {doubleClick}
+                backToRack = {backToRack}
             />
         </div>
     )

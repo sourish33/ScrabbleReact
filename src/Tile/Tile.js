@@ -8,8 +8,8 @@ const Tile = (props) => {
         classes = !props.submitted? `${styles['tile']} ${styles['submitted']}`: styles['tile']
     }
 
-    const handleDoubleClick = (e) =>{
-        props.doubleClick(e)
+    const handleSendBackClick = (e) =>{
+        props.backToRack(e)
     }
 
     return (
@@ -20,7 +20,7 @@ const Tile = (props) => {
         onDragStart={props.submitted ? props.DragStart: null}
         onDragOver={props.submitted ? props.DragOver: null}
         onDrop={props.submitted ? props.Drop: null}
-        onDoubleClick = {props.submitted ? handleDoubleClick: null}
+        onClick = {props.submitted ? handleSendBackClick: null}
         >
             <div className={styles.letter}>{props.letter}</div>
             <div className={styles.points}>{props.points}</div>
