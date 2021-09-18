@@ -8,6 +8,16 @@ const Tile = (props) => {
         classes = !props.submitted? `${styles['tile']} ${styles['submitted']}`: styles['tile']
     }
 
+    const handleDoubleClick = (e) =>{
+        switch (e.detail) {
+            case 2:
+              console.log("double click");
+              break;
+            default:
+                //do nothing
+          }
+    }
+
     return (
         <div draggable = {props.submitted} className={classes}                     
         onTouchStart = {props.submitted ? props.TouchStart : null}
@@ -16,6 +26,7 @@ const Tile = (props) => {
         onDragStart={props.submitted ? props.DragStart: null}
         onDragOver={props.submitted ? props.DragOver: null}
         onDrop={props.submitted ? props.Drop: null}
+        onClick = {props.submitted ? handleDoubleClick: null}
         >
             <div className={styles.letter}>{props.letter}</div>
             <div className={styles.points}>{props.points}</div>
