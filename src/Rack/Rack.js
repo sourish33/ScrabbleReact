@@ -5,7 +5,7 @@ import Tile from '../Tile/Tile';
 import RackSquare from '../RackSquare/RackSquare';
 
 
-const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd, showTiles}) => {
+const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd, showTiles, doubleClick}) => {
     let tilesMap = arrayToMap(tiles)
 
     const squares = []
@@ -23,6 +23,7 @@ const Rack = ({whichRack, tiles, DragStart, DragOver, Drop, TouchStart, TouchMov
                     DragOver={DragOver}
                     Drop={Drop}
                     boardTile={false}
+                    doubleClick = {doubleClick}
                 />
             )
             let thisSquare = (

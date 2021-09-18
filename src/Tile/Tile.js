@@ -9,13 +9,6 @@ const Tile = (props) => {
     }
 
     const handleDoubleClick = (e) =>{
-        // switch (e.detail) {
-        //     case 2:
-        //       console.log("double click");
-        //       break;
-        //     default:
-        //         //do nothing
-        //   }
         props.doubleClick(e)
     }
 

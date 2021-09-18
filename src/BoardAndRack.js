@@ -1,6 +1,7 @@
 import React  from "react"
 import Board from "./Board/Board"
 import styles from "./BoardAndRack.module.css"
+import {emptyOnRack} from "./Game/GameHelperFunctions"
 
 import move from "./Utils/movers"
 import {
@@ -24,10 +25,15 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     let currentY
 
     const doubleClick = (e) =>{
-        console.log("Hello doubleClick here")
         let u = e.currentTarget
-        let dest = getSquareIdFromPos(getXY(u))
-        console.log(`You clicked on ${dest}`)
+        let src = getSquareIdFromPos(getXY(u))
+        if (src[0]!=='b'){
+            console.log(`You clicked on ${src}, rack tile doing nothing`)
+            return
+        }
+        let dest = emptyOnRack(tiles, visibleRack)[0]
+        console.log(`You clicked on ${src}, will send to ${dest}`)
+        updateTiles(move(src, dest, tiles))
     }
 
     const DragStart = (event) => {
@@ -120,6 +126,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
                 showTiles={showTiles}
+                doubleClick = {doubleClick}
             />
         </div>
     )
