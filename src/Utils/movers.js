@@ -30,6 +30,7 @@ const move = (origin, destination, tiles) => {
     if (origin === destination) {
         //checking that they are not the same
         console.log("Back to the same location")
+
         return tiles
     }
     //checking if something exists are destination

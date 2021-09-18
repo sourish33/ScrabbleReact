@@ -31,8 +31,12 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
             console.log(`You clicked on ${src}, rack tile doing nothing`)
             return
         }
-        let dest = emptyOnRack(tiles, visibleRack)[0]
-        console.log(`You clicked on ${src}, will send to ${dest}`)
+        let emptySpots = emptyOnRack(tiles, visibleRack)
+        if (emptySpots.length ===0){
+            console.log("No space on rack")
+            return 
+        }
+        let dest = emptySpots[0]
         updateTiles(move(src, dest, tiles))
     }
 
@@ -97,7 +101,11 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         xOffset = 0
         yOffset = 0
         setTranslate(0, 0, lastMoved)
-        updateTiles(move(startingloc, endingloc, tiles))
+        if (startingloc === endingloc){//return tile to rack upon tapping a played-not-submitted tile
+            doubleClick(e)
+        } else{
+            updateTiles(move(startingloc, endingloc, tiles))
+        }
         document.getElementsByTagName("body")[0].style.touchAction = "auto"
     }
 
