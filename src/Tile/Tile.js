@@ -16,7 +16,7 @@ const Tile = (props) => {
         //     default:
         //         //do nothing
         //   }
-        console.log('Double Click detected!!!!!')
+        props.doubleClick(e)
     }
 
     return (

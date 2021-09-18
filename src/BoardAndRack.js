@@ -23,6 +23,13 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     let currentX
     let currentY
 
+    const doubleClick = (e) =>{
+        console.log("Hello doubleClick here")
+        let u = e.currentTarget
+        let dest = getSquareIdFromPos(getXY(u))
+        console.log(`You clicked on ${dest}`)
+    }
+
     const DragStart = (event) => {
         let whereArtThou = event.target.parentElement.parentElement.id
         event.dataTransfer.setData("text/plain", whereArtThou)
@@ -101,6 +108,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
+                doubleClick = {doubleClick}
             />
             <Rack
                 whichRack={visibleRack}
