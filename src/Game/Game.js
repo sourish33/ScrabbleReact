@@ -294,12 +294,20 @@ const Game = ({ gameVariables, exitGame }) => {
 
     async function callAllWorkers(allPerms, allSlots, tiles, whichRack) {
         let moves = await callWorker(allPerms[0], allSlots[0], tiles, whichRack)
+        if (moves.length===0){
+            return []
+        }
         moves.sort((x, y) => y.points - x.points)
         const bestMove = moves[0]
         return bestMove
     }
 
     const aiSubmitMove = (bestMove, theTiles, currentPlayer) =>{
+        if (bestMove.length===0){
+            console.log("No moves found")
+            advanceGameState()
+            return
+        }
         moveNPlay(bestMove, theTiles)
             .then((newTiles) => delay(1000, newTiles))
             .then((newTiles) => {
