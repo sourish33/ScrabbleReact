@@ -267,7 +267,7 @@ export const evaluateMoves = (
     slots,
     tiles,
     rack,
-    cutoff = 10000
+    cutoff = 50000
 ) => {
     let moves = []
     let tries = 0

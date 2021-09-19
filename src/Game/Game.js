@@ -281,7 +281,6 @@ const Game = ({ gameVariables, exitGame }) => {
                         console.log('New Message: ', message.data)
                     }
                     if (Array.isArray(result)){
-                        console.log("Arre Tu!")
                         resolve(result)
                         myWorker.terminate()
                     }
@@ -293,9 +292,15 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     async function callAllWorkers(allPerms, allSlots, tiles, whichRack) {
-        let moves0 = callWorker(allPerms[0], allSlots[0], tiles, whichRack)
-        let moves1 = callWorker(allPerms[1], allSlots[1], tiles, whichRack)
-        let moves = await Promise.all([moves0, moves1])
+        let moves = await Promise.all([
+            callWorker(allPerms[0], allSlots[0], tiles, whichRack), 
+            callWorker(allPerms[1], allSlots[1], tiles, whichRack),
+            callWorker(allPerms[2], allSlots[2], tiles, whichRack),
+            callWorker(allPerms[3], allSlots[3], tiles, whichRack),
+            callWorker(allPerms[4], allSlots[4], tiles, whichRack),
+            callWorker(allPerms[5], allSlots[5], tiles, whichRack),
+            callWorker(allPerms[6], allSlots[6], tiles, whichRack),
+        ])
         moves = moves.reduce((previousValue, currentValue) => [...previousValue, ...currentValue])
         if (moves.length===0){
             return []
