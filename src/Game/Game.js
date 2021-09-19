@@ -291,7 +291,8 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
-    async function callAllWorkers(allPerms, allSlots, tiles, whichRack) {
+    async function callAllWorkers(allPerms, allSlots, tiles, currentPlayer) {
+        let whichRack = playersAndPoints[currentPlayer].rack
         let moves = await Promise.all([
             callWorker(allPerms[0], allSlots[0], tiles, whichRack), 
             callWorker(allPerms[1], allSlots[1], tiles, whichRack),
@@ -366,7 +367,7 @@ const Game = ({ gameVariables, exitGame }) => {
         )
         let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
-        callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7], theTiles, playersAndPoints[currentPlayer].rack)
+        callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7], theTiles, currentPlayer)
             .then((bestMove)=>aiSubmitMove(bestMove, theTiles, currentPlayer))
         // let moves = [
         //     ...(moveNumber !== 0 ? evaluateMoves(p1, s1, theTiles, playersAndPoints[currentPlayer].rack )  : []),
