@@ -36,6 +36,7 @@ import {
     makeAllSlots,
     makeRackPerms,
 } from "./AIHelperFunctions"
+import worker from 'workerize-loader!../Workers/worker'; // eslint-disable-line import/no-webpack-loader-syntax
 
 const Game = ({ gameVariables, exitGame }) => {
     const [tiles, setTiles] = useState([])
@@ -269,6 +270,35 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
+    function callWorker(perms, slots) {
+        return new Promise((resolve, reject) => {
+            const myWorker = worker()
+    
+            myWorker.addEventListener('message', (message) => {
+                if (message.data.type!=="RPC"){
+                    let result = message.data
+                    if (typeof(result)==='string'){
+                        console.log('New Message: ', message.data)
+                    }
+                    if (Array.isArray(result)){
+                        console.log("Arre Tu!")
+                        resolve(result)
+                        myWorker.terminate()
+                    }
+                }
+              })
+
+            myWorker.crunch(perms, slots, maxPoints)
+        })
+    }
+
+    async function callAllWorkers(allPerms, allSlots) {
+        let workerResult = await callWorker(allPerms[0], allSlots[0])
+        console.log("Got from worker", workerResult)
+    }
+
+    
+
     const aiPlay = (theTiles) => {
         const { mn: moveNumber, cp: currentPlayer } = gameState
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(
@@ -277,51 +307,15 @@ const Game = ({ gameVariables, exitGame }) => {
         )
         let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
+        callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7])
         let moves = [
-            ...(moveNumber !== 0
-                ? evaluateMoves(
-                      p1,
-                      s1,
-                      theTiles,
-                      playersAndPoints[currentPlayer].rack
-                  )
-                : []),
-            ...evaluateMoves(
-                p2,
-                s2,
-                theTiles,
-                playersAndPoints[currentPlayer].rack
-            ),
-            ...evaluateMoves(
-                p3,
-                s3,
-                theTiles,
-                playersAndPoints[currentPlayer].rack
-            ),
-            ...evaluateMoves(
-                p4,
-                s4,
-                theTiles,
-                playersAndPoints[currentPlayer].rack
-            ),
-            ...evaluateMoves(
-                p5,
-                s5,
-                theTiles,
-                playersAndPoints[currentPlayer].rack
-            ),
-            ...evaluateMoves(
-                p6,
-                s6,
-                theTiles,
-                playersAndPoints[currentPlayer].rack
-            ),
-            ...evaluateMoves(
-                p7,
-                s7,
-                theTiles,
-                playersAndPoints[currentPlayer].rack
-            ),
+            ...(moveNumber !== 0 ? evaluateMoves(p1, s1, theTiles, playersAndPoints[currentPlayer].rack )  : []),
+            ...evaluateMoves(p2, s2, theTiles, playersAndPoints[currentPlayer].rack ),
+            ...evaluateMoves(p3, s3, theTiles, playersAndPoints[currentPlayer].rack),
+            ...evaluateMoves(p4, s4, theTiles, playersAndPoints[currentPlayer].rack ),
+            ...evaluateMoves(p5, s5, theTiles, playersAndPoints[currentPlayer].rack ),
+            ...evaluateMoves(p6, s6, theTiles, playersAndPoints[currentPlayer].rack ),
+            ...evaluateMoves(p7, s7, theTiles, playersAndPoints[currentPlayer].rack ),
         ]
 
         if (moves.length === 0) {

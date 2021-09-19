@@ -138,7 +138,6 @@ export const recallTiles = (tiles, rack) => {
     let unsubmittedTiles = tilesPlayedNotSubmitted(tiles)
 
     if (unsubmittedTiles.length === 0) {
-        console.log("nothing to return")
         return tiles
     }
     //check for and handle blank tiles
@@ -293,7 +292,6 @@ export function checkLegalPlacement(tiles, dictChecking, verbose=false) {
         return false
     }
     if (newWords.length === 0) {
-        // console.log("new words length 0")
         return false
     }
     for (let word of newWords) {

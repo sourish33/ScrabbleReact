@@ -4,11 +4,6 @@ import TileEx from "../Tile/TileEx";
 import RackSquareEx from "../RackSquare/RackSquareEx";
 
 const RackEx = ({ whichRack, tiles, clickHandlerExt }) => {
-  console.log("tiles length is "+ tiles.length)
-
-  
-
-
 
   const squares = [];
   for (let i = 1; i < 8; i++) {
