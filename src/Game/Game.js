@@ -278,7 +278,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 if (message.data.type!=="RPC"){
                     let result = message.data
                     if (typeof(result)==='string'){
-                        console.log('New Message: ', message.data)
+                        console.log(message.data)
                     }
                     if (Array.isArray(result)){
                         resolve(result)
