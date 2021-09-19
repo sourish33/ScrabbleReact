@@ -293,7 +293,10 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     async function callAllWorkers(allPerms, allSlots, tiles, whichRack) {
-        let moves = await callWorker(allPerms[0], allSlots[0], tiles, whichRack)
+        let moves0 = callWorker(allPerms[0], allSlots[0], tiles, whichRack)
+        let moves1 = callWorker(allPerms[1], allSlots[1], tiles, whichRack)
+        let moves = await Promise.all([moves0, moves1])
+        moves = moves.reduce((previousValue, currentValue) => [...previousValue, ...currentValue])
         if (moves.length===0){
             return []
         }
