@@ -270,7 +270,7 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
-    function callWorker(perms, slots) {
+    function callWorker(perms, slots, tiles, whichRack,) {
         return new Promise((resolve, reject) => {
             const myWorker = worker()
     
@@ -288,13 +288,15 @@ const Game = ({ gameVariables, exitGame }) => {
                 }
               })
 
-            myWorker.crunch(perms, slots, maxPoints)
+            myWorker.crunch(perms, slots, tiles, whichRack, maxPoints)
         })
     }
 
-    async function callAllWorkers(allPerms, allSlots) {
-        let workerResult = await callWorker(allPerms[0], allSlots[0])
-        console.log("Got from worker", workerResult)
+    async function callAllWorkers(allPerms, allSlots, tiles, whichRack) {
+        let moves = await callWorker(allPerms[0], allSlots[0], tiles, whichRack)
+        moves.sort((x, y) => y.points - x.points)
+        const bestMove = moves[0]
+        return bestMove
     }
 
     const aiSubmitMove = (bestMove, theTiles, currentPlayer) =>{
@@ -348,25 +350,23 @@ const Game = ({ gameVariables, exitGame }) => {
         )
         let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
-        callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7])
-        let moves = [
-            ...(moveNumber !== 0 ? evaluateMoves(p1, s1, theTiles, playersAndPoints[currentPlayer].rack )  : []),
-            ...evaluateMoves(p2, s2, theTiles, playersAndPoints[currentPlayer].rack ),
-            ...evaluateMoves(p3, s3, theTiles, playersAndPoints[currentPlayer].rack),
-            ...evaluateMoves(p4, s4, theTiles, playersAndPoints[currentPlayer].rack ),
-            ...evaluateMoves(p5, s5, theTiles, playersAndPoints[currentPlayer].rack ),
-            ...evaluateMoves(p6, s6, theTiles, playersAndPoints[currentPlayer].rack ),
-            ...evaluateMoves(p7, s7, theTiles, playersAndPoints[currentPlayer].rack ),
-        ]
+        callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7], theTiles, playersAndPoints[currentPlayer].rack)
+            .then((bestMove)=>aiSubmitMove(bestMove, theTiles, currentPlayer))
+        // let moves = [
+        //     ...(moveNumber !== 0 ? evaluateMoves(p1, s1, theTiles, playersAndPoints[currentPlayer].rack )  : []),
+        //     ...evaluateMoves(p2, s2, theTiles, playersAndPoints[currentPlayer].rack ),
+        //     ...evaluateMoves(p3, s3, theTiles, playersAndPoints[currentPlayer].rack),
+        //     ...evaluateMoves(p4, s4, theTiles, playersAndPoints[currentPlayer].rack ),
+        //     ...evaluateMoves(p5, s5, theTiles, playersAndPoints[currentPlayer].rack ),
+        //     ...evaluateMoves(p6, s6, theTiles, playersAndPoints[currentPlayer].rack ),
+        //     ...evaluateMoves(p7, s7, theTiles, playersAndPoints[currentPlayer].rack ),
+        // ]
 
-        if (moves.length === 0) {
-            console.log("No moves found")
-            advanceGameState()
-            return
-        }
-        moves.sort((x, y) => y.points - x.points)
-        const bestMove = moves[0]
-        aiSubmitMove(bestMove, theTiles, currentPlayer)
+        // if (moves.length === 0) {
+        //     console.log("No moves found")
+        //     advanceGameState()
+        //     return
+        // }
         
     }
 
