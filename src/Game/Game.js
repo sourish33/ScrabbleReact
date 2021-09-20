@@ -336,7 +336,6 @@ const Game = ({ gameVariables, exitGame }) => {
                 return new Promise((resolve, reject) => {
                     let tpns = tilesPlayedNotSubmitted(newTiles)
                     let newWords = getAllNewWords(newTiles)
-                    let displayWord = readWord(longestNewWord(newWords, tpns), newTiles)
                     let aiScore = score(
                         newTiles,
                         playersAndPoints[currentPlayer].rack
@@ -347,7 +346,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     setLastPlayed([
                         {
                             player: playersAndPoints[currentPlayer].name,
-                            word: displayWord,
+                            word: readWord(longestNewWord(newWords, tpns), newTiles),
                             points: aiScore,
                         },
                         ...lastPlayed,
@@ -444,7 +443,6 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         let newWords = getAllNewWords(tiles)
-        let displayWord = readWord(longestNewWord(newWords, tpns), tiles)
 
         setPlayersAndPoints((x) => {
             let playersAndPointsCopy = Array.from(x)
@@ -454,7 +452,7 @@ const Game = ({ gameVariables, exitGame }) => {
         setLastPlayed([
             {
                 player: playersAndPoints[currentPlayer].name,
-                word: displayWord,
+                word: readWord(longestNewWord(newWords, tpns), tiles),
                 points: pointsPossible,
             },
             ...lastPlayed,
