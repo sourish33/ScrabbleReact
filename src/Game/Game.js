@@ -63,6 +63,7 @@ const Game = ({ gameVariables, exitGame }) => {
     )
     const [greeting, setGreeting] = useState("")
     const [showVictoryBox, setShowVictoryBox] = useState(false)
+    const [gameIsOver, setGameIsOver] = useState(false)
 
     const gsreducer = (state, action) => {
         switch (action.type) {
@@ -72,6 +73,12 @@ const Game = ({ gameVariables, exitGame }) => {
                     mn: state.mn + 1,
                     cp: (state.mn + 1) % numPlayers,
                 }
+                case "REVERT":
+                    return {
+                        ...state,
+                        mn: state.mn - 1,
+                        cp: (state.mn - 1) % numPlayers,
+                    }
             default:
                 return state
         }
@@ -81,8 +88,14 @@ const Game = ({ gameVariables, exitGame }) => {
     const advanceGameState = () => {
         dispatch({ type: "ADVANCE" })
     }
+    const revertGameState = () => {
+        dispatch({ type: "REVERT" })
+    }
 
     useEffect(() => {
+        if (gameIsOver){
+            return
+        }
         if (gameOver()) {
             return
         }
@@ -117,7 +130,7 @@ const Game = ({ gameVariables, exitGame }) => {
                   score(tiles, playersAndPoints[currentPlayer].rack)
               )
             : setPointsPossible((x) => 0)
-    }, [tiles])
+    }, [tiles, gameIsOver])
 
     ////////START GAME OVER FUNCTION//////////
 
@@ -126,10 +139,10 @@ const Game = ({ gameVariables, exitGame }) => {
         const { mn: moveNumber, cp: currentPlayer } = gameState
         const prevPlayer = Math.max((moveNumber - 1) % numPlayers, 0)
         if (parseInt(playersAndPoints[prevPlayer].points) >= maxPoints) {
+            revertGameState()
             setShowVictoryBox((x) => true)
             setButtonsDisabled((x) => true)
-            //disabling tiles still on rack
-            disableRack()
+            setGameIsOver(true)
             return true
         }
         ///////
@@ -145,7 +158,7 @@ const Game = ({ gameVariables, exitGame }) => {
             setPlayersAndPoints(playersAndPointsCopy)
             setShowVictoryBox((x) => true)
             setButtonsDisabled((x) => true)
-            disableRack()
+            setGameIsOver(true)
             return true
         }
 
