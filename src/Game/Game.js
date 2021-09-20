@@ -373,7 +373,7 @@ const Game = ({ gameVariables, exitGame }) => {
     
 
     const aiPlay = (theTiles) => {
-        const { mn: moveNumber, cp: currentPlayer } = gameState
+        const { cp: currentPlayer } = gameState
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(
             theTiles,
             playersAndPoints[currentPlayer].rack
@@ -382,21 +382,6 @@ const Game = ({ gameVariables, exitGame }) => {
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
         callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7], theTiles, currentPlayer)
             .then((bestMove)=>aiSubmitMove(bestMove, theTiles, currentPlayer))
-        // let moves = [
-        //     ...(moveNumber !== 0 ? evaluateMoves(p1, s1, theTiles, playersAndPoints[currentPlayer].rack )  : []),
-        //     ...evaluateMoves(p2, s2, theTiles, playersAndPoints[currentPlayer].rack ),
-        //     ...evaluateMoves(p3, s3, theTiles, playersAndPoints[currentPlayer].rack),
-        //     ...evaluateMoves(p4, s4, theTiles, playersAndPoints[currentPlayer].rack ),
-        //     ...evaluateMoves(p5, s5, theTiles, playersAndPoints[currentPlayer].rack ),
-        //     ...evaluateMoves(p6, s6, theTiles, playersAndPoints[currentPlayer].rack ),
-        //     ...evaluateMoves(p7, s7, theTiles, playersAndPoints[currentPlayer].rack ),
-        // ]
-
-        // if (moves.length === 0) {
-        //     console.log("No moves found")
-        //     advanceGameState()
-        //     return
-        // }
         
     }
 

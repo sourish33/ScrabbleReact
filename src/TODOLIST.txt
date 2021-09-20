@@ -1,2 +1,4 @@
 toWin check for evaluateMoves
+AI level
 loader component while AI thinking
+make greetings into a function
