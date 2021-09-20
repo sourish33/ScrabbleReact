@@ -184,7 +184,7 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
     const exchange = () => {
-        const { mn: moveNumber, cp: currentPlayer } = gameState
+        const { cp: currentPlayer } = gameState
         recallTiles(tiles, playersAndPoints[currentPlayer].rack)
         setShowEx(true)
     }
