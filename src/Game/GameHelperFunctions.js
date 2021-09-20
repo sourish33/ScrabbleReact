@@ -205,10 +205,10 @@ export function getAllNewWords(tiles) {
     return allwordsLoc.filter((el) => anyCommonElements(el, tpnsLoc))
 }
 
-export function longestNewWord(newWords, tpns) {
+export function pickDisplayWord(newWords, tpns) {
     let tpnsPos = tpns.map((el)=>el.pos)
     if (newWords.length === 0) {
-        throw new Error("longestNewWord called with empty array of words")
+        throw new Error("pickDisplayWord called with empty array of words")
     }
     if (newWords.length === 1) {
         return newWords[0]

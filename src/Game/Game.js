@@ -13,7 +13,7 @@ import {
     checkLegalPlacement,
     emptyOnRack,
     getAllNewWords,
-    longestNewWord,
+    pickDisplayWord,
     rackPoints,
     readWord,
     recallTiles,
@@ -346,7 +346,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     setLastPlayed([
                         {
                             player: playersAndPoints[currentPlayer].name,
-                            word: readWord(longestNewWord(newWords, tpns), newTiles),
+                            word: readWord(pickDisplayWord(newWords, tpns), newTiles),
                             points: aiScore,
                         },
                         ...lastPlayed,
@@ -452,7 +452,7 @@ const Game = ({ gameVariables, exitGame }) => {
         setLastPlayed([
             {
                 player: playersAndPoints[currentPlayer].name,
-                word: readWord(longestNewWord(newWords, tpns), tiles),
+                word: readWord(pickDisplayWord(newWords, tpns), tiles),
                 points: pointsPossible,
             },
             ...lastPlayed,
