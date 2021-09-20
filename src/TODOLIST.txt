@@ -1,3 +1,2 @@
 toWin check for evaluateMoves
-last played word - max new letters
 loader component while AI thinking

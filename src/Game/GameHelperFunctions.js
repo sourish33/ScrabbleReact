@@ -9,7 +9,7 @@ import {
     coordsTolocWordArr,
     getConsecutivesNums,
     getUniques,
-    isContiguous,
+    intersection,
     loc,
     neighbors,
     range,
@@ -205,16 +205,19 @@ export function getAllNewWords(tiles) {
     return allwordsLoc.filter((el) => anyCommonElements(el, tpnsLoc))
 }
 
-export function longestNewWord(newWords) {
+export function longestNewWord(newWords, tpns) {
+    let tpnsPos = tpns.map((el)=>el.pos)
     if (newWords.length === 0) {
         throw new Error("longestNewWord called with empty array of words")
     }
     if (newWords.length === 1) {
         return newWords[0]
     }
-    newWords.sort((x, y) => {
-        return y.length - x.length
+    
+    newWords.sort((a, b) => {//sort by most new letters
+        return intersection(b, tpnsPos).length - intersection(a, tpnsPos).length
     })
+
     return newWords[0]
 }
 

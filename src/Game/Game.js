@@ -136,7 +136,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const gameOver = () => {
         //a player has reached or exceeded max points
-        const { mn: moveNumber, cp: currentPlayer } = gameState
+        const { mn: moveNumber } = gameState
         const prevPlayer = Math.max((moveNumber - 1) % numPlayers, 0)
         if (parseInt(playersAndPoints[prevPlayer].points) >= maxPoints) {
             revertGameState()
@@ -336,6 +336,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 return new Promise((resolve, reject) => {
                     let tpns = tilesPlayedNotSubmitted(newTiles)
                     let newWords = getAllNewWords(newTiles)
+                    let displayWord = readWord(longestNewWord(newWords, tpns), newTiles)
                     let aiScore = score(
                         newTiles,
                         playersAndPoints[currentPlayer].rack
@@ -346,7 +347,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     setLastPlayed([
                         {
                             player: playersAndPoints[currentPlayer].name,
-                            word: readWord(longestNewWord(newWords), newTiles),
+                            word: displayWord,
                             points: aiScore,
                         },
                         ...lastPlayed,
@@ -416,7 +417,8 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const passTurn = () => {
-        aiPlay(tiles)
+        // aiPlay(tiles)
+        console.log(tiles)
     }
 
     const lookup = () => {
@@ -442,6 +444,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         let newWords = getAllNewWords(tiles)
+        let displayWord = readWord(longestNewWord(newWords, tpns), tiles)
 
         setPlayersAndPoints((x) => {
             let playersAndPointsCopy = Array.from(x)
@@ -451,7 +454,7 @@ const Game = ({ gameVariables, exitGame }) => {
         setLastPlayed([
             {
                 player: playersAndPoints[currentPlayer].name,
-                word: readWord(longestNewWord(newWords), tiles),
+                word: displayWord,
                 points: pointsPossible,
             },
             ...lastPlayed,
