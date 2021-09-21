@@ -2,9 +2,9 @@ import { evaluateMoves } from "../Game/AIHelperFunctions"
 
 
 
-export const crunch = (pp, ss, tiles, whichRack, maxPoints) => {
+export const crunch = (pp, ss, tiles, whichRack, cutoff) => {
 
-    let result = evaluateMoves(pp, ss, tiles, whichRack )
-    postMessage(`${pp[0].length}-letter words done - ${result.length} found`)
+    let result = evaluateMoves(pp, ss, tiles, whichRack, cutoff )
+    postMessage(`- ${result.length} ${pp[0].length}-letter words found cutoff: ${cutoff}`)
     postMessage(result)
 }

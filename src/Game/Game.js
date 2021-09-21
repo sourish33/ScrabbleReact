@@ -54,13 +54,12 @@ const Game = ({ gameVariables, exitGame }) => {
     const shufflePlayers = gameVariables.shufflePlayers
     const dictChecking = gameVariables.dictCheck === "1" ? true : false
     const maxPoints = parseInt(gameVariables.gameType)
+    const maxSearches = {1: 1500, 2: 50000, 3: 150000}
     const playerTable = makePlayertable(players, shufflePlayers)
     const numPlayers = playerTable.length
     const AIPlayersExist = playerTable.filter((el) => el.level > 0).length > 0 //whether AI players exist
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
-    const [showPassDevice, setShowPassDevice] = useState(
-        playersAndPoints[0].level === 0
-    )
+    const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[0].level === 0)
     const [greeting, setGreeting] = useState("")
     const [showVictoryBox, setShowVictoryBox] = useState(false)
     const [gameIsOver, setGameIsOver] = useState(false)
@@ -283,7 +282,7 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
-    function callWorker(perms, slots, tiles, whichRack,) {
+    function callWorker(perms, slots, tiles, whichRack, cutoff) {
         return new Promise((resolve, reject) => {
             const myWorker = worker()
     
@@ -300,20 +299,21 @@ const Game = ({ gameVariables, exitGame }) => {
                 }
               })
 
-            myWorker.crunch(perms, slots, tiles, whichRack, maxPoints)
+            myWorker.crunch(perms, slots, tiles, whichRack, cutoff)
         })
     }
 
     async function callAllWorkers(allPerms, allSlots, tiles, currentPlayer) {
         let whichRack = playersAndPoints[currentPlayer].rack
+        let cutoff = maxSearches[playersAndPoints[currentPlayer].level]
         let moves = await Promise.all([
-            callWorker(allPerms[0], allSlots[0], tiles, whichRack), 
-            callWorker(allPerms[1], allSlots[1], tiles, whichRack),
-            callWorker(allPerms[2], allSlots[2], tiles, whichRack),
-            callWorker(allPerms[3], allSlots[3], tiles, whichRack),
-            callWorker(allPerms[4], allSlots[4], tiles, whichRack),
-            callWorker(allPerms[5], allSlots[5], tiles, whichRack),
-            callWorker(allPerms[6], allSlots[6], tiles, whichRack),
+            callWorker(allPerms[0], allSlots[0], tiles, whichRack, cutoff), 
+            callWorker(allPerms[1], allSlots[1], tiles, whichRack, cutoff),
+            callWorker(allPerms[2], allSlots[2], tiles, whichRack, cutoff),
+            callWorker(allPerms[3], allSlots[3], tiles, whichRack, cutoff),
+            callWorker(allPerms[4], allSlots[4], tiles, whichRack, cutoff),
+            callWorker(allPerms[5], allSlots[5], tiles, whichRack, cutoff),
+            callWorker(allPerms[6], allSlots[6], tiles, whichRack, cutoff),
         ])
         moves = moves.reduce((previousValue, currentValue) => [...previousValue, ...currentValue])
         if (moves.length===0){
