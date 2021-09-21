@@ -267,7 +267,8 @@ export const evaluateMoves = (
     slots,
     tiles,
     rack,
-    cutoff = 50000
+    cutoff = 50000,
+    toWin = 1000
 ) => {
     let moves = []
     let tries = 0
@@ -275,52 +276,62 @@ export const evaluateMoves = (
     let triesBlank = 0
     let cutoffTriesBlank = 10000
     // debugger
-    for (let rp of rackPerms) {
-        let blankInd = findBlankTile(rp, tiles)
-        if (blankInd === -1) {
-            for (let s of slots) {
-                if (tries > cutoff) {
-                    break
-                }
-                let pts = evaluateMove(rp, s, tiles, rack)
-                if (pts) {
-                    moves.push({
-                        rackPerm: rp,
-                        slot: s,
-                        points: pts,
-                        letter: "",
-                    })
-                }
-                tries += 1
-            }
-        } else {
-            for (let letter of LETTERS) {
+    function search() {//made into a function so that loops can be broken out of using return
+        for (let rp of rackPerms) {
+            let blankInd = findBlankTile(rp, tiles)
+            if (blankInd === -1) {
                 for (let s of slots) {
-                    if (triesBlank > cutoffTriesBlank) {
-                        break
+                    if (tries > cutoff) {
+                        return
                     }
-                    let pts = evaluateMoveBlank(
-                        rp,
-                        blankInd,
-                        s,
-                        tiles,
-                        rack,
-                        letter
-                    )
+                    let pts = evaluateMove(rp, s, tiles, rack)
                     if (pts) {
                         moves.push({
                             rackPerm: rp,
                             slot: s,
                             points: pts,
-                            letter: letter,
+                            letter: "",
                         })
                     }
-                    triesBlank += 1
+                    if (pts>=toWin) {
+                        console.log(`need ${toWin} to win, found ${pts}`)
+                        return
+                    }
+                    tries += 1
+                }
+            } else {
+                for (let letter of LETTERS) {
+                    for (let s of slots) {
+                        if (triesBlank > cutoffTriesBlank) {
+                            return
+                        }
+                        let pts = evaluateMoveBlank(
+                            rp,
+                            blankInd,
+                            s,
+                            tiles,
+                            rack,
+                            letter
+                        )
+                        if (pts) {
+                            moves.push({
+                                rackPerm: rp,
+                                slot: s,
+                                points: pts,
+                                letter: letter,
+                            })
+                        }
+                        if (pts>=toWin) {
+                            console.log(`need ${toWin} to win, found ${pts}`)
+                            return
+                        }
+                        triesBlank += 1
+                    }
                 }
             }
         }
     }
-
+    search()
     return moves
 }
 

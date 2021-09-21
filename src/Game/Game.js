@@ -282,7 +282,7 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
-    function callWorker(perms, slots, tiles, whichRack, cutoff) {
+    function callWorker(perms, slots, tiles, whichRack, cutoff, toWin) {
         return new Promise((resolve, reject) => {
             const myWorker = worker()
     
@@ -299,21 +299,22 @@ const Game = ({ gameVariables, exitGame }) => {
                 }
               })
 
-            myWorker.crunch(perms, slots, tiles, whichRack, cutoff)
+            myWorker.crunch(perms, slots, tiles, whichRack, cutoff, toWin)
         })
     }
 
     async function callAllWorkers(allPerms, allSlots, tiles, currentPlayer) {
         let whichRack = playersAndPoints[currentPlayer].rack
         let cutoff = maxSearches[playersAndPoints[currentPlayer].level]
+        let toWin = maxPoints - playersAndPoints[currentPlayer].points
         let moves = await Promise.all([
-            callWorker(allPerms[0], allSlots[0], tiles, whichRack, cutoff), 
-            callWorker(allPerms[1], allSlots[1], tiles, whichRack, cutoff),
-            callWorker(allPerms[2], allSlots[2], tiles, whichRack, cutoff),
-            callWorker(allPerms[3], allSlots[3], tiles, whichRack, cutoff),
-            callWorker(allPerms[4], allSlots[4], tiles, whichRack, cutoff),
-            callWorker(allPerms[5], allSlots[5], tiles, whichRack, cutoff),
-            callWorker(allPerms[6], allSlots[6], tiles, whichRack, cutoff),
+            callWorker(allPerms[0], allSlots[0], tiles, whichRack, cutoff, toWin), 
+            callWorker(allPerms[1], allSlots[1], tiles, whichRack, cutoff, toWin),
+            callWorker(allPerms[2], allSlots[2], tiles, whichRack, cutoff, toWin),
+            callWorker(allPerms[3], allSlots[3], tiles, whichRack, cutoff, toWin),
+            callWorker(allPerms[4], allSlots[4], tiles, whichRack, cutoff, toWin),
+            callWorker(allPerms[5], allSlots[5], tiles, whichRack, cutoff, toWin),
+            callWorker(allPerms[6], allSlots[6], tiles, whichRack, cutoff, toWin),
         ])
         moves = moves.reduce((previousValue, currentValue) => [...previousValue, ...currentValue])
         if (moves.length===0){
