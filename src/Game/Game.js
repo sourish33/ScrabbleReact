@@ -37,6 +37,7 @@ import {
     makeRackPerms,
 } from "./AIHelperFunctions"
 import worker from 'workerize-loader!../Workers/worker'; // eslint-disable-line import/no-webpack-loader-syntax
+import move from "../Utils/movers"
 
 const Game = ({ gameVariables, exitGame }) => {
     const [tiles, setTiles] = useState([])
@@ -303,10 +304,28 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
+    async function callWorkersSequentially(allPerms, allSlots, tiles, whichRack, cutoff, toWin) {
+        let moves = []
+        let bestMove = {points: -1}
+        for (let i =0; i<7; i++){
+            moves = await callWorker(allPerms[i], allSlots[i], tiles, whichRack, cutoff, toWin)
+            if (moves.length===0){continue}
+            moves.sort((x, y) => y.points - x.points)
+            if (moves[0].points > bestMove.points){
+                bestMove = moves[0]
+            }
+            if (bestMove.points >= toWin) {break}
+        }
+        return bestMove.points > -1 ? bestMove : []
+    }
+
     async function callAllWorkers(allPerms, allSlots, tiles, currentPlayer) {
         let whichRack = playersAndPoints[currentPlayer].rack
         let cutoff = maxSearches[playersAndPoints[currentPlayer].level]
         let toWin = maxPoints - playersAndPoints[currentPlayer].points
+        if (toWin<25){
+            return callWorkersSequentially(allPerms, allSlots, tiles, whichRack, cutoff, toWin)
+        }
         let moves = await Promise.all([
             callWorker(allPerms[0], allSlots[0], tiles, whichRack, cutoff, toWin), 
             callWorker(allPerms[1], allSlots[1], tiles, whichRack, cutoff, toWin),
