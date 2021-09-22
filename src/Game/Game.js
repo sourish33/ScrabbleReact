@@ -252,18 +252,18 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
-    const disableRack = () => {
-        const { cp: currentPlayer } = gameState
-        let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
-        if (tr.length > 0) {
-            let tilesOnRackDisabled = []
-            for (let tile of tr) {
-                tile.submitted = true
-                tilesOnRackDisabled.push(tile)
-            }
-            updateTiles([...subtractArrays(tiles, tr), ...tilesOnRackDisabled])
-        }
-    }
+    // const disableRack = () => {
+    //     const { cp: currentPlayer } = gameState
+    //     let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
+    //     if (tr.length > 0) {
+    //         let tilesOnRackDisabled = []
+    //         for (let tile of tr) {
+    //             tile.submitted = true
+    //             tilesOnRackDisabled.push(tile)
+    //         }
+    //         updateTiles([...subtractArrays(tiles, tr), ...tilesOnRackDisabled])
+    //     }
+    // }
 
     //////START AI PLAY GROUP///////////////////////////////////////////
 
