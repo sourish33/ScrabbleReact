@@ -38,6 +38,7 @@ import {
 } from "./AIHelperFunctions"
 import worker from 'workerize-loader!../Workers/worker'; // eslint-disable-line import/no-webpack-loader-syntax
 import move from "../Utils/movers"
+import AIThinkingModal from "../AIThinkingModal/AIThinkingModal"
 
 const Game = ({ gameVariables, exitGame }) => {
     const [tiles, setTiles] = useState([])
@@ -64,6 +65,8 @@ const Game = ({ gameVariables, exitGame }) => {
     const [greeting, setGreeting] = useState("")
     const [showVictoryBox, setShowVictoryBox] = useState(false)
     const [gameIsOver, setGameIsOver] = useState(false)
+    const [showAIThinking, setShowAIThinking] =  useState(false)
+    const [aiSays, setAiSays] = useState("")
 
     const gsreducer = (state, action) => {
         switch (action.type) {
@@ -291,6 +294,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 if (message.data.type!=="RPC"){
                     let result = message.data
                     if (typeof(result)==='string'){
+                        setAiSays(message.data)
                         console.log(message.data)
                     }
                     if (Array.isArray(result)){
@@ -345,6 +349,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const aiSubmitMove = (bestMove, theTiles, currentPlayer) =>{
+        setShowAIThinking(false)
         if (bestMove.length===0){
             console.log("No moves found")
             advanceGameState()
@@ -393,6 +398,7 @@ const Game = ({ gameVariables, exitGame }) => {
     
 
     const aiPlay = (theTiles) => {
+        setShowAIThinking(true)
         const { cp: currentPlayer } = gameState
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(
             theTiles,
@@ -591,6 +597,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 clickHandlerExt={clickHandlerExt}
                 handleSubmit={handleExchSubmit}
             />
+            <AIThinkingModal show={showAIThinking} aiSays={aiSays} />
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>

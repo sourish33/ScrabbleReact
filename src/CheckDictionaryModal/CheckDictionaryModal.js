@@ -6,7 +6,7 @@ import ModalBody from "react-bootstrap/ModalBody"
 // import ModalFooter from "react-bootstrap/ModalFooter"
 // import ModalTitle from "react-bootstrap/ModalTitle"
 import styles from './CheckDictionaryModal.module.css'
-import scrabbledict, { checkDict } from "../Utils/Dictionary/dictionary"
+import { checkDict } from "../Utils/Dictionary/dictionary"
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 
