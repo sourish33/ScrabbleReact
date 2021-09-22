@@ -119,7 +119,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
         if (playersAndPoints[currentPlayer].level > 0) {
             aiGetTiles().then((newTiles) =>
-                delay(1000, newTiles).then((newTiles) => aiPlay(newTiles))
+                delay(500, newTiles).then((newTiles) => aiPlay(newTiles))
             )
             return
         }

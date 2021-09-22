@@ -1,3 +1,4 @@
 loader component while AI thinking
 make greetings into a function
 if computer cant find moves it must exchange tiles
+don't replenish the rack of the winner
