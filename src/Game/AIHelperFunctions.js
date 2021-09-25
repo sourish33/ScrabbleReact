@@ -247,17 +247,7 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
     }
     tilesCopy = mapToArray(tilesCopyMap)
     let nWords = readAllWords(getAllNewWords(tilesCopy), tilesCopy)
-    // console.log(nWords)
     let anyBadWords = nWords.some((el) => !checkDict(el))
-    // let badPlacement = !checkLegalPlacement(tilesCopy, false, false)
-    // if (badPlacement) {
-    //     throw new Error(
-    //         console.log(tiles)
-    //         console.log(legalPositions)
-    //        alert(`${rackTiles} and ${boardPositions} giving bad placement. lp is ${legalPositions(tiles)}`)
-    //     )
-    // }
-    // return anyBadWords || badPlacement ? null : score(tilesCopy, visibleRack)
     return anyBadWords ? null : score(tilesCopy, visibleRack)
 }
 
