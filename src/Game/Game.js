@@ -289,7 +289,7 @@ const Game = ({ gameVariables, exitGame }) => {
     function callWorker(perms, slots, tiles, whichRack, cutoff, toWin, verbose=true) {
         return new Promise((resolve, reject) => {
             const myWorker = worker()
-    
+            setAiSays("")
             myWorker.addEventListener('message', (message) => {
                 if (message.data.type!=="RPC"){
                     let result = message.data
@@ -299,6 +299,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     }
                     if (Array.isArray(result)){
                         resolve(result)
+                        
                         myWorker.terminate()
                     }
                 }

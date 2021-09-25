@@ -265,7 +265,6 @@ export const evaluateMoves = (
     let LETTERS = Array.from("SAEOQUXBCDFGHIJKLMNPRTVWYZ")
     let triesBlank = 0
     let cutoffTriesBlank = 10000
-    // debugger
     function search() {//made into a function so that loops can be broken out of using return
         for (let rp of rackPerms) {
             let blankInd = findBlankTile(rp, tiles)

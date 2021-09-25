@@ -9,11 +9,8 @@ import { Button, Spinner } from "react-bootstrap"
 const AIThinkingModal = ({show, aiSays}) => {
 
     let aiUbach = aiSays==="" ? "AI thinking..." : aiSays
-    const handleExit  = () =>{
-        aiUbach = "AI thinking"
-    } 
     return (
-        <Modal show={show} onExit={handleExit}>
+        <Modal show={show}>
             <ModalBody className={styles.modalbody}>
                 <div className="text-center">
                     <Spinner animation="border" />
