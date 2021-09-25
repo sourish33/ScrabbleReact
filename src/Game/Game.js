@@ -286,7 +286,7 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
-    function callWorker(perms, slots, tiles, whichRack, cutoff, toWin) {
+    function callWorker(perms, slots, tiles, whichRack, cutoff, toWin, verbose=true) {
         return new Promise((resolve, reject) => {
             const myWorker = worker()
     
@@ -304,7 +304,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 }
               })
 
-            myWorker.crunch(perms, slots, tiles, whichRack, cutoff, toWin)
+            myWorker.crunch(perms, slots, tiles, whichRack, cutoff, toWin, verbose)
         })
     }
 
@@ -333,15 +333,11 @@ const Game = ({ gameVariables, exitGame }) => {
         if (toWin<25){
             return callWorkersSequentially(allPerms, allSlots, tiles, whichRack, cutoff, toWin)
         }
-        let moves = await Promise.all([
-            callWorker(allPerms[0], allSlots[0], tiles, whichRack, cutoff, toWin), 
-            callWorker(allPerms[1], allSlots[1], tiles, whichRack, cutoff, toWin),
-            callWorker(allPerms[2], allSlots[2], tiles, whichRack, cutoff, toWin),
-            callWorker(allPerms[3], allSlots[3], tiles, whichRack, cutoff, toWin),
-            callWorker(allPerms[4], allSlots[4], tiles, whichRack, cutoff, toWin),
-            callWorker(allPerms[5], allSlots[5], tiles, whichRack, cutoff, toWin),
-            callWorker(allPerms[6], allSlots[6], tiles, whichRack, cutoff, toWin),
-        ])
+        let promises = []
+        for (let i=0;i<7;i++){
+            promises.push(callWorker(allPerms[i], allSlots[i], tiles, whichRack, cutoff, toWin))
+        }
+        let moves = await Promise.all(promises)
         moves = moves.reduce((previousValue, currentValue) => [...previousValue, ...currentValue])
         if (moves.length===0){
             return []
