@@ -19,6 +19,8 @@ const AIThinkingModal = ({show, aiSays}) => {
                     <Spinner animation="border" />
                 </div>
                 <div className={styles.spinnertext}>{aiUbach}</div>
+
+
             </ModalBody>
         </Modal>
     )

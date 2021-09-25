@@ -605,7 +605,7 @@ const Game = ({ gameVariables, exitGame }) => {
                             tiles={tiles}
                             visibleRack={playersAndPoints[gameState.cp].rack}
                             updateTiles={updateTiles}
-                            showTiles={!showPassDevice}></BoardAndRack>
+                            showTiles={gameIsOver? false : !showPassDevice}></BoardAndRack>
                     </Col>
                     <Col sm={12} lg={2} md={12}>
                         <ControlButtons
