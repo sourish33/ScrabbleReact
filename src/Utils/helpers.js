@@ -54,6 +54,15 @@ export function emptySpot(arr, whichRack) {
     return false
 }
 
+export function splitArrayToChunks(array, parts) {
+    //breaks up an array into "parts" parts
+    let result = [];
+    for (let i = parts; i > 0; i--) {
+        result.push(array.splice(0, Math.ceil(array.length / i)));
+    }
+    return result;
+}
+
 
 export function multiplyArrays(arr1, arr2) {
     //dot product
@@ -321,4 +330,6 @@ export function combinations(arr) {
     }
     return combs;
 }
+
+
  

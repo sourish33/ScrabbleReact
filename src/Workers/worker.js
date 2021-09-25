@@ -2,8 +2,10 @@ import { evaluateMoves } from "../Game/AIHelperFunctions"
 
 
 
-export const crunch = (pp, ss, tiles, whichRack, cutoff, toWin) => {
+export const crunch = (pp, ss, tiles, whichRack, cutoff, toWin, verbose=true) => {
     let result = evaluateMoves(pp, ss, tiles, whichRack, cutoff, toWin )
-    postMessage(`Done with ${pp[0].length}-letter words, ${result.length} found `)
+    if (verbose){
+        postMessage(`Done with ${pp[0].length}-letter words, ${result.length} found `)
+    }
     postMessage(result)
 }

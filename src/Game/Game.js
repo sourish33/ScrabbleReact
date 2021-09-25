@@ -308,6 +308,9 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
+    // async function callManager(allPerms, allSlots, tiles, whichRack, cutoff, toWin) {
+    //     let moves = []
+    // }
     async function callWorkersSequentially(allPerms, allSlots, tiles, whichRack, cutoff, toWin) {
         let moves = []
         let bestMove = {points: -1}
