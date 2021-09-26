@@ -124,7 +124,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         replenishRack()
-    }, [gameState, gameIsOver])
+    }, [gameState])
 
     useEffect(() => {
         const { cp: currentPlayer } = gameState
