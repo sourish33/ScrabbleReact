@@ -124,7 +124,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         replenishRack()
-    }, [gameState])
+    }, [gameState, gameIsOver])
 
     useEffect(() => {
         const { cp: currentPlayer } = gameState
@@ -133,7 +133,7 @@ const Game = ({ gameVariables, exitGame }) => {
                   score(tiles, playersAndPoints[currentPlayer].rack)
               )
             : setPointsPossible((x) => 0)
-    }, [tiles, gameIsOver])
+    }, [tiles])
 
     ////////START GAME OVER FUNCTION//////////
 
