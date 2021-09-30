@@ -60,11 +60,12 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchStart = (e) => {
-        document.getElementsByTagName("body")[0].classList.add(styles.noscroll)
+        // document.getElementsByTagName("body")[0].classList.add(styles.noscroll)
         e.preventDefault()
         if (e.touches.length > 1) {
             return
-        } //Multiple Touches
+        }
+        disableScroll() //Multiple Touches
         let u = e.currentTarget
         initialX = e.touches[0].clientX - xOffset
         initialY = e.touches[0].clientY - yOffset
@@ -77,6 +78,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
+        disableScroll()
         let dragItem = e.currentTarget
         lastMoved = dragItem
 
@@ -107,7 +109,23 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
             updateTiles(move(startingloc, endingloc, tiles))
         }
         // document.getElementsByTagName("body")[0].style.touchAction = "auto"
-        document.getElementsByTagName("body")[0].classList.remove(styles.noscroll)
+        // document.getElementsByTagName("body")[0].classList.remove(styles.noscroll)
+        enableScroll()
+    }
+
+    function disableScroll() {
+        // Get the current page scroll position
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
+      
+            // if any scroll is attempted, set this to the previous value
+        window.onscroll = function() {
+                window.scrollTo(scrollLeft, scrollTop);
+            };
+    }
+      
+    function enableScroll() {
+        window.onscroll = function() {};
     }
 
 
