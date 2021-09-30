@@ -60,11 +60,11 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchStart = (e) => {
+        document.getElementsByTagName("body")[0].classList.add(styles.noscroll)
         e.preventDefault()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
-        document.getElementsByTagName("body")[0].style.touchAction = "none"
         let u = e.currentTarget
         initialX = e.touches[0].clientX - xOffset
         initialY = e.touches[0].clientY - yOffset
@@ -72,11 +72,11 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchMove = (e) => {
+        // document.getElementsByTagName("body")[0].style.touchAction = "none"
         e.preventDefault()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
-        document.getElementsByTagName("body")[0].style.touchAction = "none"
         let dragItem = e.currentTarget
         lastMoved = dragItem
 
@@ -106,7 +106,8 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         } else{
             updateTiles(move(startingloc, endingloc, tiles))
         }
-        document.getElementsByTagName("body")[0].style.touchAction = "auto"
+        // document.getElementsByTagName("body")[0].style.touchAction = "auto"
+        document.getElementsByTagName("body")[0].classList.remove(styles.noscroll)
     }
 
 
