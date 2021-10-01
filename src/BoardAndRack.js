@@ -64,6 +64,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         disableScroll() 
         e.preventDefault()
         if (e.touches.length > 1) {
+            enableScroll()
             return
         }
         //Multiple Touches
@@ -79,7 +80,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
-        // disableScroll()
+        disableScroll()
         let dragItem = e.currentTarget
         lastMoved = dragItem
 
@@ -116,17 +117,19 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
 
     function disableScroll() {
         // Get the current page scroll position
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop
-        let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
+        document.body.classList.add(styles.noscroll)
+        // let scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        // let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft
       
-            // if any scroll is attempted, set this to the previous value
-        window.onscroll = function() {
-                window.scrollTo(scrollLeft, scrollTop);
-            };
+        //     // if any scroll is attempted, set this to the previous value
+        // window.onscroll = function() {
+        //         window.scrollTo(scrollLeft, scrollTop);
+        //     };
     }
       
     function enableScroll() {
-        window.onscroll = function() {};
+        document.body.classList.remove(styles.noscroll)
+        // window.onscroll = function() {};
     }
 
 
