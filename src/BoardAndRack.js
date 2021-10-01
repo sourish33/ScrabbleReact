@@ -61,11 +61,12 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
 
     const TouchStart = (e) => {
         // document.getElementsByTagName("body")[0].classList.add(styles.noscroll)
+        disableScroll() 
         e.preventDefault()
         if (e.touches.length > 1) {
             return
         }
-        disableScroll() //Multiple Touches
+        //Multiple Touches
         let u = e.currentTarget
         initialX = e.touches[0].clientX - xOffset
         initialY = e.touches[0].clientY - yOffset
@@ -78,7 +79,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
-        disableScroll()
+        // disableScroll()
         let dragItem = e.currentTarget
         lastMoved = dragItem
 
