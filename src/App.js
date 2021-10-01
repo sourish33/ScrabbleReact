@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     document.title = "Scrabble React!"
  }, [])
-  // document.body.parentElement.style.scrollbarWidth='none'
+  document.body.parentElement.style.scrollbarWidth='none'
   return <FrontPage/>
 }
 
