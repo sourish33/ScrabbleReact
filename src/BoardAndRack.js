@@ -60,9 +60,8 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchStart = (e) => {
-        // document.getElementsByTagName("body")[0].classList.add(styles.noscroll)
         disableScroll() 
-        e.preventDefault()
+        // e.preventDefault()
         if (e.touches.length > 1) {
             enableScroll()
             return
@@ -75,8 +74,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchMove = (e) => {
-        // document.getElementsByTagName("body")[0].style.touchAction = "none"
-        e.preventDefault()
+        // e.preventDefault()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
@@ -94,7 +92,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     function TouchEnd(e) {
-        e.preventDefault()
+        // e.preventDefault()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
@@ -110,8 +108,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         } else{
             updateTiles(move(startingloc, endingloc, tiles))
         }
-        // document.getElementsByTagName("body")[0].style.touchAction = "auto"
-        // document.getElementsByTagName("body")[0].classList.remove(styles.noscroll)
         enableScroll()
     }
 
