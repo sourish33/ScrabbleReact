@@ -55,9 +55,8 @@ const LastPlayed = ({ lastPlayed }) => {
             {lastPlayed.map((el, ind) => {
                 return (
                     <p key={ind} className={styles.nomargin}>
-                        <span>{el.player}</span>:{" "}
-                        <span className={styles.bluebold}>{el.word}</span> 
-                        {el.word==="Passed" || el.word ==="Exchanged" ? <span></span> : <span className={styles.bluebold}> for {el.points}</span>}
+                        <span>{el.player}</span>:{" "} 
+                        {el.word==="Passed" || el.word ==="Exchanged" ? <span className={styles.redbold}>{el.word}</span> : <span className={styles.bluebold}>{el.word} for {el.points}</span>}
                     </p>
                 )
             })}

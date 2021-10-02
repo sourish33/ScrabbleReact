@@ -57,6 +57,11 @@ th {
     color: blue;
 }
 
+.redbold {
+    font-weight:bold;
+    color: red;
+}
+
 @media only screen and (max-width: 992px) {
 
     .smallscreen{
