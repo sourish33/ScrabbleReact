@@ -413,6 +413,15 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const passTurn = () => {
         // aiPlay(tiles)
+        const { cp: currentPlayer } = gameState
+        setLastPlayed([
+            {
+                player: playersAndPoints[currentPlayer].name,
+                word: "passed turn",
+                points: 0,
+            },
+            ...lastPlayed,
+        ])
         
         advanceGameState()
         // console.log(tiles)
