@@ -103,7 +103,7 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         const { mn: moveNumber, cp: currentPlayer } = gameState
 
-        if (greeting !== "Better Luck Next Time!") {
+        if (greeting !== "Better Luck Next Time!" || greeting !== "Uh Oh!") {
             moveNumber === 0
                 ? setGreeting("Lets Get Started!")
                 : setGreeting(
@@ -250,6 +250,15 @@ const Game = ({ gameVariables, exitGame }) => {
         //update the states
         setBag((x) => subtractArrays(addToBag, removeFromBag))
         updateTiles([...tilesRemoved, ...addToTiles])
+        const { cp: currentPlayer } = gameState
+        setLastPlayed([
+            {
+                player: playersAndPoints[currentPlayer].name,
+                word: "Exchanged",
+                points: 0,
+            },
+            ...lastPlayed,
+        ])
         advanceGameState()
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
@@ -337,7 +346,7 @@ const Game = ({ gameVariables, exitGame }) => {
         setShowAIThinking(false)
         if (bestMove.length===0){
             console.log("No moves found")
-            advanceGameState()
+            passTurn()
             return
         }
         moveNPlay(bestMove, theTiles)
@@ -411,20 +420,34 @@ const Game = ({ gameVariables, exitGame }) => {
         updateTiles(recallTiles(tiles, playersAndPoints[currentPlayer].rack))
     }
 
-    const passTurn = () => {
-        // aiPlay(tiles)
+    const passTurn = () =>{
         const { cp: currentPlayer } = gameState
         setLastPlayed([
             {
                 player: playersAndPoints[currentPlayer].name,
-                word: "passed turn",
+                word: "Passed",
                 points: 0,
             },
             ...lastPlayed,
         ])
-        
+        setGreeting("Uh Oh!")
         advanceGameState()
-        // console.log(tiles)
+    }
+
+    const passTurnWithWarning = () => {
+        Swal.fire({
+            title: 'Are you sure you want to pass your turn?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Pass',
+            denyButtonText: `Don't pass`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                passTurn()
+            } else if (result.isDenied) {
+              return
+            }
+          })
     }
 
     const lookup = () => {
@@ -608,7 +631,7 @@ const Game = ({ gameVariables, exitGame }) => {
                             shuffleRack={shuffleRack}
                             recall={recall}
                             exchange={exchange}
-                            passTurn={passTurn}
+                            passTurn={passTurnWithWarning}
                             lookup={lookup}
                             play={play}
                             disabled={buttonsDisabled}
