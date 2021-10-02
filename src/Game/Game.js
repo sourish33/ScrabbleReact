@@ -32,12 +32,10 @@ import { passGreetings } from "../Utils/DummyData"
 import VictoryModal from "../VictoryModal/VictoryModal"
 import {
     aiMove,
-    evaluateMoves,
     makeAllSlots,
     makeRackPerms,
 } from "./AIHelperFunctions"
 import worker from 'workerize-loader!../Workers/worker'; // eslint-disable-line import/no-webpack-loader-syntax
-import move from "../Utils/movers"
 import AIThinkingModal from "../AIThinkingModal/AIThinkingModal"
 
 const Game = ({ gameVariables, exitGame }) => {
@@ -50,6 +48,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const [pointsPossible, setPointsPossible] = useState(0)
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
     const [selectedTiles, setSelectedTiles] = useState(new Set())
+    const initialState = { mn: 0, cp: 0 }
 
     //parsing incoming data from the welcome page
     const players = gameVariables.players
@@ -86,7 +85,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 return state
         }
     }
-    const initialState = { mn: 0, cp: 0 }
+    
     const [gameState, dispatch] = useReducer(gsreducer, initialState)
     const advanceGameState = () => {
         dispatch({ type: "ADVANCE" })
@@ -255,18 +254,6 @@ const Game = ({ gameVariables, exitGame }) => {
     }
     /////////////////////////END EXCHANGE TILES MODAL///////////////////////////////////////
 
-    // const disableRack = () => {
-    //     const { cp: currentPlayer } = gameState
-    //     let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
-    //     if (tr.length > 0) {
-    //         let tilesOnRackDisabled = []
-    //         for (let tile of tr) {
-    //             tile.submitted = true
-    //             tilesOnRackDisabled.push(tile)
-    //         }
-    //         updateTiles([...subtractArrays(tiles, tr), ...tilesOnRackDisabled])
-    //     }
-    // }
 
     //////START AI PLAY GROUP///////////////////////////////////////////
 
@@ -309,9 +296,7 @@ const Game = ({ gameVariables, exitGame }) => {
         })
     }
 
-    // async function callManager(allPerms, allSlots, tiles, whichRack, cutoff, toWin) {
-    //     let moves = []
-    // }
+
     async function callWorkersSequentially(allPerms, allSlots, tiles, whichRack, cutoff, toWin) {
         let moves = []
         let bestMove = {points: -1}
@@ -428,7 +413,9 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const passTurn = () => {
         // aiPlay(tiles)
-        console.log(tiles)
+        
+        advanceGameState()
+        // console.log(tiles)
     }
 
     const lookup = () => {

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Card } from 'react-bootstrap'
 import styles from './TileEx.module.css'
 
 const TileEx = ({letter, points, clickHandlerExt }) => {
