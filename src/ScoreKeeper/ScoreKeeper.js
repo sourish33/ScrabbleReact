@@ -56,7 +56,7 @@ const LastPlayed = ({ lastPlayed }) => {
                 return (
                     <p key={ind} className={styles.nomargin}>
                         <span>{el.player}</span>:{" "} 
-                        {el.word==="Passed" || el.word ==="Exchanged" ? <span className={styles.redbold}>{el.word}</span> : <span className={styles.bluebold}>{el.word} for {el.points}</span>}
+                        {el.word!==el.word.toUpperCase() ? <span className={styles.redbold}>{el.word}</span> : <span className={styles.bluebold}>{el.word} for {el.points}</span>}
                     </p>
                 )
             })}
