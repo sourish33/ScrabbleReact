@@ -28,7 +28,7 @@ import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
 import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageModal"
 import { randomUpTo } from "../Utils/helpers"
-import { passGreetings } from "../Utils/DummyData"
+import { greetings } from "../Utils/GreetingList"
 import VictoryModal from "../VictoryModal/VictoryModal"
 import {
     aiMove,
@@ -85,8 +85,12 @@ const Game = ({ gameVariables, exitGame }) => {
                 return state
         }
     }
-    
     const [gameState, dispatch] = useReducer(gsreducer, initialState)
+
+    const generateGreeting = (wordplayed) => {
+        let greetlist = wordplayed===wordplayed.toUpperCase() ? greetings.normal : greetings.passExchange
+        return greetlist[randomUpTo(greetlist.length-1)]
+    }
     const advanceGameState = () => {
         dispatch({ type: "ADVANCE" })
     }
@@ -101,15 +105,10 @@ const Game = ({ gameVariables, exitGame }) => {
         if (gameOver()) {
             return
         }
-        const { mn: moveNumber, cp: currentPlayer } = gameState
+        const { cp: currentPlayer } = gameState
 
-        if (greeting !== "Better Luck Next Time!" || greeting !== "Uh Oh!") {
-            moveNumber === 0
-                ? setGreeting("Lets Get Started!")
-                : setGreeting(
-                      passGreetings[randomUpTo(passGreetings.length - 1)]
-                  )
-        }
+        lastPlayed.length === 0? setGreeting("Lets Get Started!"): setGreeting(generateGreeting(lastPlayed[0].word))
+        
         setShowPassDevice((x) => {
             return (
                 !AIPlayersExist && playersAndPoints[currentPlayer].level === 0
