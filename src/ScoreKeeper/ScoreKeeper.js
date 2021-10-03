@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Table, Button } from "react-bootstrap"
 import styles from "./ScoreKeeper.module.css"
 
@@ -6,6 +6,8 @@ import styles from "./ScoreKeeper.module.css"
 const gameType = (points) =>{
     return points===10000 ? "Till out of tiles" : `${points} point game`
 }
+
+
 
 
 
@@ -64,12 +66,14 @@ const LastPlayed = ({ lastPlayed }) => {
     )
 }
 
-const Buttons = ({exitGame}) => {
+
+
+const Buttons = ({showInstructions, exitGame}) => {
     return (
         <div className={`d-flex flex-row justify-content-center`}>
             <div className="p-2 mt-0">
-                <Button variant="info">
-                    <span className={styles.smallscreen}>Instructions</span>
+                <Button variant="info" onClick={showInstructions}>
+                    <span className={styles.smallscreen} >Instructions</span>
                 </Button>
             </div>
             <div className="p-2 mt-0">
@@ -104,7 +108,7 @@ const ScoreKeeper = (props) => {
                 <LastPlayed lastPlayed={props.lastPlayed} />
             </div>
             <div className="p-1 mb-2 justify-content-center">
-                <Buttons exitGame={props.exitGame}/>
+                <Buttons showInstructions={props.showInstructions} exitGame={props.exitGame}/>
             </div>
 
         </div>

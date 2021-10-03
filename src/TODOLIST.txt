@@ -1,2 +1,3 @@
-rethink greetings
-implement pass()
+exit button
+information and help
+save game

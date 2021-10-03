@@ -37,18 +37,25 @@ import {
 } from "./AIHelperFunctions"
 import worker from 'workerize-loader!../Workers/worker'; // eslint-disable-line import/no-webpack-loader-syntax
 import AIThinkingModal from "../AIThinkingModal/AIThinkingModal"
+import Instructions from "../Instructions/Instructions"
 
 const Game = ({ gameVariables, exitGame }) => {
+
     const [tiles, setTiles] = useState([])
     const [bag, setBag] = useState(tilesBag)
     const [showDict, setShowDict] = useState(false)
     const [showEx, setShowEx] = useState(false)
-
     const [lastPlayed, setLastPlayed] = useState([])
     const [pointsPossible, setPointsPossible] = useState(0)
     const [buttonsDisabled, setButtonsDisabled] = useState(false)
     const [selectedTiles, setSelectedTiles] = useState(new Set())
     const initialState = { mn: 0, cp: 0 }
+    const [greeting, setGreeting] = useState("")
+    const [showVictoryBox, setShowVictoryBox] = useState(false)
+    const [gameIsOver, setGameIsOver] = useState(false)
+    const [showAIThinking, setShowAIThinking] =  useState(false)
+    const [aiSays, setAiSays] = useState("")
+    const [showInstr, setShowInstr] = useState(false)
 
     //parsing incoming data from the welcome page
     const players = gameVariables.players
@@ -61,11 +68,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const AIPlayersExist = playerTable.filter((el) => el.level > 0).length > 0 //whether AI players exist
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
     const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[0].level === 0)
-    const [greeting, setGreeting] = useState("")
-    const [showVictoryBox, setShowVictoryBox] = useState(false)
-    const [gameIsOver, setGameIsOver] = useState(false)
-    const [showAIThinking, setShowAIThinking] =  useState(false)
-    const [aiSays, setAiSays] = useState("")
+
 
     const gsreducer = (state, action) => {
         switch (action.type) {
@@ -593,8 +596,22 @@ const Game = ({ gameVariables, exitGame }) => {
     const updateTiles = (newTiles) => {
         setTiles((x) => newTiles)
     }
+
+    const hideInstructions = () =>{
+        setShowInstr(false)
+    }
+
+    const showInstructions = () =>{
+        setShowInstr(true)
+    }
+
+
     return (
-        <>
+        <>  
+            <Instructions
+                show={showInstr}
+                onHide = {hideInstructions}
+            />
             <VictoryModal
                 show={showVictoryBox}
                 winner={theWinner()}
@@ -645,6 +662,7 @@ const Game = ({ gameVariables, exitGame }) => {
                             maxPoints={maxPoints}
                             lastPlayed={lastPlayed}
                             exitGame={exitGame}
+                            showInstructions = {showInstructions}
                             dictChecking={dictChecking}
                         />
                     </Col>
