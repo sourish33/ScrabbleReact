@@ -17,7 +17,7 @@ import {
     countBlanks,
     arrayToMap,
 } from "../Utils/helpers"
-import { DLs, DWs, TLs, TWs } from "../board/BoardMarkings"
+import { DLs, DWs, TLs, TWs } from "../Board/BoardMarkings"
 import { checkDict } from "../Utils/Dictionary/dictionary"
 
 function mapToArray(myMap) {
