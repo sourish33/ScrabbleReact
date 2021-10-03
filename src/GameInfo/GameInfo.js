@@ -1,10 +1,13 @@
 import React, { useState } from "react"
+import Instructions from "../Instructions/Instructions"
 import { AI_LIST } from "../Utils/Data"
 import { randomUpTo, subtractArrays } from "../Utils/helpers"
 import styles from "./GameInfo.module.css"
 
 
-const GameInfo = ({ handleSubmit, showInstructions }) => {
+const GameInfo = ({ handleSubmit }) => {
+
+    const [showInstr, setShowInstr] = useState(false)
     const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
     const [dictCheck, setDictCheck] = useState("1")
@@ -158,9 +161,23 @@ const GameInfo = ({ handleSubmit, showInstructions }) => {
         )
     }
 
+    const hideInstructions = () =>{
+        setShowInstr(false)
+    }
+
+    const showInstructions = () =>{
+        setShowInstr(true)
+    }
+
 
 
     return (
+        <>
+            <Instructions
+                show={showInstr}
+                onHide = {hideInstructions}
+                playInstr = {false}
+            />
         <div>
             <form className="row g-3"
                 onSubmit={(e) =>
@@ -206,6 +223,7 @@ const GameInfo = ({ handleSubmit, showInstructions }) => {
                 </div>
             </form>
         </div>
+    </>
     )
 }
 
