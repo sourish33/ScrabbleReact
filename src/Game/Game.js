@@ -28,7 +28,7 @@ import tilesBag from "../Utils/tilesBag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
 import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageModal"
 import { randomUpTo } from "../Utils/helpers"
-import { greetings } from "../Utils/GreetingList"
+import { greetings } from "../Utils/Data"
 import VictoryModal from "../VictoryModal/VictoryModal"
 import {
     aiMove,

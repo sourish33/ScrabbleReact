@@ -1,18 +1,9 @@
 import React, { useState } from "react"
-import Swal from "sweetalert2"
-import { randomUpTo, shuffle, subtractArrays } from "../Utils/helpers"
+import { AI_LIST } from "../Utils/Data"
+import { randomUpTo, subtractArrays } from "../Utils/helpers"
 import styles from "./GameInfo.module.css"
 
-let AI_LIST = [
-    "AI Lily",
-    "AI Tori",
-    "AI Parker",
-    "AI Kira",
-    "AI Jasmine",
-    "AI Kashmir",
-    "AI Dylan",
-    "AI Sienna",
-]
+
 const GameInfo = ({ handleSubmit, showInstructions }) => {
     const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
