@@ -1,5 +1,5 @@
 import React  from "react"
-import Board from "./Board/Board"
+import Board from "./board/Board"
 import styles from "./BoardAndRack.module.css"
 import {emptyOnRack} from "./Game/GameHelperFunctions"
 

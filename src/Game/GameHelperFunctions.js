@@ -1,5 +1,5 @@
 import Swal from "sweetalert2"
-import { DLs, DWs, S, TLs, TWs } from "../Board/BoardMarkings"
+import { DLs, DWs, S, TLs, TWs } from "../board/BoardMarkings"
 import { checkDict } from "../Utils/Dictionary/dictionary"
 import {
     addLeftAll,
