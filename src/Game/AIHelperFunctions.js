@@ -4,7 +4,6 @@ import {
     readWord,
     readAllWords,
     getAllNewWords,
-    checkLegalPlacement,
     score,
 } from "../Game/GameHelperFunctions"
 import {
@@ -12,7 +11,6 @@ import {
     coords,
     subtractArrays,
     getUniques,
-    b_coords,
     combinations,
     permute,
     b_loc,

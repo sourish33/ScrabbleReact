@@ -8,14 +8,11 @@ export const DWs = [loc(2,2), loc(2,14),
             loc(11,5), loc(11,11),
             loc(12,4), loc(12,12),
             loc(13,3), loc(13,13),
-            loc(14,2), loc(14,14),
-        ]
+            loc(14,2), loc(14,14),]
 export const TLs = [loc(2,6), loc(2,10),
                     loc(6,2), loc(6, 6), loc(6,10), loc(6, 14),
                     loc(10,2), loc(10, 6), loc(10,10), loc(10, 14),
-                    loc(14,6), loc(14,10),
-
-    ]
+                    loc(14,6), loc(14,10),]
 
 export const DLs = [loc(1,4), loc(1,12),
                     loc(3,7), loc(3,9),
