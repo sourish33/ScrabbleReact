@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/ScrabbleReact/static/css/main.907dcedb.chunk.css",
+    "main.js": "/ScrabbleReact/static/js/main.3438bd12.chunk.js",
+    "main.js.map": "/ScrabbleReact/static/js/main.3438bd12.chunk.js.map",
+    "runtime-main.js": "/ScrabbleReact/static/js/runtime-main.48f064fb.js",
+    "runtime-main.js.map": "/ScrabbleReact/static/js/runtime-main.48f064fb.js.map",
+    "static/css/2.818011ed.chunk.css": "/ScrabbleReact/static/css/2.818011ed.chunk.css",
+    "static/js/2.722349c0.chunk.js": "/ScrabbleReact/static/js/2.722349c0.chunk.js",
+    "static/js/2.722349c0.chunk.js.map": "/ScrabbleReact/static/js/2.722349c0.chunk.js.map",
+    "32b7f8884055f732f68f.worker.js": "/ScrabbleReact/32b7f8884055f732f68f.worker.js",
+    "32b7f8884055f732f68f.worker.js.map": "/ScrabbleReact/32b7f8884055f732f68f.worker.js.map",
+    "index.html": "/ScrabbleReact/index.html",
+    "static/css/2.818011ed.chunk.css.map": "/ScrabbleReact/static/css/2.818011ed.chunk.css.map",
+    "static/css/main.907dcedb.chunk.css.map": "/ScrabbleReact/static/css/main.907dcedb.chunk.css.map",
+    "static/js/2.722349c0.chunk.js.LICENSE.txt": "/ScrabbleReact/static/js/2.722349c0.chunk.js.LICENSE.txt",
+    "static/media/victory1.5818b7c7.gif": "/ScrabbleReact/static/media/victory1.5818b7c7.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.48f064fb.js",
+    "static/css/2.818011ed.chunk.css",
+    "static/js/2.722349c0.chunk.js",
+    "static/css/main.907dcedb.chunk.css",
+    "static/js/main.3438bd12.chunk.js"
+  ]
+}
