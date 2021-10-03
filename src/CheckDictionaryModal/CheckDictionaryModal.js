@@ -2,9 +2,6 @@
 // import ReactDOM from "react-dom"
 import Modal from "react-bootstrap/Modal"
 import ModalBody from "react-bootstrap/ModalBody"
-// import ModalHeader from "react-bootstrap/ModalHeader"
-// import ModalFooter from "react-bootstrap/ModalFooter"
-// import ModalTitle from "react-bootstrap/ModalTitle"
 import styles from './CheckDictionaryModal.module.css'
 import { checkDict } from "../Utils/Dictionary/dictionary"
 import { useState } from "react"
@@ -30,7 +27,7 @@ const CheckDictionaryModal = ({show, onHide}) =>{
     }
     return (
         <Modal show={show} onHide={onHide} onExit={clear}>
-                <ModalBody>
+                <Modal.Body>
                 <div className="mt-0">
 				<form>
 						<div className="input-group mb-3">
@@ -47,9 +44,9 @@ const CheckDictionaryModal = ({show, onHide}) =>{
 				FA, FE, FY, GI, GO, GU, HA, HE, HI, HM, HO, ID, IF, IN, IO, IS, IT, JA, JO, KA, KO, KI, KY, LA, LI, LO, MA, ME, MI, MM, MO, MU, MY, NA, NE, NO, NU, NY, OB, OD, OE, OF, OH, OI, OK, 
 				OM, ON, OO, OP, OR, OS, OU, OW, OX, OY, PA, PE, PI, PO, QI, RE, SH, SI, SO, ST, TA, TE, TI, TO, UG, UH, UM, UN, UP, UR, US, UT, WE, WO, XI, XU, YA, YE, YO, YU, ZA, ZE, ZO</p>
 			</div>
-                </ModalBody>
+                </Modal.Body>
                 <Modal.Footer>
-                        <button onClick={onHide}>Cancel</button>
+                        <Button variant="secondary" type="button" onClick={onHide}>Cancel</Button>
                     </Modal.Footer>
         </Modal>
     )
