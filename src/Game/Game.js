@@ -611,6 +611,7 @@ const Game = ({ gameVariables, exitGame }) => {
             <Instructions
                 show={showInstr}
                 onHide = {hideInstructions}
+                playInstr = {true}
             />
             <VictoryModal
                 show={showVictoryBox}

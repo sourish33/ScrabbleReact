@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import Game from "../Game/Game";
 
 import GameInfo from "../GameInfo/GameInfo"
+import Instructions from "../Instructions/Instructions";
 import styles from './FrontPage.module.css'
 
 
@@ -14,6 +15,7 @@ import styles from './FrontPage.module.css'
 
 const FrontPage = () => {
     const [gameVariables, setGameVariables] = useState({})
+    const [showInstr, setShowInstr] = useState(false)
 
     const handleSubmit = (event, players, shufflePlayers, dictCheck, gameType) =>{
         event.preventDefault()
@@ -55,7 +57,7 @@ const FrontPage = () => {
                 <h3>A scrabble game built using React.js</h3>
             </div>
                 <Container>
-                    <GameInfo handleSubmit={handleSubmit}/>  
+                    <GameInfo handleSubmit={handleSubmit} showInstructions={showInstructions}/>  
                 </Container>
             </div>
             
@@ -63,9 +65,22 @@ const FrontPage = () => {
         )
     }
 
+    const hideInstructions = () =>{
+        setShowInstr(false)
+    }
+
+    const showInstructions = () =>{
+        setShowInstr(true)
+    }
+
 
     return (
         <>
+            <Instructions
+                show={showInstr}
+                onHide = {hideInstructions}
+                playInstr = {false}
+            />
         {Object.keys(gameVariables).length===0 ? <WelcomePage/> : <Game gameVariables={gameVariables} exitGame={exitGame}/>}
         </>
     )

@@ -13,7 +13,7 @@ let AI_LIST = [
     "AI Dylan",
     "AI Sienna",
 ]
-const GameInfo = ({ handleSubmit }) => {
+const GameInfo = ({ handleSubmit, showInstructions }) => {
     const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
     const [dictCheck, setDictCheck] = useState("1")
@@ -211,7 +211,7 @@ const GameInfo = ({ handleSubmit }) => {
                 </div>
                 <div className="btn-toolbar">
                 <button className = {`btn btn-primary btn-lg ${styles["spacer-right"]}`} type="submit">Start Game</button>
-                <button className = {`btn btn-info btn-lg `} type="button">Help</button>
+                <button className = {`btn btn-info btn-lg `} type="button" onClick={showInstructions}>Help</button>
                 </div>
             </form>
         </div>

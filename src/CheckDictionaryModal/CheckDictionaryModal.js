@@ -1,7 +1,4 @@
-//MODAL
-// import ReactDOM from "react-dom"
 import Modal from "react-bootstrap/Modal"
-import ModalBody from "react-bootstrap/ModalBody"
 import styles from './CheckDictionaryModal.module.css'
 import { checkDict } from "../Utils/Dictionary/dictionary"
 import { useState } from "react"
