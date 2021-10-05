@@ -191,7 +191,7 @@ const GameInfo = ({ handleSubmit }) => {
                 }
             >
                 {players.length>0 ? 
-                <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-6`}>
+                <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-12`}>
                     {playerform}
                 </div> : null }
                 <div className="btn-toolbar">
@@ -212,7 +212,7 @@ const GameInfo = ({ handleSubmit }) => {
                         </button>
                     ) : null}
                 </div>
-                <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-6`}>
+                <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-12`}>
                 <ShouldShuffle />
                 <ShouldCheckDict />
                 <GameType />
