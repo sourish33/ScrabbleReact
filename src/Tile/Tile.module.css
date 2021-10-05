@@ -16,7 +16,8 @@
 .letter {
     font-weight: bold;
     text-align: center;
-    font-size: 1.3em;
+    font-size: 25px;
+    font-weight: bold;
     flex: 1;
     color: black !important;
     user-select: none;
@@ -26,10 +27,29 @@
     margin: 0;
     font-weight: bold;
     /* text-align: end; */
-    font-size: 0.7em;
+    font-size: 10px;
     align-self: flex-end;
     color: black !important;
     user-select: none;
+}
+
+.letterOnRack {
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+  flex: 1;
+  color: black !important;
+  user-select: none;
+}
+
+.pointsOnRack {
+  margin: 0;
+  font-weight: bold;
+  /* text-align: end; */
+  font-size: 15px;
+  align-self: flex-end;
+  color: black !important;
+  user-select: none;
 }
 
 .Aligner {
@@ -76,11 +96,19 @@
   @media only screen and (max-width: 992px) {
 
     .letter {
-      font-size: 0.8em;
+      font-size: 15px;
     }
 
     .points {
-      font-size: 0.6em;
+      font-size: 8px;
+    }
+
+    .letterOnRack{
+      font-size: 20px;
+    }
+
+    .pointsOnRack{
+      font-size: 10px;
     }
 
 

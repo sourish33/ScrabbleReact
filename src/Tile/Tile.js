@@ -22,8 +22,8 @@ const Tile = (props) => {
         onDrop={props.submitted ? props.Drop: null}
         onClick = {props.submitted ? handleSendBackClick: null}
         >
-            <div className={styles.letter}>{props.letter}</div>
-            <div className={styles.points}>{props.points}</div>
+            <div className={props.boardTile? styles.letter: styles.letterOnRack}>{props.letter}</div>
+            <div className={props.boardTile? styles.points: styles.pointsOnRack}>{props.points}</div>
         </div>
 
     )
