@@ -72,7 +72,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         // let dest = event.currentTarget.id
         let u = event.currentTarget
         let dest = getSquareIdFromPos(getXY(u))
-        console.log(`${incoming} to ${dest}`)
         updateTiles(move(incoming, dest, tiles))
     }
 
@@ -92,7 +91,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchMove = (e) => {
-        // e.preventDefault()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
@@ -111,7 +109,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     function TouchEnd(e) {
-        // e.preventDefault()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
