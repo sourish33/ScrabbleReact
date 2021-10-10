@@ -50,7 +50,7 @@ const FrontPage = () => {
 
     const WelcomePage = () => {
         return (
-            <div>
+            <div style={{top:'0.5px'}}>
             <div className={`p-5 mb-4 bg-light rounded-3 ${styles.headerImage}`}>
                 <h1 className={`display-4 `}>Scrabble React!</h1>
                 <h3>A scrabble game built using React.js</h3>

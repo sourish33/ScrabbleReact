@@ -6,5 +6,5 @@
   .noscrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none; 
-    margin:0; /* Firefox */
+    margin:0 /* Firefox */
   }

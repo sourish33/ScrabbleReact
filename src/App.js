@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     document.title = "Scrabble React!"
     document.body.parentElement.classList.add(styles.noscrollbar)
-    document.body.classList.add(styles.noscrollbar)  
+    // document.body.classList.add(styles.noscrollbar)  
  })
 
   return <FrontPage/>
