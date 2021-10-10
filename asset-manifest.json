@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ScrabbleReact/static/css/main.5a7274bc.chunk.css",
-    "main.js": "/ScrabbleReact/static/js/main.728fa601.chunk.js",
-    "main.js.map": "/ScrabbleReact/static/js/main.728fa601.chunk.js.map",
+    "main.js": "/ScrabbleReact/static/js/main.4205b214.chunk.js",
+    "main.js.map": "/ScrabbleReact/static/js/main.4205b214.chunk.js.map",
     "runtime-main.js": "/ScrabbleReact/static/js/runtime-main.48f064fb.js",
     "runtime-main.js.map": "/ScrabbleReact/static/js/runtime-main.48f064fb.js.map",
     "static/css/2.818011ed.chunk.css": "/ScrabbleReact/static/css/2.818011ed.chunk.css",
     "static/js/2.2e253a1a.chunk.js": "/ScrabbleReact/static/js/2.2e253a1a.chunk.js",
     "static/js/2.2e253a1a.chunk.js.map": "/ScrabbleReact/static/js/2.2e253a1a.chunk.js.map",
-    "32b7f8884055f732f68f.worker.js": "/ScrabbleReact/32b7f8884055f732f68f.worker.js",
-    "32b7f8884055f732f68f.worker.js.map": "/ScrabbleReact/32b7f8884055f732f68f.worker.js.map",
+    "c2398b47c131fd9d018b.worker.js": "/ScrabbleReact/c2398b47c131fd9d018b.worker.js",
+    "c2398b47c131fd9d018b.worker.js.map": "/ScrabbleReact/c2398b47c131fd9d018b.worker.js.map",
     "index.html": "/ScrabbleReact/index.html",
     "static/css/2.818011ed.chunk.css.map": "/ScrabbleReact/static/css/2.818011ed.chunk.css.map",
     "static/css/main.5a7274bc.chunk.css.map": "/ScrabbleReact/static/css/main.5a7274bc.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.818011ed.chunk.css",
     "static/js/2.2e253a1a.chunk.js",
     "static/css/main.5a7274bc.chunk.css",
-    "static/js/main.728fa601.chunk.js"
+    "static/js/main.4205b214.chunk.js"
   ]
 }
