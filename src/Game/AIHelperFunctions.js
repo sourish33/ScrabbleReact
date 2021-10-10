@@ -111,7 +111,7 @@ function makeHorSlots(y, n, legalPos, submittedTiles) {
 
 function makeAllHorSlots(tiles, lp, sub) {
     const arrMap = new Map()
-    let [xs, ys] = getXsAndYs(lp)
+    let [, ys] = getXsAndYs(lp)
     if (ys.length === 0) {
         return []
     }
@@ -131,7 +131,7 @@ function makeAllHorSlots(tiles, lp, sub) {
 
 function makeAllVerSlots(tiles, lp, sub) {
     const arrMap = new Map()
-    let [xs, ys] = getXsAndYs(lp)
+    let [xs] = getXsAndYs(lp)
     if (xs.length === 0) {
         return []
     }

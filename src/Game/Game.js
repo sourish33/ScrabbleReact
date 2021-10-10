@@ -125,6 +125,7 @@ const Game = ({ gameVariables, exitGame }) => {
             return
         }
         replenishRack()
+    // eslint-disable-next-line
     }, [gameState])
 
     useEffect(() => {
@@ -134,6 +135,7 @@ const Game = ({ gameVariables, exitGame }) => {
                   score(tiles, playersAndPoints[currentPlayer].rack)
               )
             : setPointsPossible((x) => 0)
+    // eslint-disable-next-line
     }, [tiles])
 
     ////////START GAME OVER FUNCTION//////////
