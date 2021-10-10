@@ -23,23 +23,9 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     let lastMoved
     let currentX
     let currentY
-    let allowScroll = true
 
-    useEffect(()=>{
-        if (allowScroll){
-            window.onscroll = function() {}
-        }
-        else {
-            let scrollTop = window.scrollY || document.documentElement.scrollTop
-            let scrollLeft = window.scrollX || document.documentElement.scrollLeft
-          
-                // if any scroll is attempted, set this to the previous value
-            window.onscroll = function() {
-                    window.scrollTo(scrollLeft, scrollTop);
-                }
-        }
 
-    }, [allowScroll])
+
 
     const backToRack = (e) =>{
         let u = e.currentTarget
@@ -76,7 +62,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchStart = (e) => {
-        e.stopPropagation()
         disableScroll() 
         // e.preventDefault()
         if (e.touches.length > 1) {
@@ -94,7 +79,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
-        e.stopPropagation()
         disableScroll()
         let dragItem = e.currentTarget
         lastMoved = dragItem
@@ -129,13 +113,10 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
 
     function disableScroll() {
         document.body.classList.add(styles.noscroll)
-        allowScroll=false
-
     }
       
     function enableScroll() {
         document.body.classList.remove(styles.noscroll)
-        allowScroll=true
     }
 
 

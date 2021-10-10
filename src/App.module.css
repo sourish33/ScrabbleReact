@@ -5,5 +5,6 @@
   /* Hide scrollbar for IE, Edge and Firefox */
   .noscrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    scrollbar-width: none; 
+    margin:0; /* Firefox */
   }
