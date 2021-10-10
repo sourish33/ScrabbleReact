@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 import Game from "../Game/Game";
 
 import GameInfo from "../GameInfo/GameInfo"
-import Instructions from "../Instructions/Instructions";
 import styles from './FrontPage.module.css'
 
 

@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 
+/* The following properties prevent the address bar from disappearing in mobile browsers while scrolling down*/
 html {
     font-family: sans-serif;
     overflow: hidden;

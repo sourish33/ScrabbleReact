@@ -1,4 +1,4 @@
-import React, { useEffect }  from "react"
+import React  from "react"
 import Board from "./Board/Board"
 import styles from "./BoardAndRack.module.css"
 import {emptyOnRack} from "./Game/GameHelperFunctions"
