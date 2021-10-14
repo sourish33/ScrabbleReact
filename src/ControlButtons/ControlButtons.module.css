@@ -18,7 +18,7 @@
 }
 
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 767px) {
 
     .horz-btns{
         flex-direction: row !important;
@@ -38,6 +38,26 @@
       display: none;
     }
 
-  
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+  .horz-btns{
+      flex-direction: row !important;
+      justify-content: space-around !important;
+    }
+
+  .stretch{
+    width:auto;
+  }
+
+  .shorttext{
+    font-size: 1.2em;
+    display: inline-block;
+  }
+
+  .longtext{
+    display: none;
+  }
 
 }
