@@ -22,7 +22,7 @@
 
     .horz-btns{
         flex-direction: row !important;
-        justify-content: space-between !important;
+        justify-content: space-around !important;
       }
 
     .stretch{
@@ -30,7 +30,7 @@
     }
 
     .shorttext{
-      font-size: 0.9em;
+      font-size: 0.7em;
       display: inline-block;
     }
 

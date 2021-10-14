@@ -18,7 +18,7 @@ const ControlButtons = ({shuffleRack, recall, exchange, passTurn, lookup, play, 
                     <ButtonContent text={"Shuffle"}/>
                 </Button>
             </div>
-            <div  className="p-2 mt-0">
+            <div className="p-2 mt-0">
                 <Button className={styles.stretch} variant="primary" onClick={recall} disabled={disabled}>
                     <ButtonContent text={"Recall"}/>
                 </Button>
