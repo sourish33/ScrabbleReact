@@ -62,6 +62,8 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchStart = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         disableScroll() 
         // e.preventDefault()
         if (e.touches.length > 1) {
@@ -76,6 +78,8 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchMove = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
@@ -93,6 +97,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     function TouchEnd(e) {
+        e.preventDefault()
         if (e.touches.length > 1) {
             return
         } //Multiple Touches
