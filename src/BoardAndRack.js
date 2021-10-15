@@ -97,6 +97,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     function TouchEnd(e) {
+        enableScroll()
         e.preventDefault()
         if (e.touches.length > 1) {
             return
@@ -113,7 +114,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         } else{
             updateTiles(move(startingloc, endingloc, tiles))
         }
-        enableScroll()
+        
     }
 
     function disableScroll() {
