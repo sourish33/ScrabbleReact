@@ -625,6 +625,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 onHide={hideModalPassDevice}
                 name={playersAndPoints[gameState.cp].name}
                 greeting={greeting}
+                playersAndPoints={playersAndPoints}
             />
             <CheckDictionaryModal show={showDict} onHide={hideModal} />
             <ExchangeTilesModal

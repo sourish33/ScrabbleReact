@@ -11,3 +11,12 @@
 .centerMid {
     text-align: center;
 }
+
+.tdstyle {
+    font-weight: bold;
+    color:hotpink;
+}
+
+.mytable {
+    background: lightgreen;
+}

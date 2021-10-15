@@ -1,17 +1,32 @@
 import Modal from "react-bootstrap/Modal"
-import ModalBody from "react-bootstrap/ModalBody"
-// import ModalHeader from "react-bootstrap/ModalHeader"
-import ModalFooter from "react-bootstrap/ModalFooter"
-// import ModalTitle from "react-bootstrap/ModalTitle"
 import styles from './PassDevice.module.css'
-import { Button } from "react-bootstrap"
+import { Button, Table } from "react-bootstrap"
 
 
 
 
-const PassDeviceMessageModal = ({show, onHide, name, greeting}) =>{
+const PassDeviceMessageModal = ({show, onHide, name, greeting, playersAndPoints}) =>{
 
     const theGreeting = <h2 >{greeting}</h2>
+
+    const scoreTable = (playersAndPoints) => {
+        return (
+            <Table striped bordered size="sm" className={styles.mytable}>
+                <tbody>
+                    {playersAndPoints.map((el, ind) => {
+                        return (
+                            <tr  key={"row" + ind}>
+                                <td>
+                                    <span className={styles.tdstyle}>{el.name}</span>
+                                </td>
+                                <td><span className={styles.tdstyle}>{el.points}</span></td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </Table>
+        )
+    }
 
     return (
     <Modal show={show} onHide={onHide} >
@@ -20,12 +35,13 @@ const PassDeviceMessageModal = ({show, onHide, name, greeting}) =>{
             {theGreeting}
             </Modal.Title>
         </Modal.Header>
-        <ModalBody>
+        <Modal.Body>
+            {greeting === "Lets Get Started!" ? null : scoreTable(playersAndPoints)}
             <h4 className={styles.centerMid} >Please pass to {name}</h4>
-        </ModalBody>
-        <ModalFooter>
+        </Modal.Body>
+        <Modal.Footer>
             <Button variant="primary" size="lg" type= "button" onClick={onHide} className={styles.buttonstyle}>OK</Button>
-        </ModalFooter>
+        </Modal.Footer>
     </Modal>
     )
 }
