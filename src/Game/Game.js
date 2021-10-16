@@ -596,6 +596,10 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     const updateTiles = (newTiles) => {
+        if (newTiles=== undefined){
+            throw new Error("updateTiles called with an undefined array");
+        }
+
         setTiles((x) => newTiles)
     }
 
