@@ -15,7 +15,8 @@ const moveType = (orig, dest)=>{
   
   }
 
-const move = (origin, destination, tiles) => {
+const move = (origin, destination, arr) => {
+    let tiles = JSON.parse(JSON.stringify(arr))
     if (!formcheck(origin)) {
         //checking origin
         console.log(`invalid origin ${origin}`)
@@ -41,14 +42,14 @@ const move = (origin, destination, tiles) => {
     ) {
         if (fromRack && toRack) {
             // checking for a rack reshuffle
-            return moveOnRack(origin, destination, tiles)
+            return moveOnRack(origin, destination, arr)
         } 
         if (fromBoard && toRack) {
            let rackSpot = emptySpot(tiles, destination[0])
            if (rackSpot) {
                 let ind = tiles.findIndex(el=>el.pos===origin)
                 tiles[ind].pos = rackSpot
-                return moveOnRack(rackSpot, destination, tiles)
+                return moveOnRack(rackSpot, destination, arr)
            }
         }
             
@@ -105,7 +106,8 @@ const move = (origin, destination, tiles) => {
     return tiles
 }
 
-function moveOnRack(orig, dest, arr) {
+function moveOnRack(orig, dest, tiles) {
+    let arr = JSON.parse(JSON.stringify(tiles))
     let orignum = parseInt(orig[1])
     let destnum = parseInt(dest[1])
 
