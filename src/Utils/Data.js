@@ -14,20 +14,19 @@ export const greetings = {
     "Nifty!",
     "Quite a wordsmith there!",
     "You da best!",
-    "Dat Brain Do",
     "Brilliant!",
     "Smart!",
     "Some Brain Power!",
-    "Unnn-Believable"
+    "Unnn-Believable",
+    "Amazing!"
     ], 
     passExchange: [
-        "Uh Oh!",
+        "Ow Ow Ow!",
         "Better Luck Next Time!",
         "It sucks, I know!",
         "OH MY GOD!",
-        "I'm sorry!",
-        "Not looking good...",
-        "Bad Letters, Huh?"
+        "Ouch!",
+        "Bad Letters, Huh?",
     ]
 
 }
