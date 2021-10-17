@@ -72,7 +72,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchStart = (e) => {
-        e.preventDefault()
         e.stopPropagation()
         disableScroll() 
         // e.preventDefault()
@@ -88,7 +87,7 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchMove = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         e.stopPropagation()
         if (e.touches.length > 1) {
             return
@@ -118,15 +117,18 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         endingloc = getSquareIdFromPos(getXY(u))
         xOffset = 0
         yOffset = 0
-        setTranslate(0, 0, lastMoved)
+        // setTranslate(0, 0, lastMoved)
         if (startingloc === endingloc){//return tile to rack upon tapping a played-not-submitted tile
             backToRack(e)
         } else{
             let newTiles = move(startingloc, endingloc, tiles)
             if (newTiles === null) {
+                lastMoved.style.transform = "none"
                 console.log("null newTiles")
                 return
             }
+            lastMoved.style.transform = "none"
+            // setTranslate(0, 0, lastMoved)
             updateTiles(newTiles)
         }
         
