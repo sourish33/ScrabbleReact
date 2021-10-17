@@ -20,19 +20,18 @@ const move = (origin, destination, arr) => {
     if (!formcheck(origin)) {
         //checking origin
         console.log(`invalid origin ${origin}`)
-        return tiles
+        return null
     }
     if (!formcheck(destination)) {
         //checking destination
         console.log(`invalid destination ${destination}`)
-        return tiles
+        return null
     }
     let [fromRack, fromBoard, toRack, toBoard] = moveType(origin, destination)
     if (origin === destination) {
         //checking that they are not the same
         console.log("Back to the same location")
-
-        return tiles
+        return null
     }
     //checking if something exists are destination
     if (
@@ -54,7 +53,7 @@ const move = (origin, destination, arr) => {
         }
             
         console.log("occupied spot")
-        return tiles
+        return null
     }
 
     let whatsHere = tiles.find((el) => {
@@ -63,7 +62,7 @@ const move = (origin, destination, arr) => {
     })
     if (!whatsHere) {
         console.log(`Nothing at origin ${origin}`)
-        return tiles
+        return null
     }
 
     if (fromRack && toBoard && readPoints(origin, tiles)===0 ) {
@@ -73,11 +72,11 @@ const move = (origin, destination, arr) => {
         //   })
         let newLetter = prompt("Please choose a letter for this tile:", "")
         if (newLetter == null || newLetter === "") {
-            return tiles
+            return null
         }
         newLetter = newLetter.charAt(0)
         if (!isLetter(newLetter)) {
-            return tiles
+            return null
         }
         tiles = changeLetter(origin, newLetter.toUpperCase(), tiles)
     }

@@ -40,7 +40,12 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
             return 
         }
         let dest = emptySpots[0]
-        updateTiles(move(src, dest, tiles))
+        let newTiles = move(src, dest, tiles)
+        if (newTiles === null) {
+            console.log("null newTiles")
+            return
+        }
+        updateTiles(newTiles)
     }
 
     const DragStart = (event) => {
@@ -58,7 +63,12 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         // let dest = event.currentTarget.id
         let u = event.currentTarget
         let dest = getSquareIdFromPos(getXY(u))
-        updateTiles(move(incoming, dest, tiles))
+        let newTiles = move(incoming, dest, tiles)
+        if (newTiles === null) {
+            console.log("null newTiles")
+            return
+        }
+        updateTiles(newTiles)
     }
 
     const TouchStart = (e) => {
@@ -112,7 +122,12 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         if (startingloc === endingloc){//return tile to rack upon tapping a played-not-submitted tile
             backToRack(e)
         } else{
-            updateTiles(move(startingloc, endingloc, tiles))
+            let newTiles = move(startingloc, endingloc, tiles)
+            if (newTiles === null) {
+                console.log("null newTiles")
+                return
+            }
+            updateTiles(newTiles)
         }
         
     }

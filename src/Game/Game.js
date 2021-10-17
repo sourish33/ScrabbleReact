@@ -600,6 +600,11 @@ const Game = ({ gameVariables, exitGame }) => {
             throw new Error("updateTiles called with an undefined array");
         }
 
+        if (newTiles === null){
+            console.log("null newTiles in updateTiles")
+            return
+        }
+
         setTiles((x) => newTiles)
     }
 
