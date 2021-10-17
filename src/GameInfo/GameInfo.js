@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button } from "react-bootstrap"
+import { Button, ButtonToolbar } from "react-bootstrap"
 import Instructions from "../Instructions/Instructions"
 import { AI_LIST } from "../Utils/Data"
 import { randomUpTo, subtractArrays } from "../Utils/helpers"
@@ -195,31 +195,31 @@ const GameInfo = ({ handleSubmit }) => {
                 <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-12`}>
                     {playerform}
                 </div> : null }
-                <div className="btn-toolbar">
+                <ButtonToolbar aria-label="Toolbar with button groups">
                     {players.length < 4 ? (
-                        <Button variant="primary" type="button" onClick={handleClickHuman}>
+                        <Button variant="primary" type="button" className={'me-2'} onClick={handleClickHuman}>
                             Add Human
                         </Button>
                     ) : null}
                     {players.length < 4 ? (
-                        <Button variant="primary" type="button" onClick={handleClickAI}>
+                        <Button variant="primary" type="button" className={'me-2'} onClick={handleClickAI}>
                             Add Computer
                         </Button>
                     ) : null}
 
                     {players.length !== 0 ? (
-                        <Button variant="primary" type="button" onClick={remove}>
+                        <Button variant="primary" type="button" className={'me-2'} onClick={remove}>
                             Remove
                         </Button>
                     ) : null}
-                </div>
+                </ButtonToolbar>
                 <div className={`${styles.card} ${styles.shadow2} col-lg-6 col-sm-12 col-md-12`}>
                 <ShouldShuffle />
                 <ShouldCheckDict />
                 <GameType />
                 </div>
                 <div className="btn-toolbar">
-                    <Button variant="primary" type="submit">Start Game</Button>
+                    <Button variant="primary" type="submit" className={'me-2'} >Start Game</Button>
                     <Button variant="primary" type="button" onClick={showInstructions}>Help</Button>
                 </div>
             </form>
