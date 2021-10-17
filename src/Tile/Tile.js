@@ -8,9 +8,6 @@ const Tile = (props) => {
         classes = !props.submitted? `${styles['tile']} ${styles['submitted']}`: styles['tile']
     }
 
-    const handleSendBackClick = (e) =>{
-        props.backToRack(e)
-    }
 
     return (
         <div draggable = {props.submitted} className={classes}                     
@@ -20,7 +17,6 @@ const Tile = (props) => {
         onDragStart={props.submitted ? props.DragStart: null}
         onDragOver={props.submitted ? props.DragOver: null}
         onDrop={props.submitted ? props.Drop: null}
-        onClick = {props.submitted ? handleSendBackClick: null}
         >
             <div className={props.boardTile? styles.letter: styles.letterOnRack}>{props.letter}</div>
             <div className={props.boardTile? styles.points: styles.pointsOnRack}>{props.points}</div>

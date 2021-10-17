@@ -27,7 +27,7 @@ const renderSquare = (i, piece = null) => {
     return <Square bgd={whichBgd}>{piece}</Square>
 }
 
-const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd, backToRack }) => {
+const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchEnd }) => {
     let tilesMap = arrayToMap(tiles)
 
     const squares = []
@@ -45,7 +45,6 @@ const Board = ({ tiles, DragStart, DragOver, Drop, TouchStart, TouchMove, TouchE
                     DragOver={DragOver}
                     Drop={Drop}
                     boardTile= {true}
-                    backToRack = {backToRack}
                 />
             )
             let thisSquare = (

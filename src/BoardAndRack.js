@@ -1,7 +1,6 @@
 import React  from "react"
 import Board from "./Board/Board"
 import styles from "./BoardAndRack.module.css"
-import {emptyOnRack} from "./Game/GameHelperFunctions"
 
 import move from "./Utils/movers"
 import {
@@ -20,33 +19,12 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     let initialY
     let xOffset = 0
     let yOffset = 0
-    let lastMoved
+    let lastMoved=null
     let currentX
     let currentY
 
 
 
-
-    const backToRack = (e) =>{
-        let u = e.currentTarget
-        let src = getSquareIdFromPos(getXY(u))
-        if (src[0]!=='b'){
-            console.log(`You clicked on ${src}, rack tile doing nothing`)
-            return
-        }
-        let emptySpots = emptyOnRack(tiles, visibleRack)
-        if (emptySpots.length ===0){
-            console.log("No space on rack")
-            return 
-        }
-        let dest = emptySpots[0]
-        let newTiles = move(src, dest, tiles)
-        if (newTiles === null) {
-            console.log("null newTiles")
-            return
-        }
-        updateTiles(newTiles)
-    }
 
     const DragStart = (event) => {
         let whereArtThou = event.target.parentElement.parentElement.id
@@ -120,7 +98,9 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
 
         let newTiles = move(startingloc, endingloc, tiles)
         if (newTiles === null) {
-            lastMoved.style.transform = "none"
+            if(lastMoved) {
+                lastMoved.style.transform = "none"
+            }
             console.log("null newTiles")
             return
         }
@@ -152,7 +132,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
                 TouchStart={TouchStart}
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
-                backToRack = {backToRack}
             />
             <Rack
                 whichRack={visibleRack}
@@ -164,7 +143,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
                 TouchMove={TouchMove}
                 TouchEnd={TouchEnd}
                 showTiles={showTiles}
-                backToRack = {backToRack}
             />
         </div>
     )
