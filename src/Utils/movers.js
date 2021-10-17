@@ -115,7 +115,7 @@ function moveOnRack(orig, dest, tiles) {
     let dest_ind = arr.findIndex((el) => el.pos === dest)
     if (orig_ind === -1 || dest_ind === -1) {
         console.log("orig or dest not found")
-        return arr
+        return null
     }
     //remove the tile at the origin
     let orig_entry = arr.filter((el) => el.pos === orig)[0]

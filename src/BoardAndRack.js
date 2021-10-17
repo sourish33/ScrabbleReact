@@ -117,18 +117,16 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
         endingloc = getSquareIdFromPos(getXY(u))
         xOffset = 0
         yOffset = 0
-        if (startingloc === endingloc){//return tile to rack upon tapping a played-not-submitted tile
-            backToRack(e)
-        } else{
-            let newTiles = move(startingloc, endingloc, tiles)
-            if (newTiles === null) {
-                lastMoved.style.transform = "none"
-                console.log("null newTiles")
-                return
-            }
+
+        let newTiles = move(startingloc, endingloc, tiles)
+        if (newTiles === null) {
             lastMoved.style.transform = "none"
-            updateTiles(newTiles)
+            console.log("null newTiles")
+            return
         }
+        lastMoved.style.transform = "none"
+        updateTiles(newTiles)
+        
         
     }
 
