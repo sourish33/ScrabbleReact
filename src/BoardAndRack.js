@@ -38,7 +38,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     const Drop = (event) => {
         event.preventDefault()
         let incoming = event.dataTransfer.getData("text")
-        // let dest = event.currentTarget.id
         let u = event.currentTarget
         let dest = getSquareIdFromPos(getXY(u))
         let newTiles = move(incoming, dest, tiles)
@@ -52,7 +51,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     const TouchStart = (e) => {
         e.stopPropagation()
         disableScroll() 
-        // e.preventDefault()
         if (e.touches.length > 1) {
             enableScroll()
             return
@@ -65,7 +63,6 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
     }
 
     const TouchMove = (e) => {
-        // e.preventDefault()
         e.stopPropagation()
         if (e.touches.length > 1) {
             return
