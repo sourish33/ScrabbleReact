@@ -56,6 +56,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const [showAIThinking, setShowAIThinking] =  useState(false)
     const [aiSays, setAiSays] = useState("")
     const [showInstr, setShowInstr] = useState(false)
+    const [numWorkersDone, setNumWorkersDone] = useState(0)
 
     //parsing incoming data from the welcome page
     const players = gameVariables.players
@@ -298,8 +299,8 @@ const Game = ({ gameVariables, exitGame }) => {
                         console.log(message.data)
                     }
                     if (Array.isArray(result)){
+                        setNumWorkersDone(x=>x+1)
                         resolve(result)
-                        
                         myWorker.terminate()
                     }
                 }
@@ -311,6 +312,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
 
     async function callWorkersSequentially(allPerms, allSlots, tiles, whichRack, cutoff, toWin) {
+        setNumWorkersDone(0)
         let moves = []
         let bestMove = {points: -1}
         for (let i =0; i<7; i++){
@@ -326,6 +328,7 @@ const Game = ({ gameVariables, exitGame }) => {
     }
 
     async function callAllWorkers(allPerms, allSlots, tiles, currentPlayer) {
+        setNumWorkersDone(0)
         let whichRack = playersAndPoints[currentPlayer].rack
         let cutoff = maxSearches[playersAndPoints[currentPlayer].level]
         let toWin = maxPoints - playersAndPoints[currentPlayer].points
@@ -644,7 +647,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 clickHandlerExt={clickHandlerExt}
                 handleSubmit={handleExchSubmit}
             />
-            <AIThinkingModal show={showAIThinking} aiSays={aiSays} />
+            <AIThinkingModal show={showAIThinking} aiSays={aiSays} numWorkersDone = {numWorkersDone}/>
             <Container>
                 <Row>
                     <Col sm={12} lg={7} md={12}>

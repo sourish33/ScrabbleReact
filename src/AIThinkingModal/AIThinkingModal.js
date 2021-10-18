@@ -1,15 +1,17 @@
 import Modal from "react-bootstrap/Modal"
 import styles from './AIThinkingModal.module.css'
-import { Spinner } from "react-bootstrap"
+import { ProgressBar, Spinner } from "react-bootstrap"
 
-const AIThinkingModal = ({show, aiSays}) => {
+const AIThinkingModal = ({show, aiSays, numWorkersDone}) => {
+
+    let now = Math.round(100*numWorkersDone/7)
 
     let aiUbach = aiSays==="" ? "AI thinking..." : aiSays
     return (
         <Modal show={show}>
             <Modal.Body className={styles.modalbody}>
                 <div className="text-center">
-                    <Spinner animation="border" />
+                    {now===0 ? <Spinner animation="border" /> : <ProgressBar now={now} label={`${now}%`} style={{minWidth:'250px'}}/>}
                 </div>
                 <div className={styles.spinnertext}>{aiUbach}</div>
             </Modal.Body>
