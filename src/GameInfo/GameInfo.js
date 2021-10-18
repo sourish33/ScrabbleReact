@@ -12,7 +12,7 @@ const GameInfo = ({ handleSubmit }) => {
     const [players, setPlayers] = useState([])
     const [shufflePlayers, setShufflePlayers] = useState("0")
     const [dictCheck, setDictCheck] = useState("1")
-    const [gameType, setGameType] = useState("75")
+    const [gameType, setGameType] = useState("150")
 
     const handleChange = (event, index) => {
         let playerName = event.target.value
