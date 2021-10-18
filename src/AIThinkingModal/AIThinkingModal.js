@@ -11,7 +11,7 @@ const AIThinkingModal = ({show, aiSays, numWorkersDone}) => {
         <Modal show={show}>
             <Modal.Body className={styles.modalbody}>
                 <div className="text-center">
-                    {now===0 ? <Spinner animation="border" /> : <ProgressBar now={now} label={`${now}%`} style={{minWidth:'250px'}}/>}
+                    {now===0 ? <Spinner animation="border" /> : <ProgressBar animated now={now} label={`${now}%`} style={{minWidth:'250px'}}/>}
                 </div>
                 <div className={styles.spinnertext}>{aiUbach}</div>
             </Modal.Body>
