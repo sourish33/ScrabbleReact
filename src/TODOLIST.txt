@@ -1,5 +1,5 @@
 save game
 all tiles used picture
 select from among gifs
-progress bar while AI thinking
+useReducer to replenish rack
 button to stop AI thinking

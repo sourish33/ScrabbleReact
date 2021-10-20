@@ -24,7 +24,7 @@ import {
     tilesPlayedNotSubmitted,
 } from "./GameHelperFunctions"
 import CheckDictionaryModal from "../CheckDictionaryModal/CheckDictionaryModal"
-import tilesBag from "../Utils/tilesBag"
+import Bag from "../Utils/Bag"
 import ExchangeTilesModal from "../ExchangeTilesModal/ExchangeTilesModal"
 import PassDeviceMessageModal from "../PassDeviceMessageModal/PassDeviceMessageModal"
 import { randomUpTo } from "../Utils/helpers"
@@ -42,7 +42,8 @@ import Instructions from "../Instructions/Instructions"
 const Game = ({ gameVariables, exitGame }) => {
 
     const [tiles, setTiles] = useState([])
-    const [bag, setBag] = useState(tilesBag)
+    const [bag, setBag] = useState(Bag)
+    const initialTilesBag = {tiles: [], bag: Bag}
     const [showDict, setShowDict] = useState(false)
     const [showEx, setShowEx] = useState(false)
     const [lastPlayed, setLastPlayed] = useState([])
@@ -89,7 +90,35 @@ const Game = ({ gameVariables, exitGame }) => {
                 return state
         }
     }
-    const [gameState, dispatch] = useReducer(gsreducer, initialState)
+    const [gameState, dispatch] = useReducer(gsreducer, initialTilesBag)
+
+    const tilesBagReducer = (state, action) => {
+        let {tiles, bag}  = state
+        let newBag = bag
+        let newTiles = tiles
+        switch (action.type) {
+            case "REPLENISH_RACK":
+                return {
+                    ...state,
+                    bag: newBag,
+                    tiles: newTiles,
+                }
+            case "RETURN_TO_BAG":
+                return {
+                    ...state,
+                    bag: newBag,
+                    tiles: newTiles,
+                }
+            case "UPDATE_TILES":
+                return {
+                    ...state,
+                    tiles: action.payload,
+                }
+            default:
+                return state
+        }
+
+    }
 
     const generateGreeting = (wordplayed) => {
         let greetlist = wordplayed===wordplayed.toUpperCase() ? greetings.normal : greetings.passExchange
@@ -590,6 +619,7 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         setBag((x) => subtractArrays(bag, removeFromBag))
         updateTiles([...tiles, ...addToTiles])
+        console.log(bag.length)
     }
 
     const theWinner = () => {
