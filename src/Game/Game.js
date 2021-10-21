@@ -202,6 +202,7 @@ const Game = ({ gameVariables, exitGame }) => {
                     tiles
                 )
             }
+            console.log(tiles)
             setPlayersAndPoints(playersAndPointsCopy)
             setShowVictoryBox((x) => true)
             setButtonsDisabled((x) => true)
@@ -613,7 +614,7 @@ const Game = ({ gameVariables, exitGame }) => {
             let newBag = subtractArrays(bag, removeFromBag)
             let newTiles = [...tiles, ...addToTiles]
             updateTilesAndBag(newTiles, newBag)
-            resolve([...tiles, ...addToTiles])
+            resolve(newTiles)
         })
     }
 
