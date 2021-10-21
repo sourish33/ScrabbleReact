@@ -205,7 +205,6 @@ const Game = ({ gameVariables, exitGame }) => {
                     tiles
                 )
             }
-            console.log(tiles)
             setPlayersAndPoints(playersAndPointsCopy)
             setShowVictoryBox((x) => true)
             setButtonsDisabled((x) => true)
@@ -318,16 +317,55 @@ const Game = ({ gameVariables, exitGame }) => {
 
     //////START AI PLAY GROUP///////////////////////////////////////////
 
-    const moveNPlay = (bestMove, theTiles) => {
+    const aiGetTiles = () => {
+        const { cp: currentPlayer } = gameState
+        const {tiles, bag} = tilesAndBag
         return new Promise((resolve, reject) => {
-            let starts = bestMove.rackPerm
-            let ends = bestMove.slot
-            let letter = bestMove.letter
-            let newTiles = aiMove(starts, ends, letter, theTiles)
-            updateTiles(newTiles)
-            resolve(aiMove(starts, ends, letter, theTiles))
+            let freeSlots = emptyOnRack(
+                tiles,
+                playersAndPoints[currentPlayer].rack
+            )
+            if (freeSlots.length === 0) {
+                resolve(tiles)
+                return
+            }
+            let removeFromBag = []
+            let addToTiles = []
+            let howManyToPick = Math.min(freeSlots.length, bag.length)
+            let inds = getUniqueInts0(howManyToPick, bag.length)
+            for (let i = 0; i < howManyToPick; i++) {
+                removeFromBag.push(bag[inds[i]])
+                addToTiles.push({
+                    pos: freeSlots[i],
+                    letter: bag[inds[i]][1],
+                    points: parseInt(bag[inds[i]][2]),
+                    submitted: playersAndPoints[currentPlayer].level > 0,
+                })
+            }
+            let newBag = subtractArrays(bag, removeFromBag)
+            let newTiles = [...tiles, ...addToTiles]
+            updateTilesAndBag(newTiles, newBag)
+            resolve(newTiles)
         })
     }
+
+    const aiPlay = (theTiles) => {
+        setShowAIThinking(true)
+        const { cp: currentPlayer } = gameState
+        let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(
+            theTiles,
+            playersAndPoints[currentPlayer].rack
+        )
+        let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
+        let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
+        callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7], theTiles, currentPlayer)
+            .then((bestMove)=>aiSubmitMove(bestMove, theTiles, currentPlayer))
+        
+    }
+
+
+
+
 
     function delay(t, v) {
         return new Promise(function (resolve) {
@@ -443,21 +481,19 @@ const Game = ({ gameVariables, exitGame }) => {
 
     }
 
+    const moveNPlay = (bestMove, theTiles) => {
+        return new Promise((resolve, reject) => {
+            let starts = bestMove.rackPerm
+            let ends = bestMove.slot
+            let letter = bestMove.letter
+            let newTiles = aiMove(starts, ends, letter, theTiles)
+            updateTiles(newTiles)
+            resolve(aiMove(starts, ends, letter, theTiles))
+        })
+    }
+
     
 
-    const aiPlay = (theTiles) => {
-        setShowAIThinking(true)
-        const { cp: currentPlayer } = gameState
-        let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(
-            theTiles,
-            playersAndPoints[currentPlayer].rack
-        )
-        let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
-        let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
-        callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7], theTiles, currentPlayer)
-            .then((bestMove)=>aiSubmitMove(bestMove, theTiles, currentPlayer))
-        
-    }
 
     //////END AI PLAY GROUP/////////////////////////////////////////
 
@@ -588,37 +624,6 @@ const Game = ({ gameVariables, exitGame }) => {
         advanceGameState()
     }
 
-    const aiGetTiles = () => {
-        const { cp: currentPlayer } = gameState
-        const {tiles, bag} = tilesAndBag
-        return new Promise((resolve, reject) => {
-            let freeSlots = emptyOnRack(
-                tiles,
-                playersAndPoints[currentPlayer].rack
-            )
-            if (freeSlots.length === 0) {
-                resolve(tiles)
-                return
-            }
-            let removeFromBag = []
-            let addToTiles = []
-            let howManyToPick = Math.min(freeSlots.length, bag.length)
-            let inds = getUniqueInts0(howManyToPick, bag.length)
-            for (let i = 0; i < howManyToPick; i++) {
-                removeFromBag.push(bag[inds[i]])
-                addToTiles.push({
-                    pos: freeSlots[i],
-                    letter: bag[inds[i]][1],
-                    points: parseInt(bag[inds[i]][2]),
-                    submitted: playersAndPoints[currentPlayer].level > 0,
-                })
-            }
-            let newBag = subtractArrays(bag, removeFromBag)
-            let newTiles = [...tiles, ...addToTiles]
-            updateTilesAndBag(newTiles, newBag)
-            resolve(newTiles)
-        })
-    }
 
     const replenishRack = () => {
         const { cp: currentPlayer } = gameState
