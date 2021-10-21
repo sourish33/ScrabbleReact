@@ -317,6 +317,8 @@ const Game = ({ gameVariables, exitGame }) => {
 
     //////START AI PLAY GROUP///////////////////////////////////////////
 
+    //TODO: pass tilesAndBag through the AI group?
+
     const aiGetTiles = () => {
         const { cp: currentPlayer } = gameState
         const {tiles, bag} = tilesAndBag
@@ -491,6 +493,31 @@ const Game = ({ gameVariables, exitGame }) => {
             resolve(aiMove(starts, ends, letter, theTiles))
         })
     }
+    const aiReplenishRack = (tiles) => {
+        const { cp: currentPlayer } = gameState
+        const {bag} = tilesAndBag
+        let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
+        if (freeSlots.length === 0) {
+            return
+        }
+        let removeFromBag = []
+        let addToTiles = []
+        let howManyToPick = Math.min(freeSlots.length, bag.length)
+        let inds = getUniqueInts0(howManyToPick, bag.length)
+        for (let i = 0; i < howManyToPick; i++) {
+            removeFromBag.push(bag[inds[i]])
+            addToTiles.push({
+                pos: freeSlots[i],
+                letter: bag[inds[i]][1],
+                points: parseInt(bag[inds[i]][2]),
+                submitted: playersAndPoints[currentPlayer].level > 0,
+            })
+        }
+        let newBag = subtractArrays(bag, removeFromBag)
+        let newTiles = [...tiles, ...addToTiles]
+        updateTilesAndBag(newTiles, newBag)
+        advanceGameState()
+    }
 
     
 
@@ -598,32 +625,7 @@ const Game = ({ gameVariables, exitGame }) => {
         advanceGameState()
     }
 
-    const aiReplenishRack = (tiles) => {
-        const { cp: currentPlayer } = gameState
-        const {bag} = tilesAndBag
-        let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
-        if (freeSlots.length === 0) {
-            return
-        }
-        let removeFromBag = []
-        let addToTiles = []
-        let howManyToPick = Math.min(freeSlots.length, bag.length)
-        let inds = getUniqueInts0(howManyToPick, bag.length)
-        for (let i = 0; i < howManyToPick; i++) {
-            removeFromBag.push(bag[inds[i]])
-            addToTiles.push({
-                pos: freeSlots[i],
-                letter: bag[inds[i]][1],
-                points: parseInt(bag[inds[i]][2]),
-                submitted: playersAndPoints[currentPlayer].level > 0,
-            })
-        }
-        let newBag = subtractArrays(bag, removeFromBag)
-        let newTiles = [...tiles, ...addToTiles]
-        updateTilesAndBag(newTiles, newBag)
-        advanceGameState()
-    }
-
+    
 
     const replenishRack = () => {
         const { cp: currentPlayer } = gameState
