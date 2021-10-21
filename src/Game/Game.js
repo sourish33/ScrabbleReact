@@ -344,7 +344,6 @@ const Game = ({ gameVariables, exitGame }) => {
                     let result = message.data
                     if (typeof(result)==='string'){
                         setAiSays(message.data)
-                        console.log(message.data)
                     }
                     if (Array.isArray(result)){
                         setNumWorkersDone(x=>x+1)
@@ -644,7 +643,7 @@ const Game = ({ gameVariables, exitGame }) => {
         let newBag = subtractArrays(bag, removeFromBag)
         let newTiles = [...tiles, ...addToTiles]
         updateTilesAndBag(newTiles, newBag)
-        console.log(bag.length)
+        // console.log(bag.length)
     }
 
     const theWinner = () => {
