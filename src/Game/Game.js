@@ -120,7 +120,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const updateTilesAndBag = (newTiles, newBag) => {
         if (newTiles.length+newBag.length !== 100) {
-            throw new Error(`tiles size ${newTiles.length}, bag size ${newBag.length}, total ${newTiles.length+newBag.length}`)
+            console.log(`tiles size ${newTiles.length}, bag size ${newBag.length}, total ${newTiles.length+newBag.length}`)
         }
         tbdispatch({type: "UPDATE_TILES_AND_BAG", bag: newBag, tiles: newTiles})
     }
