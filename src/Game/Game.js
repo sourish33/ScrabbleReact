@@ -346,6 +346,7 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             let newBag = subtractArrays(bag, removeFromBag)
             let newTiles = [...tiles, ...addToTiles]
+            console.log(`tiles: ${tiles.length} bag: ${bag.length} newBag: ${newBag.length} newTiles: ${newTiles.length}`)
             updateTilesAndBag(newTiles, newBag)
             resolve(newTiles)
         })
@@ -490,7 +491,7 @@ const Game = ({ gameVariables, exitGame }) => {
             let letter = bestMove.letter
             let newTiles = aiMove(starts, ends, letter, theTiles)
             updateTiles(newTiles)
-            resolve(aiMove(starts, ends, letter, theTiles))
+            resolve(newTiles)
         })
     }
     const aiReplenishRack = (tiles) => {
