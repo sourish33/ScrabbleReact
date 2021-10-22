@@ -120,7 +120,7 @@ const Game = ({ gameVariables, exitGame }) => {
 
     const updateTilesAndBag = (newTiles, newBag) => {
         if (newTiles.length+newBag.length !== 100) {
-            console.log(`tiles size ${newTiles.length}, bag size ${newBag.length}, total ${newTiles.length+newBag.length}`)
+            console.log(`UDATE: tiles size ${newTiles.length}, bag size ${newBag.length}, total ${newTiles.length+newBag.length}`)
         }
         tbdispatch({type: "UPDATE_TILES_AND_BAG", bag: newBag, tiles: newTiles})
     }
@@ -346,7 +346,7 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             let newBag = subtractArrays(bag, removeFromBag)
             let newTiles = [...tiles, ...addToTiles]
-            console.log(`tiles: ${tiles.length} bag: ${bag.length} newBag: ${newBag.length} newTiles: ${newTiles.length}`)
+            console.log(`GT: tiles: ${tiles.length} bag: ${bag.length} newBag: ${newBag.length} newTiles: ${newTiles.length}`)
             updateTilesAndBag(newTiles, newBag)
             resolve(newTiles)
         })
@@ -516,6 +516,7 @@ const Game = ({ gameVariables, exitGame }) => {
         }
         let newBag = subtractArrays(bag, removeFromBag)
         let newTiles = [...tiles, ...addToTiles]
+        console.log(`RR: tiles: ${tiles.length} bag: ${bag.length} newBag: ${newBag.length} newTiles: ${newTiles.length}`)
         updateTilesAndBag(newTiles, newBag)
         advanceGameState()
     }
