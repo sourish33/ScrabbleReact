@@ -161,8 +161,8 @@ const Game = ({ gameVariables, exitGame }) => {
         })
 
         if (playersAndPoints[currentPlayer].level > 0) {
-            aiGetTiles().then((newTiles) =>
-                delay(500, newTiles).then((newTiles) => aiPlay(newTiles))
+            aiGetTiles().then((newTilesAndBag) =>
+                delay(500, newTilesAndBag).then((newTilesAndBag) => aiPlay(newTilesAndBag))
             )
             return
         }
@@ -209,6 +209,7 @@ const Game = ({ gameVariables, exitGame }) => {
             setShowVictoryBox((x) => true)
             setButtonsDisabled((x) => true)
             setGameIsOver(true)
+            console.log(tiles)
             return true
         }
 
@@ -485,7 +486,8 @@ const Game = ({ gameVariables, exitGame }) => {
                 })
             })
             .then((newTiles) => {
-                aiReplenishRack([newTiles, theBag])
+                updateTilesAndBag(newTiles, theBag)
+                advanceGameState()
             })
 
     }
@@ -500,34 +502,7 @@ const Game = ({ gameVariables, exitGame }) => {
             resolve(newTiles)
         })
     }
-    const aiReplenishRack = (tilesBagArr) => {
-        const { cp: currentPlayer } = gameState
-        const [tiles, bag] = tilesBagArr
-        let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
-        if (freeSlots.length === 0) {
-            return
-        }
-        let removeFromBag = []
-        let addToTiles = []
-        let howManyToPick = Math.min(freeSlots.length, bag.length)
-        let inds = getUniqueInts0(howManyToPick, bag.length)
-        for (let i = 0; i < howManyToPick; i++) {
-            removeFromBag.push(bag[inds[i]])
-            addToTiles.push({
-                pos: freeSlots[i],
-                letter: bag[inds[i]][1],
-                points: parseInt(bag[inds[i]][2]),
-                submitted: playersAndPoints[currentPlayer].level > 0,
-            })
-        }
-        let newBag = subtractArrays(bag, removeFromBag)
-        let newTiles = [...tiles, ...addToTiles]
-        console.log(`RR: tiles: ${tiles.length} bag: ${bag.length} newBag: ${newBag.length} newTiles: ${newTiles.length}`)
-        updateTilesAndBag(newTiles, newBag)
-        advanceGameState()
-    }
-
-    
+  
 
 
     //////END AI PLAY GROUP/////////////////////////////////////////
