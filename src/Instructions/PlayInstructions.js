@@ -7,11 +7,6 @@ const PlayInstructions = () => {
                     <ul>
                         <li>Move tiles around either by mouse or touch.</li>
                         <li>
-                            <span className={styles.infobox}>Single-clicking/tapping</span>{" "}
-                            an unsubmitted tile on the board will send it back
-                            to the rack
-                        </li>
-                        <li>
                             The <span className={styles.infobox}>Shuffle</span> button
                             shuffles the tiles on the rack. You can also
                             manually rearrange the rack by dragging tiles.
@@ -51,7 +46,7 @@ const PlayInstructions = () => {
                         </li>
                         <li>
                             All words played by the AI are valid words according
-                            to the Official Scrabble Dictionary.
+                            to the <a href='https://www.collinsdictionary.com/us/scrabble/'>Collins Scrabble Dictionary</a>.
                         </li>
                     </ul>
                 </div>
