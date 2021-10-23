@@ -1,11 +1,12 @@
 import Modal from "react-bootstrap/Modal"
 import styles from './CheckDictionaryModal.module.css'
 import { checkDict } from "../Utils/Dictionary/dictionary"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Button } from "react-bootstrap"
 
-const CheckDictionaryModal = ({show, onHide}) =>{
+    const CheckDictionaryModal = ({show, onHide}) =>{
     const [word, setWord] = useState("")
+    const inputref = useRef(null)
 
     const Result = ({wordToCheck}) =>{
         if (checkDict(wordToCheck)) {
@@ -23,12 +24,12 @@ const CheckDictionaryModal = ({show, onHide}) =>{
         setWord("")
     }
     return (
-        <Modal show={show} onHide={onHide} onExit={clear}>
+        <Modal show={show} onHide={onHide} onExit={clear} onEntered={() => inputref.current.focus()}>
                 <Modal.Body>
                 <div className="mt-0">
 				<form>
 						<div className="input-group mb-3">
-							<input type="text" className="form-control" placeholder="Check dictionary"  
+							<input type="text" ref={inputref} className="form-control" placeholder="Check dictionary"  
                             value={word}
                             onChange={handleChange} />
 							<div className="input-group-append">
