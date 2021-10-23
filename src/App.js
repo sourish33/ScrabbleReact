@@ -8,7 +8,7 @@ import styles from './App.module.css'
 function App() {
   
   useEffect(() => {
-    document.title = "Scrabble React!"
+    document.title = "Tortoise Scrabble"
     // document.body.parentElement.classList.add(styles.noscrollbar)
     document.body.classList.add(styles.noscrollbar)  
  })

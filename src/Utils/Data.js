@@ -3,8 +3,8 @@ export const greetings = {
     "Nice!",
     "Finally!",
     "Good Job!",
-    "INCREDIBLE!",
-    "Noice",
+    "Incrediballs!",
+    "Noice!",
     "Wowza!",
     "Woot Woot!",
     "That's LITERALLY awesome!",
@@ -18,7 +18,8 @@ export const greetings = {
     "Smart!",
     "Some Brain Power!",
     "Unnn-Believable",
-    "Amazing!"
+    "Amazing!",
+    "High Roller!"
     ], 
     passExchange: [
         "Ow Ow Ow!",
@@ -41,4 +42,5 @@ export const AI_LIST = [
     "AI Dylan",
     "AI Sienna",
     "AI Sassy",
+    "AI Tortoise"
 ]
