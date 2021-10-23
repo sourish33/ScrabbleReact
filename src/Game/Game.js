@@ -62,7 +62,7 @@ const Game = ({ gameVariables, exitGame }) => {
     const shufflePlayers = gameVariables.shufflePlayers
     const dictChecking = gameVariables.dictCheck === "1" ? true : false
     const maxPoints = parseInt(gameVariables.gameType)
-    const maxSearches = {1: 1500, 2: 50000, 3: 150000}
+    const maxSearches = {1: 1500, 2: 60000, 3: 150000}
     const playerTable = makePlayertable(players, shufflePlayers)
     const numPlayers = playerTable.length
     const AIPlayersExist = playerTable.filter((el) => el.level > 0).length > 0 //whether AI players exist
