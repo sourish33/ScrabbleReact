@@ -119,9 +119,6 @@ const Game = ({ gameVariables, exitGame }) => {
     const [tilesAndBag, tbdispatch] = useReducer(tilesAndBagReducer, initialTilesAndBag)
 
     const updateTilesAndBag = (newTiles, newBag) => {
-        if (newTiles.length+newBag.length !== 100) {
-            console.log(`UDATE: tiles size ${newTiles.length}, bag size ${newBag.length}, total ${newTiles.length+newBag.length}`)
-        }
         tbdispatch({type: "UPDATE_TILES_AND_BAG", bag: newBag, tiles: newTiles})
     }
 
@@ -209,7 +206,6 @@ const Game = ({ gameVariables, exitGame }) => {
             setShowVictoryBox((x) => true)
             setButtonsDisabled((x) => true)
             setGameIsOver(true)
-            console.log(tiles)
             return true
         }
 
@@ -347,7 +343,6 @@ const Game = ({ gameVariables, exitGame }) => {
             }
             let newBag = subtractArrays(bag, removeFromBag)
             let newTiles = [...tiles, ...addToTiles]
-            console.log(`GT: tiles: ${tiles.length} bag: ${bag.length} newBag: ${newBag.length} newTiles: ${newTiles.length}`)
             updateTilesAndBag(newTiles, newBag)
             const tilesBagArr = [newTiles, newBag]
             resolve(tilesBagArr)
@@ -510,7 +505,6 @@ const Game = ({ gameVariables, exitGame }) => {
     const shuffleRack = () => {
         const {tiles} = tilesAndBag
         const { cp: currentPlayer } = gameState
-        console.log("Shuffling Rack")
         updateTiles(shuffleRackTiles(tiles, playersAndPoints[currentPlayer].rack))
     }
     const recall = () => {
@@ -633,7 +627,6 @@ const Game = ({ gameVariables, exitGame }) => {
         let newBag = subtractArrays(bag, removeFromBag)
         let newTiles = [...tiles, ...addToTiles]
         updateTilesAndBag(newTiles, newBag)
-        // console.log(bag.length)
     }
 
     const theWinner = () => {
