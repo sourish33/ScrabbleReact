@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/ScrabbleReact/static/css/main.2c102a9f.chunk.css",
-    "main.js": "/ScrabbleReact/static/js/main.0dda9944.chunk.js",
+    "main.js": "/ScrabbleReact/static/js/main.dd71b926.chunk.js",
     "runtime-main.js": "/ScrabbleReact/static/js/runtime-main.48f064fb.js",
     "static/css/2.b8686c67.chunk.css": "/ScrabbleReact/static/css/2.b8686c67.chunk.css",
-    "static/js/2.00c5b2a1.chunk.js": "/ScrabbleReact/static/js/2.00c5b2a1.chunk.js",
+    "static/js/2.80583b66.chunk.js": "/ScrabbleReact/static/js/2.80583b66.chunk.js",
     "c2398b47c131fd9d018b.worker.js": "/ScrabbleReact/c2398b47c131fd9d018b.worker.js",
     "index.html": "/ScrabbleReact/index.html",
-    "static/js/2.00c5b2a1.chunk.js.LICENSE.txt": "/ScrabbleReact/static/js/2.00c5b2a1.chunk.js.LICENSE.txt",
+    "static/js/2.80583b66.chunk.js.LICENSE.txt": "/ScrabbleReact/static/js/2.80583b66.chunk.js.LICENSE.txt",
     "static/media/victory1.5818b7c7.gif": "/ScrabbleReact/static/media/victory1.5818b7c7.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.48f064fb.js",
     "static/css/2.b8686c67.chunk.css",
-    "static/js/2.00c5b2a1.chunk.js",
+    "static/js/2.80583b66.chunk.js",
     "static/css/main.2c102a9f.chunk.css",
-    "static/js/main.0dda9944.chunk.js"
+    "static/js/main.dd71b926.chunk.js"
   ]
 }
