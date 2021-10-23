@@ -1,15 +1,11 @@
 import React from "react"
 import { Table, Button } from "react-bootstrap"
+import Swal from "sweetalert2"
 import styles from "./ScoreKeeper.module.css"
 
-
-const gameType = (points) =>{
-    return points===10000 ? "Till out of tiles" : `${points} point game`
+const gameType = (points) => {
+    return points === 10000 ? "Till out of tiles" : `${points} point game`
 }
-
-
-
-
 
 const scoreTable = (playersAndPoints, currentPlayer) => {
     return (
@@ -17,13 +13,13 @@ const scoreTable = (playersAndPoints, currentPlayer) => {
             <tbody>
                 {playersAndPoints.map((el, ind) => {
                     return (
-                        <tr  key={"row" + ind}
+                        <tr
+                            key={"row" + ind}
                             style={
                                 ind === currentPlayer
                                     ? { background: "yellow" }
                                     : null
-                            }
-                        >
+                            }>
                             <td>
                                 <span className={styles.bold}>{el.name}</span>
                             </td>
@@ -37,7 +33,9 @@ const scoreTable = (playersAndPoints, currentPlayer) => {
 }
 
 const TilesAndPoints = ({ tilesLeft, maxPoints, dictChecking }) => {
-    const dc=dictChecking ? "Dictionary checking ON" : "Dictionary checking OFF"
+    const dc = dictChecking
+        ? "Dictionary checking ON"
+        : "Dictionary checking OFF"
     return (
         <div className={` ${styles["tpdiv"]}`}>
             <div className={styles.tpbox}>Tiles Left: {tilesLeft}</div>
@@ -48,17 +46,22 @@ const TilesAndPoints = ({ tilesLeft, maxPoints, dictChecking }) => {
 }
 
 const LastPlayed = ({ lastPlayed }) => {
-    if (lastPlayed.length >10) {
-        lastPlayed = lastPlayed.slice(0,10)
+    if (lastPlayed.length > 10) {
+        lastPlayed = lastPlayed.slice(0, 10)
     }
-    return (
-        lastPlayed.length===0 ? null :
+    return lastPlayed.length === 0 ? null : (
         <div className={styles.lastPlayed}>
             {lastPlayed.map((el, ind) => {
                 return (
                     <p key={ind} className={styles.nomargin}>
-                        <span>{el.player}</span>:{" "} 
-                        {el.word!==el.word.toUpperCase() ? <span className={styles.redbold}>{el.word}</span> : <span className={styles.bluebold}>{el.word} for {el.points}</span>}
+                        <span>{el.player}</span>:{" "}
+                        {el.word !== el.word.toUpperCase() ? (
+                            <span className={styles.redbold}>{el.word}</span>
+                        ) : (
+                            <span className={styles.bluebold}>
+                                {el.word} for {el.points}
+                            </span>
+                        )}
                     </p>
                 )
             })}
@@ -66,14 +69,12 @@ const LastPlayed = ({ lastPlayed }) => {
     )
 }
 
-
-
-const Buttons = ({showInstructions, exitGame}) => {
+const Buttons = ({ showInstructions, exitGame }) => {
     return (
         <div className={`d-flex flex-row justify-content-center`}>
             <div className="p-2 mt-0">
                 <Button variant="info" onClick={showInstructions}>
-                    <span className={styles.smallscreen} >Instructions</span>
+                    <span className={styles.smallscreen}>Instructions</span>
                 </Button>
             </div>
             <div className="p-2 mt-0">
@@ -86,11 +87,27 @@ const Buttons = ({showInstructions, exitGame}) => {
 }
 
 const ScoreKeeper = (props) => {
+    const exitWithWarning = (e) => {
+        if (props.gameIsOver) {
+            props.exitGame()
+            return
+        }
+        Swal.fire({
+            title: "Are you sure you want to quit?",
+            showCancelButton: true,
+            confirmButtonText: "Quit",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                props.exitGame()
+            } else {
+            }
+        })
+    }
+
     return (
         <div className={`d-flex flex-column`}>
             <div
-                className={`p-1 mb-2 justify-content-center ${styles["pointsOuterBox"]}`}
-            >
+                className={`p-1 mb-2 justify-content-center ${styles["pointsOuterBox"]}`}>
                 Points possible:{" "}
                 <span className={styles.bold}>{props.pointsPossible}</span>
             </div>
@@ -101,16 +118,18 @@ const ScoreKeeper = (props) => {
                 <TilesAndPoints
                     tilesLeft={props.tilesLeft}
                     maxPoints={props.maxPoints}
-                    dictChecking ={props.dictChecking}
+                    dictChecking={props.dictChecking}
                 />
             </div>
             <div className="p-1 mb-2 justify-content-center">
                 <LastPlayed lastPlayed={props.lastPlayed} />
             </div>
             <div className="p-1 mb-2 justify-content-center">
-                <Buttons showInstructions={props.showInstructions} exitGame={props.exitGame}/>
+                <Buttons
+                    showInstructions={props.showInstructions}
+                    exitGame={exitWithWarning}
+                />
             </div>
-
         </div>
     )
 }

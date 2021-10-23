@@ -1,5 +1,4 @@
 save game
 all tiles used picture
 select from among gifs
-useReducer to replenish rack
 button to stop AI thinking

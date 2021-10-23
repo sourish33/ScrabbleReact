@@ -704,6 +704,7 @@ const Game = ({ gameVariables, exitGame }) => {
                             exitGame={exitGame}
                             showInstructions = {showInstructions}
                             dictChecking={dictChecking}
+                            gameIsOver={gameIsOver}
                         />
                     </Col>
                 </Row>
