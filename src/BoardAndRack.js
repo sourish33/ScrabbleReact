@@ -109,11 +109,13 @@ const BoardAndRack = ({ tiles, visibleRack, updateTiles, showTiles }) => {
 
     function disableScroll() {
         document.body.classList.add(styles.noscroll)
+        document.body.parentElement.classList.add(styles.noscroll)
         
     }
       
     function enableScroll() {
         document.body.classList.remove(styles.noscroll)
+        document.body.parentElement.classList.remove(styles.noscroll)
     }
 
 
