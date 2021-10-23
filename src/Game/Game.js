@@ -348,11 +348,16 @@ const Game = ({ gameVariables, exitGame }) => {
             let newTiles = [...tiles, ...addToTiles]
             console.log(`GT: tiles: ${tiles.length} bag: ${bag.length} newBag: ${newBag.length} newTiles: ${newTiles.length}`)
             updateTilesAndBag(newTiles, newBag)
-            resolve(newTiles)
+            const tilesBagArr = [newTiles, newBag]
+            resolve(tilesBagArr)
         })
     }
 
-    const aiPlay = (theTiles) => {
+    const aiPlay = (tilesBagArr) => {
+        if (tilesBagArr.length!==2){
+            throw new Error("bag not sent with tiles")
+        }
+        const [theTiles] = tilesBagArr
         setShowAIThinking(true)
         const { cp: currentPlayer } = gameState
         let [p1, p2, p3, p4, p5, p6, p7] = makeRackPerms(
@@ -362,7 +367,7 @@ const Game = ({ gameVariables, exitGame }) => {
         let makeVerslots = tilesOnBoard(theTiles).length !== 0 //no need to make vertical slots if the board is empty
         let [s1, s2, s3, s4, s5, s6, s7] = makeAllSlots(theTiles, makeVerslots)
         callAllWorkers([p1, p2, p3, p4, p5, p6, p7], [s1, s2, s3, s4, s5, s6, s7], theTiles, currentPlayer)
-            .then((bestMove)=>aiSubmitMove(bestMove, theTiles, currentPlayer))
+            .then((bestMove)=>aiSubmitMove(bestMove, tilesBagArr, currentPlayer))
         
     }
 
@@ -437,13 +442,14 @@ const Game = ({ gameVariables, exitGame }) => {
         return bestMove
     }
 
-    const aiSubmitMove = (bestMove, theTiles, currentPlayer) =>{
+    const aiSubmitMove = (bestMove, tilesBagArr, currentPlayer) =>{
         setShowAIThinking(false)
         if (bestMove.length===0){
             console.log("No moves found")
             passTurn()
             return
         }
+        const [theTiles, theBag] = tilesBagArr
         moveNPlay(bestMove, theTiles)
             .then((newTiles) => delay(1000, newTiles))
             .then((newTiles) => {
@@ -479,7 +485,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 })
             })
             .then((newTiles) => {
-                aiReplenishRack(newTiles)
+                aiReplenishRack([newTiles, theBag])
             })
 
     }
@@ -494,9 +500,9 @@ const Game = ({ gameVariables, exitGame }) => {
             resolve(newTiles)
         })
     }
-    const aiReplenishRack = (tiles) => {
+    const aiReplenishRack = (tilesBagArr) => {
         const { cp: currentPlayer } = gameState
-        const {bag} = tilesAndBag
+        const [tiles, bag] = tilesBagArr
         let freeSlots = emptyOnRack(tiles, playersAndPoints[currentPlayer].rack)
         if (freeSlots.length === 0) {
             return
