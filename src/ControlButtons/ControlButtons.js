@@ -1,14 +1,9 @@
 import React from "react"
 import { Button } from "react-bootstrap"
+import ButtonContent from "../UI/ButtonContent/ButtonContent"
 import styles from "./ControlButtons.module.css"
 
-const ButtonContent = ({text}) =>{
-    return(
-        <>
-        <span className={styles.longtext}>{text}</span><span className={styles.shorttext}>{text}</span>  
-        </>
-    )
-}
+
 
 const ControlButtons = ({shuffleRack, recall, exchange, passTurn, lookup, play, disabled}) => {
     return (
