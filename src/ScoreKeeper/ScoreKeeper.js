@@ -1,6 +1,7 @@
 import React from "react"
 import { Table, Button } from "react-bootstrap"
 import Swal from "sweetalert2"
+import ButtonContent from "../UI/ButtonContent/ButtonContent"
 import styles from "./ScoreKeeper.module.css"
 
 const gameType = (points) => {
@@ -74,12 +75,12 @@ const Buttons = ({ showInstructions, exitGame }) => {
         <div className={`d-flex flex-row justify-content-center`}>
             <div className="p-2 mt-0">
                 <Button variant="info" onClick={showInstructions}>
-                    <span className={styles.smallscreen}>Instructions</span>
+                    <ButtonContent text={"Instructions"}/>
                 </Button>
             </div>
             <div className="p-2 mt-0">
                 <Button variant="danger" onClick={exitGame}>
-                    <span className={styles.smallscreen}>Exit</span>
+                    <ButtonContent text={"Exit"}/>
                 </Button>
             </div>
         </div>
