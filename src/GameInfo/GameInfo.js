@@ -75,6 +75,7 @@ const GameInfo = ({ handleSubmit }) => {
                         className="form-control"
                         value={el.name}
                         type="text"
+                        maxlength="16"
                         placeholder={`Player ${ind + 1} name`}
                         onChange={(e) => handleChange(e, ind)}
                     />
