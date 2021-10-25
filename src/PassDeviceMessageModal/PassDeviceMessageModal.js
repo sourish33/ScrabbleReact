@@ -2,14 +2,15 @@ import Modal from "react-bootstrap/Modal"
 import styles from './PassDevice.module.css'
 import { Button, Table } from "react-bootstrap"
 
-
+const shortenedName = (nam) =>{
+    return nam.length<11 ? nam : nam.slice(0,10)
+}
 
 
 const PassDeviceMessageModal = ({show, onHide, name, greeting, playersAndPoints, lastPlayed}) =>{
 
     const theGreeting = <h2 >{greeting}</h2>
-    const playerName = lastPlayed[0].player.length<11 ? lastPlayed[0].player : lastPlayed[0].player.slice(0,10)
-    const latestPlay = lastPlayed.length===0 ? null : <h4>{`${playerName} played `} <span className={styles.bluebold}>{lastPlayed[0].word}</span> {` for `}<span className={styles.bluebold}>{lastPlayed[0].points}</span></h4>
+    const latestPlay = lastPlayed.length===0 ? null : <h4>{`${shortenedName(lastPlayed[0].player)} played `} <span className={styles.bluebold}>{lastPlayed[0].word}</span> {` for `}<span className={styles.bluebold}>{lastPlayed[0].points}</span></h4>
 
     const scoreTable = (playersAndPoints) => {
         return (
