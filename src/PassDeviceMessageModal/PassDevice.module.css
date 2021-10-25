@@ -20,3 +20,8 @@
 .mytable {
     background: lightgreen;
 }
+
+.bluebold {
+    font-weight: bold;
+    color: blue
+}

@@ -662,6 +662,7 @@ const Game = ({ gameVariables, exitGame }) => {
                 name={playersAndPoints[gameState.cp].name}
                 greeting={greeting}
                 playersAndPoints={playersAndPoints}
+                lastPlayed = {lastPlayed}
             />
             <CheckDictionaryModal show={showDict} onHide={hideModal} />
             <ExchangeTilesModal

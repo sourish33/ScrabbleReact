@@ -5,9 +5,10 @@ import { Button, Table } from "react-bootstrap"
 
 
 
-const PassDeviceMessageModal = ({show, onHide, name, greeting, playersAndPoints}) =>{
+const PassDeviceMessageModal = ({show, onHide, name, greeting, playersAndPoints, lastPlayed}) =>{
 
     const theGreeting = <h2 >{greeting}</h2>
+    const latestPlay = lastPlayed.length===0 ? null : <h4>{`${lastPlayed[0].player} played ${lastPlayed[0].word} for ${lastPlayed[0].points}`}</h4>
 
     const scoreTable = (playersAndPoints) => {
         return (
@@ -36,6 +37,7 @@ const PassDeviceMessageModal = ({show, onHide, name, greeting, playersAndPoints}
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+            {latestPlay}
             {greeting === "Lets Get Started!" ? null : scoreTable(playersAndPoints)}
             <h4 className={styles.centerMid} >Please pass to {name}</h4>
         </Modal.Body>
