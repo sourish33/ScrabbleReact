@@ -8,7 +8,7 @@ import { Button, Table } from "react-bootstrap"
 const PassDeviceMessageModal = ({show, onHide, name, greeting, playersAndPoints, lastPlayed}) =>{
 
     const theGreeting = <h2 >{greeting}</h2>
-    const latestPlay = lastPlayed.length===0 ? null : <h4>{`${lastPlayed[0].player} played ${lastPlayed[0].word} for ${lastPlayed[0].points}`}</h4>
+    const latestPlay = lastPlayed.length===0 ? null : <h4>{`${lastPlayed[0].player} played `} <span className={styles.bluebold}>{lastPlayed[0].word}</span> {` for `}<span className={styles.bluebold}>{lastPlayed[0].points}</span></h4>
 
     const scoreTable = (playersAndPoints) => {
         return (
