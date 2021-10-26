@@ -9,17 +9,17 @@ import { Button } from "react-bootstrap"
     const inputref = useRef(null)
 
     const Result = ({wordToCheck}) =>{
-        let trimmedWordToCheck = wordToCheck.split(' ').join('')//ignore whitespaces
-        if (checkDict(trimmedWordToCheck)) {
-            return <p><span className={styles.green}>{trimmedWordToCheck.toUpperCase()}</span> is valid!</p>
+        if (checkDict(wordToCheck)) {
+            return <p><span className={styles.green}>{wordToCheck.toUpperCase()}</span> is valid!</p>
         } else {
-            return <p><span className={styles.red}>{trimmedWordToCheck.toUpperCase()}</span> is not valid</p>
+            return <p><span className={styles.red}>{wordToCheck.toUpperCase()}</span> is not valid</p>
         }
     }
 
 
     const handleChange = (event) =>{
-        setWord(x=>event.target.value)
+        let word = event.target.value
+        setWord(x=>word.split(' ').join(''))
     }
     const clear = () =>{
         setWord("")
@@ -38,7 +38,7 @@ import { Button } from "react-bootstrap"
 							</div>
 						</div>
 				</form>
-				{word.split(' ').join('')!=="" && word.length>1 && <Result wordToCheck={word}/>}
+				{word.length>1 && <Result wordToCheck={word}/>}
                 <p className={styles.twoletterwords}>AA, AB, AD, AE, AG, AH, AI, AL, AM, AN, AR, AS, AT, AW, AX, AY, BA, BE, BI, BO, BY, CH, DA, DE, DI, DO, EA, EE, ED, EF, EH, EL, EM, EN, ER, ES, ET, EW, EX, 
 				FA, FE, FY, GI, GO, GU, HA, HE, HI, HM, HO, ID, IF, IN, IO, IS, IT, JA, JO, KA, KO, KI, KY, LA, LI, LO, MA, ME, MI, MM, MO, MU, MY, NA, NE, NO, NU, NY, OB, OD, OE, OF, OH, OI, OK, 
 				OM, ON, OO, OP, OR, OS, OU, OW, OX, OY, PA, PE, PI, PO, QI, RE, SH, SI, SO, ST, TA, TE, TI, TO, UG, UH, UM, UN, UP, UR, US, UT, WE, WO, XI, XU, YA, YE, YO, YU, ZA, ZE, ZO</p>
