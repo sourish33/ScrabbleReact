@@ -4,6 +4,7 @@ import styles from "./Instructions.module.css"
 const StartInstructions = () => {
     return(
         <div>
+          In this Scrabble game you always have access  to the Scrabble Dictionary. Feel free to use it to come up with the best words you can find!
               <ul>
                 <li>Clicking <span className={styles.infobox}>Add Human</span> adds a human player</li>
                 <li>Clicking <span className={styles.infobox}>Add Computer</span> adds a Artificial Intelligence player.</li>

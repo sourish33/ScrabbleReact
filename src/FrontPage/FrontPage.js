@@ -52,7 +52,7 @@ const FrontPage = () => {
             <div style={{top:'0.5px'}}>
             <div className={`p-5 mb-4 bg-light rounded-3 ${styles.headerImage}`}>
                 <h1 className={`display-4 `}>Tortoise Scrabble</h1>
-                <h3>A Scrabble Game Built With React.js</h3>
+                <h3>A Scrabble Game where it is legal to cheat!</h3>
             </div>
                 <Container>
                     <GameInfo handleSubmit={handleSubmit} />  
