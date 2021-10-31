@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { Container } from "react-bootstrap"
 import Swal from "sweetalert2";
 import Game from "../Game/Game";
-
 import GameInfo from "../GameInfo/GameInfo"
 import styles from './FrontPage.module.css'
 
@@ -56,7 +55,9 @@ const FrontPage = () => {
             </div>
                 <Container>
                     <GameInfo handleSubmit={handleSubmit} />  
+                    <p style={{textAlign:'right'}}><a href="https://forms.gle/4FfSmwEHkgjvYZK7A" target="_blank" rel="noopener noreferrer">Leave Feedback</a></p>
                 </Container>
+                
             </div>
             
 
@@ -68,7 +69,6 @@ const FrontPage = () => {
 
     return (
         <>
-
         {Object.keys(gameVariables).length===0 ? <WelcomePage/> : <Game gameVariables={gameVariables} exitGame={exitGame}/>}
         </>
     )

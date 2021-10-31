@@ -131,6 +131,9 @@ const ScoreKeeper = (props) => {
                     exitGame={exitWithWarning}
                 />
             </div>
+            <div className="p-1 mb-2 justify-content-center">
+                <p style={{textAlign:'center'}}><a href="https://forms.gle/4FfSmwEHkgjvYZK7A" target="_blank" rel="noopener noreferrer">Leave Feedback</a></p>
+            </div>
         </div>
     )
 }
