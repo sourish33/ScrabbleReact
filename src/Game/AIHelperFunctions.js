@@ -250,14 +250,11 @@ export function evaluateMove(rackTiles, boardPositions, tiles, visibleRack) {
 }
 
 
-export const evaluateMoves = (
-    rackPerms,
-    slots,
-    tiles,
-    rack,
-    cutoff = 50000,
-    toWin = 1000
-) => {
+export const evaluateMoves = (rackPerms, slots, tiles, rack, cutoff = 50000, toWin = 1000) => {
+    if (rackPerms.length===0){
+        return []
+    }
+
     let moves = []
     let tries = 0
     let LETTERS = Array.from("SAEOQUXBCDFGHIJKLMNPRTVWYZ")
