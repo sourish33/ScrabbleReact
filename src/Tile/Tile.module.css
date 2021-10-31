@@ -113,3 +113,26 @@
 
 
   }
+
+  
+
+  @media only screen and (min-width: 993px) and (max-width: 1199px) {
+
+    .letter {
+      font-size: 18px;
+    }
+
+    .points {
+      font-size: 8px;
+    }
+
+    .letterOnRack{
+      font-size: 25px;
+    }
+
+    .pointsOnRack{
+      font-size: 12px;
+    }
+
+
+  }

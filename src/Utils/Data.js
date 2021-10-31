@@ -3,7 +3,7 @@ export const greetings = {
     "Nice!",
     "Finally!",
     "Good Job!",
-    "Incrediballs!",
+    "Incredible!",
     "Noice!",
     "Wowza!",
     "Woot Woot!",
