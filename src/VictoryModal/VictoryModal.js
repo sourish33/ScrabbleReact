@@ -1,9 +1,19 @@
 import React from "react"
 import { Image } from "react-bootstrap"
-import victory1 from "../Assets/victory1.gif"
+import {shuffle } from "../Utils/helpers"
+// import victory1 from "../Assets/Images/victory1.gif"
 import styles from "./VictoryModal.module.css"
 
 const VictoryModal = ({ show, winner, onClickClose }) => {
+
+    const images = [
+        require('../Assets/Images/dancingdino.gif').default,
+        require('../Assets/Images/dinoscream.gif').default,
+        require('../Assets/Images/dinodance.gif').default,
+    ]
+    const shuffledImages = shuffle(images)
+
+
     return (
         <>
             {show && (
@@ -19,7 +29,7 @@ const VictoryModal = ({ show, winner, onClickClose }) => {
                         </h1>
                     </div>
                     <div>
-                        <Image src={victory1} fluid alt="nope"/>
+                        <Image src={shuffledImages[0]} fluid alt="nope"/>
                     </div>
                 </div>
             )}
