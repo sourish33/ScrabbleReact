@@ -2,3 +2,6 @@ save game
 all tiles used picture
 select from among gifs
 button to stop AI thinking
+contact dev link
+please flip orientation message
+awful appearance on medium size screen
