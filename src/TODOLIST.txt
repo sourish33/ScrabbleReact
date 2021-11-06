@@ -1,7 +1,7 @@
-save game
+save game -86
 all tiles used picture
-select from among gifs
-button to stop AI thinking
-contact dev link
-please flip orientation message
-awful appearance on medium size screen
+select from among gifs -Done
+button to stop AI thinking -86
+contact dev link -Done
+please flip orientation message -86
+awful appearance on medium size screen -Somewhat fixed
