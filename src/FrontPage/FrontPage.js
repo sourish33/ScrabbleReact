@@ -44,6 +44,7 @@ const FrontPage = () => {
 
     const exitGame = () => {
         setGameVariables({})
+        window.location.reload(true);
     }
 
     const WelcomePage = () => {
