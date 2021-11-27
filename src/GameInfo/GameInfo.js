@@ -221,7 +221,7 @@ const GameInfo = ({ handleSubmit }) => {
                 </div>
                 <div className="btn-toolbar">
                     <Button variant="primary" type="submit" className={'me-2'} >Start Game</Button>
-                    <Button variant="primary" type="button" onClick={showInstructions}>Help</Button>
+                    <Button variant="info" type="button" onClick={showInstructions}>Instructions</Button>
                 </div>
             </form>
         </div>
