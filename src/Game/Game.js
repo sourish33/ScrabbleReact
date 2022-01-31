@@ -664,7 +664,12 @@ const Game = ({ gameVariables, exitGame }) => {
                 playersAndPoints={playersAndPoints}
                 lastPlayed = {lastPlayed}
             />
-            <CheckDictionaryModal show={showDict} onHide={hideModal} />
+            <CheckDictionaryModal 
+                show={showDict} 
+                onHide={hideModal} 
+                whichRack={playersAndPoints[gameState.cp].rack}
+                tiles={tilesAndBag.tiles}
+            />
             <ExchangeTilesModal
                 show={showEx}
                 onHide={hideModalEx}

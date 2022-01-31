@@ -3,8 +3,9 @@ import styles from './CheckDictionaryModal.module.css'
 import { checkDict } from "../Utils/Dictionary/dictionary"
 import { useRef, useState } from "react"
 import { Button } from "react-bootstrap"
+import RackDict from "../Rack/RackDict"
 
-    const CheckDictionaryModal = ({show, onHide}) =>{
+    const CheckDictionaryModal = ({show, onHide, whichRack, tiles}) =>{
     const [word, setWord] = useState("")
     const inputref = useRef(null)
 
@@ -26,7 +27,21 @@ import { Button } from "react-bootstrap"
     }
     return (
         <Modal show={show} onHide={onHide} onExit={clear} onEntered={() => inputref.current.focus()}>
+            <Modal.Header>
+                    <RackDict
+                        whichRack={whichRack}
+                        tiles={tiles}
+                    ></RackDict>
+            </Modal.Header>
+     
                 <Modal.Body>
+                {/* <div>
+                    <RackEx
+                        whichRack={whichRack}
+                        tiles={tiles}
+                        clickHandlerExt={null}
+                    ></RackEx>
+                </div> */}
                 <div className="mt-0">
 				<form>
 						<div className="input-group mb-3">
