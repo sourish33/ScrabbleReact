@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ScrabbleReact/static/css/main.4edc3463.chunk.css",
-    "main.js": "/ScrabbleReact/static/js/main.25b9fdf0.chunk.js",
+    "main.css": "/ScrabbleReact/static/css/main.24aff649.chunk.css",
+    "main.js": "/ScrabbleReact/static/js/main.1abcc716.chunk.js",
     "runtime-main.js": "/ScrabbleReact/static/js/runtime-main.48f064fb.js",
     "static/css/2.b8686c67.chunk.css": "/ScrabbleReact/static/css/2.b8686c67.chunk.css",
-    "static/js/2.088db3b7.chunk.js": "/ScrabbleReact/static/js/2.088db3b7.chunk.js",
+    "static/js/2.76c058b9.chunk.js": "/ScrabbleReact/static/js/2.76c058b9.chunk.js",
     "0ac9d1eddb68bcb374de.worker.js": "/ScrabbleReact/0ac9d1eddb68bcb374de.worker.js",
     "index.html": "/ScrabbleReact/index.html",
-    "static/js/2.088db3b7.chunk.js.LICENSE.txt": "/ScrabbleReact/static/js/2.088db3b7.chunk.js.LICENSE.txt",
+    "static/js/2.76c058b9.chunk.js.LICENSE.txt": "/ScrabbleReact/static/js/2.76c058b9.chunk.js.LICENSE.txt",
     "static/media/dancingdino.gif": "/ScrabbleReact/static/media/dancingdino.7f374d61.gif",
     "static/media/dinodance.gif": "/ScrabbleReact/static/media/dinodance.3487c032.gif",
     "static/media/dinoscream.gif": "/ScrabbleReact/static/media/dinoscream.9a294e0e.gif"
@@ -15,8 +15,8 @@
   "entrypoints": [
     "static/js/runtime-main.48f064fb.js",
     "static/css/2.b8686c67.chunk.css",
-    "static/js/2.088db3b7.chunk.js",
-    "static/css/main.4edc3463.chunk.css",
-    "static/js/main.25b9fdf0.chunk.js"
+    "static/js/2.76c058b9.chunk.js",
+    "static/css/main.24aff649.chunk.css",
+    "static/js/main.1abcc716.chunk.js"
   ]
 }
