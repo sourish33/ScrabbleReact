@@ -9,7 +9,6 @@ const RackDict = ({ whichRack, tiles }) => {
   const tr = tilesOnRack(tiles, whichRack)
   const tpns = tilesPlayedNotSubmitted(tiles)
   const currentUnPlayedTiles = [...tr, ...tpns]
-  console.log(currentUnPlayedTiles)
 
   const squares = [];
   for (let i = 1; i < 8; i++) {
