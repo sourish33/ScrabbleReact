@@ -8,7 +8,7 @@ const gameType = (points) => {
     return points === 10000 ? "Till out of tiles" : `${points} point game`
 }
 
-const engLevels = {0: "", 1: "(Weak)", 2: "(Medium)", 3: "(Hard)"}
+const engLevels = {0: "", 1: "(Weak)", 2: "(Medium)", 3: "(Hard)"}//used to display the level of the AI
 
 const scoreTable = (playersAndPoints, currentPlayer) => {
     return (
