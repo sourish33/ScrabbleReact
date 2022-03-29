@@ -8,6 +8,8 @@ const gameType = (points) => {
     return points === 10000 ? "Till out of tiles" : `${points} point game`
 }
 
+const engLevels = {0: "", 1: "(Weak)", 2: "(Medium)", 3: "(Hard)"}
+
 const scoreTable = (playersAndPoints, currentPlayer) => {
     return (
         <Table bordered className={styles.mytable}>
@@ -22,7 +24,7 @@ const scoreTable = (playersAndPoints, currentPlayer) => {
                                     : null
                             }>
                             <td>
-                                <span className={styles.bold}>{el.name}</span>
+                                <span className={styles.bold}>{`${el.name} ${engLevels[el.level]}`}</span>
                             </td>
                             <td>{el.points}</td>
                         </tr>
