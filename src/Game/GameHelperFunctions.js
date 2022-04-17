@@ -314,11 +314,11 @@ export function checkLegalPlacement(tiles, dictChecking, verbose=false) {
     if (dictChecking) {
         let badWords = dictCheckWords(tiles)
         if (badWords.length!==0) {
-            Swal.fire(`${dictCheckWords(tiles).join(", ")} not valid`)
+            const badWordsList = dictCheckWords(tiles).join(", ")
             Swal.fire({
                 icon: 'error',
                 title: 'Invalid Words',
-                text: `${dictCheckWords(tiles).join(", ")} not valid`,
+                text: `${badWordsList} not valid`,
               })
             return false
         }
