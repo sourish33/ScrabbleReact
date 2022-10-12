@@ -42,5 +42,6 @@ export const AI_LIST = [
     "AI Dylan",
     "AI Sienna",
     "AI Sassy",
-    "AI Tortoise"
+    "AI Tortoise",
+    'AI Sahara'
 ]
