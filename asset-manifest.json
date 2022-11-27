@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ScrabbleReact/static/css/main.b45b7d68.chunk.css",
-    "main.js": "/ScrabbleReact/static/js/main.3cbb271b.chunk.js",
+    "main.js": "/ScrabbleReact/static/js/main.d7211a73.chunk.js",
     "runtime-main.js": "/ScrabbleReact/static/js/runtime-main.48f064fb.js",
     "static/css/2.b8686c67.chunk.css": "/ScrabbleReact/static/css/2.b8686c67.chunk.css",
     "static/js/2.9c338d87.chunk.js": "/ScrabbleReact/static/js/2.9c338d87.chunk.js",
@@ -17,6 +17,6 @@
     "static/css/2.b8686c67.chunk.css",
     "static/js/2.9c338d87.chunk.js",
     "static/css/main.b45b7d68.chunk.css",
-    "static/js/main.3cbb271b.chunk.js"
+    "static/js/main.d7211a73.chunk.js"
   ]
 }
