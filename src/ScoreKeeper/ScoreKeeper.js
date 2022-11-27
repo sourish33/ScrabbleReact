@@ -1,7 +1,6 @@
 import React from "react"
-import { useEffect } from "react"
 import { useState } from "react"
-import { Table, Button, Spinner } from "react-bootstrap"
+import { Table, Button} from "react-bootstrap"
 import Swal from "sweetalert2"
 import ButtonContent from "../UI/ButtonContent/ButtonContent"
 import { DefModal } from "./DefModal"
