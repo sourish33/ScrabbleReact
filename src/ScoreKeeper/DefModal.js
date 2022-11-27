@@ -8,9 +8,12 @@ import styles from './DefModal.module.css'
 export const DefModal = ({show, setShow, word}) => {
 //   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const [showSpinner, setShowSpinner] = useState(true)
   const [definition, setDefinition] = useState("")
+
+  const handleClose = () => {
+    setShow(false)
+  }
 
   useEffect(()=>{
     fetch(`https://helpful-deer-baseball-cap.cyclic.app/dictionary?word=${word}`)
@@ -25,6 +28,11 @@ export const DefModal = ({show, setShow, word}) => {
         }
         
     })
+
+    return () => {
+        setDefinition("")
+        setShowSpinner(true)
+    }
     
 
   },[word])
