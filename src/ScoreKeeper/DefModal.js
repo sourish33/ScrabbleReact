@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export const DefModal = ({show, setShow, word, definition}) => {
+export const DefModal = ({show, setShow, word}) => {
 //   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -18,7 +18,7 @@ export const DefModal = ({show, setShow, word, definition}) => {
         <Modal.Header closeButton>
           <Modal.Title>{word}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{definition}</Modal.Body>
+        <Modal.Body>{}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

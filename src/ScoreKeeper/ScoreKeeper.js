@@ -1,7 +1,7 @@
 import React from "react"
 import { useEffect } from "react"
 import { useState } from "react"
-import { Table, Button } from "react-bootstrap"
+import { Table, Button, Spinner } from "react-bootstrap"
 import Swal from "sweetalert2"
 import ButtonContent from "../UI/ButtonContent/ButtonContent"
 import { DefModal } from "./DefModal"
@@ -54,10 +54,6 @@ const TilesAndPoints = ({ tilesLeft, maxPoints, dictChecking }) => {
 const LastPlayed = ({ lastPlayed }) => {
     const [showDef, setShowDef] = useState(false);
     const [wordToCheck, setWordToCheck] = useState("")
-    const [dictEntry, setDictEntry] = useState({
-        word: "QI",
-        definition: "(Chinese) a life force, also KI [n -S]"
-    })
 
     const handleClick = (word) =>{
         setShowDef(true)
@@ -85,7 +81,7 @@ const LastPlayed = ({ lastPlayed }) => {
                     </p>
                 )
             })}
-            <DefModal show={showDef} setShow={setShowDef} word={dictEntry.word} definition={dictEntry.definition}/>
+            <DefModal show={showDef} setShow={setShowDef} word={wordToCheck}/>
         </div>
     )
 }
