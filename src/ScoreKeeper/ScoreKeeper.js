@@ -1,7 +1,10 @@
 import React from "react"
+import { useEffect } from "react"
+import { useState } from "react"
 import { Table, Button } from "react-bootstrap"
 import Swal from "sweetalert2"
 import ButtonContent from "../UI/ButtonContent/ButtonContent"
+import { DefModal } from "./DefModal"
 import styles from "./ScoreKeeper.module.css"
 
 const gameType = (points) => {
@@ -49,6 +52,19 @@ const TilesAndPoints = ({ tilesLeft, maxPoints, dictChecking }) => {
 }
 
 const LastPlayed = ({ lastPlayed }) => {
+    const [showDef, setShowDef] = useState(false);
+    const [wordToCheck, setWordToCheck] = useState("")
+    const [dictEntry, setDictEntry] = useState({
+        word: "QI",
+        definition: "(Chinese) a life force, also KI [n -S]"
+    })
+
+    const handleClick = (word) =>{
+        setShowDef(true)
+        setWordToCheck(word)
+    }
+
+    
     if (lastPlayed.length > 10) {
         lastPlayed = lastPlayed.slice(0, 10)
     }
@@ -61,13 +77,15 @@ const LastPlayed = ({ lastPlayed }) => {
                         {el.word !== el.word.toUpperCase() ? (
                             <span className={styles.redbold}>{el.word}</span>
                         ) : (
-                            <span className={styles.bluebold}>
-                                {el.word} for {el.points}
+                            <>
+                            <span className={styles.fakeLink} onClick={() => {handleClick(el.word)}}>{el.word} </span> <span className={styles.bluebold}>for {el.points}
                             </span>
+                            </>
                         )}
                     </p>
                 )
             })}
+            <DefModal show={showDef} setShow={setShowDef} word={dictEntry.word} definition={dictEntry.definition}/>
         </div>
     )
 }

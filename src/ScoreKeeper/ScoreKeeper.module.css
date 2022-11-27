@@ -52,6 +52,17 @@ th {
     margin:0;
 }
 
+.fakeLink {
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
+}
+
+.fakeLink:hover {
+    text-decoration:none;
+    text-shadow: 1px 1px 1px #555;
+}
+
 .bluebold {
     font-weight: bold;
     color: blue;
