@@ -45,7 +45,9 @@ export const DefModal = ({show, setShow, word}) => {
           <Modal.Title>{word}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Spinner animation="grow" variant="info" className={showSpinner?``:`${styles.hidden}`}/>{definition}
+            <Spinner animation="grow" variant="info" className={showSpinner?``:`${styles.hidden}`}/>
+            <p>{definition}</p>
+            <p className={styles.smalltext}>All words and definitions are from the Collins Official Scrabble Dictionary (2019)</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
