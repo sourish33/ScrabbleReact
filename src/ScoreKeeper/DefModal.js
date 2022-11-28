@@ -20,7 +20,7 @@ export const DefModal = ({show, setShow, word}) => {
     .then(res=>res.json())
     .then((data)=>{
         setShowSpinner(false)
-        if (data.definition.length>0){
+        if (data && data.definition.length>0){
             console.log(data.definition[0].Definition)
             setDefinition(data.definition[0].Definition)
         } else{
@@ -44,7 +44,9 @@ export const DefModal = ({show, setShow, word}) => {
         <Modal.Header closeButton>
           <Modal.Title>{word}</Modal.Title>
         </Modal.Header>
-        <Modal.Body><Spinner animation="grow" variant="info" className={showSpinner?``:`${styles.hidden}`}/>{definition}</Modal.Body>
+        <Modal.Body>
+            <Spinner animation="grow" variant="info" className={showSpinner?``:`${styles.hidden}`}/>{definition}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
