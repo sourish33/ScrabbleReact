@@ -1,8 +1,10 @@
 # Tortoise Scrabble
 
-Tortoise Scrabble is a Scrabble game that can be played by up to four human players in pass-and-play mode or a human player can play against an AI. In this version of Scrabble, players are allowed to use the built-in Scrabble dictionary to "cheat" and look up words if they wish. Unless you are a Scrabble champion this is probably the only way you can beat the AI!
+Tortoise Scrabble is a Scrabble game that can be played by up to four human players in pass-and-play mode or a human player can play against an AI. The game keeps track of turns, scores and when a player wins. 
 
 The AI has three levels of difficulty and plays by performing a somewhat optimized brute-force search in the Scrabble dictionary. Since the AI does not use any "clever" tricks apart from finding the word that maximizes points, you might be able to figure out ways of "hoodwinking" it!
+
+In this version of Scrabble, players are allowed to use the built-in Scrabble dictionary to "cheat" and look up words if they wish. Unless you are a Scrabble champion this is probably the only way you can beat the AI!
 
 Every word played by the AI is valid and from the Collins Official Scrabble dictionary (2019). The game shows a list of words played and clicking on any of the words brings up the definition of the word. 
 
