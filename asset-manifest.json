@@ -1,22 +1,20 @@
 {
   "files": {
-    "main.css": "/ScrabbleReact/static/css/main.1c0af1d6.chunk.css",
-    "main.js": "/ScrabbleReact/static/js/main.34c3cde8.chunk.js",
-    "runtime-main.js": "/ScrabbleReact/static/js/runtime-main.48f064fb.js",
-    "static/css/2.b8686c67.chunk.css": "/ScrabbleReact/static/css/2.b8686c67.chunk.css",
-    "static/js/2.90d32016.chunk.js": "/ScrabbleReact/static/js/2.90d32016.chunk.js",
-    "ef7bb6a382427f28ef25.worker.js": "/ScrabbleReact/ef7bb6a382427f28ef25.worker.js",
-    "index.html": "/ScrabbleReact/index.html",
-    "static/js/2.90d32016.chunk.js.LICENSE.txt": "/ScrabbleReact/static/js/2.90d32016.chunk.js.LICENSE.txt",
-    "static/media/dancingdino.gif": "/ScrabbleReact/static/media/dancingdino.7f374d61.gif",
-    "static/media/dinodance.gif": "/ScrabbleReact/static/media/dinodance.3487c032.gif",
-    "static/media/dinoscream.gif": "/ScrabbleReact/static/media/dinoscream.9a294e0e.gif"
+    "main.css": "/ScrabbleReact/static/css/main.b23fcd10.css",
+    "main.js": "/ScrabbleReact/static/js/main.94c5082d.js",
+    "static/media/allTilesUsed1.gif": "/ScrabbleReact/static/media/allTilesUsed1.783cf0c9aefb98860697.gif",
+    "worker.js": "/ScrabbleReact/1df4d50ea2dfd8d2219a.worker.js",
+    "static/media/allTilesUsed3.gif": "/ScrabbleReact/static/media/allTilesUsed3.7f6f4e5c9192b38aa1f5.gif",
+    "static/media/dinodance.gif": "/ScrabbleReact/static/media/dinodance.3487c0327e452d2661fa.gif",
+    "static/media/dinosaur-roar.gif": "/ScrabbleReact/static/media/dinosaur-roar.fa6288ff30655a5bab82.gif",
+    "static/media/dinoscream.gif": "/ScrabbleReact/static/media/dinoscream.9a294e0ee25f0307cc22.gif",
+    "static/media/allTilesUsed2.gif": "/ScrabbleReact/static/media/allTilesUsed2.6b042387ab26ca74ddc3.gif",
+    "static/media/dinosaur-dance1.gif": "/ScrabbleReact/static/media/dinosaur-dance1.bcaacabfada3c09f20aa.gif",
+    "static/media/dancingdino.gif": "/ScrabbleReact/static/media/dancingdino.7f374d61508fbfb69bac.gif",
+    "index.html": "/ScrabbleReact/index.html"
   },
   "entrypoints": [
-    "static/js/runtime-main.48f064fb.js",
-    "static/css/2.b8686c67.chunk.css",
-    "static/js/2.90d32016.chunk.js",
-    "static/css/main.1c0af1d6.chunk.css",
-    "static/js/main.34c3cde8.chunk.js"
+    "static/css/main.b23fcd10.css",
+    "static/js/main.94c5082d.js"
   ]
 }
