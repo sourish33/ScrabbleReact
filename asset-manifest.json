@@ -1,20 +1,17 @@
 {
   "files": {
     "main.css": "/ScrabbleReact/static/css/main.b23fcd10.css",
-    "main.js": "/ScrabbleReact/static/js/main.94c5082d.js",
-    "static/media/allTilesUsed1.gif": "/ScrabbleReact/static/media/allTilesUsed1.783cf0c9aefb98860697.gif",
+    "main.js": "/ScrabbleReact/static/js/main.c20e29d0.js",
     "worker.js": "/ScrabbleReact/1df4d50ea2dfd8d2219a.worker.js",
-    "static/media/allTilesUsed3.gif": "/ScrabbleReact/static/media/allTilesUsed3.7f6f4e5c9192b38aa1f5.gif",
     "static/media/dinodance.gif": "/ScrabbleReact/static/media/dinodance.3487c0327e452d2661fa.gif",
     "static/media/dinosaur-roar.gif": "/ScrabbleReact/static/media/dinosaur-roar.fa6288ff30655a5bab82.gif",
     "static/media/dinoscream.gif": "/ScrabbleReact/static/media/dinoscream.9a294e0ee25f0307cc22.gif",
-    "static/media/allTilesUsed2.gif": "/ScrabbleReact/static/media/allTilesUsed2.6b042387ab26ca74ddc3.gif",
     "static/media/dinosaur-dance1.gif": "/ScrabbleReact/static/media/dinosaur-dance1.bcaacabfada3c09f20aa.gif",
     "static/media/dancingdino.gif": "/ScrabbleReact/static/media/dancingdino.7f374d61508fbfb69bac.gif",
     "index.html": "/ScrabbleReact/index.html"
   },
   "entrypoints": [
     "static/css/main.b23fcd10.css",
-    "static/js/main.94c5082d.js"
+    "static/js/main.c20e29d0.js"
   ]
 }
