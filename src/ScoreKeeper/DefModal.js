@@ -5,8 +5,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import styles from './DefModal.module.css'
 
+const SERVER_ADDRESS = "https://scrabble-api-2n61.onrender.com"
+
 export const DefModal = ({show, setShow, word}) => {
-//   const [show, setShow] = useState(false);
+
 
   const [showSpinner, setShowSpinner] = useState(true)
   const [definition, setDefinition] = useState("")
@@ -16,7 +18,7 @@ export const DefModal = ({show, setShow, word}) => {
   }
 
   useEffect(()=>{
-    fetch(`https://helpful-deer-baseball-cap.cyclic.app/dictionary?word=${word}`)
+    fetch(`${SERVER_ADDRESS}/dictionary?word=${word}`)
     .then(res=>res.json())
     .then((data)=>{
         setShowSpinner(false)
