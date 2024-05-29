@@ -7,7 +7,6 @@ import ScoreKeeper from "../ScoreKeeper/ScoreKeeper"
 import {
     getUniqueInts0,
     makePlayertable,
-    shuffle,
     subtractArrays,
 } from "../Utils/helpers"
 import {
@@ -40,9 +39,6 @@ import worker from 'workerize-loader!../Workers/worker'; // eslint-disable-line 
 import AIThinkingModal from "../AIThinkingModal/AIThinkingModal"
 import Instructions from "../Instructions/Instructions"
 
-import allTilesUsed1 from "../Assets/Images/allTilesUsed1.gif"
-import allTilesUsed2 from "../Assets/Images/allTilesUsed2.gif"
-import allTilesUsed3 from "../Assets/Images/allTilesUsed3.gif"
 
 const Game = ({ gameVariables, exitGame }) => {
 
@@ -73,10 +69,6 @@ const Game = ({ gameVariables, exitGame }) => {
     const AIPlayersExist = playerTable.filter((el) => el.level > 0).length > 0 //whether AI players exist
     const [playersAndPoints, setPlayersAndPoints] = useState(playerTable)
     const [showPassDevice, setShowPassDevice] = useState(playersAndPoints[0].level === 0)
-
-    //image array for all tiles used congratulations message
-    const allTilesImages = [allTilesUsed1, allTilesUsed2, allTilesUsed3]
-    const allTilesImage = shuffle(allTilesImages)[0]
 
 
     const gsreducer = (state, action) => {
@@ -600,19 +592,12 @@ const Game = ({ gameVariables, exitGame }) => {
         updateTiles([...subtractArrays(tiles, tpns), ...tilesNowSubmitted])
         let tr = tilesOnRack(tiles, playersAndPoints[currentPlayer].rack)
         if (tr.length === 0) {
-            //bingo
-            // Swal.fire({
-            //     icon: "success",
-            //     title: "All Tiles Used!!!",
-            //     text: "Great Job!!",
-            // })
             Swal.fire({
-                icon: 'success',
-                title: 'All Tiles Used!!!',
-                text: 'Great Job!!',
-                imageUrl: {allTilesImage},
-                imageAlt: 'Congrats Image',
-              });
+                icon: "success",
+                title: "All Tiles Used!!!",
+                text: "Great Job!!",
+            })
+
         }
 
         advanceGameState()
